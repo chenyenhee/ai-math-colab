@@ -106,7 +106,8 @@ nav.bd-links li.toctree-l1.current > a::before { color: var(--unit); }
 a:focus-visible { outline: 2px solid var(--unit); outline-offset: 2px; }
 /* 핵심 정리의 수식 상자 */
 .box-formula { border-left-color: var(--unit); background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--unit);
-  font-size: 1.05rem; line-height: 2; padding: 0.8rem 1.3rem; }
+  font-size: 1.05rem; line-height: 2; padding: 0.9rem 1.4rem !important; }
+.box-formula p { margin: 0.2rem 0; }
 .box-formula strong { color: var(--unit); }
 /* 애니메이션 동영상과 결과 그림 */
 figure.anim { margin: 1.2rem 0 1.6rem; }
@@ -114,6 +115,11 @@ figure.anim video { width: 100%; height: auto; border: 1px solid var(--rule); bo
 .cell_output img { border: 1px solid var(--rule); border-radius: 6px; background: #fff; max-width: 100%; }
 .cell_output .output.text_html { overflow-x: auto; }
 @media (min-width: 960px) { .bd-header { display: none; } }
+/* 수식 (수능 문항지처럼) */
+mjx-container[jax="CHTML"] { font-size: 108% !important; }
+mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; padding: 0.3rem 0; }
+.box-formula mjx-container[jax="CHTML"][display="false"], .bd-article p mjx-container[display="false"] { margin: 0 0.12em; }
+td mjx-container[jax="CHTML"] { font-size: 100% !important; }
 /* 접힌 코드 버튼을 한국어로 */
 details.above-input { border-color: var(--rule) !important; border-left: 3px solid var(--unit) !important; box-shadow: none !important; background: var(--paper) !important; }
 details.above-input > summary { color: var(--ink-soft); }
