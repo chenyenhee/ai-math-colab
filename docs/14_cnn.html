@@ -1,0 +1,1046 @@
+
+<!DOCTYPE html>
+
+
+<html lang="ko" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기 &#8212; 인공지능을 위한 수학</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=ae323b5b"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = '표시하려면 클릭';</script>
+    <script>let toggleHintHide = '숨기려면 클릭';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=e33e7ba0"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '14_cnn';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="색인" href="genindex.html" />
+    <link rel="search" title="검색" href="search.html" />
+    <link rel="next" title="📝 [제 15편] RNN - 순서를 기억하는 신경망" href="15_rnn.html" />
+    <link rel="prev" title="📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습" href="13_backprop_2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="ko"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">검색</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">검색</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">인공지능을 위한 수학</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">검색</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    📚 인공지능을 위한 수학
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_xor.html">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/chenyenhee/ai-math-colab/blob/python/14_cnn.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="소스 저장소"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="이 페이지 다운로드">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/14_cnn.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="소스 파일 다운로드"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="PDF로 인쇄"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="전체 화면으로보기"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> 내용 </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">📖 개념 다지기 1. CNN 의 구조</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📖 개념 다지기 2. 합성곱(컨볼루션) 연산 ⭐</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">🎬 애니메이션 1. 필터가 미끄러지며 계산하는 모습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relu">📖 개념 다지기 3. ReLU 와 풀링</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#padding">📖 개념 다지기 4. 패딩(padding)과 출력 크기</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">출력 크기 공식</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">📖 개념 다지기 5. 필터는 무엇을 찾을까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">🎬 애니메이션 2. 손글씨 숫자에서 세로·가로 획 찾기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conv-relu-max-pooling">🎬 애니메이션 3. conv → ReLU → max pooling 한 번에 보기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">✏️ 연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">📌 정리</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">🏆 도전 과제</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="cnn">
+<h1>📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기<a class="headerlink" href="#cnn" title="Link to this heading">#</a></h1>
+<p><strong>학년/반/번호:</strong> 2학년 ( )반 ( )번  <strong>이름:</strong> (           )</p>
+<blockquote>
+<div><p>근거 자료: 박성호, 「CNN (I) - 컨볼루션 연산 • 풀링 • 패딩」 (ML_LEC_32)</p>
+</div></blockquote>
+<hr class="docutils" />
+<section id="id1">
+<h2>🎯 학습 목표<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>합성곱(컨볼루션) 연산을 손으로 계산하고, 필터가 특징을 찾는 원리를 설명할 수 있다.</p></li>
+<li><p>ReLU 와 풀링(pooling)의 역할을 알고 계산할 수 있다.</p></li>
+<li><p>패딩과 스트라이드에 따른 출력 크기를 공식으로 구할 수 있다.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>🧭 지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>제 13편 도전 과제: 지금까지의 신경망은 28 × 28 사진을 <strong>784 개짜리 한 줄로 펴서</strong> 넣었습니다. → 픽셀끼리 <strong>위아래·좌우로 이웃</strong> 한다는 정보가 사라집니다.</p></li>
+<li><p>CNN (Convolutional Neural Network, 합성곱 신경망) 은 사진을 <strong>2차원 그대로</strong> 다루며 특징(feature)을 찾습니다.</p></li>
+</ul>
+<blockquote>
+<div><p>🚀 <strong>실습하려면</strong> : 이 페이지 맨 위의 <strong>로켓(🚀) 버튼 → Colab</strong> 을 누르세요. 코랩에서 코드를 실행하고 🎬 애니메이션을 볼 수 있습니다.
+코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2>⚙️ 0단계. 준비하기<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title ▶ 준비 셀 (먼저 실행하세요)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.font_manager</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">animation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">font_path</span> <span class="o">=</span> <span class="s1">'NanumGothic.ttf'</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">font_path</span><span class="p">):</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/google/fonts/main/ofl/nanumgothic/NanumGothic-Regular.ttf'</span><span class="p">,</span> <span class="n">font_path</span><span class="p">)</span>
+    <span class="n">fm</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">font_path</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">'font'</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">font_path</span><span class="p">)</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'글꼴을 내려받지 못했습니다(그래프의 한글이 깨질 수 있음):'</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'axes.unicode_minus'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'animation.embed_limit'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">):</span>
+    <span class="c1"># 애니메이션을 코랩 화면에 재생 버튼과 함께 보여 주기</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_jshtml</span><span class="p">()))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'✅ 준비 완료!'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id4">
+<h2>📖 개념 다지기 1. CNN 의 구조<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> 일반 신경망 :  입력 → [완전연결 + sigmoid] → [완전연결 + sigmoid] → 출력
+ CNN       :  입력 → [conv → ReLU → pooling] → [conv → ReLU → pooling] → [완전연결] → 출력
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>층</p></th>
+<th class="head text-left"><p>하는 일</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>conv (합성곱)</strong></p></td>
+<td class="text-left"><p>필터(가중치 묶음)를 사진 위로 옮겨 가며 곱해 <strong>특징(feature)</strong> 을 뽑는다</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>ReLU</strong></p></td>
+<td class="text-left"><p>활성화 함수. 음수는 0, 양수는 그대로 → ReLU(x) = max(0, x)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>pooling (풀링)</strong></p></td>
+<td class="text-left"><p>작은 구역을 최댓값(max) 등 하나로 <strong>압축</strong> 해서 계산량을 줄인다</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id5">
+<h2>📖 개념 다지기 2. 합성곱(컨볼루션) 연산 ⭐<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>필터를 일정 간격(<strong>스트라이드</strong>)으로 옮기면서, 입력과 필터의 <strong>같은 자리끼리 곱해 모두 더합니다.</strong></p>
+<p>입력 (4 × 4)　　　　　　 필터 (3 × 3)
+　( 1　2　3　0 )　　　　 ( 2　0　1 )
+　( 0　1　2　3 )　　　　 ( 0　1　2 )
+　( 3　0　1　2 )　　　　 ( 1　0　2 )
+　( 2　3　0　1 )</p>
+<ul class="simple">
+<li><p>왼쪽 위 (1행 1열):  1×2 + 2×0 + 3×1 + 0×0 + 1×1 + 2×2 + 3×1 + 0×0 + 1×2 = <strong>15</strong></p></li>
+<li><p>오른쪽으로 1칸:　2×2 + 3×0 + 0×1 + 1×0 + 2×1 + 3×2 + 0×1 + 1×0 + 2×2 = ( 　　 )</p></li>
+<li><p>아래로 1칸:　　0×2 + 1×0 + 2×1 + 3×0 + 0×1 + 1×2 + 2×1 + 3×0 + 0×2 = ( 　　 )</p></li>
+<li><p>오른쪽 아래:　 ( 　　　　　　　　　　　　　　　　　　　　 ) = 15</p></li>
+</ul>
+<p>결과 (2 × 2) 에 바이어스 3 을 더하면 <strong>특징 맵 (feature map)</strong> :  ( 18　19 ) / ( ( 　 )　18 )</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">conv2d</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">;</span> <span class="n">FH</span><span class="p">,</span> <span class="n">FW</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">OH</span> <span class="o">=</span> <span class="p">(</span><span class="n">H</span> <span class="o">-</span> <span class="n">FH</span><span class="p">)</span> <span class="o">//</span> <span class="n">stride</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">OW</span> <span class="o">=</span> <span class="p">(</span><span class="n">W</span> <span class="o">-</span> <span class="n">FW</span><span class="p">)</span> <span class="o">//</span> <span class="n">stride</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">OH</span><span class="p">,</span> <span class="n">OW</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">OH</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">OW</span><span class="p">):</span>
+            <span class="n">window</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">stride</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="n">stride</span><span class="o">+</span><span class="n">FH</span><span class="p">,</span> <span class="n">j</span><span class="o">*</span><span class="n">stride</span><span class="p">:</span><span class="n">j</span><span class="o">*</span><span class="n">stride</span><span class="o">+</span><span class="n">FW</span><span class="p">]</span>   <span class="c1"># 필터가 덮는 부분</span>
+            <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">window</span> <span class="o">*</span> <span class="n">F</span><span class="p">)</span>                           <span class="c1"># 같은 자리끼리 곱해서 모두 더하기</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">conv2d</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'컨볼루션 결과 =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'바이어스 3 을 더한 특징 맵 =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">C</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h2>🎬 애니메이션 1. 필터가 미끄러지며 계산하는 모습<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 1 실행 (컨볼루션)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_grid</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">hl</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hc</span><span class="o">=</span><span class="s1">'#ffe08a'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">'</span><span class="si">{:g}</span><span class="s1">'</span><span class="p">,</span> <span class="n">hide</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+            <span class="n">on</span> <span class="o">=</span> <span class="n">hl</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">hl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">hl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">hl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">and</span> <span class="n">hl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">hl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">hl</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">x0</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="n">y0</span> <span class="o">-</span> <span class="n">i</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">hc</span> <span class="k">if</span> <span class="n">on</span> <span class="k">else</span> <span class="s1">'white'</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.2</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">hide</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">hide</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x0</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">y0</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x0</span> <span class="o">+</span> <span class="n">c</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y0</span> <span class="o">+</span> <span class="mf">1.3</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+
+<span class="n">pos</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="n">f</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">17.5</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">4.6</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">'equal'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">draw_grid</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hl</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">'입력 (4 × 4)'</span><span class="p">)</span>
+        <span class="n">draw_grid</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hl</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">hc</span><span class="o">=</span><span class="s1">'#cfe3ff'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'필터 (3 × 3)'</span><span class="p">)</span>
+        <span class="n">draw_grid</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hl</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">hc</span><span class="o">=</span><span class="s1">'#b8f0b8'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'결과 (2 × 2)'</span><span class="p">,</span> <span class="n">hide</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">pos</span><span class="p">[:</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">terms</span> <span class="o">=</span> <span class="s1">' + '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">+</span><span class="n">b</span><span class="p">]</span><span class="si">}</span><span class="s1">×</span><span class="si">{</span><span class="n">F</span><span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">]</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.9</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">terms</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'darkgreen'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">draw_grid</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'입력 (4 × 4)'</span><span class="p">);</span> <span class="n">draw_grid</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hc</span><span class="o">=</span><span class="s1">'#cfe3ff'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'필터 (3 × 3)'</span><span class="p">)</span>
+        <span class="n">draw_grid</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'결과'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">12.6</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">'+ 3 ='</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">)</span>
+        <span class="n">draw_grid</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">C</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">14.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hc</span><span class="o">=</span><span class="s1">'#b8f0b8'</span><span class="p">,</span> <span class="n">hl</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">'특징 맵'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">4.75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">9.25</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'='</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">170</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="relu">
+<h2>📖 개념 다지기 3. ReLU 와 풀링<a class="headerlink" href="#relu" title="Link to this heading">#</a></h2>
+<p><strong>ReLU(x) = max(0, x)</strong> : 음수는 0 으로, 양수는 그대로.  예) ReLU(−3) = ( 　 ), ReLU(5) = ( 　 )</p>
+<p><strong>풀링</strong> : 구역을 대표값 하나로 압축</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>종류</p></th>
+<th class="head text-center"><p>( 15 16 / 6 15 ) 의 결과</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>max pooling (최댓값)</p></td>
+<td class="text-center"><p>16</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>min pooling (최솟값)</p></td>
+<td class="text-center"><p>( 　 )</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>average pooling (평균)</p></td>
+<td class="text-center"><p>( 　 )</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>→ CNN 에서는 <strong>max pooling</strong> 을 가장 많이 씁니다. (가장 강한 특징만 남기기)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'max ='</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="s1">', min ='</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="s1">', average ='</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">max_pool</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">[:</span><span class="n">H</span><span class="o">//</span><span class="n">size</span><span class="o">*</span><span class="n">size</span><span class="p">,</span> <span class="p">:</span><span class="n">W</span><span class="o">//</span><span class="n">size</span><span class="o">*</span><span class="n">size</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">H</span><span class="o">//</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">W</span><span class="o">//</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">X =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'ReLU(X) =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'2 × 2 max pooling =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">max_pool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>[연습 1]</strong> 위 X 에 ReLU 를 적용한 뒤 2 × 2 max pooling 한 결과를 손으로 먼저 구하세요.  ( 　 　 ) / ( 　 　 )</p>
+</div></blockquote>
+</section>
+<section id="padding">
+<h2>📖 개념 다지기 4. 패딩(padding)과 출력 크기<a class="headerlink" href="#padding" title="Link to this heading">#</a></h2>
+<p>컨볼루션을 하면 크기가 줄어듭니다. (4 × 4 → 2 × 2) 이를 막으려고 입력 둘레를 0 으로 채우는 것이 <strong>패딩</strong> 입니다.</p>
+<p>패딩 1 : 4 × 4 입력 → 6 × 6 → 3 × 3 필터로 컨볼루션 → <strong>4 × 4</strong> (크기 유지!)</p>
+<section id="id7">
+<h3>출력 크기 공식<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>입력 (H, W), 필터 (FH, FW), 패딩 P, 스트라이드 S 일 때</p>
+<blockquote>
+<div><p><strong>OH = (H + 2P − FH) / S + 1,　 OW = (W + 2P − FW) / S + 1</strong></p>
+</div></blockquote>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p>입력</p></th>
+<th class="head text-center"><p>필터</p></th>
+<th class="head text-center"><p>패딩</p></th>
+<th class="head text-center"><p>스트라이드</p></th>
+<th class="head text-center"><p>출력</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>예1</p></td>
+<td class="text-center"><p>(4, 4)</p></td>
+<td class="text-center"><p>(3, 3)</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>(4 + 2 − 3)/1 + 1 = 4 → (4, 4)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>예2</p></td>
+<td class="text-center"><p>(7, 7)</p></td>
+<td class="text-center"><p>(3, 3)</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>( 　 , 　 )</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>예3</p></td>
+<td class="text-center"><p>(28, 31)</p></td>
+<td class="text-center"><p>(5, 5)</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>3</p></td>
+<td class="text-center"><p>( 　 , 　 )</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Ap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>                     <span class="c1"># 둘레를 0 으로 1칸 채우기</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'패딩한 입력 (6 × 6) =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">Ap</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'컨볼루션 결과 (4 × 4) =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">conv2d</span><span class="p">(</span><span class="n">Ap</span><span class="p">,</span> <span class="n">F</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">out_size</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">FH</span><span class="p">,</span> <span class="n">FW</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">H</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">P</span> <span class="o">-</span> <span class="n">FH</span><span class="p">)</span> <span class="o">//</span> <span class="n">S</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">W</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">P</span> <span class="o">-</span> <span class="n">FW</span><span class="p">)</span> <span class="o">//</span> <span class="n">S</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">args</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'입력 </span><span class="si">{</span><span class="n">args</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">, 필터 </span><span class="si">{</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">, 패딩 </span><span class="si">{</span><span class="n">args</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">, 스트라이드 </span><span class="si">{</span><span class="n">args</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s1"> → 출력 </span><span class="si">{</span><span class="n">out_size</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2>📖 개념 다지기 5. 필터는 무엇을 찾을까?<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>필터의 숫자 배치에 따라 찾는 특징이 달라집니다.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>필터</p></th>
+<th class="head text-center"><p>모양</p></th>
+<th class="head text-left"><p>찾는 것</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>세로선 필터</p></td>
+<td class="text-center"><p>( 1 0 −1 / 1 0 −1 / 1 0 −1 )</p></td>
+<td class="text-left"><p>왼쪽이 밝고 오른쪽이 어두운 <strong>세로 경계</strong></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>가로선 필터</p></td>
+<td class="text-center"><p>( 1 1 1 / 0 0 0 / −1 −1 −1 )</p></td>
+<td class="text-left"><p>위가 밝고 아래가 어두운 <strong>가로 경계</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>CNN 은 이런 필터의 숫자(가중치)를 사람이 정하지 않고 <strong>오차역전파로 스스로 학습</strong> 합니다.</p>
+</section>
+<section id="id9">
+<h2>🎬 애니메이션 2. 손글씨 숫자에서 세로·가로 획 찾기<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>손글씨 숫자 사진 위로 세로선 필터와 가로선 필터가 지나가며 특징 맵을 만듭니다. (ReLU 적용, 밝을수록 그 특징이 강함)</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 2 실행 (필터가 찾은 특징)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_digits</span>
+<span class="n">digit</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>                       <span class="c1"># 8 × 8 손글씨 숫자</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">digit</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span> <span class="o">/</span> <span class="mi">16</span>            <span class="c1"># 24 × 24 로 키우기</span>
+<span class="n">Fv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">Fh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">Mv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">conv2d</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">Fv</span><span class="p">));</span> <span class="n">Mh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">conv2d</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">Fh</span><span class="p">))</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">Mv</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">order</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">8</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="n">f</span><span class="p">];</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span> <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">j</span> <span class="o">-</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mf">.5</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">))</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'입력 사진 (빨간 칸 = 필터 위치)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">Mx</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Mv</span><span class="p">,</span> <span class="s1">'세로선 필터'</span><span class="p">),</span> <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">Mh</span><span class="p">,</span> <span class="s1">'가로선 필터'</span><span class="p">)]:</span>
+        <span class="n">show</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">Mx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">order</span><span class="p">[:</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span> <span class="n">show</span><span class="p">[</span><span class="n">a</span><span class="p">:</span><span class="n">a</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="n">b</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Mx</span><span class="p">[</span><span class="n">a</span><span class="p">:</span><span class="n">a</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="n">b</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">show</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'magma'</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">Mv</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">Mh</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">의 특징 맵'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<blockquote>
+<div><p><strong>[관찰 1]</strong> 세로선 필터의 특징 맵에서는 숫자의 ( 세로 / 가로 ) 획 부분이 밝게 나타난다. 가로선 필터에서는 ( 　　 ) 획이 밝다.</p>
+</div></blockquote>
+</section>
+<section id="conv-relu-max-pooling">
+<h2>🎬 애니메이션 3. conv → ReLU → max pooling 한 번에 보기<a class="headerlink" href="#conv-relu-max-pooling" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 3 실행 (CNN 한 층의 흐름)</span>
+<span class="n">C1</span> <span class="o">=</span> <span class="n">conv2d</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">Fv</span><span class="p">);</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">C1</span><span class="p">);</span> <span class="n">P1</span> <span class="o">=</span> <span class="n">max_pool</span><span class="p">(</span><span class="n">R1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">stages</span> <span class="o">=</span> <span class="p">[(</span><span class="n">img</span><span class="p">,</span> <span class="s1">'입력 24 × 24'</span><span class="p">,</span> <span class="s1">'gray'</span><span class="p">),</span> <span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'conv 결과 </span><span class="si">{</span><span class="n">C1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> × </span><span class="si">{</span><span class="n">C1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'coolwarm'</span><span class="p">),</span>
+          <span class="p">(</span><span class="n">R1</span><span class="p">,</span> <span class="s1">'ReLU (음수 → 0)'</span><span class="p">,</span> <span class="s1">'magma'</span><span class="p">),</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'max pooling </span><span class="si">{</span><span class="n">P1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> × </span><span class="si">{</span><span class="n">P1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'magma'</span><span class="p">)]</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="n">f</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">M</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">cm</span> <span class="o">=</span> <span class="n">stages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">cm</span> <span class="o">==</span> <span class="s1">'coolwarm'</span><span class="p">:</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">();</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="n">m</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<blockquote>
+<div><p>💡 크기는 24 × 24 → 22 × 22 → 11 × 11 로 줄어들었지만, <strong>세로 획이 있는 곳</strong> 이라는 핵심 정보는 남아 있습니다. CNN 은 이런 층을 여러 번 쌓아 점점 복잡한 특징(획 → 곡선 → 숫자 모양)을 찾습니다.</p>
+</div></blockquote>
+</section>
+<section id="id10">
+<h2>✏️ 연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>[문제 1]</strong> 입력 ( 1 0 1 / 0 1 0 / 1 0 1 ), 필터 ( 1 0 / 0 1 ), 스트라이드 1 의 컨볼루션 결과를 손으로 구하세요.  ( 　 　 ) / ( 　 　 )</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>[문제 2]</strong> MNIST 사진 (28, 28) 에 필터 (3, 3), 패딩 1, 스트라이드 1 로 컨볼루션한 뒤 2 × 2 max pooling 을 하면 크기는? ( 　 , 　 )</p>
+</div></blockquote>
+<p>코드로 확인하세요.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'문제 1 :</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">conv2d</span><span class="p">(</span><span class="n">______</span><span class="p">,</span> <span class="n">______</span><span class="p">))</span>
+<span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">out_size</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">______</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'문제 2 : conv 후'</span><span class="p">,</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="s1">'→ pooling 후'</span><span class="p">,</span> <span class="p">(</span><span class="n">h</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">w</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id11">
+<h2>📌 정리<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
+<th class="head text-left"><p>내용</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>컨볼루션</p></td>
+<td class="text-left"><p>필터를 옮기며 같은 자리끼리 곱해서 더하기 → 특징 맵</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ReLU</p></td>
+<td class="text-left"><p>max(0, x)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>풀링</p></td>
+<td class="text-left"><p>구역을 최댓값 등으로 압축 (max pooling)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>패딩</p></td>
+<td class="text-left"><p>둘레를 0 으로 채워 크기 유지</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>출력 크기</p></td>
+<td class="text-left"><p>OH = (H + 2P − FH)/S + 1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>학습</p></td>
+<td class="text-left"><p>필터의 숫자도 W 처럼 오차역전파로 학습된다</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="id12">
+<h3>🏆 도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>사진은 픽셀의 <strong>위치(공간)</strong> 가 중요했습니다. 그렇다면 문장 “나는 학교에 간다” 처럼 <strong>순서(시간)</strong> 가 중요한 데이터는 어떻게 다룰까요? → 다음 시간: <strong>RNN (순환 신경망)</strong></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="13_backprop_2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">이전</p>
+        <p class="prev-next-title">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="15_rnn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">다음</p>
+        <p class="prev-next-title">📝 [제 15편] RNN - 순서를 기억하는 신경망</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 내용
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">📖 개념 다지기 1. CNN 의 구조</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📖 개념 다지기 2. 합성곱(컨볼루션) 연산 ⭐</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">🎬 애니메이션 1. 필터가 미끄러지며 계산하는 모습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relu">📖 개념 다지기 3. ReLU 와 풀링</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#padding">📖 개념 다지기 4. 패딩(padding)과 출력 크기</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">출력 크기 공식</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">📖 개념 다지기 5. 필터는 무엇을 찾을까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">🎬 애니메이션 2. 손글씨 숫자에서 세로·가로 획 찾기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conv-relu-max-pooling">🎬 애니메이션 3. conv → ReLU → max pooling 한 번에 보기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">✏️ 연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">📌 정리</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">🏆 도전 과제</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+으로 AI 수학 수업
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

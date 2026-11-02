@@ -1,0 +1,1126 @@
+
+<!DOCTYPE html>
+
+
+<html lang="ko" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습 &#8212; 인공지능을 위한 수학</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=ae323b5b"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = '표시하려면 클릭';</script>
+    <script>let toggleHintHide = '숨기려면 클릭';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=e33e7ba0"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '13_backprop_2';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="색인" href="genindex.html" />
+    <link rel="search" title="검색" href="search.html" />
+    <link rel="next" title="📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기" href="14_cnn.html" />
+    <link rel="prev" title="📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기" href="12_backprop_1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="ko"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">검색</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">검색</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">인공지능을 위한 수학</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">검색</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    📚 인공지능을 위한 수학
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_xor.html">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/chenyenhee/ai-math-colab/blob/python/13_backprop_2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="소스 저장소"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="이 페이지 다운로드">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/13_backprop_2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="소스 파일 다운로드"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="PDF로 인쇄"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="전체 화면으로보기"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> 내용 </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">📖 개념 다지기 1. 은닉층 가중치는 길이 두 갈래!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">행렬로 쓰면</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">[연습 1] 은닉층 손실 손으로 계산하기</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">💻 실습 1. 은닉층 공식 검증 (수치미분과 비교)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ok">📖 개념 다지기 2. 오차역전파 일반 공식 (은닉층이 여러 개여도 OK)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">🎬 애니메이션 1. 오차가 거꾸로 퍼져 나가는 모습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">💻 실습 2. 오차역전파 MNIST 신경망 (원본 강의 코드)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">속도 비교 : 사진 1장 학습 시간</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#epoch-30-1">학습 (학습 데이터 전체 1번 = 1 epoch, 30초 ~ 1분)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">🎬 애니메이션 2. 은닉 노드는 무엇을 볼까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">✏️ 연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">📌 정리</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">🏆 도전 과제</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="mnist">
+<h1>📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습<a class="headerlink" href="#mnist" title="Link to this heading">#</a></h1>
+<p><strong>학년/반/번호:</strong> 2학년 ( )반 ( )번  <strong>이름:</strong> (           )</p>
+<blockquote>
+<div><p>근거 자료: 박성호, 「오차역전파 (III) 은닉층」, 「(IV) 일반 공식」, 「(V) 오차역전파를 이용한 MNIST 인식」 (ML_LEC_25, 26, 27)</p>
+</div></blockquote>
+<hr class="docutils" />
+<section id="id1">
+<h2>🎯 학습 목표<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>은닉층 가중치의 오차역전파 공식 loss_2 = (loss_3 · W3ᵀ) × A2(1 − A2) 를 연쇄법칙으로 설명할 수 있다.</p></li>
+<li><p>층이 여러 개인 신경망에 쓸 수 있는 오차역전파 일반 공식을 말할 수 있다.</p></li>
+<li><p>오차역전파로 MNIST 신경망을 학습시키고, 수치미분과 속도·정확도를 비교할 수 있다.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>🧭 지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>제 12편 출력층 공식:  loss_3 = (A3 − T) × A3(1 − A3),  ∂E/∂W3 = A2ᵀ · loss_3,  ∂E/∂b3 = loss_3</p></li>
+</ul>
+<blockquote>
+<div><p>🚀 <strong>실습하려면</strong> : 이 페이지 맨 위의 <strong>로켓(🚀) 버튼 → Colab</strong> 을 누르세요. 코랩에서 코드를 실행하고 🎬 애니메이션을 볼 수 있습니다.
+코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2>⚙️ 0단계. 준비하기<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title ▶ 준비 셀 (먼저 실행하세요)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.font_manager</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">animation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">font_path</span> <span class="o">=</span> <span class="s1">'NanumGothic.ttf'</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">font_path</span><span class="p">):</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/google/fonts/main/ofl/nanumgothic/NanumGothic-Regular.ttf'</span><span class="p">,</span> <span class="n">font_path</span><span class="p">)</span>
+    <span class="n">fm</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">font_path</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">'font'</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">font_path</span><span class="p">)</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'글꼴을 내려받지 못했습니다(그래프의 한글이 깨질 수 있음):'</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'axes.unicode_minus'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'animation.embed_limit'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">):</span>
+    <span class="c1"># 애니메이션을 코랩 화면에 재생 버튼과 함께 보여 주기</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_jshtml</span><span class="p">()))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'✅ 준비 완료!'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title ▶ 수치미분, sigmoid 함수 (실행만 하세요)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">numerical_derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">delta_x</span> <span class="o">=</span> <span class="mf">1e-4</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">'multi_index'</span><span class="p">],</span> <span class="n">op_flags</span><span class="o">=</span><span class="p">[</span><span class="s1">'readwrite'</span><span class="p">])</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">it</span><span class="o">.</span><span class="n">finished</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">multi_index</span>
+        <span class="n">tmp_val</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tmp_val</span><span class="p">)</span> <span class="o">+</span> <span class="n">delta_x</span><span class="p">;</span> <span class="n">fx1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tmp_val</span><span class="p">)</span> <span class="o">-</span> <span class="n">delta_x</span><span class="p">;</span> <span class="n">fx2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">grad</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fx1</span> <span class="o">-</span> <span class="n">fx2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">delta_x</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span>
+        <span class="n">it</span><span class="o">.</span><span class="n">iternext</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">grad</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'준비 완료'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id4">
+<h2>📖 개념 다지기 1. 은닉층 가중치는 길이 두 갈래!<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>2 - 2 - 2 신경망에서 은닉층 가중치 w<sub>11</sub><sup>(2)</sup> (입력 노드 1 → 은닉 노드 1) 를 생각합니다.</p>
+<p>w<sub>11</sub><sup>(2)</sup> 가 바뀌면 → a<sub>1</sub><sup>(2)</sup> 가 바뀌고 → 출력 노드 <strong>1 과 2 모두</strong> 가 바뀝니다. 그래서 연쇄법칙의 길도 두 갈래입니다.</p>
+<blockquote>
+<div><p>∂E/∂w<sub>11</sub><sup>(2)</sup> = { <strong>(출력 노드 1 의 손실) × w<sub>11</sub><sup>(3)</sup></strong> + <strong>(출력 노드 2 의 손실) × w<sub>21</sub><sup>(3)</sup></strong> } × a<sub>1</sub><sup>(2)</sup>(1 − a<sub>1</sub><sup>(2)</sup>) × a<sub>1</sub><sup>(1)</sup></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>{ } 안 : 출력층의 손실들이 가중치를 타고 <strong>거꾸로</strong> 은닉 노드 1 로 모여든 것</p></li>
+<li><p>여기에 은닉 노드의 sigmoid 미분 a(1 − a) 를 곱한 것을 <strong>은닉층 손실 (loss_2)</strong> 이라 합니다.</p></li>
+</ul>
+<section id="id5">
+<h3>행렬로 쓰면<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>loss_2 = (loss_3 · W3<sup>T</sup>) × A2 × (1 − A2)</strong>
+<strong>∂E/∂W2 = A1<sup>T</sup> · loss_2,　 ∂E/∂b2 = loss_2</strong></p>
+</div></blockquote>
+<p>💡 출력층 공식과 <strong>모양이 똑같습니다!</strong>  (이전 층 출력)ᵀ · (현재 층 손실)</p>
+</section>
+<section id="id6">
+<h3>[연습 1] 은닉층 손실 손으로 계산하기<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>loss_3 = (0.1, −0.2),　W3 = ( 1　2 ) / ( 3　4 ) (은닉 2 × 출력 2),　A2 = (0.5, 0.5) 일 때</p>
+<p>① loss_3 · W3<sup>T</sup> = (0.1 × 1 + (−0.2) × 2,　0.1 × 3 + (−0.2) × 4) = ( 　　,　　 )
+② A2 × (1 − A2) = (0.25, 0.25)
+③ loss_2 = ① × ② = ( 　　　,　　　 )</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">loss_3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">]])</span>
+<span class="n">W3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="n">A2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
+<span class="n">loss_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">loss_3</span><span class="p">,</span> <span class="n">W3</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">A2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">A2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'loss_3 · W3ᵀ ='</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">loss_3</span><span class="p">,</span> <span class="n">W3</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'loss_2       ='</span><span class="p">,</span> <span class="n">loss_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id7">
+<h2>💻 실습 1. 은닉층 공식 검증 (수치미분과 비교)<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]]);</span> <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">W2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">W3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="n">b3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">loss</span><span class="p">():</span>
+    <span class="n">A2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">A1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">);</span> <span class="n">A3</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">A2</span> <span class="o">@</span> <span class="n">W3</span> <span class="o">+</span> <span class="n">b3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">T</span> <span class="o">-</span> <span class="n">A3</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># 피드포워드</span>
+<span class="n">A2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">A1</span> <span class="o">@</span> <span class="n">W2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>
+<span class="n">A3</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">A2</span> <span class="o">@</span> <span class="n">W3</span> <span class="o">+</span> <span class="n">b3</span><span class="p">)</span>
+<span class="c1"># 오차역전파 : 출력층 → 은닉층 순서로!</span>
+<span class="n">loss_3</span> <span class="o">=</span> <span class="p">(</span><span class="n">A3</span> <span class="o">-</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">A3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">A3</span><span class="p">)</span>
+<span class="n">loss_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">loss_3</span> <span class="o">@</span> <span class="n">W3</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">A2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">A2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'[오차역전파] ∂E/∂W2 =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">A1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">loss_2</span><span class="p">,</span> <span class="s1">'</span><span class="se">\n</span><span class="s1"> ∂E/∂b2 ='</span><span class="p">,</span> <span class="n">loss_2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">loss</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">[수치미분]   ∂E/∂W2 =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">numerical_derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">W2</span><span class="p">),</span> <span class="s1">'</span><span class="se">\n</span><span class="s1"> ∂E/∂b2 ='</span><span class="p">,</span> <span class="n">numerical_derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">b2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>[확인 1]</strong> 은닉층 공식도 수치미분과 ( 같은 / 다른 ) 결과를 낸다.</p>
+</div></blockquote>
+</section>
+<section id="ok">
+<h2>📖 개념 다지기 2. 오차역전파 일반 공식 (은닉층이 여러 개여도 OK)<a class="headerlink" href="#ok" title="Link to this heading">#</a></h2>
+<p><strong>현재 층 / 이전 층 / 다음 층</strong> 으로 이름을 붙이면 모든 층이 같은 공식을 따릅니다.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>무엇</p></th>
+<th class="head text-left"><p>공식</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>출력층 손실</p></td>
+<td class="text-left"><p>(출력층 출력 − 정답) × 출력층 출력 × (1 − 출력층 출력)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>은닉층(현재 층) 손실</p></td>
+<td class="text-left"><p>(다음 층 손실 · 다음 층 W<sup>T</sup>) × 현재 층 출력 × (1 − 현재 층 출력)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>현재 층 W 의 미분</p></td>
+<td class="text-left"><p>(이전 층 출력)<sup>T</sup> · 현재 층 손실</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>현재 층 b 의 미분</p></td>
+<td class="text-left"><p>현재 층 손실</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>입력층 → 은닉층1 → 은닉층2 → 출력층 (W2, W3, W4) 인 신경망이라면</p>
+<p>loss_4 = (A4 − T) × A4(1 − A4) 　→　 loss_3 = (loss_4 · W4<sup>T</sup>) × A3(1 − A3) 　→　 loss_2 = (loss_3 · W3<sup>T</sup>) × A2(1 − A2)</p>
+<p>W4 ← W4 − α × (A3<sup>T</sup> · loss_4),　W3 ← W3 − α × (A2<sup>T</sup> · loss_3),　W2 ← W2 − α × (A1<sup>T</sup> · loss_2)</p>
+<blockquote>
+<div><p><strong>[연습 2]</strong> 은닉층이 3개인 신경망 (W2, W3, W4, W5) 에서 loss_3 을 구하려면 ( 　 ) 층의 손실과 W( 　 ) 가 필요하다.</p>
+</div></blockquote>
+</section>
+<section id="id8">
+<h2>🎬 애니메이션 1. 오차가 거꾸로 퍼져 나가는 모습<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>입력 2 - 은닉 4 - 은닉 3 - 출력 2 신경망입니다. <strong>순전파</strong>(파랑)로 출력을 계산한 뒤, 출력층의 <strong>오차(빨강)</strong> 가 가중치를 타고 한 층씩 거꾸로 전달됩니다. 원의 색이 진할수록 그 노드의 손실(|loss|)이 큽니다.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 1 실행 (오차의 역전파)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">Ws</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">sizes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sizes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">sizes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]]);</span> <span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+<span class="n">As</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">W_</span><span class="p">,</span> <span class="n">b_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">Ws</span><span class="p">,</span> <span class="n">bs</span><span class="p">):</span>
+    <span class="n">As</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">As</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">@</span> <span class="n">W_</span> <span class="o">+</span> <span class="n">b_</span><span class="p">))</span>
+<span class="n">losses</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span>
+<span class="n">losses</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">As</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">tt</span><span class="p">)</span> <span class="o">*</span> <span class="n">As</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">As</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+    <span class="n">losses</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">losses</span><span class="p">[</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">@</span> <span class="n">Ws</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">As</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">As</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="n">sizes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sizes</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">vmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="n">losses</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'f'</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[(</span><span class="s1">'b'</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[(</span><span class="s1">'b'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span><span class="o">*</span><span class="mi">8</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'입력층'</span><span class="p">,</span> <span class="s1">'은닉층 1'</span><span class="p">,</span> <span class="s1">'은닉층 2'</span><span class="p">,</span> <span class="s1">'출력층'</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">mode</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="n">f</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">11.5</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">2.6</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">l</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">'f'</span><span class="p">:</span>
+                    <span class="n">on</span> <span class="o">=</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">col</span> <span class="o">=</span> <span class="s1">'royalblue'</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">on</span> <span class="o">=</span> <span class="n">l</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">;</span> <span class="n">col</span> <span class="o">=</span> <span class="s1">'crimson'</span>          <span class="c1"># 손실이 지나간 가중치</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="n">Ws</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span> <span class="k">if</span> <span class="n">on</span> <span class="k">else</span> <span class="s1">'lightgray'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span> <span class="o">+</span> <span class="mf">1.5</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">if</span> <span class="n">on</span> <span class="k">else</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span> <span class="k">if</span> <span class="n">on</span> <span class="k">else</span> <span class="mf">0.4</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="mf">2.35</span><span class="p">,</span> <span class="n">names</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">l</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">'b'</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">&gt;=</span> <span class="n">k</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">losses</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">]);</span> <span class="n">fc</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Reds</span><span class="p">(</span><span class="mf">0.15</span> <span class="o">+</span> <span class="mf">0.85</span><span class="o">*</span><span class="n">v</span><span class="o">/</span><span class="n">vmax</span><span class="p">);</span> <span class="n">txt</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">losses</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s1">+.3f</span><span class="si">}</span><span class="s1">'</span>
+            <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">'f'</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">k</span> <span class="ow">or</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">'b'</span><span class="p">:</span>
+                <span class="n">fc</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">(</span><span class="mf">0.15</span> <span class="o">+</span> <span class="mf">0.6</span><span class="o">*</span><span class="n">As</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">]);</span> <span class="n">txt</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">As</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">'</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fc</span><span class="p">,</span> <span class="n">txt</span> <span class="o">=</span> <span class="s1">'white'</span><span class="p">,</span> <span class="s1">''</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">),</span> <span class="mf">0.38</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">fc</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">'b'</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">10.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'정답 T</span><span class="se">\n</span><span class="si">{</span><span class="n">tt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'① 순전파 : 출력 a 계산 (원 안 = 출력값)'</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">'f'</span> <span class="k">else</span> <span class="s1">'② 역전파 : 손실(loss)이 출력층 → 은닉층2 → 은닉층1 로 전달 (원 안 = loss)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">170</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id9">
+<h2>💻 실습 2. 오차역전파 MNIST 신경망 (원본 강의 코드)<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>원본 강의(ML_LEC_27)의 NeuralNetwork 클래스입니다. 달라진 점:</p>
+<ul class="simple">
+<li><p>가중치 초기화: <code class="docutils literal notranslate"><span class="pre">np.random.randn(...)</span> <span class="pre">/</span> <span class="pre">np.sqrt(입력</span> <span class="pre">노드</span> <span class="pre">수</span> <span class="pre">/</span> <span class="pre">2)</span></code> (<strong>He 초기화</strong> - 학습이 잘 되도록 처음 값을 알맞은 크기로)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">train</span></code> 에서 수치미분 대신 <strong>오차역전파 공식</strong> 사용</p></li>
+<li><p>학습률 0.3</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title ▶ MNIST 불러오기 (제 11편과 같음)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">mnist</span>
+    <span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">t_tr</span><span class="p">),</span> <span class="p">(</span><span class="n">x_te</span><span class="p">,</span> <span class="n">t_te</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+    <span class="n">training_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">t_tr</span><span class="p">,</span> <span class="n">x_tr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">test_data</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">t_te</span><span class="p">,</span> <span class="n">x_te</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'✅ MNIST 불러오기 성공'</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_digits</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">255</span> <span class="o">/</span> <span class="mi">16</span><span class="p">)]</span>
+    <span class="n">training_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="mi">1500</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="mi">1500</span><span class="p">:]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'⚠️ MNIST 를 불러오지 못해 8 × 8 손글씨 데이터로 대신합니다:'</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="n">IMG</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">training_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'training_data.shape ='</span><span class="p">,</span> <span class="n">training_data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">', test_data.shape ='</span><span class="p">,</span> <span class="n">test_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">NeuralNetwork</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_nodes</span><span class="p">,</span> <span class="n">hidden_nodes</span><span class="p">,</span> <span class="n">output_nodes</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_nodes</span> <span class="o">=</span> <span class="n">input_nodes</span><span class="p">,</span> <span class="n">hidden_nodes</span><span class="p">,</span> <span class="n">output_nodes</span>
+        <span class="c1"># 은닉층 가중치 W2 (784 × 100), 바이어스 b2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_nodes</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_nodes</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_nodes</span><span class="p">)</span>
+        <span class="c1"># 출력층 가중치 W3 (100 × 10), 바이어스 b3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_nodes</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_nodes</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_nodes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">feed_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="mf">1e-7</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Z1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_data</span><span class="p">;</span>  <span class="bp">self</span><span class="o">.</span><span class="n">A1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_data</span>              <span class="c1"># 입력층</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b2</span><span class="p">;</span> <span class="bp">self</span><span class="o">.</span><span class="n">A2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Z2</span><span class="p">)</span>   <span class="c1"># 은닉층</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Z3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W3</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b3</span><span class="p">;</span> <span class="bp">self</span><span class="o">.</span><span class="n">A3</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Z3</span><span class="p">)</span>   <span class="c1"># 출력층</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_data</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A3</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_data</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">A3</span><span class="p">)</span> <span class="o">+</span> <span class="n">delta</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">loss_val</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">target_data</span><span class="p">):</span>        <span class="c1"># input_data (1 × 784), target_data (1 × 10)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_data</span> <span class="o">=</span> <span class="n">target_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_data</span> <span class="o">=</span> <span class="n">input_data</span>
+        <span class="n">loss_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span>                 <span class="c1"># ① 피드포워드</span>
+        <span class="c1"># ② 출력층 손실 → W3, b3 갱신</span>
+        <span class="n">loss_3</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A3</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_data</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">A3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">A3</span><span class="p">)</span>
+        <span class="c1"># ③ 은닉층 손실 (W3 를 갱신하기 '전' 값으로 계산)</span>
+        <span class="n">loss_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">loss_3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W3</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">A2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">A2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W3</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A2</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">loss_3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">b3</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">loss_3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">loss_2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">b2</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">loss_2</span>
+        <span class="k">return</span> <span class="n">loss_val</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">):</span>
+        <span class="n">A2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b2</span><span class="p">)</span>
+        <span class="n">A3</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W3</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">A3</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_data</span><span class="p">):</span>
+        <span class="n">matched</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">test_data</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="mf">255.0</span> <span class="o">*</span> <span class="mf">0.99</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.01</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">matched</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">matched</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'NeuralNetwork (오차역전파 버전) 준비 완료'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>⚠️ 원본 코드에서는 W3 를 먼저 갱신한 뒤 loss_2 를 계산하지만, 수학적으로 정확하려면 <strong>갱신 전의 W3</strong> 로 loss_2 를 구해야 합니다. 이 학습지에서는 이 부분을 바로잡았습니다.</p>
+</div></blockquote>
+<section id="id10">
+<h3>속도 비교 : 사진 1장 학습 시간<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">nn</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="n">IMG</span><span class="o">*</span><span class="n">IMG</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="n">row</span> <span class="o">=</span> <span class="n">training_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="p">((</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.99</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">;</span> <span class="n">t1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="mf">0.99</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">();</span> <span class="n">nn</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">t1</span><span class="p">);</span> <span class="n">t_bp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="n">nn</span><span class="o">.</span><span class="n">target_data</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">input_data</span> <span class="o">=</span> <span class="n">t1</span><span class="p">,</span> <span class="n">x1</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">();</span> <span class="n">numerical_derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">W3</span><span class="p">);</span> <span class="n">t_nd3</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>   <span class="c1"># W3 만 수치미분</span>
+<span class="n">t_nd</span> <span class="o">=</span> <span class="n">t_nd3</span> <span class="o">*</span> <span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">W2</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">nn</span><span class="o">.</span><span class="n">b2</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">nn</span><span class="o">.</span><span class="n">W3</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">nn</span><span class="o">.</span><span class="n">b3</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">/</span> <span class="n">nn</span><span class="o">.</span><span class="n">W3</span><span class="o">.</span><span class="n">size</span>     <span class="c1"># 전체로 환산</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'오차역전파 : 사진 1장 </span><span class="si">{</span><span class="n">t_bp</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> ms'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'수치미분   : 사진 1장 약 </span><span class="si">{</span><span class="n">t_nd</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> 초 (W3 만 재고 전체 개수로 환산)'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'→ 오차역전파가 약 </span><span class="si">{</span><span class="n">t_nd</span><span class="o">/</span><span class="n">t_bp</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1"> 배 빠르다!'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>[확인 2]</strong> 오차역전파는 수치미분보다 약 ( 　　　 ) 배 빠르다.</p>
+</div></blockquote>
+</section>
+<section id="epoch-30-1">
+<h3>학습 (학습 데이터 전체 1번 = 1 epoch, 30초 ~ 1분)<a class="headerlink" href="#epoch-30-1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">nn</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="n">IMG</span><span class="o">*</span><span class="n">IMG</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10000</span> <span class="k">else</span> <span class="mi">15</span>
+<span class="n">snapshots</span><span class="p">,</span> <span class="n">acc_hist</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>                        <span class="c1"># 애니메이션용 기록</span>
+<span class="n">check</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span><span class="o">*</span><span class="n">epochs</span> <span class="o">//</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">training_data</span><span class="p">):</span>
+        <span class="n">target_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.01</span>
+        <span class="n">target_data</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="mf">0.99</span>
+        <span class="n">input_data</span> <span class="o">=</span> <span class="p">((</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.99</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.01</span>
+        <span class="n">loss_val</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">ndmin</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">target_data</span><span class="p">,</span> <span class="n">ndmin</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="n">check</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">snapshots</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">count</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">W2</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">16</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()))</span>
+            <span class="n">acc_hist</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">count</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">test_data</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])))</span>
+        <span class="k">if</span> <span class="n">epochs</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">10000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'step </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s1">6d</span><span class="si">}</span><span class="s1"> : loss = </span><span class="si">{</span><span class="n">loss_val</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">epochs</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'epoch </span><span class="si">{</span><span class="n">ep</span><span class="si">}</span><span class="s1"> 끝 : loss = </span><span class="si">{</span><span class="n">loss_val</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'학습 시간 ='</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'테스트 정확도 = </span><span class="si">{</span><span class="n">nn</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> %'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>[확인 3]</strong> 오차역전파로 1 epoch 학습한 정확도는 ( 　　 ) % 이다. 원본 강의의 수치미분 버전(30,000장, 몇십 시간)의 정확도 94.34 % 와 비교해 보세요.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="id11">
+<h2>🎬 애니메이션 2. 은닉 노드는 무엇을 볼까?<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<p>은닉 노드 하나에 연결된 가중치 784 개 (W2 의 한 열) 를 28 × 28 그림으로 그리면 <strong>그 노드가 좋아하는 무늬</strong> 가 보입니다. (빨강 +, 파랑 −)
+학습이 진행되며 무작위 점무늬가 <strong>획(선)의 일부를 닮은 무늬</strong> 로 바뀌는지 관찰하세요.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 2 실행 (실습 2 학습을 먼저 실행하세요)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="p">[</span><span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">)]</span>
+<span class="n">axA</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">:])</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">snapshots</span><span class="p">)))</span> <span class="o">+</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">snapshots</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">cnt</span><span class="p">,</span> <span class="n">Wk</span> <span class="o">=</span> <span class="n">snapshots</span><span class="p">[</span><span class="n">f</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axs</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">w</span> <span class="o">=</span> <span class="n">Wk</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">IMG</span><span class="p">,</span> <span class="n">IMG</span><span class="p">);</span> <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'bwr'</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="n">m</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">m</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+    <span class="n">axA</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">acc_hist</span><span class="p">[:</span><span class="n">f</span><span class="o">+</span><span class="mi">1</span><span class="p">]];</span> <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="o">*</span><span class="mi">100</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">acc_hist</span><span class="p">[:</span><span class="n">f</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">axA</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s1">'o-'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'green'</span><span class="p">);</span> <span class="n">axA</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span> <span class="n">axA</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">acc_hist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">axA</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'학습한 사진 수'</span><span class="p">);</span> <span class="n">axA</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'정확도 (%)'</span><span class="p">);</span> <span class="n">axA</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">axA</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">tick_right</span><span class="p">();</span> <span class="n">axA</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s1">'right'</span><span class="p">)</span>
+    <span class="n">axA</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">cnt</span><span class="si">}</span><span class="s1">장 학습 → 정확도 </span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">'은닉 노드 16개의 가중치 무늬'</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.27</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<blockquote>
+<div><p><strong>[관찰 1]</strong> 정확도는 처음 몇천 장 만에 ( 빠르게 / 천천히 ) 올라간다. 은닉 노드 무늬 중 숫자의 일부(동그라미, 세로 획 등)처럼 보이는 것이 있나요? (                     )</p>
+</div></blockquote>
+</section>
+<section id="id12">
+<h2>✏️ 연습 문제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>[문제 1]</strong> 은닉층을 2개 (784 - 100 - 50 - 10) 로 늘린다면 train 메서드에서 손실은 어떤 순서로 계산해야 할까요?
+loss_( 　 ) → loss_( 　 ) → loss_( 　 )</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>[문제 2]</strong> 학습률을 0.3 대신 0.01 과 1.0 으로 바꿔 학습하고 정확도를 비교하세요. (아래 셀의 <code class="docutils literal notranslate"><span class="pre">______</span></code> 를 채우세요. 시간을 줄이려고 학습 데이터 10,000 장만 사용)</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">lr</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">______</span><span class="p">]:</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="n">IMG</span><span class="o">*</span><span class="n">IMG</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">lr</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">training_data</span><span class="p">[:</span><span class="mi">10000</span><span class="p">]:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">;</span> <span class="n">t</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="mf">0.99</span>
+        <span class="n">net</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="mf">255.0</span> <span class="o">*</span> <span class="mf">0.99</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">ndmin</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ndmin</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'학습률 </span><span class="si">{</span><span class="n">lr</span><span class="si">}</span><span class="s1"> : 정확도 = </span><span class="si">{</span><span class="n">net</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> %'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id13">
+<h2>📌 정리<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
+<th class="head text-left"><p>내용</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>은닉층 손실</p></td>
+<td class="text-left"><p>loss_2 = (loss_3 · W3<sup>T</sup>) × A2(1 − A2)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>일반 공식</p></td>
+<td class="text-left"><p>현재 층 손실 = (다음 층 손실 · 다음 층 W<sup>T</sup>) × A(1 − A)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>갱신</p></td>
+<td class="text-left"><p>W ← W − α × (이전 층 출력<sup>T</sup> · 현재 층 손실),  b ← b − α × 현재 층 손실</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>순서</p></td>
+<td class="text-left"><p>순전파(입력 → 출력) 후, 역전파(출력 → 입력)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>효과</p></td>
+<td class="text-left"><p>수치미분보다 수만 배 빠르고, MNIST 1 epoch 로 약 95 % 정확도</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="id14">
+<h3>🏆 도전 과제<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<p>지금 신경망은 사진의 784 픽셀을 <strong>한 줄로 펴서</strong> 넣기 때문에, 바로 옆에 붙어 있는 픽셀이라는 정보가 사라집니다. 사진의 <strong>모양(공간 정보)</strong> 을 살려서 학습하는 방법은? → 다음 시간: <strong>CNN (합성곱 신경망)</strong></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="12_backprop_1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">이전</p>
+        <p class="prev-next-title">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="14_cnn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">다음</p>
+        <p class="prev-next-title">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 내용
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">📖 개념 다지기 1. 은닉층 가중치는 길이 두 갈래!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">행렬로 쓰면</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">[연습 1] 은닉층 손실 손으로 계산하기</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">💻 실습 1. 은닉층 공식 검증 (수치미분과 비교)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ok">📖 개념 다지기 2. 오차역전파 일반 공식 (은닉층이 여러 개여도 OK)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">🎬 애니메이션 1. 오차가 거꾸로 퍼져 나가는 모습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">💻 실습 2. 오차역전파 MNIST 신경망 (원본 강의 코드)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">속도 비교 : 사진 1장 학습 시간</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#epoch-30-1">학습 (학습 데이터 전체 1번 = 1 epoch, 30초 ~ 1분)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">🎬 애니메이션 2. 은닉 노드는 무엇을 볼까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">✏️ 연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">📌 정리</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">🏆 도전 과제</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+으로 AI 수학 수업
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

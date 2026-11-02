@@ -1,0 +1,1122 @@
+
+<!DOCTYPE html>
+
+
+<html lang="ko" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기 &#8212; 인공지능을 위한 수학</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=ae323b5b"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = '표시하려면 클릭';</script>
+    <script>let toggleHintHide = '숨기려면 클릭';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=e33e7ba0"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_vector_matrix';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="색인" href="genindex.html" />
+    <link rel="search" title="검색" href="search.html" />
+    <link rel="next" title="📝 [제 4편] 머신러닝의 개념과 종류" href="04_ml_overview.html" />
+    <link rel="prev" title="📝 [제 2편] 수치미분 - 파이썬으로 미분하기" href="02_numerical_derivative.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="ko"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">검색</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">검색</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">인공지능을 위한 수학</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">검색</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    📚 인공지능을 위한 수학
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_xor.html">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/chenyenhee/ai-math-colab/blob/python/03_vector_matrix.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="소스 저장소"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="이 페이지 다운로드">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/03_vector_matrix.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="소스 파일 다운로드"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="PDF로 인쇄"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="전체 화면으로보기"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="검색" aria-label="검색" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> 내용 </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shape">📖 개념 다지기 1. 벡터와 행렬, 형상(shape)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape">📖 개념 다지기 2. 같은 자리끼리 하는 사칙연산과 형 변환(reshape)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-product">📖 개념 다지기 3. 행렬 곱 (dot product) ⭐ 가장 중요!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">크기 조건</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">🎬 애니메이션 1. 행렬 곱이 계산되는 순서</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcast">📖 개념 다지기 4. 브로드캐스트 (broadcast)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose">📖 개념 다지기 5. 전치행렬 (transpose)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">📖 개념 다지기 6. 원하는 부분만 꺼내기 : 인덱싱과 슬라이싱</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">💻 실습. 시험 점수 데이터를 입력과 정답으로 나누기</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">자주 쓰는 numpy 함수</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">✏️ 연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">📌 정리</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">🏆 도전 과제</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="numpy">
+<h1>📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기<a class="headerlink" href="#numpy" title="Link to this heading">#</a></h1>
+<p><strong>학년/반/번호:</strong> 2학년 ( )반 ( )번  <strong>이름:</strong> (           )</p>
+<blockquote>
+<div><p>근거 자료: 박성호, 「Python numpy (I)·(II)·(III)」 (ML_LEC_06, 07, 08)</p>
+</div></blockquote>
+<hr class="docutils" />
+<section id="id1">
+<h2>🎯 학습 목표<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>numpy 로 벡터와 행렬을 만들고 형상(shape)과 차원(ndim)을 확인할 수 있다.</p></li>
+<li><p>행렬 곱의 계산 원리와 크기 조건 (m × n)(n × k) = (m × k) 를 설명할 수 있다.</p></li>
+<li><p>브로드캐스트, 전치행렬, 인덱싱·슬라이싱으로 데이터를 원하는 모양으로 바꿀 수 있다.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>🧭 지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>제 2편에서 여러 변수를 <code class="docutils literal notranslate"><span class="pre">np.array([1.0,</span> <span class="pre">2.0])</span></code>, <code class="docutils literal notranslate"><span class="pre">np.array([[1.0,</span> <span class="pre">2.0],</span> <span class="pre">[3.0,</span> <span class="pre">4.0]])</span></code> 처럼 <strong>배열</strong>에 담아 수치미분했습니다.</p></li>
+<li><p>오늘은 이 배열, 즉 <strong>벡터와 행렬</strong>을 자세히 배웁니다.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>왜 행렬일까?</strong> 🤔<br />
+사진 한 장은 숫자(밝기)가 가로세로로 늘어선 <strong>행렬</strong>입니다. 28 × 28 손글씨 숫자 사진은 784 개의 숫자이고,<br />
+인공지능은 이 숫자들에 <strong>가중치 행렬</strong>을 곱해서 “이 숫자는 5” 라고 판단합니다.</p>
+</div></blockquote>
+<blockquote>
+<div><p>🚀 <strong>실습하려면</strong> : 이 페이지 맨 위의 <strong>로켓(🚀) 버튼 → Colab</strong> 을 누르세요. 코랩에서 코드를 실행하고 🎬 애니메이션을 볼 수 있습니다.
+코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2>⚙️ 0단계. 준비하기<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title ▶ 준비 셀 (먼저 실행하세요)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.font_manager</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">animation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">font_path</span> <span class="o">=</span> <span class="s1">'NanumGothic.ttf'</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">font_path</span><span class="p">):</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/google/fonts/main/ofl/nanumgothic/NanumGothic-Regular.ttf'</span><span class="p">,</span> <span class="n">font_path</span><span class="p">)</span>
+    <span class="n">fm</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">font_path</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">'font'</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">font_path</span><span class="p">)</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'글꼴을 내려받지 못했습니다(그래프의 한글이 깨질 수 있음):'</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'axes.unicode_minus'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'animation.embed_limit'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">):</span>
+    <span class="c1"># 애니메이션을 코랩 화면에 재생 버튼과 함께 보여 주기</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_jshtml</span><span class="p">()))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'✅ 준비 완료!'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="shape">
+<h2>📖 개념 다지기 1. 벡터와 행렬, 형상(shape)<a class="headerlink" href="#shape" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>벡터</strong>: 숫자를 한 줄로 늘어놓은 것 → 1차원 배열.  예) A = (1, 2, 3)</p></li>
+<li><p><strong>행렬</strong>: 숫자를 가로(행)·세로(열)로 늘어놓은 것 → 2차원 배열.</p></li>
+</ul>
+<p>A = ( 1　2　3 )
+　　　　( 4　5　6 )　　→ 행 2개, 열 3개 → <strong>형상(shape) 2 × 3</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>확인할 것</p></th>
+<th class="head text-left"><p>numpy 코드</p></th>
+<th class="head text-left"><p>위 행렬 A 의 결과</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>형상</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">A.shape</span></code></p></td>
+<td class="text-left"><p>(2, 3)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>차원</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">A.ndim</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>원소 개수</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">A.size</span></code></p></td>
+<td class="text-left"><p>6</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>[연습 1]</strong> 행렬 B = ( 1　2 ) / ( 3　4 ) / ( 5　6 ) (3행 2열) 의 형상은 ( 　 × 　 ), 원소 개수는 ( 　 ) 개</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>                       <span class="c1"># 벡터</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>          <span class="c1"># 행렬</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A ='</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="s1">'  shape ='</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">'  ndim ='</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'B =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'B.shape ='</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">'  B.ndim ='</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span> <span class="s1">'  B.size ='</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reshape">
+<h2>📖 개념 다지기 2. 같은 자리끼리 하는 사칙연산과 형 변환(reshape)<a class="headerlink" href="#reshape" title="Link to this heading">#</a></h2>
+<p>크기가 같은 두 벡터(행렬)의 +, −, ×, ÷ 는 <strong>같은 자리의 원소끼리</strong> 계산합니다.</p>
+<p>A = (1, 2, 3),　B = (4, 5, 6) 이면
+　A + B = (5, 7, 9),　A × B = ( 　, 　, 　 ),　B / A = (4, 2.5, 2)</p>
+<p><strong>reshape</strong> 는 원소의 순서는 그대로 두고 <strong>모양만</strong> 바꿉니다.
+　(1, 2, 3, 4, 5, 6) → reshape(2, 3) → ( 1 2 3 / 4 5 6 )</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A + B ='</span><span class="p">,</span> <span class="n">A</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A - B ='</span><span class="p">,</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A * B ='</span><span class="p">,</span> <span class="n">A</span> <span class="o">*</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'B / A ='</span><span class="p">,</span> <span class="n">B</span> <span class="o">/</span> <span class="n">A</span><span class="p">)</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">reshape(2, 3) =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'reshape(3, 2) =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>[확인 1]</strong> <code class="docutils literal notranslate"><span class="pre">C.reshape(3,</span> <span class="pre">2)</span></code> 의 결과를 손으로 먼저 써 보고 비교하세요. 원소는 ( 행 / 열 ) 방향으로 차례대로 채워집니다.
+<strong>[생각해 보기]</strong> <code class="docutils literal notranslate"><span class="pre">C.reshape(4,</span> <span class="pre">2)</span></code> 는 왜 오류가 날까요? (                                       )</p>
+</div></blockquote>
+</section>
+<section id="dot-product">
+<h2>📖 개념 다지기 3. 행렬 곱 (dot product) ⭐ 가장 중요!<a class="headerlink" href="#dot-product" title="Link to this heading">#</a></h2>
+<p>행렬 곱 A · B 의 (i 행, j 열) 원소 = <strong>A 의 i 번째 행</strong> 과 <strong>B 의 j 번째 열</strong> 에서 같은 순서의 원소끼리 곱해서 모두 더한 값</p>
+<p>A = ( 1　2　3 )　　B = ( −1　−2 )
+　　　( 4　5　6 )　　　　( −3　−4 )
+　　　　　　　　　　　　( −5　−6 )</p>
+<ul class="simple">
+<li><p>(1, 1) 원소 = 1 × (−1) + 2 × (−3) + 3 × (−5) = −1 − 6 − 15 = −22</p></li>
+<li><p>(1, 2) 원소 = 1 × (−2) + 2 × (−4) + 3 × (−6) = ( 　　 )</p></li>
+<li><p>(2, 1) 원소 = 4 × (−1) + 5 × (−3) + 6 × (−5) = ( 　　 )</p></li>
+<li><p>(2, 2) 원소 = ( 　　　　　　　　　　　　　　 ) = −64</p></li>
+</ul>
+<section id="id4">
+<h3>크기 조건<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p><strong>(m × n) · (n × k) = (m × k)</strong>  → 앞 행렬의 <strong>열의 개수</strong> 와 뒤 행렬의 <strong>행의 개수</strong> 가 같아야 곱할 수 있습니다.</p>
+<p>(2 × <u>3</u>) · (<u>3</u> × 2) = (2 × 2)</p>
+</section>
+</section>
+<section id="id5">
+<h2>🎬 애니메이션 1. 행렬 곱이 계산되는 순서<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>A 의 행(빨강)과 B 의 열(파랑)이 만나 결과 행렬 C 의 한 칸(초록)이 채워집니다. 실행 후 ▶ 를 누르세요.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 1 실행 (행렬 곱)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">]])</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">B</span>
+<span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">hl_rows</span><span class="o">=</span><span class="p">(),</span> <span class="n">hl_cols</span><span class="o">=</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+            <span class="n">fc</span> <span class="o">=</span> <span class="s1">'white'</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">hl_rows</span><span class="p">:</span> <span class="n">fc</span> <span class="o">=</span> <span class="s1">'#ffb3b3'</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">hl_cols</span><span class="p">:</span> <span class="n">fc</span> <span class="o">=</span> <span class="s1">'#b3d1ff'</span>
+            <span class="k">if</span> <span class="n">show</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="n">show</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">fc</span> <span class="o">=</span> <span class="n">show</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">x0</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="n">y0</span> <span class="o">-</span> <span class="n">i</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">fc</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+            <span class="n">txt</span> <span class="o">=</span> <span class="s1">''</span> <span class="k">if</span> <span class="p">(</span><span class="n">show</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">show</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">show</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x0</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">y0</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x0</span> <span class="o">+</span> <span class="n">c</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y0</span> <span class="o">+</span> <span class="mf">1.4</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">  (</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s1"> × </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1">)'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+
+<span class="n">steps</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+    <span class="n">frames</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">t</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">6</span>
+<span class="n">frames</span> <span class="o">+=</span> <span class="p">[(</span><span class="nb">len</span><span class="p">(</span><span class="n">steps</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">8</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="n">f</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">13</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">3.8</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">'equal'</span><span class="p">)</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">steps</span><span class="p">[:</span><span class="n">t</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">draw_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'A'</span><span class="p">);</span> <span class="n">draw_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">)</span>
+        <span class="n">draw_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'C = A · B'</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.3</span><span class="p">,</span> <span class="s1">'완성!  (2 × 3) · (3 × 2) = (2 × 2)'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'green'</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">draw_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'A'</span><span class="p">,</span> <span class="n">hl_rows</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,))</span>
+    <span class="n">draw_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="n">hl_cols</span><span class="o">=</span><span class="p">(</span><span class="n">j</span><span class="p">,))</span>
+    <span class="n">draw_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'C = A · B'</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="s1">'#b3ffb3'</span><span class="p">,</span> <span class="n">done</span> <span class="o">|</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)}))</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="s1">' + '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">]</span><span class="si">}</span><span class="s1">×(</span><span class="si">{</span><span class="n">B</span><span class="p">[</span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s1">)'</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.3</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'C[</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">] = </span><span class="si">{</span><span class="n">terms</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'darkgreen'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.6</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">'·'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">'='</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">)</span>
+
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>               <span class="c1"># 2 × 3</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">]])</span>       <span class="c1"># 3 × 2</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>                                   <span class="c1"># A @ B 라고 써도 같음</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A.shape ='</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">', B.shape ='</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">'→ C.shape ='</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>[연습 2]</strong> 크기 조건만 보고 결과의 형상을 쓰세요. 곱할 수 없으면 × 표시.
+① (3 × 4) · (4 × 1) = ( 　　 ) 　 ② (2 × 2) · (3 × 2) = ( 　　 ) 　 ③ (1 × 784) · (784 × 100) = ( 　　 )</p>
+</div></blockquote>
+<blockquote>
+<div><p>💡 <strong>머신러닝과의 연결</strong>: ③ 은 손글씨 사진 한 장(784개 숫자)에 가중치 행렬(784 × 100)을 곱하는 계산입니다.
+행렬 곱 덕분에 (64 × 64) · (64 × 256) · (256 × 512) · … 처럼 <strong>크기 조건만 맞으면 원하는 만큼 층을 이어 붙일 수 있습니다.</strong> 이것이 딥러닝의 ‘깊은 층’ 입니다.</p>
+</div></blockquote>
+<p>⚠️ <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code> (같은 자리끼리 곱) 와 <code class="docutils literal notranslate"><span class="pre">np.dot(A,</span> <span class="pre">B)</span></code> (행렬 곱) 는 <strong>완전히 다릅니다!</strong></p>
+</section>
+<section id="broadcast">
+<h2>📖 개념 다지기 4. 브로드캐스트 (broadcast)<a class="headerlink" href="#broadcast" title="Link to this heading">#</a></h2>
+<p>수학에서는 크기가 다른 행렬끼리 더할 수 없지만, numpy 는 <strong>작은 쪽을 반복해서 크기를 맞춘 뒤</strong> 계산해 줍니다.</p>
+<p>A = ( 1　2 ) / ( 3　4 ),　b = 5 일 때　A + b = ( 1　2 ) / ( 3　4 ) + ( 5　5 ) / ( 5　5 ) = ( 6　7 ) / ( 8　9 )</p>
+<p>C = ( 1　2 ) / ( 3　4 ),　D = ( 4　5 ) 일 때　C + D = ( 1　2 ) / ( 3　4 ) + ( 4　5 ) / ( 4　5 ) = ( 　　 ) / ( 　　 )</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 2 실행 (브로드캐스트)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]);</span> <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cell</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">fc</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">.5</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">21</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">'equal'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">cell</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'+'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">cell</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="s1">'#b3d1ff'</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">f</span> <span class="o">/</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>                               <span class="c1"># 복사된 행이 내려오는 정도</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">cell</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">,</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="s1">'#ffe0a3'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span> <span class="o">+</span> <span class="mf">0.6</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.9</span><span class="p">,</span> <span class="mf">2.25</span><span class="p">,</span> <span class="s1">'작은 쪽(D)을 행 방향으로 복사'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'royalblue'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">f</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'='</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">)</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">C</span> <span class="o">+</span> <span class="n">D</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">cell</span><span class="p">(</span><span class="mi">6</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="s1">'#b3ffb3'</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A + 5 =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">A</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]);</span> <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'C + D =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">C</span> <span class="o">+</span> <span class="n">D</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="transpose">
+<h2>📖 개념 다지기 5. 전치행렬 (transpose)<a class="headerlink" href="#transpose" title="Link to this heading">#</a></h2>
+<p>행렬 A 의 <strong>행과 열을 바꾼</strong> 행렬을 전치행렬이라 하고 A<sup>T</sup> 로 씁니다. (1행 → 1열, 2행 → 2열, …)</p>
+<p>A = ( 1　2 ) / ( 3　4 ) / ( 5　6 )  (3 × 2)　→　A<sup>T</sup> = ( 1　3　5 ) / ( 2　4　6 )  ( 　 × 　 )</p>
+<blockquote>
+<div><p>💡 행렬 곱의 크기가 안 맞을 때 전치행렬로 맞춰 줍니다.
+예) A 가 (3 × 2) 이면 A · A 는 곱할 수 없지만 A<sup>T</sup> · A 는 (2 × 3) · (3 × 2) = ( 　 × 　 ) 로 계산 가능!</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A.shape ='</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">'→ A.T.shape ='</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A.T · A =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h2>📖 개념 다지기 6. 원하는 부분만 꺼내기 : 인덱싱과 슬라이싱<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>A = ( 10　20 ) / ( 30　40 ) / ( 50　60 )  (3 × 2)</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>코드</p></th>
+<th class="head text-left"><p>뜻</p></th>
+<th class="head text-left"><p>결과</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">A[0,</span> <span class="pre">0]</span></code></p></td>
+<td class="text-left"><p>1행 1열 (번호는 <strong>0부터</strong>)</p></td>
+<td class="text-left"><p>10</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">A[2,</span> <span class="pre">1]</span></code></p></td>
+<td class="text-left"><p>3행 2열</p></td>
+<td class="text-left"><p>( 　 )</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">A[:,</span> <span class="pre">0]</span></code></p></td>
+<td class="text-left"><p>모든 행의 1열</p></td>
+<td class="text-left"><p>[10, 30, 50]</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">A[0:-1,</span> <span class="pre">1:2]</span></code></p></td>
+<td class="text-left"><p>1행 ~ 2행, 2열</p></td>
+<td class="text-left"><p>[[20], [40]]</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">A[:,</span> <span class="pre">-1]</span></code></p></td>
+<td class="text-left"><p>모든 행의 <strong>마지막</strong> 열</p></td>
+<td class="text-left"><p>( 　　　　 )</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>💡 <strong>머신러닝에서</strong>: 데이터 표에서 앞쪽 열은 입력 x, 마지막 열은 정답 t 로 나눌 때 <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">0:-1]</span></code>, <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">[-1]]</span></code> 을 씁니다.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A[0, 0]      ='</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A[2, 1]      ='</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A[:, 0]      ='</span><span class="p">,</span> <span class="n">A</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A[0:-1, 1:2] ='</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A[:, -1]     ='</span><span class="p">,</span> <span class="n">A</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h2>💻 실습. 시험 점수 데이터를 입력과 정답으로 나누기<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p>아래 표는 학생 5명의 1차, 2차, 3차 시험 점수(입력)와 최종 점수(정답) 입니다. (원본 강의의 data-01.csv 일부)</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>1차</p></th>
+<th class="head text-center"><p>2차</p></th>
+<th class="head text-center"><p>3차</p></th>
+<th class="head text-center"><p>최종</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>73</p></td>
+<td class="text-center"><p>80</p></td>
+<td class="text-center"><p>75</p></td>
+<td class="text-center"><p>152</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>93</p></td>
+<td class="text-center"><p>88</p></td>
+<td class="text-center"><p>93</p></td>
+<td class="text-center"><p>185</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>89</p></td>
+<td class="text-center"><p>91</p></td>
+<td class="text-center"><p>90</p></td>
+<td class="text-center"><p>180</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>96</p></td>
+<td class="text-center"><p>98</p></td>
+<td class="text-center"><p>100</p></td>
+<td class="text-center"><p>196</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>73</p></td>
+<td class="text-center"><p>66</p></td>
+<td class="text-center"><p>70</p></td>
+<td class="text-center"><p>142</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 파일 만들기 (실제로는 np.loadtxt 로 csv 파일을 읽어 옵니다)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'data-01.csv'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'73,80,75,152</span><span class="se">\n</span><span class="s1">93,88,93,185</span><span class="se">\n</span><span class="s1">89,91,90,180</span><span class="se">\n</span><span class="s1">96,98,100,196</span><span class="se">\n</span><span class="s1">73,66,70,142</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="n">loaded_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">'./data-01.csv'</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">','</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># 입력: 처음부터 마지막 열 '전'까지</span>
+<span class="n">t_data</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[:,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>     <span class="c1"># 정답: 마지막 열 (2차원 모양 유지)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'x_data.shape ='</span><span class="p">,</span> <span class="n">x_data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">', t_data.shape ='</span><span class="p">,</span> <span class="n">t_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'입력 x_data =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">x_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'정답 t_data =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">t_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>[확인 2]</strong> <code class="docutils literal notranslate"><span class="pre">x_data</span></code> 의 형상은 ( 　 × 　 ), <code class="docutils literal notranslate"><span class="pre">t_data</span></code> 의 형상은 ( 　 × 　 ) 이다.
+가중치 W 를 곱해 x_data · W 의 형상이 t_data 와 같은 (5 × 1) 이 되려면, W 의 형상은 ( 　 × 　 ) 이어야 한다.</p>
+</div></blockquote>
+<section id="id8">
+<h3>자주 쓰는 numpy 함수<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'np.sum(X) ='</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="s1">', np.max(X) ='</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="s1">', np.argmax(X) ='</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'np.exp(X) ='</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'np.log(X) ='</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">M =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'np.max(M, axis=0)    ='</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="s1">'  ← 열마다 최댓값 (세로 방향)'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'np.max(M, axis=1)    ='</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s1">'  ← 행마다 최댓값 (가로 방향)'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'np.argmax(M, axis=1) ='</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s1">'  ← 행마다 최댓값의 위치'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>💡 <code class="docutils literal notranslate"><span class="pre">argmax</span></code> 는 손글씨 인식에서 “10개의 출력 중 <strong>가장 큰 값의 위치</strong> = 인공지능이 고른 숫자” 를 찾을 때 씁니다.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="id9">
+<h2>✏️ 연습 문제<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>[문제 1]</strong> P = ( 1　0 ) / ( 2　1 ),  Q = ( 3　1 ) / ( 1　2 ) 일 때 P · Q 를 손으로 구하세요.
+P · Q = ( 　　 　　 ) / ( 　　 　　 )</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>[문제 2]</strong> 1부터 12까지의 수로 3 × 4 행렬 M 을 만들고, ① M 의 형상, ② M<sup>T</sup> 의 형상, ③ M 의 2행 전체, ④ M<sup>T</sup> · M 의 형상을 구하세요.</p>
+</div></blockquote>
+<p>아래 셀의 <code class="docutils literal notranslate"><span class="pre">______</span></code> 를 채워 실행하세요.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># [문제 1]</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'P · Q =</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">______</span><span class="p">)</span>
+
+<span class="c1"># [문제 2]</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">______</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'① M.shape   ='</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'② M.T.shape ='</span><span class="p">,</span> <span class="n">______</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'③ M 의 2행  ='</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">______</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'④ (M.T · M).shape ='</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">______</span><span class="p">,</span> <span class="n">______</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h2>📌 정리<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
+<th class="head text-left"><p>내용</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>형상</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">shape</span></code> 로 (행, 열) 확인. 계산 전에 항상 확인하는 습관!</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>사칙연산</p></td>
+<td class="text-left"><p>같은 자리끼리. 크기가 다르면 브로드캐스트</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>행렬 곱</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">np.dot(A,</span> <span class="pre">B)</span></code>, (m × n) · (n × k) = (m × k)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>전치</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">A.T</span></code>, 행 ↔ 열</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>슬라이싱</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">0:-1]</span></code> 입력, <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">[-1]]</span></code> 정답</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="id11">
+<h3>🏆 도전 과제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<p>입력 데이터 X 의 형상이 (25 × 3) 이고 정답 T 의 형상이 (25 × 1) 일 때,
+y = X · W + b 가 T 와 같은 형상이 되도록 하는 가중치 W 의 형상은 ( 　 × 　 ) 입니다.
+→ 다음 시간(제 5편 선형회귀)에는 이 W 와 b 를 <strong>인공지능이 스스로 찾는 방법</strong> 을 배웁니다!</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_numerical_derivative.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">이전</p>
+        <p class="prev-next-title">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_ml_overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">다음</p>
+        <p class="prev-next-title">📝 [제 4편] 머신러닝의 개념과 종류</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 내용
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shape">📖 개념 다지기 1. 벡터와 행렬, 형상(shape)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape">📖 개념 다지기 2. 같은 자리끼리 하는 사칙연산과 형 변환(reshape)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-product">📖 개념 다지기 3. 행렬 곱 (dot product) ⭐ 가장 중요!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">크기 조건</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">🎬 애니메이션 1. 행렬 곱이 계산되는 순서</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcast">📖 개념 다지기 4. 브로드캐스트 (broadcast)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose">📖 개념 다지기 5. 전치행렬 (transpose)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">📖 개념 다지기 6. 원하는 부분만 꺼내기 : 인덱싱과 슬라이싱</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">💻 실습. 시험 점수 데이터를 입력과 정답으로 나누기</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">자주 쓰는 numpy 함수</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">✏️ 연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">📌 정리</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">🏆 도전 과제</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+으로 AI 수학 수업
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
