@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류) &#8212; 인공지능을 위한 수학</title>
+    <title>로지스틱 회귀 - 합격일까 불합격일까? (분류) &#8212; 인공지능을 위한 수학</title>
   
   
   
@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -65,8 +67,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
     <link rel="search" title="검색" href="search.html" />
-    <link rel="next" title="📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다" href="09_xor.html" />
-    <link rel="prev" title="📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기" href="07_linear_regression_python.html" />
+    <link rel="next" title="XOR 문제 - 직선 하나로는 나눌 수 없다" href="09_xor.html" />
+    <link rel="prev" title="선형 회귀 (3) - 파이썬으로 직접 학습시키기" href="07_linear_regression_python.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ko"/>
   <meta name="docsearch:version" content="" />
@@ -100,8 +102,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -206,43 +208,35 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    📚 인공지능을 위한 수학
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅰ. 수학 도구</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">벡터와 행렬 - numpy 로 데이터 다루기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅱ. 머신러닝 기초</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅲ. 분류와 신경망</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_xor.html">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_xor.html">XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">MNIST - 손글씨 숫자를 읽는 신경망</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅳ. 오차역전파</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅴ. 응용 : CNN 과 RNN</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">RNN - 순서를 기억하는 신경망</a></li>
 </ul>
 
     </div>
@@ -322,85 +316,6 @@
 
 
 
-<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="소스 저장소"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="이 페이지 다운로드">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/08_logistic_regression.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="소스 파일 다운로드"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="PDF로 인쇄"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
-  title="전체 화면으로보기"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
 <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
   <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
@@ -424,7 +339,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</h1>
+    <h1>로지스틱 회귀 - 합격일까 불합격일까? (분류)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -434,23 +349,23 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📖 개념 다지기 1. 직선만으로는 부족하다</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sigmoid">📖 개념 다지기 2. sigmoid 함수</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 1. 직선만으로는 부족하다</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sigmoid">개념 다지기 2. sigmoid 함수</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">로지스틱 회귀 = 선형 회귀 + sigmoid</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b-sigmoid">🎬 애니메이션 1. W 와 b 가 sigmoid 곡선을 어떻게 바꿀까?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy">📖 개념 다지기 3. 분류의 손실함수 : cross-entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">💻 실습 1. 공부 시간으로 합격/불합격 예측하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">🎬 애니메이션 2. sigmoid 곡선이 학습되는 과정</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">💻 실습 2. 예습 시간과 복습 시간으로 합격 예측하기 (다변수)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">🎬 애니메이션 3. 결정 경계가 자리 잡는 과정</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b-sigmoid">애니메이션 1. W 와 b 가 sigmoid 곡선을 어떻게 바꿀까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy">개념 다지기 3. 분류의 손실함수 : cross-entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">실습 1. 공부 시간으로 합격/불합격 예측하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">애니메이션 2. sigmoid 곡선이 학습되는 과정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">실습 2. 예습 시간과 복습 시간으로 합격 예측하기 (다변수)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">애니메이션 3. 결정 경계가 자리 잡는 과정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -464,15 +379,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="id1">
-<h1>📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p><strong>학년/반/번호:</strong> 2학년 ( )반 ( )번  <strong>이름:</strong> (           )</p>
-<blockquote>
-<div><p>근거 자료: 박성호, 「Logistic Regression (I) - concept • cross-entropy」 (C.pptx = ML_LEC_16), 「Logistic Regression (II) - example」 (ML_LEC_17)</p>
-</div></blockquote>
+  <p class="unit-mark">제 8 편</p>
+<section id="id1">
+<h1>로지스틱 회귀 - 합격일까 불합격일까? (분류)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="box box-note docutils container">
+<p>근거 자료: 박성호, 「Logistic Regression (I) - concept • cross-entropy」 (C.pptx = ML_LEC_16), 「Logistic Regression (II) - example」 (ML_LEC_17)</p>
+</div>
 <hr class="docutils" />
 <section id="id2">
-<h2>🎯 학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>분류(classification) 문제에서 sigmoid 함수가 필요한 이유를 설명하고 함숫값을 계산할 수 있다.</p></li>
 <li><p>손실함수 cross-entropy 가 정답과 예측의 차이를 어떻게 벌점으로 바꾸는지 이해한다.</p></li>
@@ -481,18 +396,17 @@
 </section>
 <hr class="docutils" />
 <section id="id3">
-<h2>🧭 지난 시간 복습<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>지난 시간 복습<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>제 7편: 선형 회귀 y = Wx + b 를 경사하강법으로 학습시켜 <strong>점수(연속적인 숫자)</strong> 를 예측했습니다.</p></li>
 <li><p>오늘은 <strong>합격(1) / 불합격(0)</strong> 처럼 <strong>종류</strong>를 맞히는 <strong>분류</strong> 문제입니다.</p></li>
 </ul>
-<blockquote>
-<div><p>🚀 <strong>실습하려면</strong> : 이 페이지 맨 위의 <strong>로켓(🚀) 버튼 → Colab</strong> 을 누르세요. 코랩에서 코드를 실행하고 🎬 애니메이션을 볼 수 있습니다.
-코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p><strong>실습은 코랩에서</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르면 이 학습지가 코랩으로 열립니다. 코드 실행, 애니메이션, 정답 확인은 코랩에서 합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
+</div>
 </section>
 <section id="id4">
-<h2>⚙️ 0단계. 준비하기<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>0단계. 준비하기<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -558,7 +472,7 @@
 </div>
 </section>
 <section id="id5">
-<h2>📖 개념 다지기 1. 직선만으로는 부족하다<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 1. 직선만으로는 부족하다<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>공부 시간 x</p></th>
@@ -611,10 +525,10 @@
 </div>
 </section>
 <section id="sigmoid">
-<h2>📖 개념 다지기 2. sigmoid 함수<a class="headerlink" href="#sigmoid" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>sigmoid(z) = 1 / (1 + e<sup>−z</sup>)</strong></p>
-</div></blockquote>
+<h2>개념 다지기 2. sigmoid 함수<a class="headerlink" href="#sigmoid" title="Link to this heading">#</a></h2>
+<div class="box box-note docutils container">
+<p><strong>sigmoid(z) = 1 / (1 + e<sup>−z</sup>)</strong></p>
+</div>
 <ul class="simple">
 <li><p>z 가 아무리 커도, 아무리 작아도 sigmoid(z) 는 항상 <strong>0 과 1 사이</strong></p></li>
 <li><p>sigmoid(0) = 1 / (1 + 1) = ( 　　 )</p></li>
@@ -667,7 +581,7 @@
 </section>
 </section>
 <section id="w-b-sigmoid">
-<h2>🎬 애니메이션 1. W 와 b 가 sigmoid 곡선을 어떻게 바꿀까?<a class="headerlink" href="#w-b-sigmoid" title="Link to this heading">#</a></h2>
+<h2>애니메이션 1. W 와 b 가 sigmoid 곡선을 어떻게 바꿀까?<a class="headerlink" href="#w-b-sigmoid" title="Link to this heading">#</a></h2>
 <p>y = sigmoid(Wx + b) 에서</p>
 <ul class="simple">
 <li><p><strong>1단계</strong>: b = −6 고정, W 를 0.1 → 2 로 → 곡선의 <strong>가파른 정도</strong>가 변한다.</p></li>
@@ -706,11 +620,11 @@
 </div>
 </section>
 <section id="cross-entropy">
-<h2>📖 개념 다지기 3. 분류의 손실함수 : cross-entropy<a class="headerlink" href="#cross-entropy" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 3. 분류의 손실함수 : cross-entropy<a class="headerlink" href="#cross-entropy" title="Link to this heading">#</a></h2>
 <p>출력 y 가 확률(0~1)이고 정답 t 가 0 또는 1 이므로 오차² 대신 아래 손실함수를 씁니다.</p>
-<blockquote>
-<div><p><strong>E(W, b) = − Σ<sub>i=1</sub><sup>n</sup> { t<sub>i</sub> log y<sub>i</sub> + (1 − t<sub>i</sub>) log(1 − y<sub>i</sub>) }</strong></p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p><strong>E(W, b) = − Σ<sub>i=1</sub><sup>n</sup> { t<sub>i</sub> log y<sub>i</sub> + (1 − t<sub>i</sub>) log(1 − y<sub>i</sub>) }</strong></p>
+</div>
 <p>어렵게 보이지만 데이터 하나씩 보면 간단합니다. (log 는 자연로그 ln)</p>
 <ul class="simple">
 <li><p>정답 t = 1 이면 → 벌점 = <strong>− log y</strong>  (y 가 1 에 가까울수록 벌점 0)</p></li>
@@ -749,10 +663,10 @@
 </tbody>
 </table>
 </div>
-<blockquote>
-<div><p>💡 자신만만하게 틀릴수록(예: 정답 1 인데 y = 0.001) 벌점이 <strong>아주 커집니다</strong>. (− ln 0.001 ≒ 6.9)
+<div class="box box-note docutils container">
+<p>자신만만하게 틀릴수록(예: 정답 1 인데 y = 0.001) 벌점이 <strong>아주 커집니다</strong>. (− ln 0.001 ≒ 6.9)
 이 손실함수도 경사하강법으로 W, b 를 갱신합니다:  W ← W − α × ∂E/∂W,  b ← b − α × ∂E/∂b</p>
-</div></blockquote>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
@@ -767,7 +681,7 @@
 </div>
 </section>
 <section id="id7">
-<h2>💻 실습 1. 공부 시간으로 합격/불합격 예측하기<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2>실습 1. 공부 시간으로 합격/불합격 예측하기<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>선형 회귀(제 7편)와 달라진 곳은 <strong>딱 두 군데</strong> 입니다. ① y = sigmoid(z) ② 손실함수 = cross-entropy</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -813,13 +727,13 @@
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[확인 1]</strong> 3시간 공부하면 ( 합격 / 불합격 ), 17시간이면 ( 합격 / 불합격 ) 으로 예측한다.
+<div class="box box-check docutils container">
+<p><strong>[확인 1]</strong> 3시간 공부하면 ( 합격 / 불합격 ), 17시간이면 ( 합격 / 불합격 ) 으로 예측한다.
 경계는 약 ( 　 ) 시간이다. 데이터(12시간은 0, 14시간은 1)와 비교하면 그럴듯한가요?</p>
-</div></blockquote>
+</div>
 </section>
 <section id="id8">
-<h2>🎬 애니메이션 2. sigmoid 곡선이 학습되는 과정<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2>애니메이션 2. sigmoid 곡선이 학습되는 과정<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -852,7 +766,7 @@
 </div>
 </section>
 <section id="id9">
-<h2>💻 실습 2. 예습 시간과 복습 시간으로 합격 예측하기 (다변수)<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<h2>실습 2. 예습 시간과 복습 시간으로 합격 예측하기 (다변수)<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>예습 x₁</p></th>
@@ -928,14 +842,14 @@
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[확인 2]</strong> W₁ ( &gt; / &lt; ) W₂ 이므로, 이 데이터에서는 ( 예습 / 복습 ) 시간이 합격에 더 큰 영향을 준다.
+<div class="box box-check docutils container">
+<p><strong>[확인 2]</strong> W₁ ( &gt; / &lt; ) W₂ 이므로, 이 데이터에서는 ( 예습 / 복습 ) 시간이 합격에 더 큰 영향을 준다.
 (예습 3, 복습 17) 은 복습을 많이 했는데도 ( 합격 / 불합격 ) 으로 예측되었다. 그 이유는?
 (                                                                                   )</p>
-</div></blockquote>
+</div>
 </section>
 <section id="id10">
-<h2>🎬 애니메이션 3. 결정 경계가 자리 잡는 과정<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<h2>애니메이션 3. 결정 경계가 자리 잡는 과정<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>배경색은 합격 확률(빨강: 합격 쪽, 파랑: 불합격 쪽), 검은 선은 결정 경계 W₁x₁ + W₂x₂ + b = 0 입니다.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -967,19 +881,19 @@
 </div>
 </details>
 </div>
-<blockquote>
-<div><p><strong>[관찰 3]</strong> 결정 경계는 ( 세로선에 가깝게 / 가로선에 가깝게 ) 기울어져 있다. 이것은 합격 여부가 주로 ( 예습 x₁ / 복습 x₂ ) 에 따라 정해진다는 뜻이다.</p>
-</div></blockquote>
+<div class="box box-check docutils container">
+<p><strong>[관찰 3]</strong> 결정 경계는 ( 세로선에 가깝게 / 가로선에 가깝게 ) 기울어져 있다. 이것은 합격 여부가 주로 ( 예습 x₁ / 복습 x₂ ) 에 따라 정해진다는 뜻이다.</p>
+</div>
 </section>
 <section id="id11">
-<h2>✏️ 연습 문제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>[문제 1]</strong> 학습된 W = 1.15, b = −14.86 (실습 1 결과와 비슷한 값) 일 때, 공부 시간 x = 13 시간의 합격 확률을 손으로 어림해 보세요.
+<h2>연습 문제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<div class="box box-practice docutils container">
+<p><strong>[문제 1]</strong> 학습된 W = 1.15, b = −14.86 (실습 1 결과와 비슷한 값) 일 때, 공부 시간 x = 13 시간의 합격 확률을 손으로 어림해 보세요.
 z = 1.15 × 13 − 14.86 = ( 　　 ),  sigmoid(z) ≒ ( 　　 ) → ( 합격 / 불합격 )</p>
-</div></blockquote>
-<blockquote>
-<div><p><strong>[문제 2]</strong> W = 1.15, b = −14.86 인 모델에서 1 ~ 20시간 중 <strong>합격 확률이 처음으로 90% 를 넘는 시간</strong>을 찾는 코드를 완성하세요.</p>
-</div></blockquote>
+</div>
+<div class="box box-practice docutils container">
+<p><strong>[문제 2]</strong> W = 1.15, b = −14.86 인 모델에서 1 ~ 20시간 중 <strong>합격 확률이 처음으로 90% 를 넘는 시간</strong>을 찾는 코드를 완성하세요.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># [문제 2]</span>
@@ -995,7 +909,7 @@ z = 1.15 × 13 − 14.86 = ( 　　 ),  sigmoid(z) ≒ ( 　　 ) → ( 합격 /
 </div>
 </section>
 <section id="id12">
-<h2>📌 정리<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<h2>정리<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
@@ -1022,7 +936,7 @@ z = 1.15 × 13 − 14.86 = ( 　　 ),  sigmoid(z) ≒ ( 　　 ) → ( 합격 /
 </table>
 </div>
 <section id="id13">
-<h3>🏆 도전 과제<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<h3>도전 과제<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <p>로지스틱 회귀의 결정 경계는 항상 <strong>직선</strong> 입니다. 그렇다면 직선 하나로는 나눌 수 없는 데이터도 있을까요?
 아래처럼 (0,0)·(1,1) 은 0, (0,1)·(1,0) 은 1 인 데이터를 직선 하나로 나눠 보세요. → 다음 시간: <strong>XOR 문제</strong></p>
 <p>(                                                                                                                            )</p>
@@ -1066,7 +980,7 @@ z = 1.15 × 13 − 14.86 = ( 　　 ),  sigmoid(z) ≒ ( 　　 ) → ( 합격 /
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">이전</p>
-        <p class="prev-next-title">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</p>
+        <p class="prev-next-title">선형 회귀 (3) - 파이썬으로 직접 학습시키기</p>
       </div>
     </a>
     <a class="right-next"
@@ -1074,7 +988,7 @@ z = 1.15 × 13 − 14.86 = ( 　　 ),  sigmoid(z) ≒ ( 　　 ) → ( 합격 /
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">다음</p>
-        <p class="prev-next-title">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</p>
+        <p class="prev-next-title">XOR 문제 - 직선 하나로는 나눌 수 없다</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1096,23 +1010,23 @@ z = 1.15 × 13 − 14.86 = ( 　　 ),  sigmoid(z) ≒ ( 　　 ) → ( 합격 /
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📖 개념 다지기 1. 직선만으로는 부족하다</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sigmoid">📖 개념 다지기 2. sigmoid 함수</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 1. 직선만으로는 부족하다</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sigmoid">개념 다지기 2. sigmoid 함수</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">로지스틱 회귀 = 선형 회귀 + sigmoid</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b-sigmoid">🎬 애니메이션 1. W 와 b 가 sigmoid 곡선을 어떻게 바꿀까?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy">📖 개념 다지기 3. 분류의 손실함수 : cross-entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">💻 실습 1. 공부 시간으로 합격/불합격 예측하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">🎬 애니메이션 2. sigmoid 곡선이 학습되는 과정</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">💻 실습 2. 예습 시간과 복습 시간으로 합격 예측하기 (다변수)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">🎬 애니메이션 3. 결정 경계가 자리 잡는 과정</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b-sigmoid">애니메이션 1. W 와 b 가 sigmoid 곡선을 어떻게 바꿀까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy">개념 다지기 3. 분류의 손실함수 : cross-entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">실습 1. 공부 시간으로 합격/불합격 예측하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">애니메이션 2. sigmoid 곡선이 학습되는 과정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">실습 2. 예습 시간과 복습 시간으로 합격 예측하기 (다변수)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">애니메이션 3. 결정 경계가 자리 잡는 과정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -1145,9 +1059,6 @@ z = 1.15 × 13 − 14.86 = ( 　　 ),  sigmoid(z) ≒ ( 　　 ) → ( 합격 /
   
   <div class="footer-item">
     
-<div class="extra_footer">
-  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
-</div>
   </div>
   
 </div>

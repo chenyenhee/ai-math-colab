@@ -35,6 +35,8 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -96,8 +98,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -200,43 +202,35 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    📚 인공지능을 위한 수학
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅰ. 수학 도구</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">벡터와 행렬 - numpy 로 데이터 다루기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅱ. 머신러닝 기초</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅲ. 분류와 신경망</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_xor.html">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_xor.html">XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">MNIST - 손글씨 숫자를 읽는 신경망</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅳ. 오차역전파</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅴ. 응용 : CNN 과 RNN</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">RNN - 순서를 기억하는 신경망</a></li>
 </ul>
 
     </div>
@@ -285,37 +279,6 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="소스 저장소"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
-  title="전체 화면으로보기"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
 <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
   <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
@@ -351,8 +314,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -410,9 +373,6 @@
   
   <div class="footer-item">
     
-<div class="extra_footer">
-  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
-</div>
   </div>
   
 </div>

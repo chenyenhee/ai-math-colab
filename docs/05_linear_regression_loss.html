@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수 &#8212; 인공지능을 위한 수학</title>
+    <title>선형 회귀 (1) - 오차와 손실함수 &#8212; 인공지능을 위한 수학</title>
   
   
   
@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -65,8 +67,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
     <link rel="search" title="검색" href="search.html" />
-    <link rel="next" title="📝 [제 6편] 선형 회귀 (2) - 경사하강법" href="06_gradient_descent.html" />
-    <link rel="prev" title="📝 [제 4편] 머신러닝의 개념과 종류" href="04_ml_overview.html" />
+    <link rel="next" title="선형 회귀 (2) - 경사하강법" href="06_gradient_descent.html" />
+    <link rel="prev" title="머신러닝의 개념과 종류" href="04_ml_overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ko"/>
   <meta name="docsearch:version" content="" />
@@ -100,8 +102,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -206,43 +208,35 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    📚 인공지능을 위한 수학
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅰ. 수학 도구</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">벡터와 행렬 - numpy 로 데이터 다루기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅱ. 머신러닝 기초</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅲ. 분류와 신경망</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_xor.html">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_xor.html">XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">MNIST - 손글씨 숫자를 읽는 신경망</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅳ. 오차역전파</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅴ. 응용 : CNN 과 RNN</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">RNN - 순서를 기억하는 신경망</a></li>
 </ul>
 
     </div>
@@ -322,85 +316,6 @@
 
 
 
-<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="소스 저장소"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="이 페이지 다운로드">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/05_linear_regression_loss.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="소스 파일 다운로드"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="PDF로 인쇄"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
-  title="전체 화면으로보기"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
 <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
   <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
@@ -424,7 +339,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</h1>
+    <h1>선형 회귀 (1) - 오차와 손실함수</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -434,20 +349,20 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📖 개념 다지기 1. 데이터를 가장 잘 나타내는 직선 찾기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error">📖 개념 다지기 2. 오차(error) = 정답 − 예측값</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">📖 개념 다지기 3. 왜 오차를 ‘제곱’ 할까?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">📖 개념 다지기 4. 손실함수 (loss function)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🎬 애니메이션 1. ‘오차²’ 은 진짜 정사각형의 넓이다!</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">🎛️ 직접 조절해 보기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">📖 개념 다지기 5. 손실함수의 모양 - 간단한 데이터로 손 계산</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">🎬 애니메이션 2. W 와 b 를 함께 바꾸면? - 손실함수 ‘그릇’</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 1. 데이터를 가장 잘 나타내는 직선 찾기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error">개념 다지기 2. 오차(error) = 정답 − 예측값</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">개념 다지기 3. 왜 오차를 ‘제곱’ 할까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">개념 다지기 4. 손실함수 (loss function)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">애니메이션 1. ‘오차²’ 은 진짜 정사각형의 넓이다!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">직접 조절해 보기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">개념 다지기 5. 손실함수의 모양 - 간단한 데이터로 손 계산</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">애니메이션 2. W 와 b 를 함께 바꾸면? - 손실함수 ‘그릇’</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -461,15 +376,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="id1">
-<h1>📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p><strong>학년/반/번호:</strong> 2학년 ( )반 ( )번  <strong>이름:</strong> (           )</p>
-<blockquote>
-<div><p>근거 자료: 박성호, 「Linear Regression (I) - 오차 • 손실함수」 (ML_LEC_13), 「Linear Regression (II)」 (ML_LEC_14) 일부</p>
-</div></blockquote>
+  <p class="unit-mark">제 5 편</p>
+<section id="id1">
+<h1>선형 회귀 (1) - 오차와 손실함수<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="box box-note docutils container">
+<p>근거 자료: 박성호, 「Linear Regression (I) - 오차 • 손실함수」 (ML_LEC_13), 「Linear Regression (II)」 (ML_LEC_14) 일부</p>
+</div>
 <hr class="docutils" />
 <section id="id2">
-<h2>🎯 학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>입력과 정답의 관계를 일차함수 y = Wx + b 로 나타내고, 가중치 W 와 바이어스 b 의 뜻을 말할 수 있다.</p></li>
 <li><p>오차 t − y 를 구하고, 오차를 제곱해서 평균 내는 이유를 설명할 수 있다.</p></li>
@@ -478,18 +393,17 @@
 </section>
 <hr class="docutils" />
 <section id="id3">
-<h2>🧭 지난 시간 복습<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>지난 시간 복습<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>제 3편: 데이터 표를 입력 <code class="docutils literal notranslate"><span class="pre">x_data</span></code> 와 정답 <code class="docutils literal notranslate"><span class="pre">t_data</span></code> 로 나눴습니다.</p></li>
 <li><p>제 4편: <strong>회귀</strong>는 공부 시간으로 시험 점수처럼 <strong>연속적인 숫자</strong>를 예측하는 지도학습입니다.</p></li>
 </ul>
-<blockquote>
-<div><p>🚀 <strong>실습하려면</strong> : 이 페이지 맨 위의 <strong>로켓(🚀) 버튼 → Colab</strong> 을 누르세요. 코랩에서 코드를 실행하고 🎬 애니메이션을 볼 수 있습니다.
-코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p><strong>실습은 코랩에서</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르면 이 학습지가 코랩으로 열립니다. 코드 실행, 애니메이션, 정답 확인은 코랩에서 합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
+</div>
 </section>
 <section id="id4">
-<h2>⚙️ 0단계. 준비하기<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>0단계. 준비하기<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -528,7 +442,7 @@
 </div>
 </section>
 <section id="id5">
-<h2>📖 개념 다지기 1. 데이터를 가장 잘 나타내는 직선 찾기<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 1. 데이터를 가장 잘 나타내는 직선 찾기<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>공부 시간 x</p></th>
@@ -557,10 +471,10 @@
 <li><p>머신러닝에서는 기울기 W 를 <strong>가중치(weight)</strong>, y 절편 b 를 <strong>바이어스(bias)</strong> 라고 부릅니다.</p></li>
 <li><p><strong>학습(learning)</strong> = 데이터를 가장 잘 나타내는 W 와 b 를 찾는 것</p></li>
 </ul>
-<blockquote>
-<div><p><strong>[생각해 보기]</strong> 💡 아래 그래프의 세 직선 ①, ②, ③ 중 데이터를 가장 잘 나타내는 직선은? ( 　 )
+<div class="box box-think docutils container">
+<p><strong>[생각해 보기]</strong> 💡 아래 그래프의 세 직선 ①, ②, ③ 중 데이터를 가장 잘 나타내는 직선은? ( 　 )
 그렇게 판단한 기준은 무엇인가요? (                                                            )</p>
-</div></blockquote>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">37</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -579,11 +493,11 @@
 </div>
 </section>
 <section id="error">
-<h2>📖 개념 다지기 2. 오차(error) = 정답 − 예측값<a class="headerlink" href="#error" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 2. 오차(error) = 정답 − 예측값<a class="headerlink" href="#error" title="Link to this heading">#</a></h2>
 <p>직선 y = Wx + b 로 계산한 값을 <strong>예측값 y</strong>, 실제 값을 <strong>정답 t</strong> 라고 하면</p>
-<blockquote>
-<div><p><strong>오차 = t − y = t − (Wx + b)</strong></p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p><strong>오차 = t − y = t − (Wx + b)</strong></p>
+</div>
 <p><strong>[연습 1]</strong> 직선 y = 0.5x + 70 일 때 표를 완성하세요.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -645,7 +559,7 @@
 </div>
 </section>
 <section id="id6">
-<h2>📖 개념 다지기 3. 왜 오차를 ‘제곱’ 할까?<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 3. 왜 오차를 ‘제곱’ 할까?<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>오차를 그냥 더하면 <strong>+ 오차와 − 오차가 서로 지워져서</strong> 합이 0 에 가까워질 수 있습니다.
 → 합이 0 이라고 해서 정말 잘 맞는 직선인지 알 수 없습니다.</p>
 <p>그래서 <strong>오차를 제곱</strong>해서 더합니다.</p>
@@ -653,28 +567,28 @@
 <li><p>제곱하면 언제나 <strong>0 이상</strong> → 서로 지워지지 않는다.</p></li>
 <li><p>오차가 큰 점은 제곱하면 <strong>훨씬 더 커진다</strong> (2² = 4, 10² = 100) → 많이 틀린 점을 더 강하게 고치게 된다.</p></li>
 </ol>
-<blockquote>
-<div><p><strong>[확인 1]</strong> 오차가 (+3, −3) 인 두 점이 있다. 오차의 합 = ( 　 ),  오차²의 합 = ( 　 )</p>
-</div></blockquote>
+<div class="box box-check docutils container">
+<p><strong>[확인 1]</strong> 오차가 (+3, −3) 인 두 점이 있다. 오차의 합 = ( 　 ),  오차²의 합 = ( 　 )</p>
+</div>
 </section>
 <section id="loss-function">
-<h2>📖 개념 다지기 4. 손실함수 (loss function)<a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 4. 손실함수 (loss function)<a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h2>
 <p>데이터가 n 개일 때, 오차² 의 <strong>평균</strong>을 손실함수라고 합니다.</p>
-<blockquote>
-<div><p><strong>E(W, b) = {(t₁ − y₁)² + (t₂ − y₂)² + … + (tₙ − yₙ)²} / n</strong>
+<div class="box box-note docutils container">
+<p><strong>E(W, b) = {(t₁ − y₁)² + (t₂ − y₂)² + … + (tₙ − yₙ)²} / n</strong>
 　　　　 = (1/n) × Σ<sub>i=1</sub><sup>n</sup> {t<sub>i</sub> − (W x<sub>i</sub> + b)}²</p>
-</div></blockquote>
+</div>
 <ul class="simple">
 <li><p>x 와 t 는 데이터로 <strong>이미 주어진 값</strong>입니다.</p></li>
 <li><p>따라서 E 의 값을 바꾸는 것은 <strong>W 와 b 뿐</strong> → 손실함수는 <strong>W, b 의 함수</strong> E(W, b)</p></li>
 </ul>
-<blockquote>
-<div><p><strong>[연습 2]</strong> [연습 1] 의 직선 y = 0.5x + 70 의 손실함수 값은
+<div class="box box-practice docutils container">
+<p><strong>[연습 2]</strong> [연습 1] 의 직선 y = 0.5x + 70 의 손실함수 값은
 E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
-</div></blockquote>
-<blockquote>
-<div><p>🎯 <strong>선형 회귀의 최종 목표</strong>: 손실함수 E(W, b) 가 <strong>가장 작아지는</strong> W 와 b 를 찾는 것!</p>
-</div></blockquote>
+</div>
+<div class="box box-note docutils container">
+<p><strong>선형 회귀의 최종 목표</strong>: 손실함수 E(W, b) 가 <strong>가장 작아지는</strong> W 와 b 를 찾는 것!</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">loss_func</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -688,12 +602,12 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[확인 2]</strong> 세 직선 중 손실함수 값이 가장 작은 직선은 ( 　 ) 번이고, 이것이 처음 그래프에서 고른 직선과 같은가요?</p>
-</div></blockquote>
+<div class="box box-check docutils container">
+<p><strong>[확인 2]</strong> 세 직선 중 손실함수 값이 가장 작은 직선은 ( 　 ) 번이고, 이것이 처음 그래프에서 고른 직선과 같은가요?</p>
+</div>
 </section>
 <section id="id7">
-<h2>🎬 애니메이션 1. ‘오차²’ 은 진짜 정사각형의 넓이다!<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2>애니메이션 1. ‘오차²’ 은 진짜 정사각형의 넓이다!<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>오차가 t − y 이면 오차² 은 <strong>한 변이 |t − y| 인 정사각형의 넓이</strong> 입니다.
 기울기 W 를 0 → 1.2 로 바꿀 때 정사각형들의 넓이(빨강)와 손실함수 E(W) (오른쪽)가 어떻게 변하는지 보세요.
 (이 애니메이션에서는 바이어스를 b = 71.6 으로 고정합니다)</p>
@@ -738,18 +652,18 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </div>
 </details>
 </div>
-<blockquote>
-<div><p><strong>[관찰 1]</strong>
+<div class="box box-check docutils container">
+<p><strong>[관찰 1]</strong>
 ① 손실함수 E(W) 의 그래프는 ( 　　　　 ) 모양이다. (힌트: 수학 시간에 배운 함수)
 ② 정사각형들이 가장 작아질 때의 W 는 약 ( 　　 ) 이고, 이때 그래프는 ( 꼭짓점 / 양 끝 ) 에 있다.</p>
-</div></blockquote>
+</div>
 </section>
 <section id="id8">
-<h2>🎛️ 직접 조절해 보기<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2>직접 조절해 보기<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>슬라이더로 W 와 b 를 바꿔 가며 <strong>손실함수 값이 가장 작아지는 직선</strong>을 찾아보세요. 친구와 누가 더 작은 E 를 찾는지 겨뤄 보세요!</p>
-<blockquote>
-<div><p>내가 찾은 값:  W = ( 　　 ),  b = ( 　　 ),  E = ( 　　 )</p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p>내가 찾은 값:  W = ( 　　 ),  b = ( 　　 ),  E = ( 　　 )</p>
+</div>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -779,7 +693,7 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </div>
 </section>
 <section id="id9">
-<h2>📖 개념 다지기 5. 손실함수의 모양 - 간단한 데이터로 손 계산<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 5. 손실함수의 모양 - 간단한 데이터로 손 계산<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>계산을 쉽게 하기 위해 아래 데이터에서 <strong>b = 0</strong> 으로 두고 E(W) 를 계산해 봅시다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -820,11 +734,11 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </tbody>
 </table>
 </div>
-<blockquote>
-<div><p><strong>[생각해 보기]</strong> 💡 E(W) = (14/3)(1 − W)² 은 W = ( 　 ) 에서 최솟값 ( 　 ) 을 갖는 이차함수이다.
+<div class="box box-think docutils container">
+<p><strong>[생각해 보기]</strong> 💡 E(W) = (14/3)(1 − W)² 은 W = ( 　 ) 에서 최솟값 ( 　 ) 을 갖는 이차함수이다.
 이번처럼 식이 간단하면 손으로 꼭짓점을 찾을 수 있지만, 변수(W)가 수백만 개인 인공지능은 어떻게 최솟값을 찾을까요?
 → <strong>다음 시간: 미분을 이용한 경사하강법!</strong></p>
-</div></blockquote>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]);</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">])</span>
@@ -842,7 +756,7 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </div>
 </section>
 <section id="w-b">
-<h2>🎬 애니메이션 2. W 와 b 를 함께 바꾸면? - 손실함수 ‘그릇’<a class="headerlink" href="#w-b" title="Link to this heading">#</a></h2>
+<h2>애니메이션 2. W 와 b 를 함께 바꾸면? - 손실함수 ‘그릇’<a class="headerlink" href="#w-b" title="Link to this heading">#</a></h2>
 <p>W 와 b 가 둘 다 변하면 E(W, b) 는 <strong>길쭉한 그릇(골짜기) 모양의 곡면</strong>이 됩니다. 그릇의 <strong>가장 낮은 바닥(빨간 점)</strong> 이 우리가 찾는 W, b 입니다.
 (공부 시간 데이터 사용. 왼쪽 곡면이 천천히 돌아가고, 오른쪽은 위에서 내려다본 등고선입니다. 너무 높은 부분은 잘라서 보여 줍니다)</p>
 <div class="cell tag_hide-input docutils container">
@@ -880,14 +794,14 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </div>
 </section>
 <section id="id10">
-<h2>✏️ 연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>[문제 1]</strong> 직선 y = x + 60 의 공부 시간 데이터에 대한 오차를 모두 구하고, 오차의 합과 손실함수 값을 구하세요.
+<h2>연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<div class="box box-practice docutils container">
+<p><strong>[문제 1]</strong> 직선 y = x + 60 의 공부 시간 데이터에 대한 오차를 모두 구하고, 오차의 합과 손실함수 값을 구하세요.
 오차: ( 　, 　, 　, 　, 　, 　 ),  오차의 합 = ( 　 ),  E = ( 　　 )</p>
-</div></blockquote>
-<blockquote>
-<div><p><strong>[문제 2]</strong> [문제 1] 의 직선과 y = 0.5x + 70 중 어느 쪽이 더 좋은 직선인가요? <strong>오차의 합</strong>으로 판단할 때와 <strong>손실함수</strong>로 판단할 때 결과가 같은지 비교하세요.</p>
-</div></blockquote>
+</div>
+<div class="box box-practice docutils container">
+<p><strong>[문제 2]</strong> [문제 1] 의 직선과 y = 0.5x + 70 중 어느 쪽이 더 좋은 직선인가요? <strong>오차의 합</strong>으로 판단할 때와 <strong>손실함수</strong>로 판단할 때 결과가 같은지 비교하세요.</p>
+</div>
 <p>아래 셀의 <code class="docutils literal notranslate"><span class="pre">______</span></code> 를 채워 확인하세요.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -902,7 +816,7 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </div>
 </section>
 <section id="id11">
-<h2>📌 정리<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<h2>정리<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
@@ -926,7 +840,7 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </table>
 </div>
 <section id="id12">
-<h3>🏆 도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<h3>도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <p>E(W) 그래프에서 현재 W = 3 에 있다고 하자. 이 점에서 접선의 기울기는 ( 양수 / 음수 ) 이므로,
 E(W) 를 줄이려면 W 를 ( 늘려야 / 줄여야 ) 한다. → 제 2편의 수치미분으로 이 기울기를 구할 수 있다!</p>
 </section>
@@ -969,7 +883,7 @@ E(W) 를 줄이려면 W 를 ( 늘려야 / 줄여야 ) 한다. → 제 2편의 �
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">이전</p>
-        <p class="prev-next-title">📝 [제 4편] 머신러닝의 개념과 종류</p>
+        <p class="prev-next-title">머신러닝의 개념과 종류</p>
       </div>
     </a>
     <a class="right-next"
@@ -977,7 +891,7 @@ E(W) 를 줄이려면 W 를 ( 늘려야 / 줄여야 ) 한다. → 제 2편의 �
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">다음</p>
-        <p class="prev-next-title">📝 [제 6편] 선형 회귀 (2) - 경사하강법</p>
+        <p class="prev-next-title">선형 회귀 (2) - 경사하강법</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -999,20 +913,20 @@ E(W) 를 줄이려면 W 를 ( 늘려야 / 줄여야 ) 한다. → 제 2편의 �
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📖 개념 다지기 1. 데이터를 가장 잘 나타내는 직선 찾기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error">📖 개념 다지기 2. 오차(error) = 정답 − 예측값</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">📖 개념 다지기 3. 왜 오차를 ‘제곱’ 할까?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">📖 개념 다지기 4. 손실함수 (loss function)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🎬 애니메이션 1. ‘오차²’ 은 진짜 정사각형의 넓이다!</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">🎛️ 직접 조절해 보기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">📖 개념 다지기 5. 손실함수의 모양 - 간단한 데이터로 손 계산</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">🎬 애니메이션 2. W 와 b 를 함께 바꾸면? - 손실함수 ‘그릇’</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 1. 데이터를 가장 잘 나타내는 직선 찾기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error">개념 다지기 2. 오차(error) = 정답 − 예측값</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">개념 다지기 3. 왜 오차를 ‘제곱’ 할까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">개념 다지기 4. 손실함수 (loss function)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">애니메이션 1. ‘오차²’ 은 진짜 정사각형의 넓이다!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">직접 조절해 보기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">개념 다지기 5. 손실함수의 모양 - 간단한 데이터로 손 계산</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">애니메이션 2. W 와 b 를 함께 바꾸면? - 손실함수 ‘그릇’</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -1045,9 +959,6 @@ E(W) 를 줄이려면 W 를 ( 늘려야 / 줄여야 ) 한다. → 제 2편의 �
   
   <div class="footer-item">
     
-<div class="extra_footer">
-  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
-</div>
   </div>
   
 </div>

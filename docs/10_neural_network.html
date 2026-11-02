@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기 &#8212; 인공지능을 위한 수학</title>
+    <title>신경망과 딥러닝 - 피드포워드로 XOR 풀기 &#8212; 인공지능을 위한 수학</title>
   
   
   
@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -65,8 +67,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
     <link rel="search" title="검색" href="search.html" />
-    <link rel="next" title="📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망" href="11_mnist.html" />
-    <link rel="prev" title="📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다" href="09_xor.html" />
+    <link rel="next" title="MNIST - 손글씨 숫자를 읽는 신경망" href="11_mnist.html" />
+    <link rel="prev" title="XOR 문제 - 직선 하나로는 나눌 수 없다" href="09_xor.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ko"/>
   <meta name="docsearch:version" content="" />
@@ -100,8 +102,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -206,43 +208,35 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    📚 인공지능을 위한 수학
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅰ. 수학 도구</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">벡터와 행렬 - numpy 로 데이터 다루기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅱ. 머신러닝 기초</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅲ. 분류와 신경망</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_xor.html">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_xor.html">XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">MNIST - 손글씨 숫자를 읽는 신경망</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅳ. 오차역전파</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅴ. 응용 : CNN 과 RNN</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">RNN - 순서를 기억하는 신경망</a></li>
 </ul>
 
     </div>
@@ -322,85 +316,6 @@
 
 
 
-<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="소스 저장소"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="이 페이지 다운로드">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/10_neural_network.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="소스 파일 다운로드"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="PDF로 인쇄"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
-  title="전체 화면으로보기"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
 <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
   <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
@@ -424,7 +339,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</h1>
+    <h1>신경망과 딥러닝 - 피드포워드로 XOR 풀기</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -434,23 +349,23 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">📖 개념 다지기 1. 뉴런과 활성화 함수</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📖 개념 다지기 2. 신경망의 구조</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">📖 개념 다지기 3. 표기법 (notation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward">📖 개념 다지기 4. 피드포워드 (feed forward, 순전파)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">개념 다지기 1. 뉴런과 활성화 함수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 2. 신경망의 구조</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">개념 다지기 3. 표기법 (notation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward">개념 다지기 4. 피드포워드 (feed forward, 순전파)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">행렬 식으로 쓰면 한 줄!</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">[연습 2] 손으로 피드포워드 계산하기</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">🎬 애니메이션 1. 신호가 앞으로 흘러가는 피드포워드</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xor-2-6-1">💻 실습. 딥러닝으로 XOR 학습시키기 (2 - 6 - 1 신경망)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">🎬 애니메이션 2. 신경망이 만드는 ‘휘어진’ 결정 경계</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">애니메이션 1. 신호가 앞으로 흘러가는 피드포워드</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xor-2-6-1">실습. 딥러닝으로 XOR 학습시키기 (2 - 6 - 1 신경망)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 2. 신경망이 만드는 ‘휘어진’ 결정 경계</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -464,15 +379,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="xor">
-<h1>📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기<a class="headerlink" href="#xor" title="Link to this heading">#</a></h1>
-<p><strong>학년/반/번호:</strong> 2학년 ( )반 ( )번  <strong>이름:</strong> (           )</p>
-<blockquote>
-<div><p>근거 자료: 박성호, 「Deep Learning (I) 신경망 개념 • 아키텍처」, 「(II) feed forward • loss」, 「(III) 딥러닝으로 XOR 문제 해결」 (ML_LEC_19, 20, 21)</p>
-</div></blockquote>
+  <p class="unit-mark">제 10 편</p>
+<section id="xor">
+<h1>신경망과 딥러닝 - 피드포워드로 XOR 풀기<a class="headerlink" href="#xor" title="Link to this heading">#</a></h1>
+<div class="box box-note docutils container">
+<p>근거 자료: 박성호, 「Deep Learning (I) 신경망 개념 • 아키텍처」, 「(II) feed forward • loss」, 「(III) 딥러닝으로 XOR 문제 해결」 (ML_LEC_19, 20, 21)</p>
+</div>
 <hr class="docutils" />
 <section id="id1">
-<h2>🎯 학습 목표<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>학습 목표<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>뉴런과 활성화 함수의 관계를 알고, 입력층·은닉층·출력층으로 된 신경망 구조를 설명할 수 있다.</p></li>
 <li><p>가중치·바이어스 표기법을 읽고, 피드포워드(순전파) 계산을 일반 식과 행렬 식으로 할 수 있다.</p></li>
@@ -481,18 +396,17 @@
 </section>
 <hr class="docutils" />
 <section id="id2">
-<h2>🧭 지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>제 9편: 로지스틱 회귀 하나로는 XOR 을 풀 수 없지만, NAND·OR (1층) → AND (2층) 처럼 <strong>층을 쌓으면</strong> 풀린다.</p></li>
 <li><p>오늘은 층 사이의 가중치를 사람이 설계하지 않고 <strong>신경망이 스스로 학습</strong> 하게 합니다.</p></li>
 </ul>
-<blockquote>
-<div><p>🚀 <strong>실습하려면</strong> : 이 페이지 맨 위의 <strong>로켓(🚀) 버튼 → Colab</strong> 을 누르세요. 코랩에서 코드를 실행하고 🎬 애니메이션을 볼 수 있습니다.
-코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p><strong>실습은 코랩에서</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르면 이 학습지가 코랩으로 열립니다. 코드 실행, 애니메이션, 정답 확인은 코랩에서 합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
+</div>
 </section>
 <section id="id3">
-<h2>⚙️ 0단계. 준비하기<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>0단계. 준비하기<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -561,7 +475,7 @@
 </div>
 </section>
 <section id="id4">
-<h2>📖 개념 다지기 1. 뉴런과 활성화 함수<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 1. 뉴런과 활성화 함수<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>우리 뇌의 신경세포(뉴런)는</p>
 <ol class="arabic simple">
 <li><p>앞 뉴런들에게서 신호를 받아 (입력 × 가중치 를 모두 더하고)</p></li>
@@ -569,13 +483,13 @@
 </ol>
 <p>이처럼 입력의 합이 임계점을 넘으면 출력을 만들어 주는 함수를 <strong>활성화 함수 (activation function)</strong> 라고 합니다.
 지금까지 써 온 <strong>sigmoid</strong> 가 대표적인 활성화 함수입니다. (그 밖에 ReLU, tanh 등)</p>
-<blockquote>
-<div><p><strong>인공 뉴런 (노드) 1개 = 로지스틱 회귀 1개</strong>
+<div class="box box-note docutils container">
+<p><strong>인공 뉴런 (노드) 1개 = 로지스틱 회귀 1개</strong>
 z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (활성화)</p>
-</div></blockquote>
+</div>
 </section>
 <section id="id5">
-<h2>📖 개념 다지기 2. 신경망의 구조<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 2. 신경망의 구조<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>층</p></th>
@@ -600,7 +514,7 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </ul>
 </section>
 <section id="notation">
-<h2>📖 개념 다지기 3. 표기법 (notation)<a class="headerlink" href="#notation" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 3. 표기법 (notation)<a class="headerlink" href="#notation" title="Link to this heading">#</a></h2>
 <p>층 번호는 입력층 = 1, 은닉층 = 2, 출력층 = 3 으로 셉니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -624,12 +538,12 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </tbody>
 </table>
 </div>
-<blockquote>
-<div><p><strong>[연습 1]</strong> w<sub>13</sub><sup>(3)</sup> 은 계층 ( 　 ) 의 노드 ( 　 ) 에서 계층 ( 　 ) 의 노드 ( 　 ) 로 가는 신호의 가중치이다.</p>
-</div></blockquote>
+<div class="box box-practice docutils container">
+<p><strong>[연습 1]</strong> w<sub>13</sub><sup>(3)</sup> 은 계층 ( 　 ) 의 노드 ( 　 ) 에서 계층 ( 　 ) 의 노드 ( 　 ) 로 가는 신호의 가중치이다.</p>
+</div>
 </section>
 <section id="feed-forward">
-<h2>📖 개념 다지기 4. 피드포워드 (feed forward, 순전파)<a class="headerlink" href="#feed-forward" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 4. 피드포워드 (feed forward, 순전파)<a class="headerlink" href="#feed-forward" title="Link to this heading">#</a></h2>
 <p>입력층 → 은닉층 → 출력층 으로 값이 <strong>앞으로 전달</strong> 되며 계산되는 과정입니다. (입력 2개, 은닉 노드 2개, 출력 1개)</p>
 <p><strong>① 입력층 출력</strong>:  a<sub>1</sub><sup>(1)</sup> = x₁,  a<sub>2</sub><sup>(1)</sup> = x₂</p>
 <p><strong>② 은닉층</strong></p>
@@ -643,10 +557,10 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </ul>
 <section id="id6">
 <h3>행렬 식으로 쓰면 한 줄!<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>Z<sup>(2)</sup> = A<sup>(1)</sup> · W<sup>(2)</sup> + b<sup>(2)</sup>,　A<sup>(2)</sup> = sigmoid(Z<sup>(2)</sup>)</strong>
+<div class="box box-note docutils container">
+<p><strong>Z<sup>(2)</sup> = A<sup>(1)</sup> · W<sup>(2)</sup> + b<sup>(2)</sup>,　A<sup>(2)</sup> = sigmoid(Z<sup>(2)</sup>)</strong>
 <strong>Z<sup>(3)</sup> = A<sup>(2)</sup> · W<sup>(3)</sup> + b<sup>(3)</sup>,　y = A<sup>(3)</sup> = sigmoid(Z<sup>(3)</sup>)</strong></p>
-</div></blockquote>
+</div>
 <p>(1 × 2) · (2 × 2) = (1 × 2),　(1 × 2) · (2 × 1) = (1 × 1)</p>
 </section>
 <section id="id7">
@@ -689,9 +603,9 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </tbody>
 </table>
 </div>
-<blockquote>
-<div><p>결과 y 는 ( AND / OR / XOR ) 의 진리표와 같다!</p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p>결과 y 는 ( AND / OR / XOR ) 의 진리표와 같다!</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">W2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">],</span>
@@ -713,7 +627,7 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </section>
 </section>
 <section id="id8">
-<h2>🎬 애니메이션 1. 신호가 앞으로 흘러가는 피드포워드<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2>애니메이션 1. 신호가 앞으로 흘러가는 피드포워드<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>위 신경망에 입력 (0,0), (0,1), (1,0), (1,1) 을 차례로 넣습니다. 노드 안의 숫자는 그 노드의 출력 a, 선의 굵기는 가중치의 크기(빨강 +, 파랑 −) 입니다.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -759,7 +673,7 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </div>
 </section>
 <section id="xor-2-6-1">
-<h2>💻 실습. 딥러닝으로 XOR 학습시키기 (2 - 6 - 1 신경망)<a class="headerlink" href="#xor-2-6-1" title="Link to this heading">#</a></h2>
+<h2>실습. 딥러닝으로 XOR 학습시키기 (2 - 6 - 1 신경망)<a class="headerlink" href="#xor-2-6-1" title="Link to this heading">#</a></h2>
 <p>이번에는 가중치를 정해 주지 않고 <strong>무작위 값에서 시작해 스스로 학습</strong> 시킵니다.</p>
 <ul class="simple">
 <li><p>입력층 노드 2개, <strong>은닉층 노드 6개</strong>, 출력층 노드 1개</p></li>
@@ -827,14 +741,14 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[확인 1]</strong> 딥러닝 버전의 XOR 예측은 정답 (0, 1, 1, 0) 과 ( 일치한다 / 다르다 ).
+<div class="box box-check docutils container">
+<p><strong>[확인 1]</strong> 딥러닝 버전의 XOR 예측은 정답 (0, 1, 1, 0) 과 ( 일치한다 / 다르다 ).
 제 9편(로지스틱 회귀 하나)의 손실 값 약 2.77 과 비교하면 지금 손실 값은 ( 　　 ) 이다.</p>
-</div></blockquote>
+</div>
 <p>💡 NAND·OR·AND 를 사람이 조합해 주지 않았는데도, 은닉층의 노드들이 <strong>스스로 알맞은 역할</strong> 을 학습했습니다!</p>
 </section>
 <section id="id9">
-<h2>🎬 애니메이션 2. 신경망이 만드는 ‘휘어진’ 결정 경계<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<h2>애니메이션 2. 신경망이 만드는 ‘휘어진’ 결정 경계<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>로지스틱 회귀의 경계는 직선이었지만, 은닉층이 있는 신경망의 경계는 <strong>휘어질 수 있습니다.</strong> 학습 과정을 재생합니다.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -869,19 +783,19 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </div>
 </details>
 </div>
-<blockquote>
-<div><p><strong>[관찰 1]</strong> 학습 초반 한동안은 배경이 한 가지 색이다가, step ( 　　 ) 쯤부터 경계가 생긴다. 완성된 경계는 ● 두 개를 ( 하나의 띠 / 두 영역 ) 로 묶는다.</p>
-</div></blockquote>
+<div class="box box-check docutils container">
+<p><strong>[관찰 1]</strong> 학습 초반 한동안은 배경이 한 가지 색이다가, step ( 　　 ) 쯤부터 경계가 생긴다. 완성된 경계는 ● 두 개를 ( 하나의 띠 / 두 영역 ) 로 묶는다.</p>
+</div>
 </section>
 <section id="id10">
-<h2>✏️ 연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>[문제 1]</strong> 입력 2개, 은닉층 노드 10개, 출력 1개인 신경망에서 W2, b2, W3, b3 의 형상과 학습할 값의 총 개수를 구하세요.
+<h2>연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<div class="box box-practice docutils container">
+<p><strong>[문제 1]</strong> 입력 2개, 은닉층 노드 10개, 출력 1개인 신경망에서 W2, b2, W3, b3 의 형상과 학습할 값의 총 개수를 구하세요.
 W2 ( 　 × 　 ), b2 ( 　 ), W3 ( 　 × 　 ), b3 ( 　 ) → 총 ( 　 ) 개</p>
-</div></blockquote>
-<blockquote>
-<div><p><strong>[문제 2]</strong> 실습의 피드포워드를 행렬 식으로 직접 써서, 학습이 끝난 XOR 신경망으로 입력 (1, 0) 의 출력을 계산하는 코드를 완성하세요.</p>
-</div></blockquote>
+</div>
+<div class="box box-practice docutils container">
+<p><strong>[문제 2]</strong> 실습의 피드포워드를 행렬 식으로 직접 써서, 학습이 끝난 XOR 신경망으로 입력 (1, 0) 의 출력을 계산하는 코드를 완성하세요.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="p">,</span> <span class="n">W2k</span><span class="p">,</span> <span class="n">b2k</span><span class="p">,</span> <span class="n">W3k</span><span class="p">,</span> <span class="n">b3k</span> <span class="o">=</span> <span class="n">xor</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>            <span class="c1"># 학습이 끝난 가중치</span>
@@ -895,7 +809,7 @@ W2 ( 　 × 　 ), b2 ( 　 ), W3 ( 　 × 　 ), b3 ( 　 ) → 총 ( 　 ) 개
 </div>
 </section>
 <section id="id11">
-<h2>📌 정리<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<h2>정리<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
@@ -922,7 +836,7 @@ W2 ( 　 × 　 ), b2 ( 　 ), W3 ( 　 × 　 ), b3 ( 　 ) → 총 ( 　 ) 개
 </table>
 </div>
 <section id="id12">
-<h3>🏆 도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<h3>도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <p>XOR 은 입력이 2개였습니다. 28 × 28 손글씨 숫자 사진은 입력이 ( 　 ) 개, 정답은 0 ~ 9 중 하나이므로 출력 노드는 ( 　 ) 개가 필요합니다.
 → 다음 시간: <strong>MNIST 손글씨 숫자 인식</strong></p>
 </section>
@@ -965,7 +879,7 @@ W2 ( 　 × 　 ), b2 ( 　 ), W3 ( 　 × 　 ), b3 ( 　 ) → 총 ( 　 ) 개
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">이전</p>
-        <p class="prev-next-title">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</p>
+        <p class="prev-next-title">XOR 문제 - 직선 하나로는 나눌 수 없다</p>
       </div>
     </a>
     <a class="right-next"
@@ -973,7 +887,7 @@ W2 ( 　 × 　 ), b2 ( 　 ), W3 ( 　 × 　 ), b3 ( 　 ) → 총 ( 　 ) 개
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">다음</p>
-        <p class="prev-next-title">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</p>
+        <p class="prev-next-title">MNIST - 손글씨 숫자를 읽는 신경망</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -995,23 +909,23 @@ W2 ( 　 × 　 ), b2 ( 　 ), W3 ( 　 × 　 ), b3 ( 　 ) → 총 ( 　 ) 개
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">📖 개념 다지기 1. 뉴런과 활성화 함수</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📖 개념 다지기 2. 신경망의 구조</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">📖 개념 다지기 3. 표기법 (notation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward">📖 개념 다지기 4. 피드포워드 (feed forward, 순전파)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">개념 다지기 1. 뉴런과 활성화 함수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 2. 신경망의 구조</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">개념 다지기 3. 표기법 (notation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward">개념 다지기 4. 피드포워드 (feed forward, 순전파)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">행렬 식으로 쓰면 한 줄!</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">[연습 2] 손으로 피드포워드 계산하기</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">🎬 애니메이션 1. 신호가 앞으로 흘러가는 피드포워드</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xor-2-6-1">💻 실습. 딥러닝으로 XOR 학습시키기 (2 - 6 - 1 신경망)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">🎬 애니메이션 2. 신경망이 만드는 ‘휘어진’ 결정 경계</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">애니메이션 1. 신호가 앞으로 흘러가는 피드포워드</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xor-2-6-1">실습. 딥러닝으로 XOR 학습시키기 (2 - 6 - 1 신경망)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 2. 신경망이 만드는 ‘휘어진’ 결정 경계</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -1044,9 +958,6 @@ W2 ( 　 × 　 ), b2 ( 　 ), W3 ( 　 × 　 ), b3 ( 　 ) → 총 ( 　 ) 개
   
   <div class="footer-item">
     
-<div class="extra_footer">
-  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
-</div>
   </div>
   
 </div>

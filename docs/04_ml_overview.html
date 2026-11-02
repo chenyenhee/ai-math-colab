@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>📝 [제 4편] 머신러닝의 개념과 종류 &#8212; 인공지능을 위한 수학</title>
+    <title>머신러닝의 개념과 종류 &#8212; 인공지능을 위한 수학</title>
   
   
   
@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -65,8 +67,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
     <link rel="search" title="검색" href="search.html" />
-    <link rel="next" title="📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수" href="05_linear_regression_loss.html" />
-    <link rel="prev" title="📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기" href="03_vector_matrix.html" />
+    <link rel="next" title="선형 회귀 (1) - 오차와 손실함수" href="05_linear_regression_loss.html" />
+    <link rel="prev" title="벡터와 행렬 - numpy 로 데이터 다루기" href="03_vector_matrix.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ko"/>
   <meta name="docsearch:version" content="" />
@@ -100,8 +102,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -206,43 +208,35 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    📚 인공지능을 위한 수학
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅰ. 수학 도구</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">벡터와 행렬 - numpy 로 데이터 다루기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅱ. 머신러닝 기초</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅲ. 분류와 신경망</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_xor.html">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_xor.html">XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">MNIST - 손글씨 숫자를 읽는 신경망</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅳ. 오차역전파</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅴ. 응용 : CNN 과 RNN</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">RNN - 순서를 기억하는 신경망</a></li>
 </ul>
 
     </div>
@@ -322,85 +316,6 @@
 
 
 
-<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="소스 저장소"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="이 페이지 다운로드">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/04_ml_overview.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="소스 파일 다운로드"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="PDF로 인쇄"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
-  title="전체 화면으로보기"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
 <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
   <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
@@ -424,7 +339,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>📝 [제 4편] 머신러닝의 개념과 종류</h1>
+    <h1>머신러닝의 개념과 종류</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -434,23 +349,23 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📖 개념 다지기 1. 인공지능 ⊃ 머신러닝 ⊃ 딥러닝</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 1. 인공지능 ⊃ 머신러닝 ⊃ 딥러닝</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">왜 프레임워크 없이 직접 만들어 볼까?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">📖 개념 다지기 2. 지도학습 vs 비지도학습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">📖 개념 다지기 3. 회귀 vs 분류 (지도학습의 두 종류)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">📖 개념 다지기 4. 머신러닝이 일하는 순서</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">🎬 애니메이션 1. 비지도학습 - 정답 없이 스스로 묶기 (군집화)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">✏️ 연습 문제</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">🤔 오늘의 질문 (심화 토의)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">개념 다지기 2. 지도학습 vs 비지도학습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">개념 다지기 3. 회귀 vs 분류 (지도학습의 두 종류)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 4. 머신러닝이 일하는 순서</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 1. 비지도학습 - 정답 없이 스스로 묶기 (군집화)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">오늘의 질문 (심화 토의)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -464,15 +379,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="id1">
-<h1>📝 [제 4편] 머신러닝의 개념과 종류<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p><strong>학년/반/번호:</strong> 2학년 ( )반 ( )번  <strong>이름:</strong> (           )</p>
-<blockquote>
-<div><p>근거 자료: 박성호, 「과정 소개」 (ML_LEC_01), 「머신러닝(지도학습/비지도학습) 개요」 (ML_LEC_12)</p>
-</div></blockquote>
+  <p class="unit-mark">제 4 편</p>
+<section id="id1">
+<h1>머신러닝의 개념과 종류<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="box box-note docutils container">
+<p>근거 자료: 박성호, 「과정 소개」 (ML_LEC_01), 「머신러닝(지도학습/비지도학습) 개요」 (ML_LEC_12)</p>
+</div>
 <hr class="docutils" />
 <section id="id2">
-<h2>🎯 학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>인공지능, 머신러닝, 딥러닝의 포함 관계를 설명할 수 있다.</p></li>
 <li><p>지도학습과 비지도학습의 차이점을 이해한다.</p></li>
@@ -481,18 +396,17 @@
 </section>
 <hr class="docutils" />
 <section id="id3">
-<h2>🧭 지난 시간 복습<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>지난 시간 복습<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>제 1 ~ 3편: 미분, 수치미분, 행렬 - 인공지능을 만들 <strong>도구</strong> 를 준비했습니다.</p></li>
 <li><p>오늘은 그 도구로 만들 <strong>머신러닝이 무엇인지</strong> 큰 그림을 봅니다.</p></li>
 </ul>
-<blockquote>
-<div><p>🚀 <strong>실습하려면</strong> : 이 페이지 맨 위의 <strong>로켓(🚀) 버튼 → Colab</strong> 을 누르세요. 코랩에서 코드를 실행하고 🎬 애니메이션을 볼 수 있습니다.
-코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p><strong>실습은 코랩에서</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르면 이 학습지가 코랩으로 열립니다. 코드 실행, 애니메이션, 정답 확인은 코랩에서 합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
+</div>
 </section>
 <section id="id4">
-<h2>⚙️ 0단계. 준비하기<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>0단계. 준비하기<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -531,15 +445,15 @@
 </div>
 </section>
 <section id="id5">
-<h2>📖 개념 다지기 1. 인공지능 ⊃ 머신러닝 ⊃ 딥러닝<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 1. 인공지능 ⊃ 머신러닝 ⊃ 딥러닝<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>인공지능 (AI)</strong> : 인간의 학습·추론 능력을 컴퓨터로 구현하는 가장 넓은 개념</p></li>
 <li><p><strong>머신러닝 (ML)</strong> : 데이터에서 특성과 패턴을 <strong>스스로 학습</strong> 해서, 처음 보는 데이터의 결과를 예측하는 인공지능의 한 분야 (회귀, 분류, 신경망 …)</p></li>
 <li><p><strong>딥러닝 (DL)</strong> : 머신러닝 중에서 뇌를 닮은 <strong>신경망(Neural Network)</strong> 을 깊게 쌓아 학습하는 방법 (CNN, RNN …)</p></li>
 </ul>
-<blockquote>
-<div><p><strong>[이해해 보기]</strong> 💡 포함 관계: ( 　　　　 ) ⊃ ( 　　　　 ) ⊃ ( 　　　　 )</p>
-</div></blockquote>
+<div class="box box-think docutils container">
+<p><strong>[이해해 보기]</strong> 💡 포함 관계: ( 　　　　 ) ⊃ ( 　　　　 ) ⊃ ( 　　　　 )</p>
+</div>
 <section id="id6">
 <h3>왜 프레임워크 없이 직접 만들어 볼까?<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>TensorFlow 같은 도구를 쓰면 몇 줄로 인공지능을 만들 수 있지만, 속이 보이지 않는 <strong>블랙박스</strong> 입니다.
@@ -565,7 +479,7 @@
 </section>
 </section>
 <section id="vs">
-<h2>📖 개념 다지기 2. 지도학습 vs 비지도학습<a class="headerlink" href="#vs" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 2. 지도학습 vs 비지도학습<a class="headerlink" href="#vs" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p></p></th>
@@ -595,7 +509,7 @@
 </div>
 </section>
 <section id="id7">
-<h2>📖 개념 다지기 3. 회귀 vs 분류 (지도학습의 두 종류)<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 3. 회귀 vs 분류 (지도학습의 두 종류)<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>구분</p></th>
@@ -615,13 +529,13 @@
 </tbody>
 </table>
 </div>
-<blockquote>
-<div><p><strong>[연습 1]</strong> 회귀와 분류 중 어느 것일까요?
+<div class="box box-practice docutils container">
+<p><strong>[연습 1]</strong> 회귀와 분류 중 어느 것일까요?
 ① 사진 속 동물이 고양이인지 강아지인지 판별 → ( 　　 )
 ② 오늘의 온도·습도로 내일의 강수량(mm) 예측 → ( 　　 )
 ③ 키와 몸무게로 신발 치수(mm) 예측 → ( 　　 )
 ④ 손글씨 사진이 0 ~ 9 중 어느 숫자인지 판별 → ( 　　 )</p>
-</div></blockquote>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -643,14 +557,14 @@
 </div>
 </section>
 <section id="id8">
-<h2>📖 개념 다지기 4. 머신러닝이 일하는 순서<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 4. 머신러닝이 일하는 순서<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span> ① 학습 데이터 입력 (training data)  →  ② 학습 (learning)  →  ③ 처음 보는 데이터로 질문 (test data)  →  ④ 예측 (predict)
 </pre></div>
 </div>
 <p>예) 공부 시간 - 점수 데이터로 학습한 뒤, 데이터에 없는 <strong>43시간</strong> 의 점수를 묻는다.</p>
 </section>
 <section id="id9">
-<h2>🎬 애니메이션 1. 비지도학습 - 정답 없이 스스로 묶기 (군집화)<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<h2>애니메이션 1. 비지도학습 - 정답 없이 스스로 묶기 (군집화)<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>아래 점들에는 <strong>정답(색)이 없습니다.</strong> 컴퓨터가 “가까운 것끼리” 기준으로 3개의 그룹을 스스로 찾아가는 과정입니다. (k-평균 군집화)</p>
 <ol class="arabic simple">
 <li><p>그룹의 중심(★)을 아무 데나 3개 놓는다.</p></li>
@@ -696,28 +610,28 @@
 </div>
 </details>
 </div>
-<blockquote>
-<div><p><strong>[관찰 1]</strong> 처음 ★ 들은 모두 위쪽에 몰려 있었지만, 반복할수록 각 ★ 이 점들이 모인 ( 　　　 ) 으로 이동한다.
+<div class="box box-check docutils container">
+<p><strong>[관찰 1]</strong> 처음 ★ 들은 모두 위쪽에 몰려 있었지만, 반복할수록 각 ★ 이 점들이 모인 ( 　　　 ) 으로 이동한다.
 이 과정에서 컴퓨터는 정답을 ( 받았다 / 받지 않았다 ).</p>
-</div></blockquote>
+</div>
 </section>
 <section id="id10">
-<h2>✏️ 연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>[문제 1]</strong> 다음을 지도학습(회귀), 지도학습(분류), 비지도학습 으로 나누세요.
+<h2>연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<div class="box box-practice docutils container">
+<p><strong>[문제 1]</strong> 다음을 지도학습(회귀), 지도학습(분류), 비지도학습 으로 나누세요.
 ① 지난 10년의 아파트 거래 기록으로 새 아파트 가격 예측 ( 　　 )
 ② 구매 기록이 비슷한 손님들을 몇 그룹으로 묶기 ( 　　 )
 ③ 엑스레이 사진으로 폐렴 여부 판단 ( 　　 )</p>
-</div></blockquote>
+</div>
 <section id="id11">
-<h3>🤔 오늘의 질문 (심화 토의)<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<h3>오늘의 질문 (심화 토의)<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>음악 앱이나 동영상 사이트의 “당신이 좋아할 만한 콘텐츠” 추천은 어떤 방식의 머신러닝에 가까울까요?
 (힌트: 정답이 정해져 있을까요? 취향이 비슷한 사람들을 어떻게 모을 수 있을까요?)</p>
 <p>(                                                                                                                            )</p>
 </section>
 </section>
 <section id="id12">
-<h2>📌 정리<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<h2>정리<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
@@ -738,7 +652,7 @@
 </table>
 </div>
 <section id="id13">
-<h3>🏆 도전 과제<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<h3>도전 과제<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <p>회귀의 대표 모델은 <strong>y = Wx + b</strong> 입니다. 데이터에 가장 잘 맞는 W, b 를 찾으려면 “잘 맞는다” 를 숫자로 나타내야 합니다. 어떻게 나타낼 수 있을까요? → 다음 시간: <strong>선형 회귀와 손실함수</strong></p>
 </section>
 </section>
@@ -780,7 +694,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">이전</p>
-        <p class="prev-next-title">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</p>
+        <p class="prev-next-title">벡터와 행렬 - numpy 로 데이터 다루기</p>
       </div>
     </a>
     <a class="right-next"
@@ -788,7 +702,7 @@
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">다음</p>
-        <p class="prev-next-title">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</p>
+        <p class="prev-next-title">선형 회귀 (1) - 오차와 손실함수</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -810,23 +724,23 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📖 개념 다지기 1. 인공지능 ⊃ 머신러닝 ⊃ 딥러닝</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 1. 인공지능 ⊃ 머신러닝 ⊃ 딥러닝</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">왜 프레임워크 없이 직접 만들어 볼까?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">📖 개념 다지기 2. 지도학습 vs 비지도학습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">📖 개념 다지기 3. 회귀 vs 분류 (지도학습의 두 종류)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">📖 개념 다지기 4. 머신러닝이 일하는 순서</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">🎬 애니메이션 1. 비지도학습 - 정답 없이 스스로 묶기 (군집화)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">✏️ 연습 문제</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">🤔 오늘의 질문 (심화 토의)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">개념 다지기 2. 지도학습 vs 비지도학습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">개념 다지기 3. 회귀 vs 분류 (지도학습의 두 종류)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 4. 머신러닝이 일하는 순서</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 1. 비지도학습 - 정답 없이 스스로 묶기 (군집화)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">오늘의 질문 (심화 토의)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -859,9 +773,6 @@
   
   <div class="footer-item">
     
-<div class="extra_footer">
-  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
-</div>
   </div>
   
 </div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>📝 [제 2편] 수치미분 - 파이썬으로 미분하기 &#8212; 인공지능을 위한 수학</title>
+    <title>수치미분 - 파이썬으로 미분하기 &#8212; 인공지능을 위한 수학</title>
   
   
   
@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -65,8 +67,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
     <link rel="search" title="검색" href="search.html" />
-    <link rel="next" title="📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기" href="03_vector_matrix.html" />
-    <link rel="prev" title="📝 [제 1편] 머신러닝을 위한 미분 기초" href="01_derivative.html" />
+    <link rel="next" title="벡터와 행렬 - numpy 로 데이터 다루기" href="03_vector_matrix.html" />
+    <link rel="prev" title="머신러닝을 위한 미분 기초" href="01_derivative.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ko"/>
   <meta name="docsearch:version" content="" />
@@ -100,8 +102,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -206,43 +208,35 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    📚 인공지능을 위한 수학
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅰ. 수학 도구</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">벡터와 행렬 - numpy 로 데이터 다루기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅱ. 머신러닝 기초</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅲ. 분류와 신경망</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_xor.html">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_xor.html">XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">MNIST - 손글씨 숫자를 읽는 신경망</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅳ. 오차역전파</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅴ. 응용 : CNN 과 RNN</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">RNN - 순서를 기억하는 신경망</a></li>
 </ul>
 
     </div>
@@ -322,85 +316,6 @@
 
 
 
-<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="소스 저장소"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="이 페이지 다운로드">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/02_numerical_derivative.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="소스 파일 다운로드"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="PDF로 인쇄"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
-  title="전체 화면으로보기"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
 <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
   <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
@@ -424,7 +339,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>📝 [제 2편] 수치미분 - 파이썬으로 미분하기</h1>
+    <h1>수치미분 - 파이썬으로 미분하기</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -434,31 +349,31 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🧭 지난 시간 복습 (제 1편)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">📖 개념 다지기 1. 수치미분(Numerical Derivative)이란?</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습 (제 1편)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">개념 다지기 1. 수치미분(Numerical Derivative)이란?</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">미분계수의 정의와 중앙차분</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#def-lambda">📖 개념 다지기 2. 파이썬으로 함수 만들기 : def 와 lambda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">💻 실습 1. 수치미분 1차 버전 (변수가 1개인 함수)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#def-lambda">개념 다지기 2. 파이썬으로 함수 만들기 : def 와 lambda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">실습 1. 수치미분 1차 버전 (변수가 1개인 함수)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-3xex-f-2">[예제 2] f(x) = 3x·e<sup>x</sup> 에서 f’(2) 구하기</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#x">🎬 애니메이션 1. Δx 가 작아지면 할선이 접선이 된다</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🔬 탐구. Δx 는 무조건 작을수록 좋을까?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">📖 개념 다지기 3. 변수가 여러 개이면? → 변수마다 따로 수치미분</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">🎬 애니메이션 2. 컴퓨터가 편미분하는 순서 보기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">💻 실습 2. 수치미분 최종 버전 (변수가 여러 개인 함수)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#x">애니메이션 1. Δx 가 작아지면 할선이 접선이 된다</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">탐구. Δx 는 무조건 작을수록 좋을까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 3. 변수가 여러 개이면? → 변수마다 따로 수치미분</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 2. 컴퓨터가 편미분하는 순서 보기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">실습 2. 수치미분 최종 버전 (변수가 여러 개인 함수)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-x2-f-3">[예제 3] 1변수 함수 f(x) = x², f’(3)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-y-2x-3xy-y3-1-0-2-0">[예제 4] 2변수 함수 f(x, y) = 2x + 3xy + y³, 점 (1.0, 2.0)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-w-x-y-z-wx-xyz-3w-zy2-w-x-y-z-1-2-3-4">[예제 5] 4변수 함수 f(w, x, y, z) = wx + xyz + 3w + zy², 점 (w, x, y, z) = (1, 2, 3, 4)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -472,15 +387,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="id1">
-<h1>📝 [제 2편] 수치미분 - 파이썬으로 미분하기<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p><strong>학년/반/번호:</strong> 2학년 ( )반 ( )번  <strong>이름:</strong> (           )</p>
-<blockquote>
-<div><p>근거 자료: 박성호, 「머신러닝/딥러닝을 위한 수치미분 (II)·(III)」 (ML_LEC_10, ML_LEC_11), 「Python function·lambda」 (ML_LEC_04)</p>
-</div></blockquote>
+  <p class="unit-mark">제 2 편</p>
+<section id="id1">
+<h1>수치미분 - 파이썬으로 미분하기<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="box box-note docutils container">
+<p>근거 자료: 박성호, 「머신러닝/딥러닝을 위한 수치미분 (II)·(III)」 (ML_LEC_10, ML_LEC_11), 「Python function·lambda」 (ML_LEC_04)</p>
+</div>
 <hr class="docutils" />
 <section id="id2">
-<h2>🎯 학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>수치미분이 무엇인지 알고, 수학 공식으로 하는 미분(해석적 미분)과 비교할 수 있다.</p></li>
 <li><p>중앙차분 공식을 파이썬 함수로 구현하여 미분계수를 계산할 수 있다.</p></li>
@@ -489,23 +404,22 @@
 </section>
 <hr class="docutils" />
 <section id="id3">
-<h2>🧭 지난 시간 복습 (제 1편)<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>지난 시간 복습 (제 1편)<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>미분은 <strong>“입력이 아주 조금 변할 때 출력이 얼마나 민감하게 변하는가”</strong> 를 알려 준다.</p></li>
 <li><p>f(x) = x² 이면 f’(x) = 2x, 따라서 f’(3) = 6</p></li>
 <li><p>편미분: 관심 있는 변수 하나만 움직이고 <strong>나머지는 상수로 고정</strong>한다.</p></li>
 </ul>
-<blockquote>
-<div><p><strong>오늘의 질문</strong> 🤔
+<div class="box box-note docutils container">
+<p><strong>오늘의 질문</strong> 🤔
 컴퓨터는 “x² 을 미분하면 2x” 라는 공식을 모릅니다. 그렇다면 컴퓨터는 어떻게 미분을 할까요?</p>
-</div></blockquote>
-<blockquote>
-<div><p>🚀 <strong>실습하려면</strong> : 이 페이지 맨 위의 <strong>로켓(🚀) 버튼 → Colab</strong> 을 누르세요. 코랩에서 코드를 실행하고 🎬 애니메이션을 볼 수 있습니다.
-코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
-</div></blockquote>
+</div>
+<div class="box box-note docutils container">
+<p><strong>실습은 코랩에서</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르면 이 학습지가 코랩으로 열립니다. 코드 실행, 애니메이션, 정답 확인은 코랩에서 합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
+</div>
 </section>
 <section id="id4">
-<h2>⚙️ 0단계. 준비하기<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>0단계. 준비하기<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -545,7 +459,7 @@
 </div>
 </section>
 <section id="numerical-derivative">
-<h2>📖 개념 다지기 1. 수치미분(Numerical Derivative)이란?<a class="headerlink" href="#numerical-derivative" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 1. 수치미분(Numerical Derivative)이란?<a class="headerlink" href="#numerical-derivative" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>구분</p></th>
@@ -576,18 +490,18 @@
 <li><p>컴퓨터는 Δx → 0 (극한)을 할 수 없으므로 <strong>Δx 에 아주 작은 수 (예: 10<sup>−4</sup> = 0.0001)</strong> 를 넣어 계산합니다.</p></li>
 <li><p>이때 x 의 <strong>양쪽</strong>을 똑같이 Δx 만큼 잡는 <strong>중앙차분</strong>을 쓰면 훨씬 정확합니다.</p></li>
 </ul>
-<blockquote>
-<div><p><strong>중앙차분 공식</strong>
+<div class="box box-note docutils container">
+<p><strong>중앙차분 공식</strong>
 f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
-</div></blockquote>
-<blockquote>
-<div><p><strong>[생각해 보기]</strong> 💡 두 점 (x − Δx, f(x − Δx)), (x + Δx, f(x + Δx)) 을 잇는 직선의 기울기를 구해 보면,
+</div>
+<div class="box box-think docutils container">
+<p><strong>[생각해 보기]</strong> 💡 두 점 (x − Δx, f(x − Δx)), (x + Δx, f(x + Δx)) 을 잇는 직선의 기울기를 구해 보면,
 분모는 두 점의 x 좌표의 차인 (x + Δx) − (x − Δx) = ( 　　　 ) 이 됩니다.</p>
-</div></blockquote>
+</div>
 </section>
 </section>
 <section id="def-lambda">
-<h2>📖 개념 다지기 2. 파이썬으로 함수 만들기 : def 와 lambda<a class="headerlink" href="#def-lambda" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 2. 파이썬으로 함수 만들기 : def 와 lambda<a class="headerlink" href="#def-lambda" title="Link to this heading">#</a></h2>
 <p>수학의 함수 f(x) = x² 을 파이썬에서는 두 가지 방법으로 만들 수 있습니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 방법 1: def</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -601,10 +515,10 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">입력</span> <span class="pre">:</span> <span class="pre">식</span></code> 은 <strong>“f(x) 를 식으로 바꿔 계산하라”</strong> 는 뜻입니다.</p></li>
 <li><p>수치미분 함수에 <strong>미분할 함수 자체를 입력으로 넘겨줄 때</strong> 아주 편리합니다.</p></li>
 </ul>
-<blockquote>
-<div><p><strong>[연습 1]</strong> 아래 셀을 실행하고, 빈칸에 결과를 적어 보세요.
+<div class="box box-practice docutils container">
+<p><strong>[연습 1]</strong> 아래 셀을 실행하고, 빈칸에 결과를 적어 보세요.
 f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
-</div></blockquote>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
@@ -620,7 +534,7 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </div>
 </section>
 <section id="id6">
-<h2>💻 실습 1. 수치미분 1차 버전 (변수가 1개인 함수)<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>실습 1. 수치미분 1차 버전 (변수가 1개인 함수)<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>중앙차분 공식을 그대로 코드로 옮깁니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -661,10 +575,10 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[확인 1]</strong> 수치미분 결과는 6 과 <strong>정확히 같나요?</strong> 차이가 난다면 그 이유는 무엇일까요?
+<div class="box box-check docutils container">
+<p><strong>[확인 1]</strong> 수치미분 결과는 6 과 <strong>정확히 같나요?</strong> 차이가 난다면 그 이유는 무엇일까요?
 (                                                                                   )</p>
-</div></blockquote>
+</div>
 <section id="f-x-3xex-f-2">
 <h3>[예제 2] f(x) = 3x·e<sup>x</sup> 에서 f’(2) 구하기<a class="headerlink" href="#f-x-3xex-f-2" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -685,7 +599,7 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </section>
 </section>
 <section id="x">
-<h2>🎬 애니메이션 1. Δx 가 작아지면 할선이 접선이 된다<a class="headerlink" href="#x" title="Link to this heading">#</a></h2>
+<h2>애니메이션 1. Δx 가 작아지면 할선이 접선이 된다<a class="headerlink" href="#x" title="Link to this heading">#</a></h2>
 <p>f(x) = x² 위의 점 x = 1 에서</p>
 <ul class="simple">
 <li><p>🔴 <strong>전진차분</strong>: 두 점 1 과 1 + Δx 를 잇는 직선</p></li>
@@ -731,16 +645,16 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </div>
 </details>
 </div>
-<blockquote>
-<div><p><strong>[관찰 1]</strong>
+<div class="box box-check docutils container">
+<p><strong>[관찰 1]</strong>
 ① Δx 가 작아질수록 빨간 직선의 기울기는 ( 　　 ) 에 가까워진다.
 ② 초록 직선(중앙차분)의 기울기는 Δx 의 크기와 상관없이 항상 ( 　　 ) 이다. 왜 그럴까요?
 　 (힌트: {(1 + Δx)² − (1 − Δx)²} / (2Δx) 을 직접 전개해 보세요.)
 (                                                                                   )</p>
-</div></blockquote>
+</div>
 </section>
 <section id="id7">
-<h2>🔬 탐구. Δx 는 무조건 작을수록 좋을까?<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2>탐구. Δx 는 무조건 작을수록 좋을까?<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>f(x) = x³ 에서 f’(1) = 3 입니다. Δx 를 10<sup>−1</sup>, 10<sup>−2</sup>, … , 10<sup>−15</sup> 으로 바꿔 가며 <strong>오차 = |수치미분 − 3|</strong> 을 비교해 봅시다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -766,41 +680,41 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[탐구 결과]</strong>
+<div class="box box-check docutils container">
+<p><strong>[탐구 결과]</strong>
 ① 오차가 가장 작아지는 Δx 는 대략 전진차분 ( 　　　 ), 중앙차분 ( 　　　 ) 근처이다.
 ② Δx 가 너무 작아지면(10<sup>−12</sup> 이하) 오차가 오히려 ( 커진다 / 작아진다 ).</p>
 <p>💡 <strong>이유</strong>: 컴퓨터는 소수를 약 16자리까지만 저장합니다. Δx 가 너무 작으면 f(x + Δx) 와 f(x − Δx) 가 거의 같은 수가 되어, 그 차를 계산할 때 <strong>반올림 오차</strong>가 크게 드러납니다.
 그래서 머신러닝에서는 보통 <strong>Δx = 10<sup>−4</sup></strong> 정도를 사용합니다.</p>
-</div></blockquote>
+</div>
 </section>
 <section id="id8">
-<h2>📖 개념 다지기 3. 변수가 여러 개이면? → 변수마다 따로 수치미분<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 3. 변수가 여러 개이면? → 변수마다 따로 수치미분<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>f(x, y) = 2x + 3xy + y³ 에서 점 (1, 2) 에서의 편미분을 구해 봅시다.</p>
 <p><strong>① x 에 대한 편미분</strong> (y = 2 로 고정)
 　f(x, 2) = 2x + 6x + 8 = 8x + 8 　→　 ∂f/∂x = ( 　　 )</p>
 <p><strong>② y 에 대한 편미분</strong> (x = 1 로 고정)
 　f(1, y) = 2 + 3y + y³ 　→　 ∂f/∂y = 3 + 3y²,　y = 2 를 대입하면 ( 　　 )</p>
-<blockquote>
-<div><p><strong>[의미 해석]</strong> 💡</p>
+<div class="box box-think docutils container">
+<p><strong>[의미 해석]</strong> 💡</p>
 <ul class="simple">
 <li><p>∂f/∂x = 8 : y 를 2 로 고정한 채 x 를 1 에서 아주 조금 늘리면, f 는 그 변화량의 ( 　 )배만큼 변한다.</p></li>
 <li><p>∂f/∂y = 15 : x 를 1 로 고정한 채 y 를 2 에서 아주 조금 늘리면, f 는 그 변화량의 ( 　 )배만큼 변한다.
 → 이 점에서 f 는 <strong>( x / y )</strong> 의 변화에 더 민감하다.</p></li>
 </ul>
-</div></blockquote>
+</div>
 <p>컴퓨터도 똑같이 합니다. <strong>변수를 하나씩 번갈아 가며</strong> “그 변수만 ±Δx 만큼 움직이고 나머지는 그대로” 두고 계산합니다.</p>
 </section>
 <section id="id9">
-<h2>🎬 애니메이션 2. 컴퓨터가 편미분하는 순서 보기<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<h2>애니메이션 2. 컴퓨터가 편미분하는 순서 보기<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>왼쪽: f(x, y) = 2x + 3xy + y³ 의 등고선 위의 점 (1, 2)</p></li>
 <li><p>오른쪽: 지금 움직이는 변수 방향으로 자른 단면 곡선과 접선</p></li>
 </ul>
 <p><strong>1단계</strong>에서는 x 만 움직이고(y 고정), <strong>2단계</strong>에서는 y 만 움직입니다(x 고정).</p>
-<blockquote>
-<div><p>💡 1단계의 단면 f(x, 2) = 8x + 8 은 직선이라 접선과 완전히 겹칩니다. 2단계의 단면은 곡선이라 접선이 한 점에서만 닿습니다.</p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p>1단계의 단면 f(x, 2) = 8x + 8 은 직선이라 접선과 완전히 겹칩니다. 2단계의 단면은 곡선이라 접선이 한 점에서만 닿습니다.</p>
+</div>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -854,7 +768,7 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </div>
 </section>
 <section id="id10">
-<h2>💻 실습 2. 수치미분 최종 버전 (변수가 여러 개인 함수)<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<h2>실습 2. 수치미분 최종 버전 (변수가 여러 개인 함수)<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>변수가 여러 개이면 입력을 <strong>numpy 배열</strong> 하나에 모아서 넘겨줍니다. 예: (x, y) = (1, 2) → <code class="docutils literal notranslate"><span class="pre">np.array([1.0,</span> <span class="pre">2.0])</span></code></p>
 <p>코드의 핵심 아이디어 ①~④</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -938,9 +852,9 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[확인 2]</strong> 개념 다지기 3 에서 손으로 구한 값 ( 　 , 　 ) 과 일치하나요? ( 예 / 아니오 )</p>
-</div></blockquote>
+<div class="box box-check docutils container">
+<p><strong>[확인 2]</strong> 개념 다지기 3 에서 손으로 구한 값 ( 　 , 　 ) 과 일치하나요? ( 예 / 아니오 )</p>
+</div>
 </section>
 <section id="f-w-x-y-z-wx-xyz-3w-zy2-w-x-y-z-1-2-3-4">
 <h3>[예제 5] 4변수 함수 f(w, x, y, z) = wx + xyz + 3w + zy², 점 (w, x, y, z) = (1, 2, 3, 4)<a class="headerlink" href="#f-w-x-y-z-wx-xyz-3w-zy2-w-x-y-z-1-2-3-4" title="Link to this heading">#</a></h3>
@@ -967,22 +881,22 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[생각해 보기]</strong> 💡 결과도 입력과 똑같이 <strong>2 × 2 행렬</strong> 모양으로 나옵니다.
+<div class="box box-think docutils container">
+<p><strong>[생각해 보기]</strong> 💡 결과도 입력과 똑같이 <strong>2 × 2 행렬</strong> 모양으로 나옵니다.
 나중에 딥러닝에서 수백 개의 가중치를 행렬 W 에 담아 한꺼번에 미분할 때 바로 이 코드를 사용합니다!</p>
-</div></blockquote>
+</div>
 </section>
 </section>
 <section id="id11">
-<h2>✏️ 연습 문제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>[문제 1]</strong> f(x) = ln x + 1/x 일 때, f’(2) 를 손으로 구하고 수치미분으로 확인하세요.
+<h2>연습 문제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<div class="box box-practice docutils container">
+<p><strong>[문제 1]</strong> f(x) = ln x + 1/x 일 때, f’(2) 를 손으로 구하고 수치미분으로 확인하세요.
 손 계산: f’(x) = ( 　　　　　 ),　f’(2) = ( 　　 )</p>
-</div></blockquote>
-<blockquote>
-<div><p><strong>[문제 2]</strong> f(x, y) = x²y + e<sup>y</sup> 일 때, 점 (1, 0) 에서 ∂f/∂x, ∂f/∂y 를 손으로 구하고 수치미분으로 확인하세요.
+</div>
+<div class="box box-practice docutils container">
+<p><strong>[문제 2]</strong> f(x, y) = x²y + e<sup>y</sup> 일 때, 점 (1, 0) 에서 ∂f/∂x, ∂f/∂y 를 손으로 구하고 수치미분으로 확인하세요.
 손 계산: ∂f/∂x = ( 　　 ),　∂f/∂y = ( 　　 )</p>
-</div></blockquote>
+</div>
 <p>아래 셀의 <code class="docutils literal notranslate"><span class="pre">______</span></code> 부분을 채워 실행하세요.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1003,7 +917,7 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </div>
 </section>
 <section id="id12">
-<h2>📌 정리<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<h2>정리<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
@@ -1028,7 +942,7 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </div>
 <hr class="docutils" />
 <section id="id13">
-<h3>🏆 도전 과제<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<h3>도전 과제<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <p>f(W) = (W − 3)² 에서 W = 0 일 때 수치미분 값은 ( 　　 ) 입니다.
 이 값이 <strong>음수</strong>라는 것은 W 를 ( 늘려야 / 줄여야 ) f(W) 가 작아진다는 뜻입니다.
 → 다음 시간에는 이 아이디어로 인공지능이 <strong>오차를 줄여 가는 방법(경사하강법)</strong> 을 배웁니다!</p>
@@ -1073,7 +987,7 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">이전</p>
-        <p class="prev-next-title">📝 [제 1편] 머신러닝을 위한 미분 기초</p>
+        <p class="prev-next-title">머신러닝을 위한 미분 기초</p>
       </div>
     </a>
     <a class="right-next"
@@ -1081,7 +995,7 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">다음</p>
-        <p class="prev-next-title">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</p>
+        <p class="prev-next-title">벡터와 행렬 - numpy 로 데이터 다루기</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1103,31 +1017,31 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🧭 지난 시간 복습 (제 1편)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">📖 개념 다지기 1. 수치미분(Numerical Derivative)이란?</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습 (제 1편)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">개념 다지기 1. 수치미분(Numerical Derivative)이란?</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">미분계수의 정의와 중앙차분</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#def-lambda">📖 개념 다지기 2. 파이썬으로 함수 만들기 : def 와 lambda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">💻 실습 1. 수치미분 1차 버전 (변수가 1개인 함수)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#def-lambda">개념 다지기 2. 파이썬으로 함수 만들기 : def 와 lambda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">실습 1. 수치미분 1차 버전 (변수가 1개인 함수)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-3xex-f-2">[예제 2] f(x) = 3x·e<sup>x</sup> 에서 f’(2) 구하기</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#x">🎬 애니메이션 1. Δx 가 작아지면 할선이 접선이 된다</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🔬 탐구. Δx 는 무조건 작을수록 좋을까?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">📖 개념 다지기 3. 변수가 여러 개이면? → 변수마다 따로 수치미분</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">🎬 애니메이션 2. 컴퓨터가 편미분하는 순서 보기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">💻 실습 2. 수치미분 최종 버전 (변수가 여러 개인 함수)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#x">애니메이션 1. Δx 가 작아지면 할선이 접선이 된다</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">탐구. Δx 는 무조건 작을수록 좋을까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 3. 변수가 여러 개이면? → 변수마다 따로 수치미분</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 2. 컴퓨터가 편미분하는 순서 보기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">실습 2. 수치미분 최종 버전 (변수가 여러 개인 함수)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-x2-f-3">[예제 3] 1변수 함수 f(x) = x², f’(3)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-y-2x-3xy-y3-1-0-2-0">[예제 4] 2변수 함수 f(x, y) = 2x + 3xy + y³, 점 (1.0, 2.0)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-w-x-y-z-wx-xyz-3w-zy2-w-x-y-z-1-2-3-4">[예제 5] 4변수 함수 f(w, x, y, z) = wx + xyz + 3w + zy², 점 (w, x, y, z) = (1, 2, 3, 4)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -1160,9 +1074,6 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
   
   <div class="footer-item">
     
-<div class="extra_footer">
-  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
-</div>
   </div>
   
 </div>

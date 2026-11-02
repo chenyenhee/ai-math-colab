@@ -1,0 +1,113 @@
+
+/* ===== 차분한 교과서 테마 ===== */
+html[data-theme="light"] {
+  --paper: #FAFBFA; --margin: #EEF2F0; --ink: #22303A; --ink-soft: #5A6872; --rule: #D5DDDA;
+  --unit: #2F5F66; --unit-soft: #E8F1F1;
+  --practice: #9C7420; --practice-bg: #FBF4E3;
+  --think: #5D7A57; --think-bg: #EEF3EC;
+  --note-bg: #F3F5F4;
+  --pst-color-background: var(--paper);
+  --pst-color-on-background: var(--paper);
+  --pst-color-surface: var(--margin);
+  --pst-color-text-base: var(--ink);
+  --pst-color-text-muted: var(--ink-soft);
+  --pst-color-primary: var(--unit);
+  --pst-color-link: var(--unit);
+  --pst-color-link-hover: #1D4247;
+  --pst-color-border: var(--rule);
+  --pst-color-inline-code: #7A4E1C;
+}
+html[data-theme="dark"] {
+  --paper: #161D21; --margin: #1C252A; --ink: #DCE3E2; --ink-soft: #9BA8AB; --rule: #2E3A40;
+  --unit: #7FB3B8; --unit-soft: #1F3236;
+  --practice: #D8B05A; --practice-bg: #2A2416;
+  --think: #9DBB96; --think-bg: #1E2A1E;
+  --note-bg: #20292E;
+  --pst-color-background: var(--paper);
+  --pst-color-on-background: var(--paper);
+  --pst-color-surface: var(--margin);
+  --pst-color-primary: var(--unit);
+  --pst-color-link: var(--unit);
+}
+:root {
+  --pst-font-family-base: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --pst-font-family-heading: "Gowun Batang", "AppleMyungjo", serif;
+  --pst-font-family-monospace: "IBM Plex Mono", Consolas, monospace;
+  --pst-font-size-base: 1.02rem;
+}
+body { background: var(--paper); color: var(--ink); }
+.bd-article { line-height: 1.85; word-break: keep-all; }
+.bd-article-container { max-width: 46rem; }
+
+/* 제목 : 바탕체, 굵기는 절제 */
+.bd-article h1, .bd-article h2, .bd-article h3 { font-family: var(--pst-font-family-heading); color: var(--ink); letter-spacing: -0.01em; }
+.bd-article h1 { font-size: 2.15rem; font-weight: 700; line-height: 1.35; margin: 0.2rem 0 1.6rem; }
+.bd-article h2 { font-size: 1.45rem; font-weight: 700; margin-top: 3.2rem; padding-bottom: 0.45rem; border-bottom: 2px solid var(--unit); }
+.bd-article h3 { font-size: 1.15rem; font-weight: 700; margin-top: 2rem; color: var(--unit); }
+.headerlink { display: none !important; }
+
+/* 편 번호 표지 띠 : 이 사이트의 한 가지 개성 */
+.unit-mark { display: inline-block; margin: 0.8rem 0 0; padding: 0.2rem 0.9rem 0.25rem 0.75rem;
+  font-family: var(--pst-font-family-heading); font-weight: 700; font-size: 0.95rem; letter-spacing: 0.08em;
+  color: var(--paper); background: var(--unit); border-radius: 0 999px 999px 0; }
+
+/* 의미가 있는 상자들 */
+.box { margin: 1.4rem 0; padding: 0.95rem 1.2rem; border-left: 4px solid var(--unit); background: var(--unit-soft); border-radius: 0 6px 6px 0; }
+.box p:last-child, .box ul:last-child, .box ol:last-child { margin-bottom: 0; }
+.box-practice { border-left-color: var(--practice); background: var(--practice-bg); }
+.box-think    { border-left-color: var(--think);    background: var(--think-bg); }
+.box-note     { border-left-color: var(--rule);     background: var(--note-bg); }
+.box-practice strong:first-child { color: var(--practice); }
+.box-think strong:first-child    { color: var(--think); }
+.box-check strong:first-child    { color: var(--unit); }
+
+/* 표 : 교과서 표처럼 가로선만 */
+.bd-article table { border-collapse: collapse; margin: 1.2rem 0; font-size: 0.95rem; }
+.bd-article table th { background: var(--margin); border-bottom: 2px solid var(--unit); font-weight: 600; }
+.bd-article table td, .bd-article table th { border-left: none; border-right: none; padding: 0.5rem 0.8rem; }
+.bd-article table tr { border-bottom: 1px solid var(--rule); }
+.bd-article table tbody tr:nth-child(odd) { background: transparent; }
+
+/* 코드 */
+div.highlight, .cell_input { border-radius: 6px; }
+.cell_input { border-left: 3px solid var(--rule) !important; background: var(--note-bg) !important; }
+code.literal, .bd-article p code { font-size: 0.88em; }
+
+/* 왼쪽 차례 */
+.bd-sidebar-primary { background: var(--margin); border-right: 1px solid var(--rule); }
+.bd-sidebar-primary .navbar-brand, .bd-sidebar-primary .navbar-brand p { font-family: var(--pst-font-family-heading); font-weight: 700; color: var(--ink); }
+nav.bd-links { counter-reset: unit; }
+nav.bd-links p.caption, nav.bd-links .caption-text { text-transform: none; letter-spacing: 0; font-family: var(--pst-font-family-heading);
+  font-size: 0.92rem; font-weight: 700; color: var(--unit); margin-top: 1.1rem; }
+nav.bd-links li.toctree-l1 { counter-increment: unit; }
+nav.bd-links li.toctree-l1 > a { display: flex; gap: 0.6rem; align-items: baseline; font-size: 0.92rem; line-height: 1.5; color: var(--ink); }
+nav.bd-links li.toctree-l1 > a::before { content: counter(unit); flex: 0 0 1.4rem; text-align: right;
+  font-family: var(--pst-font-family-monospace); font-size: 0.8rem; color: var(--ink-soft); }
+nav.bd-links li.toctree-l1.current > a, nav.bd-links li.toctree-l1 > a.current { font-weight: 700; color: var(--unit); box-shadow: none; }
+nav.bd-links li.toctree-l1.current > a::before { color: var(--unit); }
+
+/* 첫 화면 : 교과서 차례 쪽 */
+.lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 38rem; margin-bottom: 2.2rem; }
+.contents { border-top: 2px solid var(--unit); padding-top: 0.6rem; margin-bottom: 1rem; }
+.contents .part { display: grid; grid-template-columns: 11rem 1fr; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+.contents .part h3 { margin: 0.15rem 0 0 !important; font-size: 1.05rem; color: var(--ink) !important; }
+.contents .roman { display: inline-block; width: 1.8rem; color: var(--unit); }
+.contents ol { list-style: none; margin: 0; padding: 0; }
+.contents li a { display: flex; align-items: baseline; gap: 0.7rem; padding: 0.22rem 0; color: var(--ink); text-decoration: none; }
+.contents li a .num { flex: 0 0 1.6rem; text-align: right; font-family: var(--pst-font-family-monospace); font-size: 0.85rem; color: var(--ink-soft); }
+.contents li a .t { flex: 1; display: flex; align-items: baseline; gap: 0.5rem; }
+.contents li a .t::after { content: ""; flex: 1; border-bottom: 1px dotted var(--rule); transform: translateY(-0.3em); }
+.contents li a:hover .t, .contents li a:focus-visible .t { color: var(--unit); }
+.credit { margin-top: 2.5rem; font-size: 0.88rem; color: var(--ink-soft); }
+@media (max-width: 640px) {
+  .contents .part { grid-template-columns: 1fr; gap: 0.3rem; }
+  .bd-article h1 { font-size: 1.75rem; }
+}
+a:focus-visible { outline: 2px solid var(--unit); outline-offset: 2px; }
+@media (min-width: 960px) { .bd-header { display: none; } }
+/* 접힌 코드 버튼을 한국어로 */
+details.above-input { border-color: var(--rule) !important; border-left: 3px solid var(--unit) !important; box-shadow: none !important; background: var(--paper) !important; }
+details.above-input > summary { color: var(--ink-soft); }
+details.above-input > summary .collapsed, details.above-input > summary .expanded { font-size: 0 !important; }
+details.above-input > summary .collapsed::after { content: "코드 보기"; font-size: 0.9rem; }
+details.above-input > summary .expanded::after  { content: "코드 접기"; font-size: 0.9rem; }   /* 넓은 화면에서는 위쪽 검색 줄을 숨김 (왼쪽에 이미 있음) */

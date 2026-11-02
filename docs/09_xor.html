@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다 &#8212; 인공지능을 위한 수학</title>
+    <title>XOR 문제 - 직선 하나로는 나눌 수 없다 &#8212; 인공지능을 위한 수학</title>
   
   
   
@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -65,8 +67,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
     <link rel="search" title="검색" href="search.html" />
-    <link rel="next" title="📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기" href="10_neural_network.html" />
-    <link rel="prev" title="📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)" href="08_logistic_regression.html" />
+    <link rel="next" title="신경망과 딥러닝 - 피드포워드로 XOR 풀기" href="10_neural_network.html" />
+    <link rel="prev" title="로지스틱 회귀 - 합격일까 불합격일까? (분류)" href="08_logistic_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ko"/>
   <meta name="docsearch:version" content="" />
@@ -100,8 +102,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -206,43 +208,35 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    📚 인공지능을 위한 수학
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅰ. 수학 도구</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_vector_matrix.html">벡터와 행렬 - numpy 로 데이터 다루기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅱ. 머신러닝 기초</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅲ. 분류와 신경망</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">MNIST - 손글씨 숫자를 읽는 신경망</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅳ. 오차역전파</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅴ. 응용 : CNN 과 RNN</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">RNN - 순서를 기억하는 신경망</a></li>
 </ul>
 
     </div>
@@ -322,85 +316,6 @@
 
 
 
-<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="소스 저장소"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="이 페이지 다운로드">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/09_xor.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="소스 파일 다운로드"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="PDF로 인쇄"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
-  title="전체 화면으로보기"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
 <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
   <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
@@ -424,7 +339,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</h1>
+    <h1>XOR 문제 - 직선 하나로는 나눌 수 없다</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -434,23 +349,23 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">📖 개념 다지기 1. 논리게이트 = 학습 데이터</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logicgate">💻 실습 1. LogicGate 클래스 만들기</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">개념 다지기 1. 논리게이트 = 학습 데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logicgate">실습 1. LogicGate 클래스 만들기</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-or-nand">AND, OR, NAND 학습시키기</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">이제 XOR 차례!</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">🎬 애니메이션 1. 네 게이트의 결정 경계가 학습되는 모습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🎬 애니메이션 2. 정말로 직선 하나로는 안 될까?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">📖 개념 다지기 2. 게이트를 쌓아서 XOR 만들기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">🎬 애니메이션 3. 1층이 ‘공간을 바꿔’ 준다</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insight">💡 insight - 신경망(딥러닝)의 핵심 아이디어</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">애니메이션 1. 네 게이트의 결정 경계가 학습되는 모습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">애니메이션 2. 정말로 직선 하나로는 안 될까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 2. 게이트를 쌓아서 XOR 만들기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 3. 1층이 ‘공간을 바꿔’ 준다</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insight">insight - 신경망(딥러닝)의 핵심 아이디어</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -464,15 +379,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="xor">
-<h1>📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다<a class="headerlink" href="#xor" title="Link to this heading">#</a></h1>
-<p><strong>학년/반/번호:</strong> 2학년 ( )반 ( )번  <strong>이름:</strong> (           )</p>
-<blockquote>
-<div><p>근거 자료: 박성호, 「머신러닝 XOR 문제 - AND • OR • NAND • XOR」 (ML_LEC_18), 「Python class」 (ML_LEC_05)</p>
-</div></blockquote>
+  <p class="unit-mark">제 9 편</p>
+<section id="xor">
+<h1>XOR 문제 - 직선 하나로는 나눌 수 없다<a class="headerlink" href="#xor" title="Link to this heading">#</a></h1>
+<div class="box box-note docutils container">
+<p>근거 자료: 박성호, 「머신러닝 XOR 문제 - AND • OR • NAND • XOR」 (ML_LEC_18), 「Python class」 (ML_LEC_05)</p>
+</div>
 <hr class="docutils" />
 <section id="id1">
-<h2>🎯 학습 목표<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>학습 목표<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>논리게이트 AND, OR, NAND, XOR 의 진리표를 머신러닝 학습 데이터로 볼 수 있다.</p></li>
 <li><p>로지스틱 회귀 하나로 AND, OR, NAND 는 학습되지만 XOR 은 학습되지 않는 이유를 설명할 수 있다.</p></li>
@@ -481,18 +396,17 @@
 </section>
 <hr class="docutils" />
 <section id="id2">
-<h2>🧭 지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>제 8편: 로지스틱 회귀의 <strong>결정 경계는 직선</strong> (W₁x₁ + W₂x₂ + b = 0) 입니다.</p></li>
 <li><p>도전 과제: (0,0)·(1,1) 은 0, (0,1)·(1,0) 은 1 인 점들을 <strong>직선 하나로 나눌 수 있을까?</strong></p></li>
 </ul>
-<blockquote>
-<div><p>🚀 <strong>실습하려면</strong> : 이 페이지 맨 위의 <strong>로켓(🚀) 버튼 → Colab</strong> 을 누르세요. 코랩에서 코드를 실행하고 🎬 애니메이션을 볼 수 있습니다.
-코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p><strong>실습은 코랩에서</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르면 이 학습지가 코랩으로 열립니다. 코드 실행, 애니메이션, 정답 확인은 코랩에서 합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
+</div>
 </section>
 <section id="id3">
-<h2>⚙️ 0단계. 준비하기<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>0단계. 준비하기<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -561,7 +475,7 @@
 </div>
 </section>
 <section id="id4">
-<h2>📖 개념 다지기 1. 논리게이트 = 학습 데이터<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 1. 논리게이트 = 학습 데이터<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>컴퓨터 회로의 기본 부품인 논리게이트는 입력 2개 (0 또는 1) 를 받아 0 또는 1 을 출력합니다.
 진리표를 <strong>입력 (x₁, x₂), 정답 t</strong> 로 보면 그대로 <strong>분류 문제의 학습 데이터</strong> 입니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -614,7 +528,7 @@
 </ul>
 </section>
 <section id="logicgate">
-<h2>💻 실습 1. LogicGate 클래스 만들기<a class="headerlink" href="#logicgate" title="Link to this heading">#</a></h2>
+<h2>실습 1. LogicGate 클래스 만들기<a class="headerlink" href="#logicgate" title="Link to this heading">#</a></h2>
 <p>게이트 4개를 똑같은 방법으로 학습시키므로 <strong>클래스(class)</strong> 로 한 번 만들어 두고 여러 번 씁니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -707,9 +621,9 @@
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[확인 1]</strong> AND, OR, NAND 의 예측 결과가 진리표와 모두 일치하나요? ( 예 / 아니오 )</p>
-</div></blockquote>
+<div class="box box-check docutils container">
+<p><strong>[확인 1]</strong> AND, OR, NAND 의 예측 결과가 진리표와 모두 일치하나요? ( 예 / 아니오 )</p>
+</div>
 </section>
 <section id="id5">
 <h3>이제 XOR 차례!<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
@@ -726,14 +640,14 @@
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[확인 2]</strong> XOR 의 예측 결과는 정답 (0, 1, 1, 0) 과 ( 일치한다 / 다르다 ).
+<div class="box box-check docutils container">
+<p><strong>[확인 2]</strong> XOR 의 예측 결과는 정답 (0, 1, 1, 0) 과 ( 일치한다 / 다르다 ).
 손실 값은 학습을 8000 번 해도 약 ( 　　 ) 에서 더 이상 줄지 않는다. sigmoid 값들은 모두 ( 　　 ) 근처이다.</p>
-</div></blockquote>
+</div>
 </section>
 </section>
 <section id="id6">
-<h2>🎬 애니메이션 1. 네 게이트의 결정 경계가 학습되는 모습<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>애니메이션 1. 네 게이트의 결정 경계가 학습되는 모습<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>배경색은 출력이 1 일 확률(빨강 1, 파랑 0), 검은 선은 결정 경계(sigmoid = 0.5) 입니다. ● 정답 1, ✕ 정답 0</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -770,12 +684,12 @@
 </div>
 </details>
 </div>
-<blockquote>
-<div><p><strong>[관찰 1]</strong> AND, OR, NAND 는 직선 하나로 ● 와 ✕ 가 깔끔하게 나뉜다. XOR 은 배경이 거의 ( 한 가지 색 / 두 가지 색 ) 이고, ● 와 ✕ 를 나누지 못한다.</p>
-</div></blockquote>
+<div class="box box-check docutils container">
+<p><strong>[관찰 1]</strong> AND, OR, NAND 는 직선 하나로 ● 와 ✕ 가 깔끔하게 나뉜다. XOR 은 배경이 거의 ( 한 가지 색 / 두 가지 색 ) 이고, ● 와 ✕ 를 나누지 못한다.</p>
+</div>
 </section>
 <section id="id7">
-<h2>🎬 애니메이션 2. 정말로 직선 하나로는 안 될까?<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2>애니메이션 2. 정말로 직선 하나로는 안 될까?<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>직선을 여러 방향, 여러 위치로 움직여 보며 XOR 의 네 점 중 <strong>몇 개를 맞히는지</strong> 세어 봅시다.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -816,13 +730,13 @@
 </div>
 </details>
 </div>
-<blockquote>
-<div><p><strong>[관찰 2]</strong> 어떤 직선을 그어도 최대 ( 　 ) / 4 개밖에 맞히지 못한다.
+<div class="box box-check docutils container">
+<p><strong>[관찰 2]</strong> 어떤 직선을 그어도 최대 ( 　 ) / 4 개밖에 맞히지 못한다.
 💡 이처럼 직선 하나로 나눌 수 없는 데이터를 <strong>선형 분리 불가능</strong> 하다고 합니다. 1969년 이 사실이 알려지면서 인공지능 연구가 한동안 침체되기도 했습니다.</p>
-</div></blockquote>
+</div>
 </section>
 <section id="id8">
-<h2>📖 개념 다지기 2. 게이트를 쌓아서 XOR 만들기<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 2. 게이트를 쌓아서 XOR 만들기<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>XOR 은 NAND 와 OR 의 출력을 다시 AND 에 넣으면 만들 수 있습니다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span> x₁ ─┬─→ [NAND] ─ s₁ ─┐
      │                 ├─→ [AND] ─→ y (XOR)
@@ -886,7 +800,7 @@
 </div>
 </section>
 <section id="id9">
-<h2>🎬 애니메이션 3. 1층이 ‘공간을 바꿔’ 준다<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<h2>애니메이션 3. 1층이 ‘공간을 바꿔’ 준다<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>1층(NAND, OR)을 지나면 점 (x₁, x₂) 가 새로운 점 (s₁, s₂) 로 <strong>옮겨집니다.</strong>
 옮겨진 공간에서는 <strong>직선 하나(AND 의 결정 경계)로 나눌 수 있게</strong> 됩니다!</p>
 <div class="cell tag_hide-input docutils container">
@@ -928,12 +842,12 @@
 </div>
 </details>
 </div>
-<blockquote>
-<div><p><strong>[관찰 3]</strong> (0, 1) 과 (1, 0) 은 이동한 뒤 같은 점 ( 　, 　 ) 으로 모인다. (0, 0) 은 ( 　, 　 ), (1, 1) 은 ( 　, 　 ) 으로 옮겨진다.</p>
-</div></blockquote>
+<div class="box box-check docutils container">
+<p><strong>[관찰 3]</strong> (0, 1) 과 (1, 0) 은 이동한 뒤 같은 점 ( 　, 　 ) 으로 모인다. (0, 0) 은 ( 　, 　 ), (1, 1) 은 ( 　, 　 ) 으로 옮겨진다.</p>
+</div>
 </section>
 <section id="insight">
-<h2>💡 insight - 신경망(딥러닝)의 핵심 아이디어<a class="headerlink" href="#insight" title="Link to this heading">#</a></h2>
+<h2>insight - 신경망(딥러닝)의 핵심 아이디어<a class="headerlink" href="#insight" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>게이트 하나하나는 <strong>로지스틱 회귀</strong> (선형 회귀 + sigmoid) 입니다.</p></li>
 <li><p>앞 층의 <strong>출력</strong>을 다음 층의 <strong>입력</strong>으로 넣어 <strong>여러 층(multi-layer)</strong> 으로 쌓으면, 직선 하나로는 풀 수 없던 문제도 풀 수 있습니다.</p></li>
@@ -942,14 +856,14 @@
 <p>→ 이것이 바로 <strong>신경망(Neural Network)</strong> 이고, 층을 깊게(deep) 쌓은 것이 <strong>딥러닝(Deep Learning)</strong> 입니다!</p>
 </section>
 <section id="id10">
-<h2>✏️ 연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>[문제 1]</strong> XNOR 은 XOR 의 반대 (두 입력이 같을 때 1) 입니다. XNOR 의 진리표를 쓰고, 로지스틱 회귀 하나로 학습이 될지 예상하세요.
+<h2>연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<div class="box box-practice docutils container">
+<p><strong>[문제 1]</strong> XNOR 은 XOR 의 반대 (두 입력이 같을 때 1) 입니다. XNOR 의 진리표를 쓰고, 로지스틱 회귀 하나로 학습이 될지 예상하세요.
 진리표: (0,0)→( 　 ), (0,1)→( 　 ), (1,0)→( 　 ), (1,1)→( 　 ),  예상: ( 된다 / 안 된다 )</p>
-</div></blockquote>
-<blockquote>
-<div><p><strong>[문제 2]</strong> XOR = AND(NAND, OR) 이었습니다. 그렇다면 XNOR 은 어떤 게이트들의 조합으로 만들 수 있을까요? 아래 코드의 <code class="docutils literal notranslate"><span class="pre">______</span></code> 에 게이트 이름을 넣어 확인하세요. (힌트: XNOR = NOT XOR, 즉 마지막을 AND 대신 ( 　　 ) 로!)</p>
-</div></blockquote>
+</div>
+<div class="box box-practice docutils container">
+<p><strong>[문제 2]</strong> XOR = AND(NAND, OR) 이었습니다. 그렇다면 XNOR 은 어떤 게이트들의 조합으로 만들 수 있을까요? 아래 코드의 <code class="docutils literal notranslate"><span class="pre">______</span></code> 에 게이트 이름을 넣어 확인하세요. (힌트: XNOR = NOT XOR, 즉 마지막을 AND 대신 ( 　　 ) 로!)</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xdata</span><span class="p">:</span>
@@ -963,7 +877,7 @@
 </div>
 </section>
 <section id="id11">
-<h2>📌 정리<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<h2>정리<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
@@ -987,7 +901,7 @@
 </table>
 </div>
 <section id="id12">
-<h3>🏆 도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<h3>도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <p>이번에는 사람이 “NAND, OR, AND 를 쌓자” 고 <strong>설계</strong>해 주었습니다. 만약 층의 가중치를 모두 처음부터 <strong>스스로 학습</strong>하게 하면 어떻게 될까요?
 → 다음 시간: <strong>신경망과 딥러닝</strong>  (                                                                         )</p>
 </section>
@@ -1030,7 +944,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">이전</p>
-        <p class="prev-next-title">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</p>
+        <p class="prev-next-title">로지스틱 회귀 - 합격일까 불합격일까? (분류)</p>
       </div>
     </a>
     <a class="right-next"
@@ -1038,7 +952,7 @@
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">다음</p>
-        <p class="prev-next-title">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</p>
+        <p class="prev-next-title">신경망과 딥러닝 - 피드포워드로 XOR 풀기</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1060,23 +974,23 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">📖 개념 다지기 1. 논리게이트 = 학습 데이터</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logicgate">💻 실습 1. LogicGate 클래스 만들기</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">개념 다지기 1. 논리게이트 = 학습 데이터</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logicgate">실습 1. LogicGate 클래스 만들기</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-or-nand">AND, OR, NAND 학습시키기</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">이제 XOR 차례!</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">🎬 애니메이션 1. 네 게이트의 결정 경계가 학습되는 모습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🎬 애니메이션 2. 정말로 직선 하나로는 안 될까?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">📖 개념 다지기 2. 게이트를 쌓아서 XOR 만들기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">🎬 애니메이션 3. 1층이 ‘공간을 바꿔’ 준다</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insight">💡 insight - 신경망(딥러닝)의 핵심 아이디어</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">애니메이션 1. 네 게이트의 결정 경계가 학습되는 모습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">애니메이션 2. 정말로 직선 하나로는 안 될까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 2. 게이트를 쌓아서 XOR 만들기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 3. 1층이 ‘공간을 바꿔’ 준다</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insight">insight - 신경망(딥러닝)의 핵심 아이디어</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -1109,9 +1023,6 @@
   
   <div class="footer-item">
     
-<div class="extra_footer">
-  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
-</div>
   </div>
   
 </div>

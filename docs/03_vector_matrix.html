@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기 &#8212; 인공지능을 위한 수학</title>
+    <title>벡터와 행렬 - numpy 로 데이터 다루기 &#8212; 인공지능을 위한 수학</title>
   
   
   
@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -65,8 +67,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
     <link rel="search" title="검색" href="search.html" />
-    <link rel="next" title="📝 [제 4편] 머신러닝의 개념과 종류" href="04_ml_overview.html" />
-    <link rel="prev" title="📝 [제 2편] 수치미분 - 파이썬으로 미분하기" href="02_numerical_derivative.html" />
+    <link rel="next" title="머신러닝의 개념과 종류" href="04_ml_overview.html" />
+    <link rel="prev" title="수치미분 - 파이썬으로 미분하기" href="02_numerical_derivative.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ko"/>
   <meta name="docsearch:version" content="" />
@@ -100,8 +102,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -206,43 +208,35 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    📚 인공지능을 위한 수학
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">수학 도구</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅰ. 수학 도구</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">📝 [제 1편] 머신러닝을 위한 미분 기초</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_derivative.html">머신러닝을 위한 미분 기초</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_derivative.html">수치미분 - 파이썬으로 미분하기</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">벡터와 행렬 - numpy 로 데이터 다루기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">머신러닝 기초</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅱ. 머신러닝 기초</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">📝 [제 4편] 머신러닝의 개념과 종류</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">📝 [제 5편] 선형 회귀 (1) - 오차와 손실함수</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">📝 [제 6편] 선형 회귀 (2) - 경사하강법</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">📝 [제 7편] 선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_ml_overview.html">머신러닝의 개념과 종류</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_linear_regression_loss.html">선형 회귀 (1) - 오차와 손실함수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_gradient_descent.html">선형 회귀 (2) - 경사하강법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linear_regression_python.html">선형 회귀 (3) - 파이썬으로 직접 학습시키기</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">분류와 신경망</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅲ. 분류와 신경망</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">📝 [제 8편] 로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_xor.html">📝 [제 9편] XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">📝 [제 10편] 신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">📝 [제 11편] MNIST - 손글씨 숫자를 읽는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_logistic_regression.html">로지스틱 회귀 - 합격일까 불합격일까? (분류)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_xor.html">XOR 문제 - 직선 하나로는 나눌 수 없다</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_neural_network.html">신경망과 딥러닝 - 피드포워드로 XOR 풀기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_mnist.html">MNIST - 손글씨 숫자를 읽는 신경망</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">오차역전파</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅳ. 오차역전파</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">📝 [제 12편] 오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">📝 [제 13편] 오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_backprop_1.html">오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_backprop_2.html">오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">응용 : CNN · RNN</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ⅴ. 응용 : CNN 과 RNN</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">📝 [제 14편] CNN - 합성곱으로 사진의 특징 찾기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">📝 [제 15편] RNN - 순서를 기억하는 신경망</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_cnn.html">CNN - 합성곱으로 사진의 특징 찾기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_rnn.html">RNN - 순서를 기억하는 신경망</a></li>
 </ul>
 
     </div>
@@ -322,85 +316,6 @@
 
 
 
-<a href="https://github.com/chenyenhee/ai-math-colab" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="소스 저장소"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="이 페이지 다운로드">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/03_vector_matrix.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="소스 파일 다운로드"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="PDF로 인쇄"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
-  title="전체 화면으로보기"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
 <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
   <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
   <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
@@ -424,7 +339,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기</h1>
+    <h1>벡터와 행렬 - numpy 로 데이터 다루기</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -434,26 +349,26 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shape">📖 개념 다지기 1. 벡터와 행렬, 형상(shape)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape">📖 개념 다지기 2. 같은 자리끼리 하는 사칙연산과 형 변환(reshape)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-product">📖 개념 다지기 3. 행렬 곱 (dot product) ⭐ 가장 중요!</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shape">개념 다지기 1. 벡터와 행렬, 형상(shape)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape">개념 다지기 2. 같은 자리끼리 하는 사칙연산과 형 변환(reshape)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-product">개념 다지기 3. 행렬 곱 (dot product) ⭐ 가장 중요!</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">크기 조건</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">🎬 애니메이션 1. 행렬 곱이 계산되는 순서</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcast">📖 개념 다지기 4. 브로드캐스트 (broadcast)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose">📖 개념 다지기 5. 전치행렬 (transpose)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">📖 개념 다지기 6. 원하는 부분만 꺼내기 : 인덱싱과 슬라이싱</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">💻 실습. 시험 점수 데이터를 입력과 정답으로 나누기</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">애니메이션 1. 행렬 곱이 계산되는 순서</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcast">개념 다지기 4. 브로드캐스트 (broadcast)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose">개념 다지기 5. 전치행렬 (transpose)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">개념 다지기 6. 원하는 부분만 꺼내기 : 인덱싱과 슬라이싱</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">실습. 시험 점수 데이터를 입력과 정답으로 나누기</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">자주 쓰는 numpy 함수</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -467,15 +382,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="numpy">
-<h1>📝 [제 3편] 벡터와 행렬 - numpy 로 데이터 다루기<a class="headerlink" href="#numpy" title="Link to this heading">#</a></h1>
-<p><strong>학년/반/번호:</strong> 2학년 ( )반 ( )번  <strong>이름:</strong> (           )</p>
-<blockquote>
-<div><p>근거 자료: 박성호, 「Python numpy (I)·(II)·(III)」 (ML_LEC_06, 07, 08)</p>
-</div></blockquote>
+  <p class="unit-mark">제 3 편</p>
+<section id="numpy">
+<h1>벡터와 행렬 - numpy 로 데이터 다루기<a class="headerlink" href="#numpy" title="Link to this heading">#</a></h1>
+<div class="box box-note docutils container">
+<p>근거 자료: 박성호, 「Python numpy (I)·(II)·(III)」 (ML_LEC_06, 07, 08)</p>
+</div>
 <hr class="docutils" />
 <section id="id1">
-<h2>🎯 학습 목표<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>학습 목표<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>numpy 로 벡터와 행렬을 만들고 형상(shape)과 차원(ndim)을 확인할 수 있다.</p></li>
 <li><p>행렬 곱의 계산 원리와 크기 조건 (m × n)(n × k) = (m × k) 를 설명할 수 있다.</p></li>
@@ -484,23 +399,22 @@
 </section>
 <hr class="docutils" />
 <section id="id2">
-<h2>🧭 지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>제 2편에서 여러 변수를 <code class="docutils literal notranslate"><span class="pre">np.array([1.0,</span> <span class="pre">2.0])</span></code>, <code class="docutils literal notranslate"><span class="pre">np.array([[1.0,</span> <span class="pre">2.0],</span> <span class="pre">[3.0,</span> <span class="pre">4.0]])</span></code> 처럼 <strong>배열</strong>에 담아 수치미분했습니다.</p></li>
 <li><p>오늘은 이 배열, 즉 <strong>벡터와 행렬</strong>을 자세히 배웁니다.</p></li>
 </ul>
-<blockquote>
-<div><p><strong>왜 행렬일까?</strong> 🤔<br />
+<div class="box box-note docutils container">
+<p><strong>왜 행렬일까?</strong> 🤔<br />
 사진 한 장은 숫자(밝기)가 가로세로로 늘어선 <strong>행렬</strong>입니다. 28 × 28 손글씨 숫자 사진은 784 개의 숫자이고,<br />
 인공지능은 이 숫자들에 <strong>가중치 행렬</strong>을 곱해서 “이 숫자는 5” 라고 판단합니다.</p>
-</div></blockquote>
-<blockquote>
-<div><p>🚀 <strong>실습하려면</strong> : 이 페이지 맨 위의 <strong>로켓(🚀) 버튼 → Colab</strong> 을 누르세요. 코랩에서 코드를 실행하고 🎬 애니메이션을 볼 수 있습니다.
-코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
-</div></blockquote>
+</div>
+<div class="box box-note docutils container">
+<p><strong>실습은 코랩에서</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르면 이 학습지가 코랩으로 열립니다. 코드 실행, 애니메이션, 정답 확인은 코랩에서 합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
+</div>
 </section>
 <section id="id3">
-<h2>⚙️ 0단계. 준비하기<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>0단계. 준비하기<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -539,7 +453,7 @@
 </div>
 </section>
 <section id="shape">
-<h2>📖 개념 다지기 1. 벡터와 행렬, 형상(shape)<a class="headerlink" href="#shape" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 1. 벡터와 행렬, 형상(shape)<a class="headerlink" href="#shape" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>벡터</strong>: 숫자를 한 줄로 늘어놓은 것 → 1차원 배열.  예) A = (1, 2, 3)</p></li>
 <li><p><strong>행렬</strong>: 숫자를 가로(행)·세로(열)로 늘어놓은 것 → 2차원 배열.</p></li>
@@ -569,9 +483,9 @@
 </tbody>
 </table>
 </div>
-<blockquote>
-<div><p><strong>[연습 1]</strong> 행렬 B = ( 1　2 ) / ( 3　4 ) / ( 5　6 ) (3행 2열) 의 형상은 ( 　 × 　 ), 원소 개수는 ( 　 ) 개</p>
-</div></blockquote>
+<div class="box box-practice docutils container">
+<p><strong>[연습 1]</strong> 행렬 B = ( 1　2 ) / ( 3　4 ) / ( 5　6 ) (3행 2열) 의 형상은 ( 　 × 　 ), 원소 개수는 ( 　 ) 개</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>                       <span class="c1"># 벡터</span>
@@ -585,7 +499,7 @@
 </div>
 </section>
 <section id="reshape">
-<h2>📖 개념 다지기 2. 같은 자리끼리 하는 사칙연산과 형 변환(reshape)<a class="headerlink" href="#reshape" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 2. 같은 자리끼리 하는 사칙연산과 형 변환(reshape)<a class="headerlink" href="#reshape" title="Link to this heading">#</a></h2>
 <p>크기가 같은 두 벡터(행렬)의 +, −, ×, ÷ 는 <strong>같은 자리의 원소끼리</strong> 계산합니다.</p>
 <p>A = (1, 2, 3),　B = (4, 5, 6) 이면
 　A + B = (5, 7, 9),　A × B = ( 　, 　, 　 ),　B / A = (4, 2.5, 2)</p>
@@ -607,13 +521,13 @@
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[확인 1]</strong> <code class="docutils literal notranslate"><span class="pre">C.reshape(3,</span> <span class="pre">2)</span></code> 의 결과를 손으로 먼저 써 보고 비교하세요. 원소는 ( 행 / 열 ) 방향으로 차례대로 채워집니다.
+<div class="box box-check docutils container">
+<p><strong>[확인 1]</strong> <code class="docutils literal notranslate"><span class="pre">C.reshape(3,</span> <span class="pre">2)</span></code> 의 결과를 손으로 먼저 써 보고 비교하세요. 원소는 ( 행 / 열 ) 방향으로 차례대로 채워집니다.
 <strong>[생각해 보기]</strong> <code class="docutils literal notranslate"><span class="pre">C.reshape(4,</span> <span class="pre">2)</span></code> 는 왜 오류가 날까요? (                                       )</p>
-</div></blockquote>
+</div>
 </section>
 <section id="dot-product">
-<h2>📖 개념 다지기 3. 행렬 곱 (dot product) ⭐ 가장 중요!<a class="headerlink" href="#dot-product" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 3. 행렬 곱 (dot product) ⭐ 가장 중요!<a class="headerlink" href="#dot-product" title="Link to this heading">#</a></h2>
 <p>행렬 곱 A · B 의 (i 행, j 열) 원소 = <strong>A 의 i 번째 행</strong> 과 <strong>B 의 j 번째 열</strong> 에서 같은 순서의 원소끼리 곱해서 모두 더한 값</p>
 <p>A = ( 1　2　3 )　　B = ( −1　−2 )
 　　　( 4　5　6 )　　　　( −3　−4 )
@@ -631,7 +545,7 @@
 </section>
 </section>
 <section id="id5">
-<h2>🎬 애니메이션 1. 행렬 곱이 계산되는 순서<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2>애니메이션 1. 행렬 곱이 계산되는 순서<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>A 의 행(빨강)과 B 의 열(파랑)이 만나 결과 행렬 C 의 한 칸(초록)이 채워집니다. 실행 후 ▶ 를 누르세요.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -701,18 +615,18 @@
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[연습 2]</strong> 크기 조건만 보고 결과의 형상을 쓰세요. 곱할 수 없으면 × 표시.
+<div class="box box-practice docutils container">
+<p><strong>[연습 2]</strong> 크기 조건만 보고 결과의 형상을 쓰세요. 곱할 수 없으면 × 표시.
 ① (3 × 4) · (4 × 1) = ( 　　 ) 　 ② (2 × 2) · (3 × 2) = ( 　　 ) 　 ③ (1 × 784) · (784 × 100) = ( 　　 )</p>
-</div></blockquote>
-<blockquote>
-<div><p>💡 <strong>머신러닝과의 연결</strong>: ③ 은 손글씨 사진 한 장(784개 숫자)에 가중치 행렬(784 × 100)을 곱하는 계산입니다.
+</div>
+<div class="box box-note docutils container">
+<p><strong>머신러닝과의 연결</strong>: ③ 은 손글씨 사진 한 장(784개 숫자)에 가중치 행렬(784 × 100)을 곱하는 계산입니다.
 행렬 곱 덕분에 (64 × 64) · (64 × 256) · (256 × 512) · … 처럼 <strong>크기 조건만 맞으면 원하는 만큼 층을 이어 붙일 수 있습니다.</strong> 이것이 딥러닝의 ‘깊은 층’ 입니다.</p>
-</div></blockquote>
+</div>
 <p>⚠️ <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code> (같은 자리끼리 곱) 와 <code class="docutils literal notranslate"><span class="pre">np.dot(A,</span> <span class="pre">B)</span></code> (행렬 곱) 는 <strong>완전히 다릅니다!</strong></p>
 </section>
 <section id="broadcast">
-<h2>📖 개념 다지기 4. 브로드캐스트 (broadcast)<a class="headerlink" href="#broadcast" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 4. 브로드캐스트 (broadcast)<a class="headerlink" href="#broadcast" title="Link to this heading">#</a></h2>
 <p>수학에서는 크기가 다른 행렬끼리 더할 수 없지만, numpy 는 <strong>작은 쪽을 반복해서 크기를 맞춘 뒤</strong> 계산해 줍니다.</p>
 <p>A = ( 1　2 ) / ( 3　4 ),　b = 5 일 때　A + b = ( 1　2 ) / ( 3　4 ) + ( 5　5 ) / ( 5　5 ) = ( 6　7 ) / ( 8　9 )</p>
 <p>C = ( 1　2 ) / ( 3　4 ),　D = ( 4　5 ) 일 때　C + D = ( 1　2 ) / ( 3　4 ) + ( 4　5 ) / ( 4　5 ) = ( 　　 ) / ( 　　 )</p>
@@ -764,13 +678,13 @@
 </div>
 </section>
 <section id="transpose">
-<h2>📖 개념 다지기 5. 전치행렬 (transpose)<a class="headerlink" href="#transpose" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 5. 전치행렬 (transpose)<a class="headerlink" href="#transpose" title="Link to this heading">#</a></h2>
 <p>행렬 A 의 <strong>행과 열을 바꾼</strong> 행렬을 전치행렬이라 하고 A<sup>T</sup> 로 씁니다. (1행 → 1열, 2행 → 2열, …)</p>
 <p>A = ( 1　2 ) / ( 3　4 ) / ( 5　6 )  (3 × 2)　→　A<sup>T</sup> = ( 1　3　5 ) / ( 2　4　6 )  ( 　 × 　 )</p>
-<blockquote>
-<div><p>💡 행렬 곱의 크기가 안 맞을 때 전치행렬로 맞춰 줍니다.
+<div class="box box-note docutils container">
+<p>행렬 곱의 크기가 안 맞을 때 전치행렬로 맞춰 줍니다.
 예) A 가 (3 × 2) 이면 A · A 는 곱할 수 없지만 A<sup>T</sup> · A 는 (2 × 3) · (3 × 2) = ( 　 × 　 ) 로 계산 가능!</p>
-</div></blockquote>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
@@ -783,7 +697,7 @@
 </div>
 </section>
 <section id="id6">
-<h2>📖 개념 다지기 6. 원하는 부분만 꺼내기 : 인덱싱과 슬라이싱<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2>개념 다지기 6. 원하는 부분만 꺼내기 : 인덱싱과 슬라이싱<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>A = ( 10　20 ) / ( 30　40 ) / ( 50　60 )  (3 × 2)</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -816,9 +730,9 @@
 </tbody>
 </table>
 </div>
-<blockquote>
-<div><p>💡 <strong>머신러닝에서</strong>: 데이터 표에서 앞쪽 열은 입력 x, 마지막 열은 정답 t 로 나눌 때 <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">0:-1]</span></code>, <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">[-1]]</span></code> 을 씁니다.</p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p><strong>머신러닝에서</strong>: 데이터 표에서 앞쪽 열은 입력 x, 마지막 열은 정답 t 로 나눌 때 <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">0:-1]</span></code>, <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">[-1]]</span></code> 을 씁니다.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -834,7 +748,7 @@
 </div>
 </section>
 <section id="id7">
-<h2>💻 실습. 시험 점수 데이터를 입력과 정답으로 나누기<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2>실습. 시험 점수 데이터를 입력과 정답으로 나누기<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>아래 표는 학생 5명의 1차, 2차, 3차 시험 점수(입력)와 최종 점수(정답) 입니다. (원본 강의의 data-01.csv 일부)</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -890,10 +804,10 @@
 </div>
 </div>
 </div>
-<blockquote>
-<div><p><strong>[확인 2]</strong> <code class="docutils literal notranslate"><span class="pre">x_data</span></code> 의 형상은 ( 　 × 　 ), <code class="docutils literal notranslate"><span class="pre">t_data</span></code> 의 형상은 ( 　 × 　 ) 이다.
+<div class="box box-check docutils container">
+<p><strong>[확인 2]</strong> <code class="docutils literal notranslate"><span class="pre">x_data</span></code> 의 형상은 ( 　 × 　 ), <code class="docutils literal notranslate"><span class="pre">t_data</span></code> 의 형상은 ( 　 × 　 ) 이다.
 가중치 W 를 곱해 x_data · W 의 형상이 t_data 와 같은 (5 × 1) 이 되려면, W 의 형상은 ( 　 × 　 ) 이어야 한다.</p>
-</div></blockquote>
+</div>
 <section id="id8">
 <h3>자주 쓰는 numpy 함수<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -912,20 +826,20 @@
 </div>
 </div>
 </div>
-<blockquote>
-<div><p>💡 <code class="docutils literal notranslate"><span class="pre">argmax</span></code> 는 손글씨 인식에서 “10개의 출력 중 <strong>가장 큰 값의 위치</strong> = 인공지능이 고른 숫자” 를 찾을 때 씁니다.</p>
-</div></blockquote>
+<div class="box box-note docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">argmax</span></code> 는 손글씨 인식에서 “10개의 출력 중 <strong>가장 큰 값의 위치</strong> = 인공지능이 고른 숫자” 를 찾을 때 씁니다.</p>
+</div>
 </section>
 </section>
 <section id="id9">
-<h2>✏️ 연습 문제<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>[문제 1]</strong> P = ( 1　0 ) / ( 2　1 ),  Q = ( 3　1 ) / ( 1　2 ) 일 때 P · Q 를 손으로 구하세요.
+<h2>연습 문제<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<div class="box box-practice docutils container">
+<p><strong>[문제 1]</strong> P = ( 1　0 ) / ( 2　1 ),  Q = ( 3　1 ) / ( 1　2 ) 일 때 P · Q 를 손으로 구하세요.
 P · Q = ( 　　 　　 ) / ( 　　 　　 )</p>
-</div></blockquote>
-<blockquote>
-<div><p><strong>[문제 2]</strong> 1부터 12까지의 수로 3 × 4 행렬 M 을 만들고, ① M 의 형상, ② M<sup>T</sup> 의 형상, ③ M 의 2행 전체, ④ M<sup>T</sup> · M 의 형상을 구하세요.</p>
-</div></blockquote>
+</div>
+<div class="box box-practice docutils container">
+<p><strong>[문제 2]</strong> 1부터 12까지의 수로 3 × 4 행렬 M 을 만들고, ① M 의 형상, ② M<sup>T</sup> 의 형상, ③ M 의 2행 전체, ④ M<sup>T</sup> · M 의 형상을 구하세요.</p>
+</div>
 <p>아래 셀의 <code class="docutils literal notranslate"><span class="pre">______</span></code> 를 채워 실행하세요.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -946,7 +860,7 @@ P · Q = ( 　　 　　 ) / ( 　　 　　 )</p>
 </div>
 </section>
 <section id="id10">
-<h2>📌 정리<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<h2>정리<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
@@ -973,7 +887,7 @@ P · Q = ( 　　 　　 ) / ( 　　 　　 )</p>
 </table>
 </div>
 <section id="id11">
-<h3>🏆 도전 과제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<h3>도전 과제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>입력 데이터 X 의 형상이 (25 × 3) 이고 정답 T 의 형상이 (25 × 1) 일 때,
 y = X · W + b 가 T 와 같은 형상이 되도록 하는 가중치 W 의 형상은 ( 　 × 　 ) 입니다.
 → 다음 시간(제 5편 선형회귀)에는 이 W 와 b 를 <strong>인공지능이 스스로 찾는 방법</strong> 을 배웁니다!</p>
@@ -1017,7 +931,7 @@ y = X · W + b 가 T 와 같은 형상이 되도록 하는 가중치 W 의 형�
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">이전</p>
-        <p class="prev-next-title">📝 [제 2편] 수치미분 - 파이썬으로 미분하기</p>
+        <p class="prev-next-title">수치미분 - 파이썬으로 미분하기</p>
       </div>
     </a>
     <a class="right-next"
@@ -1025,7 +939,7 @@ y = X · W + b 가 T 와 같은 형상이 되도록 하는 가중치 W 의 형�
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">다음</p>
-        <p class="prev-next-title">📝 [제 4편] 머신러닝의 개념과 종류</p>
+        <p class="prev-next-title">머신러닝의 개념과 종류</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1047,26 +961,26 @@ y = X · W + b 가 T 와 같은 형상이 되도록 하는 가중치 W 의 형�
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🎯 학습 목표</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🧭 지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">⚙️ 0단계. 준비하기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shape">📖 개념 다지기 1. 벡터와 행렬, 형상(shape)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape">📖 개념 다지기 2. 같은 자리끼리 하는 사칙연산과 형 변환(reshape)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-product">📖 개념 다지기 3. 행렬 곱 (dot product) ⭐ 가장 중요!</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">학습 목표</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">지난 시간 복습</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shape">개념 다지기 1. 벡터와 행렬, 형상(shape)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape">개념 다지기 2. 같은 자리끼리 하는 사칙연산과 형 변환(reshape)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-product">개념 다지기 3. 행렬 곱 (dot product) ⭐ 가장 중요!</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">크기 조건</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">🎬 애니메이션 1. 행렬 곱이 계산되는 순서</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcast">📖 개념 다지기 4. 브로드캐스트 (broadcast)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose">📖 개념 다지기 5. 전치행렬 (transpose)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">📖 개념 다지기 6. 원하는 부분만 꺼내기 : 인덱싱과 슬라이싱</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">💻 실습. 시험 점수 데이터를 입력과 정답으로 나누기</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">애니메이션 1. 행렬 곱이 계산되는 순서</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcast">개념 다지기 4. 브로드캐스트 (broadcast)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose">개념 다지기 5. 전치행렬 (transpose)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">개념 다지기 6. 원하는 부분만 꺼내기 : 인덱싱과 슬라이싱</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">실습. 시험 점수 데이터를 입력과 정답으로 나누기</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">자주 쓰는 numpy 함수</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">✏️ 연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">📌 정리</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">🏆 도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -1099,9 +1013,6 @@ y = X · W + b 가 T 와 같은 형상이 되도록 하는 가중치 W 의 형�
   
   <div class="footer-item">
     
-<div class="extra_footer">
-  실습은 각 페이지의 🚀 → Colab 버튼으로 하세요.
-</div>
   </div>
   
 </div>
