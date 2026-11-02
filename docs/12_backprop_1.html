@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '12_backprop_1';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -360,7 +362,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">4개의 가중치를 행렬로 모으면</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w11-3">애니메이션 2. w₁₁⁽³⁾ 의 미분이 거꾸로 전달되는 길</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-11-3">애니메이션 2. <span class="math notranslate nohighlight">\(w_{11}^{(3)}\)</span> 의 미분이 거꾸로 전달되는 길</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">실습. 출력층만 오차역전파로 학습시켜 보기</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">연습 문제</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -379,7 +381,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 12 편</p>
-<section id="id1">
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「오차역전파 (I) 개념 • 동작원리 • 시그모이드 함수 미분」, 「오차역전파 (II) 출력층 오차역전파 공식」 (ML_LEC_23, 24)</p>
@@ -389,7 +391,7 @@
 <h2>학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>수치미분의 문제점과 오차역전파의 아이디어(연쇄법칙으로 국소 미분 분리)를 설명할 수 있다.</p></li>
-<li><p>sigmoid 함수의 도함수 sigmoid(z) × (1 − sigmoid(z)) 를 유도할 수 있다.</p></li>
+<li><p>sigmoid 함수의 도함수 <span class="math notranslate nohighlight">\(\mathrm{sigmoid}(z) \times (1 - \mathrm{sigmoid}(z))\)</span> 를 유도할 수 있다.</p></li>
 <li><p>출력층 가중치와 바이어스의 오차역전파 공식을 유도하고, 수치미분 결과와 같음을 확인할 수 있다.</p></li>
 </ol>
 </section>
@@ -398,30 +400,30 @@
 <h2>지난 시간 복습<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>제 11편: 784 - 100 - 10 신경망을 수치미분으로 학습시키면 사진 1장에 몇 초, 30,000장이면 <strong>수십 시간</strong> 이 걸렸습니다.</p></li>
-<li><p>제 1편: 합성함수의 미분 = <strong>연쇄법칙(chain rule)</strong>,  df/dx = (df/dt) × (dt/dx)</p></li>
+<li><p>제 1편: 합성함수의 미분 = <strong>연쇄법칙(chain rule)</strong>,  <span class="math notranslate nohighlight">\(\displaystyle \frac{df}{dx} = \frac{df}{dt} \times \frac{dt}{dx}\)</span></p></li>
 </ul>
 </section>
 <section id="id4">
 <h2>핵심 정리<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p><strong>① 뉴런 하나의 연쇄법칙</strong></p>
-<p>z = wx + b,　a = sigmoid(z),　E = ½(t − a)² 이면</p>
+<p><span class="math notranslate nohighlight">\(z = wx + b\)</span>,　<span class="math notranslate nohighlight">\(a = \mathrm{sigmoid}(z)\)</span>,　<span class="math notranslate nohighlight">\(\displaystyle E = \frac{1}{2}(t - a)^{2}\)</span> 이면</p>
 <div class="box box-formula docutils container">
-<p>∂E/∂w = (∂E/∂a) × (∂a/∂z) × (∂z/∂w) = (a − t) × a(1 − a) × x</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w} = \frac{\partial E}{\partial a} \times \frac{\partial a}{\partial z} \times \frac{\partial z}{\partial w} = (a - t) \times a(1 - a) \times x\)</span></p>
 </div>
-<p>예) x = 1, w = 0.5, b = 0, t = 1 : z = 0.5, a ≒ 0.6225 → ∂E/∂w ≒ (−0.3775) × 0.2350 × 1 ≒ −0.0887 (수치미분과 같다) (아래 애니메이션 1)</p>
+<p>예) <span class="math notranslate nohighlight">\(x = 1, w = 0.5, b = 0, t = 1\)</span> : <span class="math notranslate nohighlight">\(z = 0.5, a \fallingdotseq 0.6225\)</span> → <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w} \fallingdotseq (-0.3775) \times 0.2350 \times 1 \fallingdotseq -0.0887\)</span> (수치미분과 같다) (아래 애니메이션 1)</p>
 <p><strong>② sigmoid 의 도함수</strong></p>
-<p>sigmoid(z) = (1 + e<sup>−z</sup>)<sup>−1</sup> 을 연쇄법칙으로 미분하면</p>
-<p>sigmoid′(z) = e<sup>−z</sup> / (1 + e<sup>−z</sup>)² = {1 / (1 + e<sup>−z</sup>)} × {e<sup>−z</sup> / (1 + e<sup>−z</sup>)} = sigmoid(z) × {1 − sigmoid(z)}</p>
+<p><span class="math notranslate nohighlight">\(\mathrm{sigmoid}(z) = (1 + e^{-z})^{-1}\)</span> 을 연쇄법칙으로 미분하면</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \mathrm{sigmoid}'(z) = \frac{e^{-z}}{(1 + e^{-z})^{2}} = \frac{1}{1 + e^{-z}} \times \frac{e^{-z}}{1 + e^{-z}} = \mathrm{sigmoid}(z) \times \{1 - \mathrm{sigmoid}(z)\}\)</span></p>
 <div class="box box-formula docutils container">
-<p>sigmoid′(z) = a(1 − a)　(최댓값 sigmoid′(0) = 1/4)</p>
+<p><span class="math notranslate nohighlight">\(\mathrm{sigmoid}'(z) = a(1 - a)\)</span>　(최댓값 <span class="math notranslate nohighlight">\(\displaystyle \mathrm{sigmoid}'(0) = \frac{1}{4}\)</span>)</p>
 </div>
 <p><strong>③ 출력층 공식</strong></p>
-<p>출력 노드 1 의 가중치 w<sub>11</sub><sup>(3)</sup> 은 E₁ 에만 영향을 주므로</p>
-<p>∂E/∂w<sub>11</sub><sup>(3)</sup> = (a<sub>1</sub><sup>(3)</sup> − t₁) × a<sub>1</sub><sup>(3)</sup>(1 − a<sub>1</sub><sup>(3)</sup>) × a<sub>1</sub><sup>(2)</sup>　(아래 애니메이션 2)</p>
+<p>출력 노드 1 의 가중치 <span class="math notranslate nohighlight">\(w_{11}^{(3)}\)</span> 은 <span class="math notranslate nohighlight">\(E_{1}\)</span> 에만 영향을 주므로</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w_{11}^{(3)}} = (a_{1}^{(3)} - t_{1}) \times a_{1}^{(3)}(1 - a_{1}^{(3)}) \times a_{1}^{(2)}\)</span>　(아래 애니메이션 2)</p>
 <p>앞의 두 곱을 출력층 손실이라 하고 행렬로 모으면</p>
 <div class="box box-formula docutils container">
-<p>loss₃ = (A₃ − T) × A₃ × (1 − A₃)　(같은 자리끼리 곱)<br />
-∂E/∂W<sup>(3)</sup> = A₂<sup>T</sup> · loss₃,　∂E/∂b<sup>(3)</sup> = loss₃</p>
+<p><span class="math notranslate nohighlight">\(\mathrm{loss}_{3} = (A_{3} - T) \times A_{3} \times (1 - A_{3})\)</span>　(같은 자리끼리 곱)<br />
+<span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial W^{(3)}} = A_{2}^{T} \cdot \mathrm{loss}_{3}\)</span>,　<span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial b^{(3)}} = \mathrm{loss}_{3}\)</span></p>
 </div>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
@@ -429,13 +431,13 @@
 </section>
 <section id="id5">
 <h2>개념 다지기 1. 오차역전파의 아이디어<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
-<p>가중치 W<sup>(2)</sup> 가 변하면 최종 오차 E 가 얼마나 변하는지(∂E/∂W<sup>(2)</sup>) 알아야 경사하강법을 할 수 있습니다.</p>
+<p>가중치 <span class="math notranslate nohighlight">\(W^{(2)}\)</span> 가 변하면 최종 오차 <span class="math notranslate nohighlight">\(E\)</span> 가 얼마나 변하는지<span class="math notranslate nohighlight">\(\displaystyle \left(\frac{\partial E}{\partial W^{(2)}}\right)\)</span> 알아야 경사하강법을 할 수 있습니다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span> 입력 → [W(2)] → A(2) → [W(3)] → A(3) → 오차 E
 </pre></div>
 </div>
-<p>W<sup>(2)</sup> 는 E 에 <strong>직접</strong> 영향을 주지 않고, A<sup>(2)</sup> → A<sup>(3)</sup> → E 를 <strong>거쳐서</strong> 영향을 줍니다. 연쇄법칙으로 쪼개면</p>
+<p><span class="math notranslate nohighlight">\(W^{(2)}\)</span> 는 <span class="math notranslate nohighlight">\(E\)</span> 에 <strong>직접</strong> 영향을 주지 않고, <span class="math notranslate nohighlight">\(A^{(2)}\)</span> → <span class="math notranslate nohighlight">\(A^{(3)}\)</span> → <span class="math notranslate nohighlight">\(E\)</span> 를 <strong>거쳐서</strong> 영향을 줍니다. 연쇄법칙으로 쪼개면</p>
 <div class="box box-note docutils container">
-<p>∂E/∂W<sup>(2)</sup> = ( ∂E/∂A<sup>(3)</sup> ) × ( ∂A<sup>(3)</sup>/∂A<sup>(2)</sup> ) × ( ∂A<sup>(2)</sup>/∂W<sup>(2)</sup> )
+<p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial W^{(2)}} = \left( \frac{\partial E}{\partial A^{(3)}} \right) \times \left( \frac{\partial A^{(3)}}{\partial A^{(2)}} \right) \times \left( \frac{\partial A^{(2)}}{\partial W^{(2)}} \right)\)</span>
 　　　　　　　 ①　　　　　　 ②　　　　　　 ③</p>
 </div>
 <ul class="simple">
@@ -446,44 +448,44 @@
 </section>
 <section id="id6">
 <h2>개념 다지기 2. 가장 작은 예 - 뉴런 1개<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
-<p>입력 x 하나, 가중치 w, 바이어스 b, 정답 t 인 뉴런 1개를 생각합니다. 손실함수는 계산을 깔끔하게 하려고 <strong>E = ½ (t − a)²</strong> 을 씁니다.</p>
+<p>입력 <span class="math notranslate nohighlight">\(x\)</span> 하나, 가중치 <span class="math notranslate nohighlight">\(w\)</span>, 바이어스 <span class="math notranslate nohighlight">\(b\)</span>, 정답 <span class="math notranslate nohighlight">\(t\)</span> 인 뉴런 1개를 생각합니다. 손실함수는 계산을 깔끔하게 하려고 <strong><span class="math notranslate nohighlight">\(\displaystyle E = \frac{1}{2} (t - a)^{2}\)</span></strong> 을 씁니다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  w ──┐
   x ──┼─→ z = wx + b ─→ a = sigmoid(z) ─→ E = ½(t − a)²
   b ──┘
 </pre></div>
 </div>
-<p>연쇄법칙:  <strong>∂E/∂w = (∂E/∂a) × (∂a/∂z) × (∂z/∂w)</strong></p>
+<p>연쇄법칙:  <strong><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w} = \frac{\partial E}{\partial a} \times \frac{\partial a}{\partial z} \times \frac{\partial z}{\partial w}\)</span></strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>국소 미분</p></th>
 <th class="head text-center"><p>공식</p></th>
-<th class="head text-center"><p>x = 1, w = 0.5, b = 0, t = 1 일 때</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(x = 1, w = 0.5, b = 0, t = 1\)</span> 일 때</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p>∂E/∂a</p></td>
-<td class="text-center"><p>−(t − a) = a − t</p></td>
-<td class="text-center"><p>0.6225 − 1 = ( 　　　 )</p></td>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial a}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-(t - a) = a - t\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.6225 - 1 =\)</span> ( 　　　 )</p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p>∂a/∂z</p></td>
-<td class="text-center"><p>a(1 − a)  ← 아래 개념 3</p></td>
-<td class="text-center"><p>0.6225 × 0.3775 = ( 　　　 )</p></td>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial a}{\partial z}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(a(1 - a) \leftarrow\)</span> 아래 개념 3</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.6225 \times 0.3775 =\)</span> ( 　　　 )</p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p>∂z/∂w</p></td>
-<td class="text-center"><p>x</p></td>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial z}{\partial w}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(x\)</span></p></td>
 <td class="text-center"><p>( 　 )</p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>∂E/∂w</strong></p></td>
-<td class="text-center"><p><strong>(a − t) × a(1 − a) × x</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w}\)</span></strong></p></td>
+<td class="text-center"><p><strong><span class="math notranslate nohighlight">\((a - t) \times a(1 - a) \times x\)</span></strong></p></td>
 <td class="text-center"><p>( 　　　 )</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>(z = 0.5 × 1 + 0 = 0.5,  a = sigmoid(0.5) ≒ 0.6225)</p>
+<p><span class="math notranslate nohighlight">\((z = 0.5 \times 1 + 0 = 0.5, a = \mathrm{sigmoid}(0.5) \fallingdotseq 0.6225)\)</span></p>
 <div class="box box-check docutils container">
 <p><strong>[확인 1]</strong> 오차역전파 결과와 수치미분 결과가 ( 같다 / 다르다 ).
-∂E/∂w 가 음수이므로 경사하강법 w ← w − α × ∂E/∂w 에서 w 는 ( 커진다 / 작아진다 ). 그러면 a 는 정답 1 에 ( 가까워진다 / 멀어진다 ).</p>
+<span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w}\)</span> 가 음수이므로 경사하강법 <span class="math notranslate nohighlight">\(\displaystyle w \leftarrow w - \alpha \times \frac{\partial E}{\partial w}\)</span> 에서 <span class="math notranslate nohighlight">\(w\)</span> 는 ( 커진다 / 작아진다 ). 그러면 <span class="math notranslate nohighlight">\(a\)</span> 는 정답 1 에 ( 가까워진다 / 멀어진다 ).</p>
 </div>
 </section>
 <section id="id7">
@@ -496,15 +498,15 @@
 </section>
 <section id="sigmoid">
 <h2>개념 다지기 3. sigmoid 함수의 미분 ⭐<a class="headerlink" href="#sigmoid" title="Link to this heading">#</a></h2>
-<p>sigmoid(z) = 1 / (1 + e<sup>−z</sup>) = (1 + e<sup>−z</sup>)<sup>−1</sup></p>
-<p>① 연쇄법칙:  d/dz (1 + e<sup>−z</sup>)<sup>−1</sup> = −(1 + e<sup>−z</sup>)<sup>−2</sup> × ( 　　　 ) = e<sup>−z</sup> / (1 + e<sup>−z</sup>)²</p>
-<p>② 분모 분리:　= {1 / (1 + e<sup>−z</sup>)} × {e<sup>−z</sup> / (1 + e<sup>−z</sup>)}</p>
-<p>③ 분자에 +1 − 1:　e<sup>−z</sup> / (1 + e<sup>−z</sup>) = {(1 + e<sup>−z</sup>) − 1} / (1 + e<sup>−z</sup>) = 1 − ( 　　　　　 )</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \mathrm{sigmoid}(z) = \frac{1}{1 + e^{-z}} = (1 + e^{-z})^{-1}\)</span></p>
+<p>① 연쇄법칙:  <span class="math notranslate nohighlight">\(\displaystyle \frac{d}{dz} (1 + e^{-z})^{-1} = -(1 + e^{-z})^{-2} \times\)</span> ( 　　　 ) <span class="math notranslate nohighlight">\(\displaystyle = \frac{e^{-z}}{(1 + e^{-z})^{2}}\)</span></p>
+<p>② 분모 분리:　<span class="math notranslate nohighlight">\(\displaystyle = \frac{1}{1 + e^{-z}} \times \frac{e^{-z}}{1 + e^{-z}}\)</span></p>
+<p>③ 분자에 <span class="math notranslate nohighlight">\(+1 - 1\)</span>:　<span class="math notranslate nohighlight">\(\displaystyle \frac{e^{-z}}{1 + e^{-z}} = \frac{(1 + e^{-z}) - 1}{1 + e^{-z}} = 1 -\)</span> ( 　　　　　 )</p>
 <p>④ 정리하면</p>
 <div class="box box-note docutils container">
-<p><strong>sigmoid′(z) = sigmoid(z) × (1 − sigmoid(z))</strong></p>
+<p><strong><span class="math notranslate nohighlight">\(\mathrm{sigmoid}'(z) = \mathrm{sigmoid}(z) \times (1 - \mathrm{sigmoid}(z))\)</span></strong></p>
 </div>
-<p>💡 이미 순전파에서 계산한 a = sigmoid(z) 를 그대로 써서 <strong>a(1 − a)</strong> 로 미분값을 얻습니다. 새로 계산할 것이 거의 없어서 빠릅니다!</p>
+<p>💡 이미 순전파에서 계산한 <span class="math notranslate nohighlight">\(a = \mathrm{sigmoid}(z)\)</span> 를 그대로 써서 <strong><span class="math notranslate nohighlight">\(a(1 - a)\)</span></strong> 로 미분값을 얻습니다. 새로 계산할 것이 거의 없어서 빠릅니다!</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="_images/86f9c08cbda2cb3a0772637c8f5c664e3b7b478ac68963ccc13c6389721903c7.png" src="_images/86f9c08cbda2cb3a0772637c8f5c664e3b7b478ac68963ccc13c6389721903c7.png" />
@@ -514,23 +516,23 @@
 </div>
 </div>
 <div class="box box-check docutils container">
-<p><strong>[확인 2]</strong> sigmoid 도함수의 최댓값은 z = ( 　 ) 일 때 ( 　　 ) 이다.
-💡 미분값이 최대 0.25 라서, 층을 여러 번 거꾸로 곱하면 값이 점점 작아집니다 (0.25 × 0.25 × …). 이것이 깊은 신경망에서 sigmoid 대신 ReLU 를 쓰는 이유 중 하나입니다.</p>
+<p><strong>[확인 2]</strong> sigmoid 도함수의 최댓값은 <span class="math notranslate nohighlight">\(z =\)</span> ( 　 ) 일 때 ( 　　 ) 이다.
+💡 미분값이 최대 0.25 라서, 층을 여러 번 거꾸로 곱하면 값이 점점 작아집니다 <span class="math notranslate nohighlight">\((0.25 \times 0.25 \times \cdots )\)</span>. 이것이 깊은 신경망에서 sigmoid 대신 ReLU 를 쓰는 이유 중 하나입니다.</p>
 </div>
 </section>
 <section id="id8">
 <h2>개념 다지기 4. 출력층 가중치의 오차역전파 공식<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>입력 2개 - 은닉 2개 - 출력 2개 신경망 (원본 강의와 같은 구조)</p>
 <ul class="simple">
-<li><p>손실:  E = E₁ + E₂,　E₁ = ½ (t₁ − a<sub>1</sub><sup>(3)</sup>)²,　E₂ = ½ (t₂ − a<sub>2</sub><sup>(3)</sup>)²</p></li>
-<li><p>출력층:  z<sub>1</sub><sup>(3)</sup> = a<sub>1</sub><sup>(2)</sup> w<sub>11</sub><sup>(3)</sup> + a<sub>2</sub><sup>(2)</sup> w<sub>12</sub><sup>(3)</sup> + b<sub>1</sub><sup>(3)</sup>,　a<sub>1</sub><sup>(3)</sup> = sigmoid(z<sub>1</sub><sup>(3)</sup>)</p></li>
+<li><p>손실:  <span class="math notranslate nohighlight">\(E = E_{1} + E_{2}\)</span>,　<span class="math notranslate nohighlight">\(\displaystyle E_{1} = \frac{1}{2} (t_{1} - a_{1}^{(3)})^{2}\)</span>,　<span class="math notranslate nohighlight">\(\displaystyle E_{2} = \frac{1}{2} (t_{2} - a_{2}^{(3)})^{2}\)</span></p></li>
+<li><p>출력층:  <span class="math notranslate nohighlight">\(z_{1}^{(3)} = a_{1}^{(2)} w_{11}^{(3)} + a_{2}^{(2)} w_{12}^{(3)} + b_{1}^{(3)}\)</span>,　<span class="math notranslate nohighlight">\(a_{1}^{(3)} = \mathrm{sigmoid}(z_{1}^{(3)})\)</span></p></li>
 </ul>
-<p>w<sub>11</sub><sup>(3)</sup> 는 E₂ 에는 영향을 주지 않으므로 ∂E₂/∂w<sub>11</sub><sup>(3)</sup> = 0</p>
+<p><span class="math notranslate nohighlight">\(w_{11}^{(3)}\)</span> 는 <span class="math notranslate nohighlight">\(E_{2}\)</span> 에는 영향을 주지 않으므로 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E_{2}}{\partial w_{11}^{(3)}} = 0\)</span></p>
 <div class="box box-note docutils container">
-<p>∂E/∂w<sub>11</sub><sup>(3)</sup> = ∂E₁/∂a<sub>1</sub><sup>(3)</sup> × ∂a<sub>1</sub><sup>(3)</sup>/∂z<sub>1</sub><sup>(3)</sup> × ∂z<sub>1</sub><sup>(3)</sup>/∂w<sub>11</sub><sup>(3)</sup>
-　　　　　 = (a<sub>1</sub><sup>(3)</sup> − t₁) × a<sub>1</sub><sup>(3)</sup>(1 − a<sub>1</sub><sup>(3)</sup>) × ( 　　　 )</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w_{11}^{(3)}} = \frac{\partial E_{1}}{\partial a_{1}^{(3)}} \times \frac{\partial a_{1}^{(3)}}{\partial z_{1}^{(3)}} \times \frac{\partial z_{1}^{(3)}}{\partial w_{11}^{(3)}}\)</span>
+　　　　　 <span class="math notranslate nohighlight">\(= (a_{1}^{(3)} - t_{1}) \times a_{1}^{(3)}(1 - a_{1}^{(3)}) \times\)</span> ( 　　　 )</p>
 </div>
-<p>앞의 두 부분 (a<sub>1</sub><sup>(3)</sup> − t₁) × a<sub>1</sub><sup>(3)</sup>(1 − a<sub>1</sub><sup>(3)</sup>) 을 <strong>출력층 손실 (loss_3)</strong> 이라고 부릅니다.</p>
+<p>앞의 두 부분 <span class="math notranslate nohighlight">\((a_{1}^{(3)} - t_{1}) \times a_{1}^{(3)}(1 - a_{1}^{(3)})\)</span> 을 <strong>출력층 손실 (loss_3)</strong> 이라고 부릅니다.</p>
 <section id="id9">
 <h3>4개의 가중치를 행렬로 모으면<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <div class="box box-note docutils container">
@@ -538,18 +540,18 @@
 <strong>∂E/∂W<sup>(3)</sup> = A2<sup>T</sup> · loss_3</strong>　　　(은닉층 출력의 전치 · 출력층 손실)
 <strong>∂E/∂b<sup>(3)</sup> = loss_3</strong></p>
 </div>
-<p>(2 × 1) · (1 × 2) = (2 × 2) → W<sup>(3)</sup> 와 같은 형상!</p>
+<p><span class="math notranslate nohighlight">\((2 \times 1) \cdot (1 \times 2) = (2 \times 2)\)</span> → <span class="math notranslate nohighlight">\(W^{(3)}\)</span> 와 같은 형상!</p>
 <div class="box box-practice docutils container">
-<p><strong>[연습 1]</strong> ∂E/∂w<sub>21</sub><sup>(3)</sup> 은 출력 노드 ( 　 ) 의 손실에 은닉 노드 ( 　 ) 의 출력을 곱한 값이다.</p>
+<p><strong>[연습 1]</strong> <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w_{21}^{(3)}}\)</span> 은 출력 노드 ( 　 ) 의 손실에 은닉 노드 ( 　 ) 의 출력을 곱한 값이다.</p>
 </div>
 <div class="box box-check docutils container">
 <p><strong>[확인 3]</strong> 두 방법의 결과가 소수점 아래 ( 　 ) 자리까지 같다.</p>
 </div>
 </section>
 </section>
-<section id="w11-3">
-<h2>애니메이션 2. w₁₁⁽³⁾ 의 미분이 거꾸로 전달되는 길<a class="headerlink" href="#w11-3" title="Link to this heading">#</a></h2>
-<p>2 - 2 - 2 신경망 그림에서 E₁ → a₁⁽³⁾ → z₁⁽³⁾ → w₁₁⁽³⁾ 로 국소 미분이 차례로 곱해지는 모습입니다.</p>
+<section id="w-11-3">
+<h2>애니메이션 2. <span class="math notranslate nohighlight">\(w_{11}^{(3)}\)</span> 의 미분이 거꾸로 전달되는 길<a class="headerlink" href="#w-11-3" title="Link to this heading">#</a></h2>
+<p>2 - 2 - 2 신경망 그림에서 <span class="math notranslate nohighlight">\(E_{1}\)</span> → <span class="math notranslate nohighlight">\(a_{1}^{(3)}\)</span> → <span class="math notranslate nohighlight">\(z_{1}^{(3)}\)</span> → <span class="math notranslate nohighlight">\(w_{11}^{(3)}\)</span> 로 국소 미분이 차례로 곱해지는 모습입니다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/12_backprop_1_2.jpg"><source src="videos/12_backprop_1_2.mp4" type="video/mp4"></video></figure></div></div>
@@ -557,16 +559,16 @@
 </section>
 <section id="id10">
 <h2>실습. 출력층만 오차역전파로 학습시켜 보기<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
-<p>출력층의 W3, b3 만 공식으로 갱신하고 (W2, b2 는 고정), 손실이 줄어드는지 확인합니다. 은닉층 공식은 다음 시간에!</p>
+<p>출력층의 <span class="math notranslate nohighlight">\(W3, b3\)</span> 만 공식으로 갱신하고 (<span class="math notranslate nohighlight">\(W2, b2\)</span> 는 고정), 손실이 줄어드는지 확인합니다. 은닉층 공식은 다음 시간에!</p>
 </section>
 <section id="id11">
 <h2>연습 문제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <div class="box box-practice docutils container">
-<p><strong>[문제 1]</strong> 뉴런 1개에서 x = 2, w = 0, b = 0, t = 0 일 때 ∂E/∂w 를 손으로 구하세요. (sigmoid(0) = 0.5)
-z = ( 　 ), a = ( 　 ), ∂E/∂a = ( 　 ), ∂a/∂z = ( 　 ), ∂z/∂w = ( 　 ) → ∂E/∂w = ( 　　 )</p>
+<p><strong>[문제 1]</strong> 뉴런 1개에서 <span class="math notranslate nohighlight">\(x = 2, w = 0, b = 0, t = 0\)</span> 일 때 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w}\)</span> 를 손으로 구하세요. <span class="math notranslate nohighlight">\((\mathrm{sigmoid}(0) = 0.5)\)</span>
+<span class="math notranslate nohighlight">\(z =\)</span> ( 　 ), <span class="math notranslate nohighlight">\(a =\)</span> ( 　 ), <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial a} =\)</span> ( 　 ), <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial a}{\partial z} =\)</span> ( 　 ), <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial z}{\partial w} =\)</span> ( 　 ) → <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w} =\)</span> ( 　　 )</p>
 </div>
 <div class="box box-practice docutils container">
-<p><strong>[문제 2]</strong> 바이어스 b 에 대한 미분 ∂E/∂b 는 ∂z/∂b = ( 　 ) 이므로 (a − t) × a(1 − a) × ( 　 ) 이다. 코드로 확인하세요.</p>
+<p><strong>[문제 2]</strong> 바이어스 <span class="math notranslate nohighlight">\(b\)</span> 에 대한 미분 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial b}\)</span> 는 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial z}{\partial b} =\)</span> ( 　 ) 이므로 <span class="math notranslate nohighlight">\((a - t) \times a(1 - a) \times\)</span> ( 　 ) 이다. 코드로 확인하세요.</p>
 </div>
 </section>
 <section id="id12">
@@ -582,7 +584,7 @@ z = ( 　 ), a = ( 　 ), ∂E/∂a = ( 　 ), ∂a/∂z = ( 　 ), ∂z/∂w = 
 <td class="text-left"><p>연쇄법칙으로 국소 미분을 분리하고, 출력층부터 거꾸로 곱해 미분값을 공식으로 계산</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>sigmoid 미분</p></td>
-<td class="text-left"><p>sigmoid′(z) = sigmoid(z)(1 − sigmoid(z)) = a(1 − a)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathrm{sigmoid}'(z) = \mathrm{sigmoid}(z)(1 - \mathrm{sigmoid}(z)) = a(1 - a)\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>출력층 손실</p></td>
 <td class="text-left"><p>loss_3 = (A3 − T) × A3 × (1 − A3)</p></td>
@@ -598,7 +600,7 @@ z = ( 　 ), a = ( 　 ), ∂E/∂a = ( 　 ), ∂a/∂z = ( 　 ), ∂z/∂w = 
 </div>
 <section id="id13">
 <h3>도전 과제<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
-<p>은닉층 가중치 W<sup>(2)</sup> 는 출력 노드 <strong>두 개 모두</strong> (E₁, E₂) 에 영향을 줍니다. 그렇다면 ∂E/∂w<sub>11</sub><sup>(2)</sup> 를 구할 때는 연쇄법칙의 길이 몇 갈래가 될까요? ( 　 ) 갈래 → 다음 시간: <strong>은닉층 오차역전파와 일반 공식</strong></p>
+<p>은닉층 가중치 <span class="math notranslate nohighlight">\(W^{(2)}\)</span> 는 출력 노드 <strong>두 개 모두</strong> <span class="math notranslate nohighlight">\((E_{1}, E_{2})\)</span> 에 영향을 줍니다. 그렇다면 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w_{11}^{(2)}}\)</span> 를 구할 때는 연쇄법칙의 길이 몇 갈래가 될까요? ( 　 ) 갈래 → 다음 시간: <strong>은닉층 오차역전파와 일반 공식</strong></p>
 </section>
 </section>
 </section>
@@ -680,7 +682,7 @@ z = ( 　 ), a = ( 　 ), ∂E/∂a = ( 　 ), ∂a/∂z = ( 　 ), ∂z/∂w = 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">4개의 가중치를 행렬로 모으면</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w11-3">애니메이션 2. w₁₁⁽³⁾ 의 미분이 거꾸로 전달되는 길</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-11-3">애니메이션 2. <span class="math notranslate nohighlight">\(w_{11}^{(3)}\)</span> 의 미분이 거꾸로 전달되는 길</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">실습. 출력층만 오차역전파로 학습시켜 보기</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">연습 문제</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">

@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '02_numerical_derivative';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -358,17 +360,17 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#def-lambda">개념 다지기 2. 파이썬으로 함수 만들기 : def 와 lambda</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">실습 1. 수치미분 1차 버전 (변수가 1개인 함수)</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-3xex-f-2">[예제 2] f(x) = 3x·e<sup>x</sup> 에서 f’(2) 구하기</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-3x-cdot-e-x-f-2">[예제 2] <span class="math notranslate nohighlight">\(f(x) = 3x\cdot e^{x}\)</span> 에서 <span class="math notranslate nohighlight">\(f'(2)\)</span> 구하기</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#x">애니메이션 1. Δx 가 작아지면 할선이 접선이 된다</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">탐구. Δx 는 무조건 작을수록 좋을까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delta-x">애니메이션 1. <span class="math notranslate nohighlight">\(\Delta x\)</span> 가 작아지면 할선이 접선이 된다</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">탐구. <span class="math notranslate nohighlight">\(\Delta x\)</span> 는 무조건 작을수록 좋을까?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 3. 변수가 여러 개이면? → 변수마다 따로 수치미분</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 2. 컴퓨터가 편미분하는 순서 보기</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">실습 2. 수치미분 최종 버전 (변수가 여러 개인 함수)</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-x2-f-3">[예제 3] 1변수 함수 f(x) = x², f’(3)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-y-2x-3xy-y3-1-0-2-0">[예제 4] 2변수 함수 f(x, y) = 2x + 3xy + y³, 점 (1.0, 2.0)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-w-x-y-z-wx-xyz-3w-zy2-w-x-y-z-1-2-3-4">[예제 5] 4변수 함수 f(w, x, y, z) = wx + xyz + 3w + zy², 점 (w, x, y, z) = (1, 2, 3, 4)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-x-2-f-3">[예제 3] 1변수 함수 <span class="math notranslate nohighlight">\(f(x) = x^{2}, f'(3)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-y-2x-3xy-y-3-1-0-2-0">[예제 4] 2변수 함수 <span class="math notranslate nohighlight">\(f(x, y) = 2x + 3xy + y^{3}\)</span>, 점 (1.0, 2.0)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-w-x-y-z-wx-xyz-3w-zy-2-w-x-y-z-1-2-3-4">[예제 5] 4변수 함수 <span class="math notranslate nohighlight">\(f(w, x, y, z) = wx + xyz + 3w + zy^{2}\)</span>, 점 <span class="math notranslate nohighlight">\((w, x, y, z) = (1, 2, 3, 4)\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">연습 문제</a></li>
@@ -388,7 +390,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 2 편</p>
-<section id="id1">
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>수치미분 - 파이썬으로 미분하기<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「머신러닝/딥러닝을 위한 수치미분 (II)·(III)」 (ML_LEC_10, ML_LEC_11), 「Python function·lambda」 (ML_LEC_04)</p>
@@ -407,35 +409,35 @@
 <h2>지난 시간 복습 (제 1편)<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>미분은 <strong>“입력이 아주 조금 변할 때 출력이 얼마나 민감하게 변하는가”</strong> 를 알려 준다.</p></li>
-<li><p>f(x) = x² 이면 f’(x) = 2x, 따라서 f’(3) = 6</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = x^{2}\)</span> 이면 <span class="math notranslate nohighlight">\(f'(x) = 2x\)</span>, 따라서 <span class="math notranslate nohighlight">\(f'(3) = 6\)</span></p></li>
 <li><p>편미분: 관심 있는 변수 하나만 움직이고 <strong>나머지는 상수로 고정</strong>한다.</p></li>
 </ul>
 <div class="box box-note docutils container">
 <p><strong>오늘의 질문</strong> 🤔
-컴퓨터는 “x² 을 미분하면 2x” 라는 공식을 모릅니다. 그렇다면 컴퓨터는 어떻게 미분을 할까요?</p>
+컴퓨터는 “<span class="math notranslate nohighlight">\(x^{2}\)</span> 을 미분하면 <span class="math notranslate nohighlight">\(2x\)</span>” 라는 공식을 모릅니다. 그렇다면 컴퓨터는 어떻게 미분을 할까요?</p>
 </div>
 </section>
 <section id="id4">
 <h2>핵심 정리<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<p><strong>① 컴퓨터의 미분 = 작은 h 로 계산한 기울기</strong></p>
+<p><strong>① 컴퓨터의 미분 = 작은 <span class="math notranslate nohighlight">\(h\)</span> 로 계산한 기울기</strong></p>
 <div class="box box-formula docutils container">
-<p>전진차분 :  f′(x) ≒ {f(x + h) − f(x)} / h<br />
-중앙차분 :  f′(x) ≒ {f(x + h) − f(x − h)} / (2h)</p>
+<p>전진차분 :  <span class="math notranslate nohighlight">\(\displaystyle f'(x) \fallingdotseq \frac{f(x + h) - f(x)}{h}\)</span><br />
+중앙차분 :  <span class="math notranslate nohighlight">\(\displaystyle f'(x) \fallingdotseq \frac{f(x + h) - f(x - h)}{2h}\)</span></p>
 </div>
 <p><strong>② 왜 중앙차분이 더 정확한가 (테일러 전개)</strong></p>
-<p>f(x + h) = f(x) + f′(x)h + f″(x)h²/2 + f‴(x)h³/6 + …<br />
-f(x − h) = f(x) − f′(x)h + f″(x)h²/2 − f‴(x)h³/6 + …</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle f(x + h) = f(x) + f'(x)h + \frac{f''(x)h^{2}}{2} + \frac{f'''(x)h^{3}}{6} + \cdots\)</span><br />
+<span class="math notranslate nohighlight">\(\displaystyle f(x - h) = f(x) - f'(x)h + \frac{f''(x)h^{2}}{2} - \frac{f'''(x)h^{3}}{6} + \cdots\)</span></p>
 <ul class="simple">
-<li><p>전진차분 :  {f(x + h) − f(x)} / h = f′(x) + <strong>f″(x)h/2</strong> + …  → 오차가 h 에 비례</p></li>
-<li><p>중앙차분 :  {f(x + h) − f(x − h)} / (2h) = f′(x) + <strong>f‴(x)h²/6</strong> + …  → h² 항이 서로 지워져 오차가 h² 에 비례</p></li>
+<li><p>전진차분 :  <span class="math notranslate nohighlight">\(\displaystyle \frac{f(x + h) - f(x)}{h} = f'(x) +\)</span> <strong><span class="math notranslate nohighlight">\(\displaystyle \frac{f''(x)h}{2}\)</span></strong> + …  → 오차가 <span class="math notranslate nohighlight">\(h\)</span> 에 비례</p></li>
+<li><p>중앙차분 :  <span class="math notranslate nohighlight">\(\displaystyle \frac{f(x + h) - f(x - h)}{2h} = f'(x) +\)</span> <strong><span class="math notranslate nohighlight">\(\displaystyle \frac{f'''(x)h^{2}}{6}\)</span></strong> + …  → <span class="math notranslate nohighlight">\(h^{2}\)</span> 항이 서로 지워져 오차가 <span class="math notranslate nohighlight">\(h^{2}\)</span> 에 비례</p></li>
 </ul>
-<p>예) f(x) = x³, x = 1, h = 0.1 :  전진차분 3.31 (오차 0.31),  중앙차분 3.01 (오차 0.01)<br />
-f(x) = x² 이면 f‴(x) = 0 이므로 중앙차분의 오차는 h 와 상관없이 0 이다. (아래 애니메이션 1)</p>
-<p><strong>③ h 는 무조건 작을수록 좋을까?</strong></p>
-<p>컴퓨터는 수를 약 16 자리까지만 저장한다. h 가 너무 작으면 f(x + h) 와 f(x − h) 가 거의 같아져 뺄셈에서 반올림 오차가 커진다. 그래서 보통 h = 10<sup>−4</sup> 을 쓴다.</p>
+<p>예) <span class="math notranslate nohighlight">\(f(x) = x^{3}, x = 1, h = 0.1\)</span> :  전진차분 3.31 (오차 0.31),  중앙차분 3.01 (오차 0.01)<br />
+<span class="math notranslate nohighlight">\(f(x) = x^{2}\)</span> 이면 <span class="math notranslate nohighlight">\(f'''(x) = 0\)</span> 이므로 중앙차분의 오차는 <span class="math notranslate nohighlight">\(h\)</span> 와 상관없이 0 이다. (아래 애니메이션 1)</p>
+<p><strong>③ <span class="math notranslate nohighlight">\(h\)</span> 는 무조건 작을수록 좋을까?</strong></p>
+<p>컴퓨터는 수를 약 16 자리까지만 저장한다. <span class="math notranslate nohighlight">\(h\)</span> 가 너무 작으면 <span class="math notranslate nohighlight">\(f(x + h)\)</span> 와 <span class="math notranslate nohighlight">\(f(x - h)\)</span> 가 거의 같아져 뺄셈에서 반올림 오차가 커진다. 그래서 보통 <span class="math notranslate nohighlight">\(h = 10^{-4}\)</span> 을 쓴다.</p>
 <p><strong>④ 변수가 여러 개이면</strong></p>
-<p>변수마다 그 변수만 ±h 만큼 움직여 편미분을 하나씩 구한다.<br />
-f(x, y) = 2x + 3xy + y³ 의 점 (1, 2) 에서 (∂f/∂x, ∂f/∂y) = (2 + 3 × 2, 3 × 1 + 3 × 2²) = (8, 15)</p>
+<p>변수마다 그 변수만 <span class="math notranslate nohighlight">\(\pm h\)</span> 만큼 움직여 편미분을 하나씩 구한다.<br />
+<span class="math notranslate nohighlight">\(f(x, y) = 2x + 3xy + y^{3}\)</span> 의 점 (1, 2) 에서 <span class="math notranslate nohighlight">\(\displaystyle \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right) = (2 + 3 \times 2, 3 \times 1 + 3 \times 2^{2}) = (8, 15)\)</span></p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
 </div></blockquote>
@@ -452,11 +454,11 @@ f(x, y) = 2x + 3xy + y³ 의 점 (1, 2) 에서 (∂f/∂x, ∂f/∂y) = (2 + 3 �
 <tbody>
 <tr class="row-even"><td class="text-center"><p>방법</p></td>
 <td class="text-left"><p>미분 공식을 이용해 <strong>도함수 식</strong>을 구한다</p></td>
-<td class="text-left"><p>아주 작은 Δx 를 직접 넣어 <strong>값을 계산</strong>한다</p></td>
+<td class="text-left"><p>아주 작은 <span class="math notranslate nohighlight">\(\Delta x\)</span> 를 직접 넣어 <strong>값을 계산</strong>한다</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>예</p></td>
-<td class="text-left"><p>f(x) = x² → f’(x) = 2x → f’(3) = 6</p></td>
-<td class="text-left"><p>{f(3 + 0.0001) − f(3 − 0.0001)} / 0.0002 = 6.000000000012…</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(f(x) = x^{2}\)</span> → <span class="math notranslate nohighlight">\(f'(x) = 2x\)</span> → <span class="math notranslate nohighlight">\(f'(3) = 6\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle \frac{f(3 + 0.0001) - f(3 - 0.0001)}{0.0002} = 6.000000000012\cdots\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>장점</p></td>
 <td class="text-left"><p>정확하다</p></td>
@@ -468,23 +470,23 @@ f(x, y) = 2x + 3xy + y³ 의 점 (1, 2) 에서 (∂f/∂x, ∂f/∂y) = (2 + 3 �
 <section id="id5">
 <h3>미분계수의 정의와 중앙차분<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>정의:  f’(x) = lim<sub>Δx→0</sub> {f(x + Δx) − f(x)} / Δx</p></li>
-<li><p>컴퓨터는 Δx → 0 (극한)을 할 수 없으므로 <strong>Δx 에 아주 작은 수 (예: 10<sup>−4</sup> = 0.0001)</strong> 를 넣어 계산합니다.</p></li>
-<li><p>이때 x 의 <strong>양쪽</strong>을 똑같이 Δx 만큼 잡는 <strong>중앙차분</strong>을 쓰면 훨씬 정확합니다.</p></li>
+<li><p>정의:  <span class="math notranslate nohighlight">\(\displaystyle f'(x) = \lim_{\Delta x\to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}\)</span></p></li>
+<li><p>컴퓨터는 <span class="math notranslate nohighlight">\(\Delta x\)</span> → 0 (극한)을 할 수 없으므로 <strong><span class="math notranslate nohighlight">\(\Delta x\)</span> 에 아주 작은 수 (예: <span class="math notranslate nohighlight">\(10^{-4} = 0.0001\)</span>)</strong> 를 넣어 계산합니다.</p></li>
+<li><p>이때 <span class="math notranslate nohighlight">\(x\)</span> 의 <strong>양쪽</strong>을 똑같이 <span class="math notranslate nohighlight">\(\Delta x\)</span> 만큼 잡는 <strong>중앙차분</strong>을 쓰면 훨씬 정확합니다.</p></li>
 </ul>
 <div class="box box-note docutils container">
 <p><strong>중앙차분 공식</strong>
 f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 </div>
 <div class="box box-think docutils container">
-<p><strong>[생각해 보기]</strong> 💡 두 점 (x − Δx, f(x − Δx)), (x + Δx, f(x + Δx)) 을 잇는 직선의 기울기를 구해 보면,
-분모는 두 점의 x 좌표의 차인 (x + Δx) − (x − Δx) = ( 　　　 ) 이 됩니다.</p>
+<p><strong>[생각해 보기]</strong> 💡 두 점 <span class="math notranslate nohighlight">\((x - \Delta x, f(x - \Delta x)), (x + \Delta x, f(x + \Delta x))\)</span> 을 잇는 직선의 기울기를 구해 보면,
+분모는 두 점의 <span class="math notranslate nohighlight">\(x\)</span> 좌표의 차인 <span class="math notranslate nohighlight">\((x + \Delta x) - (x - \Delta x) =\)</span> ( 　　　 ) 이 됩니다.</p>
 </div>
 </section>
 </section>
 <section id="def-lambda">
 <h2>개념 다지기 2. 파이썬으로 함수 만들기 : def 와 lambda<a class="headerlink" href="#def-lambda" title="Link to this heading">#</a></h2>
-<p>수학의 함수 f(x) = x² 을 파이썬에서는 두 가지 방법으로 만들 수 있습니다.</p>
+<p>수학의 함수 <span class="math notranslate nohighlight">\(f(x) = x^{2}\)</span> 을 파이썬에서는 두 가지 방법으로 만들 수 있습니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 방법 1: def</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
@@ -494,11 +496,11 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">입력</span> <span class="pre">:</span> <span class="pre">식</span></code> 은 <strong>“f(x) 를 식으로 바꿔 계산하라”</strong> 는 뜻입니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">입력</span> <span class="pre">:</span> <span class="pre">식</span></code> 은 <strong>“<span class="math notranslate nohighlight">\(f(x)\)</span> 를 식으로 바꿔 계산하라”</strong> 는 뜻입니다.</p></li>
 <li><p>수치미분 함수에 <strong>미분할 함수 자체를 입력으로 넘겨줄 때</strong> 아주 편리합니다.</p></li>
 </ul>
 <div class="box box-note docutils container">
-<p>f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
+<p><span class="math notranslate nohighlight">\(f(3) =\)</span> ( 　　 ),  <span class="math notranslate nohighlight">\(g(2) =\)</span> ( 　　 ),  <span class="math notranslate nohighlight">\(h(1, 2) =\)</span> ( 　　 )</p>
 </div>
 </section>
 <section id="id6">
@@ -511,16 +513,16 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p>미분할 함수 f</p></td>
+<tr class="row-even"><td class="text-left"><p>미분할 함수 <span class="math notranslate nohighlight">\(f\)</span></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">f</span></code> (def 나 lambda 로 만든 함수를 받는다)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>미분계수를 구할 점 x</p></td>
+<tr class="row-odd"><td class="text-left"><p>미분계수를 구할 점 <span class="math notranslate nohighlight">\(x\)</span></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>아주 작은 수 Δx</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">delta_x</span> <span class="pre">=</span> <span class="pre">1e-4</span></code> (= 0.0001)</p></td>
+<tr class="row-even"><td class="text-left"><p>아주 작은 수 <span class="math notranslate nohighlight">\(\Delta x\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">delta_x</span> <span class="pre">=</span> <span class="pre">1e-4</span></code> <span class="math notranslate nohighlight">\((= 0.0001)\)</span></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>{f(x + Δx) − f(x − Δx)} / (2Δx)</p></td>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle \frac{f(x + \Delta x) - f(x - \Delta x)}{2\Delta x}\)</span></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(f(x+delta_x)</span> <span class="pre">-</span> <span class="pre">f(x-delta_x))</span> <span class="pre">/</span> <span class="pre">(2*delta_x)</span></code></p></td>
 </tr>
 </tbody>
@@ -530,37 +532,37 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 <p><strong>[확인 1]</strong> 수치미분 결과는 6 과 <strong>정확히 같나요?</strong> 차이가 난다면 그 이유는 무엇일까요?
 (                                                                                   )</p>
 </div>
-<section id="f-x-3xex-f-2">
-<h3>[예제 2] f(x) = 3x·e<sup>x</sup> 에서 f’(2) 구하기<a class="headerlink" href="#f-x-3xex-f-2" title="Link to this heading">#</a></h3>
+<section id="f-x-3x-cdot-e-x-f-2">
+<h3>[예제 2] <span class="math notranslate nohighlight">\(f(x) = 3x\cdot e^{x}\)</span> 에서 <span class="math notranslate nohighlight">\(f'(2)\)</span> 구하기<a class="headerlink" href="#f-x-3x-cdot-e-x-f-2" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>수학 공식 (곱의 미분):  f’(x) = 3e<sup>x</sup> + 3x·e<sup>x</sup></p></li>
-<li><p>따라서  f’(2) = 3e² + 3 × 2 × e² = ( 　　 ) e²  ≒ ( 　　　　 )</p></li>
+<li><p>수학 공식 (곱의 미분):  <span class="math notranslate nohighlight">\(f'(x) = 3e^{x} + 3x\cdot e^{x}\)</span></p></li>
+<li><p>따라서  <span class="math notranslate nohighlight">\(f'(2) = 3e^{2} + 3 \times 2 \times e^{2} =\)</span> ( 　　 ) <span class="math notranslate nohighlight">\(e^{2} \fallingdotseq\)</span> ( 　　　　 )</p></li>
 </ul>
 </section>
 </section>
-<section id="x">
-<h2>애니메이션 1. Δx 가 작아지면 할선이 접선이 된다<a class="headerlink" href="#x" title="Link to this heading">#</a></h2>
-<p>f(x) = x² 위의 점 x = 1 에서</p>
+<section id="delta-x">
+<h2>애니메이션 1. <span class="math notranslate nohighlight">\(\Delta x\)</span> 가 작아지면 할선이 접선이 된다<a class="headerlink" href="#delta-x" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(f(x) = x^{2}\)</span> 위의 점 <span class="math notranslate nohighlight">\(x = 1\)</span> 에서</p>
 <ul class="simple">
-<li><p>🔴 <strong>전진차분</strong>: 두 점 1 과 1 + Δx 를 잇는 직선</p></li>
-<li><p>🟢 <strong>중앙차분</strong>: 두 점 1 − Δx 와 1 + Δx 를 잇는 직선</p></li>
+<li><p>🔴 <strong>전진차분</strong>: 두 점 1 과 <span class="math notranslate nohighlight">\(1 + \Delta x\)</span> 를 잇는 직선</p></li>
+<li><p>🟢 <strong>중앙차분</strong>: 두 점 <span class="math notranslate nohighlight">\(1 - \Delta x\)</span> 와 <span class="math notranslate nohighlight">\(1 + \Delta x\)</span> 를 잇는 직선</p></li>
 </ul>
-<p>Δx 가 1.5 에서 0 에 가까워질 때 두 직선의 기울기가 어떻게 변하는지 관찰하세요.</p>
+<p><span class="math notranslate nohighlight">\(\Delta x\)</span> 가 1.5 에서 0 에 가까워질 때 두 직선의 기울기가 어떻게 변하는지 관찰하세요.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/02_numerical_derivative_1.jpg"><source src="videos/02_numerical_derivative_1.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 <div class="box box-check docutils container">
 <p><strong>[관찰 1]</strong>
-① Δx 가 작아질수록 빨간 직선의 기울기는 ( 　　 ) 에 가까워진다.
-② 초록 직선(중앙차분)의 기울기는 Δx 의 크기와 상관없이 항상 ( 　　 ) 이다. 왜 그럴까요?
-　 (힌트: {(1 + Δx)² − (1 − Δx)²} / (2Δx) 을 직접 전개해 보세요.)
+① <span class="math notranslate nohighlight">\(\Delta x\)</span> 가 작아질수록 빨간 직선의 기울기는 ( 　　 ) 에 가까워진다.
+② 초록 직선(중앙차분)의 기울기는 <span class="math notranslate nohighlight">\(\Delta x\)</span> 의 크기와 상관없이 항상 ( 　　 ) 이다. 왜 그럴까요?
+　 (힌트: <span class="math notranslate nohighlight">\(\displaystyle \frac{(1 + \Delta x)^{2} - (1 - \Delta x)^{2}}{2\Delta x}\)</span> 을 직접 전개해 보세요.)
 (                                                                                   )</p>
 </div>
 </section>
 <section id="id7">
-<h2>탐구. Δx 는 무조건 작을수록 좋을까?<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
-<p>f(x) = x³ 에서 f’(1) = 3 입니다. Δx 를 10<sup>−1</sup>, 10<sup>−2</sup>, … , 10<sup>−15</sup> 으로 바꿔 가며 <strong>오차 = |수치미분 − 3|</strong> 을 비교해 봅시다.</p>
+<h2>탐구. <span class="math notranslate nohighlight">\(\Delta x\)</span> 는 무조건 작을수록 좋을까?<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(f(x) = x^{3}\)</span> 에서 <span class="math notranslate nohighlight">\(f'(1) = 3\)</span> 입니다. <span class="math notranslate nohighlight">\(\Delta x\)</span> 를 <span class="math notranslate nohighlight">\(10^{-1}, 10^{-2}, \cdots , 10^{-15}\)</span> 으로 바꿔 가며 <strong>오차 = |수치미분 − 3|</strong> 을 비교해 봅시다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      Δx |        전진차분 오차 |        중앙차분 오차
@@ -587,38 +589,38 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 </div>
 <div class="box box-check docutils container">
 <p><strong>[탐구 결과]</strong>
-① 오차가 가장 작아지는 Δx 는 대략 전진차분 ( 　　　 ), 중앙차분 ( 　　　 ) 근처이다.
-② Δx 가 너무 작아지면(10<sup>−12</sup> 이하) 오차가 오히려 ( 커진다 / 작아진다 ).</p>
-<p>💡 <strong>이유</strong>: 컴퓨터는 소수를 약 16자리까지만 저장합니다. Δx 가 너무 작으면 f(x + Δx) 와 f(x − Δx) 가 거의 같은 수가 되어, 그 차를 계산할 때 <strong>반올림 오차</strong>가 크게 드러납니다.
-그래서 머신러닝에서는 보통 <strong>Δx = 10<sup>−4</sup></strong> 정도를 사용합니다.</p>
+① 오차가 가장 작아지는 <span class="math notranslate nohighlight">\(\Delta x\)</span> 는 대략 전진차분 ( 　　　 ), 중앙차분 ( 　　　 ) 근처이다.
+② <span class="math notranslate nohighlight">\(\Delta x\)</span> 가 너무 작아지면(<span class="math notranslate nohighlight">\(10^{-12}\)</span> 이하) 오차가 오히려 ( 커진다 / 작아진다 ).</p>
+<p>💡 <strong>이유</strong>: 컴퓨터는 소수를 약 16자리까지만 저장합니다. <span class="math notranslate nohighlight">\(\Delta x\)</span> 가 너무 작으면 <span class="math notranslate nohighlight">\(f(x + \Delta x)\)</span> 와 <span class="math notranslate nohighlight">\(f(x - \Delta x)\)</span> 가 거의 같은 수가 되어, 그 차를 계산할 때 <strong>반올림 오차</strong>가 크게 드러납니다.
+그래서 머신러닝에서는 보통 <strong><span class="math notranslate nohighlight">\(\Delta x = 10^{-4}\)</span></strong> 정도를 사용합니다.</p>
 </div>
 </section>
 <section id="id8">
 <h2>개념 다지기 3. 변수가 여러 개이면? → 변수마다 따로 수치미분<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
-<p>f(x, y) = 2x + 3xy + y³ 에서 점 (1, 2) 에서의 편미분을 구해 봅시다.</p>
-<p><strong>① x 에 대한 편미분</strong> (y = 2 로 고정)
-　f(x, 2) = 2x + 6x + 8 = 8x + 8 　→　 ∂f/∂x = ( 　　 )</p>
-<p><strong>② y 에 대한 편미분</strong> (x = 1 로 고정)
-　f(1, y) = 2 + 3y + y³ 　→　 ∂f/∂y = 3 + 3y²,　y = 2 를 대입하면 ( 　　 )</p>
+<p><span class="math notranslate nohighlight">\(f(x, y) = 2x + 3xy + y^{3}\)</span> 에서 점 (1, 2) 에서의 편미분을 구해 봅시다.</p>
+<p><strong>① <span class="math notranslate nohighlight">\(x\)</span> 에 대한 편미분</strong> (<span class="math notranslate nohighlight">\(y = 2\)</span> 로 고정)
+　<span class="math notranslate nohighlight">\(f(x, 2) = 2x + 6x + 8 = 8x + 8\)</span> 　→　 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x} =\)</span> ( 　　 )</p>
+<p><strong>② <span class="math notranslate nohighlight">\(y\)</span> 에 대한 편미분</strong> (<span class="math notranslate nohighlight">\(x = 1\)</span> 로 고정)
+　<span class="math notranslate nohighlight">\(f(1, y) = 2 + 3y + y^{3}\)</span> 　→　 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial y} = 3 + 3y^{2}\)</span>,　<span class="math notranslate nohighlight">\(y = 2\)</span> 를 대입하면 ( 　　 )</p>
 <div class="box box-think docutils container">
 <p><strong>[의미 해석]</strong> 💡</p>
 <ul class="simple">
-<li><p>∂f/∂x = 8 : y 를 2 로 고정한 채 x 를 1 에서 아주 조금 늘리면, f 는 그 변화량의 ( 　 )배만큼 변한다.</p></li>
-<li><p>∂f/∂y = 15 : x 를 1 로 고정한 채 y 를 2 에서 아주 조금 늘리면, f 는 그 변화량의 ( 　 )배만큼 변한다.
-→ 이 점에서 f 는 <strong>( x / y )</strong> 의 변화에 더 민감하다.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x} = 8\)</span> : <span class="math notranslate nohighlight">\(y\)</span> 를 2 로 고정한 채 <span class="math notranslate nohighlight">\(x\)</span> 를 1 에서 아주 조금 늘리면, <span class="math notranslate nohighlight">\(f\)</span> 는 그 변화량의 ( 　 )배만큼 변한다.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial y} = 15\)</span> : <span class="math notranslate nohighlight">\(x\)</span> 를 1 로 고정한 채 <span class="math notranslate nohighlight">\(y\)</span> 를 2 에서 아주 조금 늘리면, <span class="math notranslate nohighlight">\(f\)</span> 는 그 변화량의 ( 　 )배만큼 변한다.
+→ 이 점에서 <span class="math notranslate nohighlight">\(f\)</span> 는 <strong>( <span class="math notranslate nohighlight">\(x\)</span> / <span class="math notranslate nohighlight">\(y\)</span> )</strong> 의 변화에 더 민감하다.</p></li>
 </ul>
 </div>
-<p>컴퓨터도 똑같이 합니다. <strong>변수를 하나씩 번갈아 가며</strong> “그 변수만 ±Δx 만큼 움직이고 나머지는 그대로” 두고 계산합니다.</p>
+<p>컴퓨터도 똑같이 합니다. <strong>변수를 하나씩 번갈아 가며</strong> “그 변수만 <span class="math notranslate nohighlight">\(\pm \Delta x\)</span> 만큼 움직이고 나머지는 그대로” 두고 계산합니다.</p>
 </section>
 <section id="id9">
 <h2>애니메이션 2. 컴퓨터가 편미분하는 순서 보기<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>왼쪽: f(x, y) = 2x + 3xy + y³ 의 등고선 위의 점 (1, 2)</p></li>
+<li><p>왼쪽: <span class="math notranslate nohighlight">\(f(x, y) = 2x + 3xy + y^{3}\)</span> 의 등고선 위의 점 (1, 2)</p></li>
 <li><p>오른쪽: 지금 움직이는 변수 방향으로 자른 단면 곡선과 접선</p></li>
 </ul>
-<p><strong>1단계</strong>에서는 x 만 움직이고(y 고정), <strong>2단계</strong>에서는 y 만 움직입니다(x 고정).</p>
+<p><strong>1단계</strong>에서는 <span class="math notranslate nohighlight">\(x\)</span> 만 움직이고(<span class="math notranslate nohighlight">\(y\)</span> 고정), <strong>2단계</strong>에서는 <span class="math notranslate nohighlight">\(y\)</span> 만 움직입니다(<span class="math notranslate nohighlight">\(x\)</span> 고정).</p>
 <div class="box box-note docutils container">
-<p>1단계의 단면 f(x, 2) = 8x + 8 은 직선이라 접선과 완전히 겹칩니다. 2단계의 단면은 곡선이라 접선이 한 점에서만 닿습니다.</p>
+<p>1단계의 단면 <span class="math notranslate nohighlight">\(f(x, 2) = 8x + 8\)</span> 은 직선이라 접선과 완전히 겹칩니다. 2단계의 단면은 곡선이라 접선이 한 점에서만 닿습니다.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -627,7 +629,7 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 </section>
 <section id="id10">
 <h2>실습 2. 수치미분 최종 버전 (변수가 여러 개인 함수)<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
-<p>변수가 여러 개이면 입력을 <strong>numpy 배열</strong> 하나에 모아서 넘겨줍니다. 예: (x, y) = (1, 2) → <code class="docutils literal notranslate"><span class="pre">np.array([1.0,</span> <span class="pre">2.0])</span></code></p>
+<p>변수가 여러 개이면 입력을 <strong>numpy 배열</strong> 하나에 모아서 넘겨줍니다. 예: <span class="math notranslate nohighlight">\((x, y) = (1, 2)\)</span> → <code class="docutils literal notranslate"><span class="pre">np.array([1.0,</span> <span class="pre">2.0])</span></code></p>
 <p>코드의 핵심 아이디어 ①~④</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -643,7 +645,7 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">np.nditer</span></code> 로 변수를 <strong>하나씩 차례대로</strong> 가리킨다 (iterator)</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>③</p></td>
-<td class="text-left"><p>가리킨 변수 하나만 +Δx, −Δx 로 바꿔서 f 를 계산한다 (나머지 변수는 그대로 = 상수 취급)</p></td>
+<td class="text-left"><p>가리킨 변수 하나만 <span class="math notranslate nohighlight">\(+\Delta x, -\Delta x\)</span> 로 바꿔서 <span class="math notranslate nohighlight">\(f\)</span> 를 계산한다 (나머지 변수는 그대로 = 상수 취급)</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>④</p></td>
 <td class="text-left"><p>바꿨던 변수를 <strong>원래 값으로 되돌린다</strong> (numpy 배열은 함수 안에서 바꾸면 원본도 바뀌기 때문)</p></td>
@@ -652,42 +654,42 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 </table>
 </div>
 <p>아래 코드는 계산 과정을 보여 주는 <code class="docutils literal notranslate"><span class="pre">debug</span></code> 출력이 들어간 버전입니다.</p>
-<section id="f-x-x2-f-3">
-<h3>[예제 3] 1변수 함수 f(x) = x², f’(3)<a class="headerlink" href="#f-x-x2-f-3" title="Link to this heading">#</a></h3>
+<section id="f-x-x-2-f-3">
+<h3>[예제 3] 1변수 함수 <span class="math notranslate nohighlight">\(f(x) = x^{2}, f'(3)\)</span><a class="headerlink" href="#f-x-x-2-f-3" title="Link to this heading">#</a></h3>
 <p>입력이 하나여도 배열 <code class="docutils literal notranslate"><span class="pre">np.array([3.0])</span></code> 로 넘겨야 합니다.</p>
 </section>
-<section id="f-x-y-2x-3xy-y3-1-0-2-0">
-<h3>[예제 4] 2변수 함수 f(x, y) = 2x + 3xy + y³, 점 (1.0, 2.0)<a class="headerlink" href="#f-x-y-2x-3xy-y3-1-0-2-0" title="Link to this heading">#</a></h3>
+<section id="f-x-y-2x-3xy-y-3-1-0-2-0">
+<h3>[예제 4] 2변수 함수 <span class="math notranslate nohighlight">\(f(x, y) = 2x + 3xy + y^{3}\)</span>, 점 (1.0, 2.0)<a class="headerlink" href="#f-x-y-2x-3xy-y-3-1-0-2-0" title="Link to this heading">#</a></h3>
 <p>⚠️ 입력은 반드시 <strong>실수(1.0, 2.0)</strong> 로 넣으세요. 정수(1, 2)로 넣으면 0.0001 을 더해도 정수로 잘려 계산이 틀어집니다.</p>
 <div class="box box-check docutils container">
 <p><strong>[확인 2]</strong> 개념 다지기 3 에서 손으로 구한 값 ( 　 , 　 ) 과 일치하나요? ( 예 / 아니오 )</p>
 </div>
 </section>
-<section id="f-w-x-y-z-wx-xyz-3w-zy2-w-x-y-z-1-2-3-4">
-<h3>[예제 5] 4변수 함수 f(w, x, y, z) = wx + xyz + 3w + zy², 점 (w, x, y, z) = (1, 2, 3, 4)<a class="headerlink" href="#f-w-x-y-z-wx-xyz-3w-zy2-w-x-y-z-1-2-3-4" title="Link to this heading">#</a></h3>
-<p>변수 4개를 2 × 2 행렬로 묶어서 넘겨줍니다.  →  [[w, x], [y, z]] = [[1, 2], [3, 4]]</p>
+<section id="f-w-x-y-z-wx-xyz-3w-zy-2-w-x-y-z-1-2-3-4">
+<h3>[예제 5] 4변수 함수 <span class="math notranslate nohighlight">\(f(w, x, y, z) = wx + xyz + 3w + zy^{2}\)</span>, 점 <span class="math notranslate nohighlight">\((w, x, y, z) = (1, 2, 3, 4)\)</span><a class="headerlink" href="#f-w-x-y-z-wx-xyz-3w-zy-2-w-x-y-z-1-2-3-4" title="Link to this heading">#</a></h3>
+<p>변수 4개를 <span class="math notranslate nohighlight">\(2 \times 2\)</span> 행렬로 묶어서 넘겨줍니다.  →  [[<span class="math notranslate nohighlight">\(w, x\)</span>], [<span class="math notranslate nohighlight">\(y, z\)</span>]] = [[1, 2], [3, 4]]</p>
 <p>손으로 먼저 구해 봅시다.</p>
 <ul class="simple">
-<li><p>∂f/∂w = x + 3 = ( 　 )</p></li>
-<li><p>∂f/∂x = w + yz = ( 　 )</p></li>
-<li><p>∂f/∂y = xz + 2zy = ( 　 )</p></li>
-<li><p>∂f/∂z = xy + y² = ( 　 )</p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial w} = x + 3 =\)</span> ( 　 )</p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x} = w + yz =\)</span> ( 　 )</p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial y} = xz + 2zy =\)</span> ( 　 )</p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial z} = xy + y^{2} =\)</span> ( 　 )</p></li>
 </ul>
 <div class="box box-think docutils container">
-<p><strong>[생각해 보기]</strong> 💡 결과도 입력과 똑같이 <strong>2 × 2 행렬</strong> 모양으로 나옵니다.
-나중에 딥러닝에서 수백 개의 가중치를 행렬 W 에 담아 한꺼번에 미분할 때 바로 이 코드를 사용합니다!</p>
+<p><strong>[생각해 보기]</strong> 💡 결과도 입력과 똑같이 <strong><span class="math notranslate nohighlight">\(2 \times 2\)</span> 행렬</strong> 모양으로 나옵니다.
+나중에 딥러닝에서 수백 개의 가중치를 행렬 <span class="math notranslate nohighlight">\(W\)</span> 에 담아 한꺼번에 미분할 때 바로 이 코드를 사용합니다!</p>
 </div>
 </section>
 </section>
 <section id="id11">
 <h2>연습 문제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <div class="box box-practice docutils container">
-<p><strong>[문제 1]</strong> f(x) = ln x + 1/x 일 때, f’(2) 를 손으로 구하고 수치미분으로 확인하세요.
-손 계산: f’(x) = ( 　　　　　 ),　f’(2) = ( 　　 )</p>
+<p><strong>[문제 1]</strong> <span class="math notranslate nohighlight">\(\displaystyle f(x) = \ln x + \frac{1}{x}\)</span> 일 때, <span class="math notranslate nohighlight">\(f'(2)\)</span> 를 손으로 구하고 수치미분으로 확인하세요.
+손 계산: <span class="math notranslate nohighlight">\(f'(x) =\)</span> ( 　　　　　 ),　<span class="math notranslate nohighlight">\(f'(2) =\)</span> ( 　　 )</p>
 </div>
 <div class="box box-practice docutils container">
-<p><strong>[문제 2]</strong> f(x, y) = x²y + e<sup>y</sup> 일 때, 점 (1, 0) 에서 ∂f/∂x, ∂f/∂y 를 손으로 구하고 수치미분으로 확인하세요.
-손 계산: ∂f/∂x = ( 　　 ),　∂f/∂y = ( 　　 )</p>
+<p><strong>[문제 2]</strong> <span class="math notranslate nohighlight">\(f(x, y) = x^{2}y + e^{y}\)</span> 일 때, 점 (1, 0) 에서 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\)</span> 를 손으로 구하고 수치미분으로 확인하세요.
+손 계산: <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x} =\)</span> ( 　　 ),　<span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial y} =\)</span> ( 　　 )</p>
 </div>
 </section>
 <section id="id12">
@@ -700,16 +702,16 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p>수치미분</p></td>
-<td class="text-left"><p>공식 없이 작은 Δx 를 직접 넣어 미분계수를 <strong>계산</strong>하는 방법</p></td>
+<td class="text-left"><p>공식 없이 작은 <span class="math notranslate nohighlight">\(\Delta x\)</span> 를 직접 넣어 미분계수를 <strong>계산</strong>하는 방법</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>중앙차분</p></td>
-<td class="text-left"><p>f’(x) ≒ {f(x + Δx) − f(x − Δx)} / (2Δx),  Δx = 10<sup>−4</sup></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle f'(x) \fallingdotseq \frac{f(x + \Delta x) - f(x - \Delta x)}{2\Delta x}, \Delta x = 10^{-4}\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>다변수</p></td>
 <td class="text-left"><p>변수를 하나씩 번갈아 움직이며 계산 (나머지는 고정 = 편미분)</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>주의</p></td>
-<td class="text-left"><p>Δx 가 너무 작으면 반올림 오차, 입력은 실수형 numpy 배열</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\Delta x\)</span> 가 너무 작으면 반올림 오차, 입력은 실수형 numpy 배열</p></td>
 </tr>
 </tbody>
 </table>
@@ -717,8 +719,8 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 <hr class="docutils" />
 <section id="id13">
 <h3>도전 과제<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
-<p>f(W) = (W − 3)² 에서 W = 0 일 때 수치미분 값은 ( 　　 ) 입니다.
-이 값이 <strong>음수</strong>라는 것은 W 를 ( 늘려야 / 줄여야 ) f(W) 가 작아진다는 뜻입니다.
+<p><span class="math notranslate nohighlight">\(f(W) = (W - 3)^{2}\)</span> 에서 <span class="math notranslate nohighlight">\(W = 0\)</span> 일 때 수치미분 값은 ( 　　 ) 입니다.
+이 값이 <strong>음수</strong>라는 것은 <span class="math notranslate nohighlight">\(W\)</span> 를 ( 늘려야 / 줄여야 ) <span class="math notranslate nohighlight">\(f(W)\)</span> 가 작아진다는 뜻입니다.
 → 다음 시간에는 이 아이디어로 인공지능이 <strong>오차를 줄여 가는 방법(경사하강법)</strong> 을 배웁니다!</p>
 <p>(                                                                                                                            )</p>
 </section>
@@ -800,17 +802,17 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#def-lambda">개념 다지기 2. 파이썬으로 함수 만들기 : def 와 lambda</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">실습 1. 수치미분 1차 버전 (변수가 1개인 함수)</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-3xex-f-2">[예제 2] f(x) = 3x·e<sup>x</sup> 에서 f’(2) 구하기</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-3x-cdot-e-x-f-2">[예제 2] <span class="math notranslate nohighlight">\(f(x) = 3x\cdot e^{x}\)</span> 에서 <span class="math notranslate nohighlight">\(f'(2)\)</span> 구하기</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#x">애니메이션 1. Δx 가 작아지면 할선이 접선이 된다</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">탐구. Δx 는 무조건 작을수록 좋을까?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delta-x">애니메이션 1. <span class="math notranslate nohighlight">\(\Delta x\)</span> 가 작아지면 할선이 접선이 된다</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">탐구. <span class="math notranslate nohighlight">\(\Delta x\)</span> 는 무조건 작을수록 좋을까?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 3. 변수가 여러 개이면? → 변수마다 따로 수치미분</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 2. 컴퓨터가 편미분하는 순서 보기</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">실습 2. 수치미분 최종 버전 (변수가 여러 개인 함수)</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-x2-f-3">[예제 3] 1변수 함수 f(x) = x², f’(3)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-y-2x-3xy-y3-1-0-2-0">[예제 4] 2변수 함수 f(x, y) = 2x + 3xy + y³, 점 (1.0, 2.0)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-w-x-y-z-wx-xyz-3w-zy2-w-x-y-z-1-2-3-4">[예제 5] 4변수 함수 f(w, x, y, z) = wx + xyz + 3w + zy², 점 (w, x, y, z) = (1, 2, 3, 4)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-x-2-f-3">[예제 3] 1변수 함수 <span class="math notranslate nohighlight">\(f(x) = x^{2}, f'(3)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-y-2x-3xy-y-3-1-0-2-0">[예제 4] 2변수 함수 <span class="math notranslate nohighlight">\(f(x, y) = 2x + 3xy + y^{3}\)</span>, 점 (1.0, 2.0)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-w-x-y-z-wx-xyz-3w-zy-2-w-x-y-z-1-2-3-4">[예제 5] 4변수 함수 <span class="math notranslate nohighlight">\(f(w, x, y, z) = wx + xyz + 3w + zy^{2}\)</span>, 점 <span class="math notranslate nohighlight">\((w, x, y, z) = (1, 2, 3, 4)\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">연습 문제</a></li>

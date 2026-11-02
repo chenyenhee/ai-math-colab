@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '05_linear_regression_loss';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -359,7 +361,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">애니메이션 1. ‘오차²’ 은 진짜 정사각형의 넓이다!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">직접 조절해 보기</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">개념 다지기 5. 손실함수의 모양 - 간단한 데이터로 손 계산</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">애니메이션 2. W 와 b 를 함께 바꾸면? - 손실함수 ‘그릇’</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">애니메이션 2. <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 함께 바꾸면? - 손실함수 ‘그릇’</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">도전 과제</a></li>
@@ -377,7 +379,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 5 편</p>
-<section id="id1">
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>선형 회귀 (1) - 오차와 손실함수<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「Linear Regression (I) - 오차 • 손실함수」 (ML_LEC_13), 「Linear Regression (II)」 (ML_LEC_14) 일부</p>
@@ -386,9 +388,9 @@
 <section id="id2">
 <h2>학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>입력과 정답의 관계를 일차함수 y = Wx + b 로 나타내고, 가중치 W 와 바이어스 b 의 뜻을 말할 수 있다.</p></li>
-<li><p>오차 t − y 를 구하고, 오차를 제곱해서 평균 내는 이유를 설명할 수 있다.</p></li>
-<li><p>손실함수 E(W, b) 가 W, b 의 함수임을 알고, 손실함수가 가장 작아지는 직선을 찾는 것이 학습임을 이해한다.</p></li>
+<li><p>입력과 정답의 관계를 일차함수 <span class="math notranslate nohighlight">\(y = Wx + b\)</span> 로 나타내고, 가중치 <span class="math notranslate nohighlight">\(W\)</span> 와 바이어스 <span class="math notranslate nohighlight">\(b\)</span> 의 뜻을 말할 수 있다.</p></li>
+<li><p>오차 <span class="math notranslate nohighlight">\(t - y\)</span> 를 구하고, 오차를 제곱해서 평균 내는 이유를 설명할 수 있다.</p></li>
+<li><p>손실함수 <span class="math notranslate nohighlight">\(E(W, b)\)</span> 가 <span class="math notranslate nohighlight">\(W, b\)</span> 의 함수임을 알고, 손실함수가 가장 작아지는 직선을 찾는 것이 학습임을 이해한다.</p></li>
 </ol>
 </section>
 <hr class="docutils" />
@@ -402,24 +404,24 @@
 <section id="id4">
 <h2>핵심 정리<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p><strong>① 모델과 오차</strong></p>
-<p>y = Wx + b,　오차 = t − y</p>
+<p><span class="math notranslate nohighlight">\(y = Wx + b\)</span>,　오차 <span class="math notranslate nohighlight">\(= t - y\)</span></p>
 <p><strong>② 손실함수 (평균제곱오차)</strong></p>
 <div class="box box-formula docutils container">
-<p>E(W, b) = (1/n) × {(t₁ − y₁)² + (t₂ − y₂)² + … + (t<sub>n</sub> − y<sub>n</sub>)²}</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle E(W, b) = \frac{1}{n} \times \{(t_{1} - y_{1})^{2} + (t_{2} - y_{2})^{2} + \cdots + (t_{n} - y_{n})^{2}\}\)</span></p>
 </div>
 <p>오차를 제곱하면 부호가 사라져 서로 지워지지 않고, 큰 오차일수록 더 크게 벌을 준다.<br />
-오차² 은 한 변이 |t − y| 인 정사각형의 넓이이므로, E 는 ‘정사각형 넓이의 평균’ 이다. (아래 애니메이션 1)</p>
-<p><strong>③ 손실함수는 W 의 이차함수</strong></p>
-<p>x = (1, 2, 3), t = (1, 2, 3), b = 0 이면</p>
-<p>E(W) = {(1 − W)² + (2 − 2W)² + (3 − 3W)²} / 3 = (1 + 4 + 9)(1 − W)² / 3 = (14/3)(W − 1)²</p>
-<p>→ 아래로 볼록한 포물선, W = 1 에서 최솟값 0.</p>
-<p><strong>④ 최솟값을 주는 W, b (최소제곱법)</strong></p>
-<p>E 를 W, b 로 각각 편미분한 값이 0 이 되는 점에서</p>
+오차² 은 한 변이 <span class="math notranslate nohighlight">\(|t - y|\)</span> 인 정사각형의 넓이이므로, <span class="math notranslate nohighlight">\(E\)</span> 는 ‘정사각형 넓이의 평균’ 이다. (아래 애니메이션 1)</p>
+<p><strong>③ 손실함수는 <span class="math notranslate nohighlight">\(W\)</span> 의 이차함수</strong></p>
+<p><span class="math notranslate nohighlight">\(x = (1, 2, 3), t = (1, 2, 3), b = 0\)</span> 이면</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle E(W) = \frac{(1 - W)^{2} + (2 - 2W)^{2} + (3 - 3W)^{2}}{3} = \frac{(1 + 4 + 9)(1 - W)^{2}}{3} = \frac{14}{3}(W - 1)^{2}\)</span></p>
+<p>→ 아래로 볼록한 포물선, <span class="math notranslate nohighlight">\(W = 1\)</span> 에서 최솟값 0.</p>
+<p><strong>④ 최솟값을 주는 <span class="math notranslate nohighlight">\(W, b\)</span> (최소제곱법)</strong></p>
+<p><span class="math notranslate nohighlight">\(E\)</span> 를 <span class="math notranslate nohighlight">\(W, b\)</span> 로 각각 편미분한 값이 0 이 되는 점에서</p>
 <div class="box box-formula docutils container">
-<p>W = Σ(x<sub>i</sub> − x̄)(t<sub>i</sub> − t̄) / Σ(x<sub>i</sub> − x̄)²,　b = t̄ − W x̄</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle W = \frac{\sum(x_{i} - \bar{x})(t_{i} - \bar{t})}{\sum(x_{i} - \bar{x})^{2}}\)</span>,　<span class="math notranslate nohighlight">\(b = \bar{t} - W \bar{x}\)</span></p>
 </div>
-<p>공부 시간 – 점수 데이터에서는 W ≒ 0.58, b ≒ 71.6 이다.<br />
-W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 그 바닥이 이 점이다. (아래 애니메이션 2)</p>
+<p>공부 시간 – 점수 데이터에서는 <span class="math notranslate nohighlight">\(W \fallingdotseq 0.58, b \fallingdotseq 71.6\)</span> 이다.<br />
+<span class="math notranslate nohighlight">\(W, b\)</span> 를 함께 바꾸면 <span class="math notranslate nohighlight">\(E(W, b)\)</span> 는 그릇(골짜기) 모양의 곡면이고, 그 바닥이 이 점이다. (아래 애니메이션 2)</p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
 </div></blockquote>
@@ -428,7 +430,7 @@ W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 
 <h2>개념 다지기 1. 데이터를 가장 잘 나타내는 직선 찾기<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>공부 시간 x</p></th>
+<tr class="row-odd"><th class="head text-center"><p>공부 시간 <span class="math notranslate nohighlight">\(x\)</span></p></th>
 <th class="head text-center"><p>9</p></th>
 <th class="head text-center"><p>14</p></th>
 <th class="head text-center"><p>21</p></th>
@@ -438,7 +440,7 @@ W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p>시험 성적 t</p></td>
+<tr class="row-even"><td class="text-center"><p>시험 성적 <span class="math notranslate nohighlight">\(t\)</span></p></td>
 <td class="text-center"><p>74</p></td>
 <td class="text-center"><p>81</p></td>
 <td class="text-center"><p>86</p></td>
@@ -450,9 +452,9 @@ W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 
 </table>
 </div>
 <ul class="simple">
-<li><p>공부 시간이 늘수록 성적도 대체로 오르는 경향 → <strong>y = Wx + b</strong> 꼴의 직선으로 나타낼 수 있습니다.</p></li>
-<li><p>머신러닝에서는 기울기 W 를 <strong>가중치(weight)</strong>, y 절편 b 를 <strong>바이어스(bias)</strong> 라고 부릅니다.</p></li>
-<li><p><strong>학습(learning)</strong> = 데이터를 가장 잘 나타내는 W 와 b 를 찾는 것</p></li>
+<li><p>공부 시간이 늘수록 성적도 대체로 오르는 경향 → <strong><span class="math notranslate nohighlight">\(y = Wx + b\)</span></strong> 꼴의 직선으로 나타낼 수 있습니다.</p></li>
+<li><p>머신러닝에서는 기울기 <span class="math notranslate nohighlight">\(W\)</span> 를 <strong>가중치(weight)</strong>, <span class="math notranslate nohighlight">\(y\)</span> 절편 <span class="math notranslate nohighlight">\(b\)</span> 를 <strong>바이어스(bias)</strong> 라고 부릅니다.</p></li>
+<li><p><strong>학습(learning)</strong> = 데이터를 가장 잘 나타내는 <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 찾는 것</p></li>
 </ul>
 <div class="box box-think docutils container">
 <p><strong>[생각해 보기]</strong> 💡 아래 그래프의 세 직선 ①, ②, ③ 중 데이터를 가장 잘 나타내는 직선은? ( 　 )
@@ -466,14 +468,14 @@ W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 
 </section>
 <section id="error">
 <h2>개념 다지기 2. 오차(error) = 정답 − 예측값<a class="headerlink" href="#error" title="Link to this heading">#</a></h2>
-<p>직선 y = Wx + b 로 계산한 값을 <strong>예측값 y</strong>, 실제 값을 <strong>정답 t</strong> 라고 하면</p>
+<p>직선 <span class="math notranslate nohighlight">\(y = Wx + b\)</span> 로 계산한 값을 <strong>예측값 <span class="math notranslate nohighlight">\(y\)</span></strong>, 실제 값을 <strong>정답 <span class="math notranslate nohighlight">\(t\)</span></strong> 라고 하면</p>
 <div class="box box-note docutils container">
-<p><strong>오차 = t − y = t − (Wx + b)</strong></p>
+<p><strong>오차 <span class="math notranslate nohighlight">\(= t - y = t - (Wx + b)\)</span></strong></p>
 </div>
-<p><strong>[연습 1]</strong> 직선 y = 0.5x + 70 일 때 표를 완성하세요.</p>
+<p><strong>[연습 1]</strong> 직선 <span class="math notranslate nohighlight">\(y = 0.5x + 70\)</span> 일 때 표를 완성하세요.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>x</p></th>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
 <th class="head text-center"><p>9</p></th>
 <th class="head text-center"><p>14</p></th>
 <th class="head text-center"><p>21</p></th>
@@ -483,7 +485,7 @@ W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p>정답 t</p></td>
+<tr class="row-even"><td class="text-center"><p>정답 <span class="math notranslate nohighlight">\(t\)</span></p></td>
 <td class="text-center"><p>74</p></td>
 <td class="text-center"><p>81</p></td>
 <td class="text-center"><p>86</p></td>
@@ -491,7 +493,7 @@ W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 
 <td class="text-center"><p>88</p></td>
 <td class="text-center"><p>92</p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p>예측 y = 0.5x + 70</p></td>
+<tr class="row-odd"><td class="text-center"><p>예측 <span class="math notranslate nohighlight">\(y = 0.5x + 70\)</span></p></td>
 <td class="text-center"><p>74.5</p></td>
 <td class="text-center"><p>77</p></td>
 <td class="text-center"><p>( 　 )</p></td>
@@ -499,7 +501,7 @@ W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 
 <td class="text-center"><p>( 　 )</p></td>
 <td class="text-center"><p>88.5</p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p>오차 t − y</p></td>
+<tr class="row-even"><td class="text-center"><p>오차 <span class="math notranslate nohighlight">\(t - y\)</span></p></td>
 <td class="text-center"><p>−0.5</p></td>
 <td class="text-center"><p>4</p></td>
 <td class="text-center"><p>( 　 )</p></td>
@@ -526,7 +528,7 @@ W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 
 <p>그래서 <strong>오차를 제곱</strong>해서 더합니다.</p>
 <ol class="arabic simple">
 <li><p>제곱하면 언제나 <strong>0 이상</strong> → 서로 지워지지 않는다.</p></li>
-<li><p>오차가 큰 점은 제곱하면 <strong>훨씬 더 커진다</strong> (2² = 4, 10² = 100) → 많이 틀린 점을 더 강하게 고치게 된다.</p></li>
+<li><p>오차가 큰 점은 제곱하면 <strong>훨씬 더 커진다</strong> <span class="math notranslate nohighlight">\((2^{2} = 4, 10^{2} = 100)\)</span> → 많이 틀린 점을 더 강하게 고치게 된다.</p></li>
 </ol>
 <div class="box box-check docutils container">
 <p><strong>[확인 1]</strong> 오차가 (+3, −3) 인 두 점이 있다. 오차의 합 = ( 　 ),  오차²의 합 = ( 　 )</p>
@@ -534,21 +536,21 @@ W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 
 </section>
 <section id="loss-function">
 <h2>개념 다지기 4. 손실함수 (loss function)<a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h2>
-<p>데이터가 n 개일 때, 오차² 의 <strong>평균</strong>을 손실함수라고 합니다.</p>
+<p>데이터가 <span class="math notranslate nohighlight">\(n\)</span> 개일 때, 오차² 의 <strong>평균</strong>을 손실함수라고 합니다.</p>
 <div class="box box-note docutils container">
-<p><strong>E(W, b) = {(t₁ − y₁)² + (t₂ − y₂)² + … + (tₙ − yₙ)²} / n</strong>
-　　　　 = (1/n) × Σ<sub>i=1</sub><sup>n</sup> {t<sub>i</sub> − (W x<sub>i</sub> + b)}²</p>
+<p><strong><span class="math notranslate nohighlight">\(\displaystyle E(W, b) = \frac{(t_{1} - y_{1})^{2} + (t_{2} - y_{2})^{2} + \cdots + (t_{n} - y_{n})^{2}}{n}\)</span></strong>
+　　　　 <span class="math notranslate nohighlight">\(\displaystyle = \frac{1}{n} \times \sum_{i=1}^{n} \{t_{i} - (W x_{i} + b)\}^{2}\)</span></p>
 </div>
 <ul class="simple">
-<li><p>x 와 t 는 데이터로 <strong>이미 주어진 값</strong>입니다.</p></li>
-<li><p>따라서 E 의 값을 바꾸는 것은 <strong>W 와 b 뿐</strong> → 손실함수는 <strong>W, b 의 함수</strong> E(W, b)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span> 와 <span class="math notranslate nohighlight">\(t\)</span> 는 데이터로 <strong>이미 주어진 값</strong>입니다.</p></li>
+<li><p>따라서 <span class="math notranslate nohighlight">\(E\)</span> 의 값을 바꾸는 것은 <strong><span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 뿐</strong> → 손실함수는 <strong><span class="math notranslate nohighlight">\(W, b\)</span> 의 함수</strong> <span class="math notranslate nohighlight">\(E(W, b)\)</span></p></li>
 </ul>
 <div class="box box-practice docutils container">
-<p><strong>[연습 2]</strong> [연습 1] 의 직선 y = 0.5x + 70 의 손실함수 값은
-E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
+<p><strong>[연습 2]</strong> [연습 1] 의 직선 <span class="math notranslate nohighlight">\(y = 0.5x + 70\)</span> 의 손실함수 값은
+<span class="math notranslate nohighlight">\(\displaystyle E(0.5, 70) = \frac{0.25 + 16 + 30.25 + 42.25 + 4 + 12.25}{6} =\)</span> ( 　　 )</p>
 </div>
 <div class="box box-note docutils container">
-<p><strong>선형 회귀의 최종 목표</strong>: 손실함수 E(W, b) 가 <strong>가장 작아지는</strong> W 와 b 를 찾는 것!</p>
+<p><strong>선형 회귀의 최종 목표</strong>: 손실함수 <span class="math notranslate nohighlight">\(E(W, b)\)</span> 가 <strong>가장 작아지는</strong> <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 찾는 것!</p>
 </div>
 <div class="box box-check docutils container">
 <p><strong>[확인 2]</strong> 세 직선 중 손실함수 값이 가장 작은 직선은 ( 　 ) 번이고, 이것이 처음 그래프에서 고른 직선과 같은가요?</p>
@@ -556,39 +558,39 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </section>
 <section id="id7">
 <h2>애니메이션 1. ‘오차²’ 은 진짜 정사각형의 넓이다!<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
-<p>오차가 t − y 이면 오차² 은 <strong>한 변이 |t − y| 인 정사각형의 넓이</strong> 입니다.
-기울기 W 를 0 → 1.2 로 바꿀 때 정사각형들의 넓이(빨강)와 손실함수 E(W) (오른쪽)가 어떻게 변하는지 보세요.
-(이 애니메이션에서는 바이어스를 b = 71.6 으로 고정합니다)</p>
+<p>오차가 <span class="math notranslate nohighlight">\(t - y\)</span> 이면 오차² 은 <strong>한 변이 <span class="math notranslate nohighlight">\(|t - y|\)</span> 인 정사각형의 넓이</strong> 입니다.
+기울기 <span class="math notranslate nohighlight">\(W\)</span> 를 0 → 1.2 로 바꿀 때 정사각형들의 넓이(빨강)와 손실함수 <span class="math notranslate nohighlight">\(E(W)\)</span> (오른쪽)가 어떻게 변하는지 보세요.
+(이 애니메이션에서는 바이어스를 <span class="math notranslate nohighlight">\(b = 71.6\)</span> 으로 고정합니다)</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/05_linear_regression_loss_1.jpg"><source src="videos/05_linear_regression_loss_1.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 <div class="box box-check docutils container">
 <p><strong>[관찰 1]</strong>
-① 손실함수 E(W) 의 그래프는 ( 　　　　 ) 모양이다. (힌트: 수학 시간에 배운 함수)
-② 정사각형들이 가장 작아질 때의 W 는 약 ( 　　 ) 이고, 이때 그래프는 ( 꼭짓점 / 양 끝 ) 에 있다.</p>
+① 손실함수 <span class="math notranslate nohighlight">\(E(W)\)</span> 의 그래프는 ( 　　　　 ) 모양이다. (힌트: 수학 시간에 배운 함수)
+② 정사각형들이 가장 작아질 때의 <span class="math notranslate nohighlight">\(W\)</span> 는 약 ( 　　 ) 이고, 이때 그래프는 ( 꼭짓점 / 양 끝 ) 에 있다.</p>
 </div>
 </section>
 <section id="id8">
 <h2>직접 조절해 보기<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
-<p>슬라이더로 W 와 b 를 바꿔 가며 <strong>손실함수 값이 가장 작아지는 직선</strong>을 찾아보세요. 친구와 누가 더 작은 E 를 찾는지 겨뤄 보세요!</p>
+<p>슬라이더로 <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 바꿔 가며 <strong>손실함수 값이 가장 작아지는 직선</strong>을 찾아보세요. 친구와 누가 더 작은 <span class="math notranslate nohighlight">\(E\)</span> 를 찾는지 겨뤄 보세요!</p>
 <div class="box box-note docutils container">
-<p>내가 찾은 값:  W = ( 　　 ),  b = ( 　　 ),  E = ( 　　 )</p>
+<p>내가 찾은 값:  <span class="math notranslate nohighlight">\(W =\)</span> ( 　　 ),  <span class="math notranslate nohighlight">\(b =\)</span> ( 　　 ),  <span class="math notranslate nohighlight">\(E =\)</span> ( 　　 )</p>
 </div>
 </section>
 <section id="id9">
 <h2>개념 다지기 5. 손실함수의 모양 - 간단한 데이터로 손 계산<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
-<p>계산을 쉽게 하기 위해 아래 데이터에서 <strong>b = 0</strong> 으로 두고 E(W) 를 계산해 봅시다.</p>
+<p>계산을 쉽게 하기 위해 아래 데이터에서 <strong><span class="math notranslate nohighlight">\(b = 0\)</span></strong> 으로 두고 <span class="math notranslate nohighlight">\(E(W)\)</span> 를 계산해 봅시다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>x</p></th>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
 <th class="head text-center"><p>1</p></th>
 <th class="head text-center"><p>2</p></th>
 <th class="head text-center"><p>3</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p>t</p></td>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(t\)</span></p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>2</p></td>
 <td class="text-center"><p>3</p></td>
@@ -596,10 +598,10 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </tbody>
 </table>
 </div>
-<p>E(W) = {(1 − W·1)² + (2 − W·2)² + (3 − W·3)²} / 3 = {(1 − W)² × (1 + 4 + 9)} / 3 = (14/3)(1 − W)²</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle E(W) = \frac{(1 - W\cdot 1)^{2} + (2 - W\cdot 2)^{2} + (3 - W\cdot 3)^{2}}{3} = \frac{(1 - W)^{2} \times (1 + 4 + 9)}{3} = \frac{14}{3}(1 - W)^{2}\)</span></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>W</p></th>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(W\)</span></p></th>
 <th class="head text-center"><p>−1</p></th>
 <th class="head text-center"><p>0</p></th>
 <th class="head text-center"><p>1</p></th>
@@ -608,7 +610,7 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p>E(W)</p></td>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(E(W)\)</span></p></td>
 <td class="text-center"><p>18.7</p></td>
 <td class="text-center"><p>( 　 )</p></td>
 <td class="text-center"><p>( 　 )</p></td>
@@ -619,8 +621,8 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </table>
 </div>
 <div class="box box-think docutils container">
-<p><strong>[생각해 보기]</strong> 💡 E(W) = (14/3)(1 − W)² 은 W = ( 　 ) 에서 최솟값 ( 　 ) 을 갖는 이차함수이다.
-이번처럼 식이 간단하면 손으로 꼭짓점을 찾을 수 있지만, 변수(W)가 수백만 개인 인공지능은 어떻게 최솟값을 찾을까요?
+<p><strong>[생각해 보기]</strong> 💡 <span class="math notranslate nohighlight">\(\displaystyle E(W) = \frac{14}{3}(1 - W)^{2}\)</span> 은 <span class="math notranslate nohighlight">\(W =\)</span> ( 　 ) 에서 최솟값 ( 　 ) 을 갖는 이차함수이다.
+이번처럼 식이 간단하면 손으로 꼭짓점을 찾을 수 있지만, 변수<span class="math notranslate nohighlight">\((W)\)</span>가 수백만 개인 인공지능은 어떻게 최솟값을 찾을까요?
 → <strong>다음 시간: 미분을 이용한 경사하강법!</strong></p>
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -637,8 +639,8 @@ W =  3  →  E(W) = 18.67
 </div>
 </section>
 <section id="w-b">
-<h2>애니메이션 2. W 와 b 를 함께 바꾸면? - 손실함수 ‘그릇’<a class="headerlink" href="#w-b" title="Link to this heading">#</a></h2>
-<p>W 와 b 가 둘 다 변하면 E(W, b) 는 <strong>길쭉한 그릇(골짜기) 모양의 곡면</strong>이 됩니다. 그릇의 <strong>가장 낮은 바닥(빨간 점)</strong> 이 우리가 찾는 W, b 입니다.
+<h2>애니메이션 2. <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 함께 바꾸면? - 손실함수 ‘그릇’<a class="headerlink" href="#w-b" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 가 둘 다 변하면 <span class="math notranslate nohighlight">\(E(W, b)\)</span> 는 <strong>길쭉한 그릇(골짜기) 모양의 곡면</strong>이 됩니다. 그릇의 <strong>가장 낮은 바닥(빨간 점)</strong> 이 우리가 찾는 <span class="math notranslate nohighlight">\(W, b\)</span> 입니다.
 (공부 시간 데이터 사용. 왼쪽 곡면이 천천히 돌아가고, 오른쪽은 위에서 내려다본 등고선입니다. 너무 높은 부분은 잘라서 보여 줍니다)</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -648,11 +650,11 @@ W =  3  →  E(W) = 18.67
 <section id="id10">
 <h2>연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <div class="box box-practice docutils container">
-<p><strong>[문제 1]</strong> 직선 y = x + 60 의 공부 시간 데이터에 대한 오차를 모두 구하고, 오차의 합과 손실함수 값을 구하세요.
-오차: ( 　, 　, 　, 　, 　, 　 ),  오차의 합 = ( 　 ),  E = ( 　　 )</p>
+<p><strong>[문제 1]</strong> 직선 <span class="math notranslate nohighlight">\(y = x + 60\)</span> 의 공부 시간 데이터에 대한 오차를 모두 구하고, 오차의 합과 손실함수 값을 구하세요.
+오차: ( 　, 　, 　, 　, 　, 　 ),  오차의 합 = ( 　 ),  <span class="math notranslate nohighlight">\(E =\)</span> ( 　　 )</p>
 </div>
 <div class="box box-practice docutils container">
-<p><strong>[문제 2]</strong> [문제 1] 의 직선과 y = 0.5x + 70 중 어느 쪽이 더 좋은 직선인가요? <strong>오차의 합</strong>으로 판단할 때와 <strong>손실함수</strong>로 판단할 때 결과가 같은지 비교하세요.</p>
+<p><strong>[문제 2]</strong> [문제 1] 의 직선과 <span class="math notranslate nohighlight">\(y = 0.5x + 70\)</span> 중 어느 쪽이 더 좋은 직선인가요? <strong>오차의 합</strong>으로 판단할 때와 <strong>손실함수</strong>로 판단할 때 결과가 같은지 비교하세요.</p>
 </div>
 </section>
 <section id="id11">
@@ -665,24 +667,24 @@ W =  3  →  E(W) = 18.67
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p>모델</p></td>
-<td class="text-left"><p>y = Wx + b  (W: 가중치, b: 바이어스)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(y = Wx + b\)</span>  (<span class="math notranslate nohighlight">\(W\)</span>: 가중치, <span class="math notranslate nohighlight">\(b\)</span>: 바이어스)</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>오차</p></td>
-<td class="text-left"><p>t − y = t − (Wx + b)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(t - y = t - (Wx + b)\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>손실함수</p></td>
-<td class="text-left"><p>E(W, b) = (1/n) × Σ {t<sub>i</sub> − (W x<sub>i</sub> + b)}²  ← 오차² 의 평균</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle E(W, b) = \frac{1}{n} \times \sum \{t_{i} - (W x_{i} + b)\}^{2} \leftarrow\)</span> 오차² 의 평균</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>학습 목표</p></td>
-<td class="text-left"><p>E(W, b) 가 최소가 되는 W, b 찾기</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(E(W, b)\)</span> 가 최소가 되는 <span class="math notranslate nohighlight">\(W, b\)</span> 찾기</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <section id="id12">
 <h3>도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
-<p>E(W) 그래프에서 현재 W = 3 에 있다고 하자. 이 점에서 접선의 기울기는 ( 양수 / 음수 ) 이므로,
-E(W) 를 줄이려면 W 를 ( 늘려야 / 줄여야 ) 한다. → 제 2편의 수치미분으로 이 기울기를 구할 수 있다!</p>
+<p><span class="math notranslate nohighlight">\(E(W)\)</span> 그래프에서 현재 <span class="math notranslate nohighlight">\(W = 3\)</span> 에 있다고 하자. 이 점에서 접선의 기울기는 ( 양수 / 음수 ) 이므로,
+<span class="math notranslate nohighlight">\(E(W)\)</span> 를 줄이려면 <span class="math notranslate nohighlight">\(W\)</span> 를 ( 늘려야 / 줄여야 ) 한다. → 제 2편의 수치미분으로 이 기울기를 구할 수 있다!</p>
 </section>
 </section>
 </section>
@@ -763,7 +765,7 @@ E(W) 를 줄이려면 W 를 ( 늘려야 / 줄여야 ) 한다. → 제 2편의 �
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">애니메이션 1. ‘오차²’ 은 진짜 정사각형의 넓이다!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">직접 조절해 보기</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">개념 다지기 5. 손실함수의 모양 - 간단한 데이터로 손 계산</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">애니메이션 2. W 와 b 를 함께 바꾸면? - 손실함수 ‘그릇’</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">애니메이션 2. <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 함께 바꾸면? - 손실함수 ‘그릇’</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">도전 과제</a></li>

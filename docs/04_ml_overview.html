@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '04_ml_overview';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -380,7 +382,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 4 편</p>
-<section id="id1">
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>머신러닝의 개념과 종류<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「과정 소개」 (ML_LEC_01), 「머신러닝(지도학습/비지도학습) 개요」 (ML_LEC_12)</p>
@@ -406,27 +408,27 @@
 <h2>핵심 정리<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p><strong>① 머신러닝을 수식으로 쓰면</strong></p>
 <ul class="simple">
-<li><p>데이터 : (x₁, t₁), (x₂, t₂), … , (x<sub>n</sub>, t<sub>n</sub>)　(x : 입력, t : 정답)</p></li>
-<li><p>모델 : y = f(x ; W) — 가중치 W 에 따라 모양이 바뀌는 함수</p></li>
-<li><p>손실 : 예측 y 와 정답 t 의 차이를 하나의 수 E(W) 로 나타낸 것</p></li>
-<li><p>학습 : E(W) 가 가장 작아지는 W 를 찾는 것</p></li>
+<li><p>데이터 : <span class="math notranslate nohighlight">\((x_{1}, t_{1}), (x_{2}, t_{2}), \cdots , (x_{n}, t_{n})\)</span>　(<span class="math notranslate nohighlight">\(x\)</span> : 입력, <span class="math notranslate nohighlight">\(t\)</span> : 정답)</p></li>
+<li><p>모델 : <span class="math notranslate nohighlight">\(y = f(x ; W)\)</span> — 가중치 <span class="math notranslate nohighlight">\(W\)</span> 에 따라 모양이 바뀌는 함수</p></li>
+<li><p>손실 : 예측 <span class="math notranslate nohighlight">\(y\)</span> 와 정답 <span class="math notranslate nohighlight">\(t\)</span> 의 차이를 하나의 수 <span class="math notranslate nohighlight">\(E(W)\)</span> 로 나타낸 것</p></li>
+<li><p>학습 : <span class="math notranslate nohighlight">\(E(W)\)</span> 가 가장 작아지는 <span class="math notranslate nohighlight">\(W\)</span> 를 찾는 것</p></li>
 </ul>
 <p><strong>② 지도학습의 두 종류</strong></p>
 <ul class="simple">
-<li><p>회귀 : 정답 t 가 연속적인 수 (점수, 가격) → 모델 예) y = Wx + b</p></li>
-<li><p>분류 : 정답 t 가 종류 (합격 / 불합격) → 모델 예) y = sigmoid(Wx + b), y ≥ 0.5 이면 합격</p></li>
+<li><p>회귀 : 정답 <span class="math notranslate nohighlight">\(t\)</span> 가 연속적인 수 (점수, 가격) → 모델 예) <span class="math notranslate nohighlight">\(y = Wx + b\)</span></p></li>
+<li><p>분류 : 정답 <span class="math notranslate nohighlight">\(t\)</span> 가 종류 (합격 / 불합격) → 모델 예) <span class="math notranslate nohighlight">\(y = \mathrm{sigmoid}(Wx + b), y \ge 0.5\)</span> 이면 합격</p></li>
 </ul>
-<p><strong>③ 비지도학습 : k-평균 군집화</strong></p>
-<p>정답 없이 점들을 k 개의 묶음으로 나눈다. 묶음의 중심을 μ₁, μ₂, … , μ<sub>k</sub> 라 할 때</p>
+<p><strong>③ 비지도학습 : <span class="math notranslate nohighlight">\(k\)</span>-평균 군집화</strong></p>
+<p>정답 없이 점들을 <span class="math notranslate nohighlight">\(k\)</span> 개의 묶음으로 나눈다. 묶음의 중심을 <span class="math notranslate nohighlight">\(\mu_{1}, \mu_{2}, \cdots , \mu_{k}\)</span> 라 할 때</p>
 <div class="box box-formula docutils container">
-<p>E = Σ (각 점과 그 점이 속한 묶음의 중심 사이 거리)²</p>
+<p><span class="math notranslate nohighlight">\(E = \sum\)</span> (각 점과 그 점이 속한 묶음의 중심 사이 거리)<span class="math notranslate nohighlight">\(^{2}\)</span></p>
 </div>
 <p>를 줄이도록 다음 두 단계를 번갈아 반복한다. (아래 애니메이션 1)</p>
 <ol class="arabic simple">
 <li><p>중심을 고정하고, 각 점을 가장 가까운 중심의 묶음에 넣는다.</p></li>
 <li><p>묶음을 고정하고, 중심을 그 묶음 점들의 평균 위치로 옮긴다.</p></li>
 </ol>
-<p>두 단계 모두 E 를 늘리지 않으므로 반복하면 E 가 줄어들다 멈춘다.</p>
+<p>두 단계 모두 <span class="math notranslate nohighlight">\(E\)</span> 를 늘리지 않으므로 반복하면 <span class="math notranslate nohighlight">\(E\)</span> 가 줄어들다 멈춘다.</p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
 </div></blockquote>
@@ -463,7 +465,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p>데이터</p></td>
-<td class="text-left"><p>입력 x 와 <strong>정답 t (label)</strong> 이 함께 있다</p></td>
+<td class="text-left"><p>입력 <span class="math notranslate nohighlight">\(x\)</span> 와 <strong>정답 t (label)</strong> 이 함께 있다</p></td>
 <td class="text-left"><p><strong>입력만</strong> 있고 정답이 없다</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>비유</p></td>
@@ -525,7 +527,7 @@
 </section>
 <section id="id9">
 <h2>애니메이션 1. 비지도학습 - 정답 없이 스스로 묶기 (군집화)<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
-<p>아래 점들에는 <strong>정답(색)이 없습니다.</strong> 컴퓨터가 “가까운 것끼리” 기준으로 3개의 그룹을 스스로 찾아가는 과정입니다. (k-평균 군집화)</p>
+<p>아래 점들에는 <strong>정답(색)이 없습니다.</strong> 컴퓨터가 “가까운 것끼리” 기준으로 3개의 그룹을 스스로 찾아가는 과정입니다. (<span class="math notranslate nohighlight">\(k\)</span>-평균 군집화)</p>
 <ol class="arabic simple">
 <li><p>그룹의 중심(★)을 아무 데나 3개 놓는다.</p></li>
 <li><p>각 점을 가장 가까운 ★ 의 그룹으로 칠한다.</p></li>
@@ -578,7 +580,7 @@
 </div>
 <section id="id13">
 <h3>도전 과제<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
-<p>회귀의 대표 모델은 <strong>y = Wx + b</strong> 입니다. 데이터에 가장 잘 맞는 W, b 를 찾으려면 “잘 맞는다” 를 숫자로 나타내야 합니다. 어떻게 나타낼 수 있을까요? → 다음 시간: <strong>선형 회귀와 손실함수</strong></p>
+<p>회귀의 대표 모델은 <strong><span class="math notranslate nohighlight">\(y = Wx + b\)</span></strong> 입니다. 데이터에 가장 잘 맞는 <span class="math notranslate nohighlight">\(W, b\)</span> 를 찾으려면 “잘 맞는다” 를 숫자로 나타내야 합니다. 어떻게 나타낼 수 있을까요? → 다음 시간: <strong>선형 회귀와 손실함수</strong></p>
 </section>
 </section>
 </section>

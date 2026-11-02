@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '03_vector_matrix';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -383,7 +385,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 3 편</p>
-<section id="numpy">
+<section class="tex2jax_ignore mathjax_ignore" id="numpy">
 <h1>벡터와 행렬 - numpy 로 데이터 다루기<a class="headerlink" href="#numpy" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「Python numpy (I)·(II)·(III)」 (ML_LEC_06, 07, 08)</p>
@@ -393,7 +395,7 @@
 <h2>학습 목표<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>numpy 로 벡터와 행렬을 만들고 형상(shape)과 차원(ndim)을 확인할 수 있다.</p></li>
-<li><p>행렬 곱의 계산 원리와 크기 조건 (m × n)(n × k) = (m × k) 를 설명할 수 있다.</p></li>
+<li><p>행렬 곱의 계산 원리와 크기 조건 <span class="math notranslate nohighlight">\((m \times n)(n \times k) = (m \times k)\)</span> 를 설명할 수 있다.</p></li>
 <li><p>브로드캐스트, 전치행렬, 인덱싱·슬라이싱으로 데이터를 원하는 모양으로 바꿀 수 있다.</p></li>
 </ol>
 </section>
@@ -406,30 +408,30 @@
 </ul>
 <div class="box box-note docutils container">
 <p><strong>왜 행렬일까?</strong> 🤔<br />
-사진 한 장은 숫자(밝기)가 가로세로로 늘어선 <strong>행렬</strong>입니다. 28 × 28 손글씨 숫자 사진은 784 개의 숫자이고,<br />
+사진 한 장은 숫자(밝기)가 가로세로로 늘어선 <strong>행렬</strong>입니다. <span class="math notranslate nohighlight">\(28 \times 28\)</span> 손글씨 숫자 사진은 784 개의 숫자이고,<br />
 인공지능은 이 숫자들에 <strong>가중치 행렬</strong>을 곱해서 “이 숫자는 5” 라고 판단합니다.</p>
 </div>
 </section>
 <section id="id3">
 <h2>핵심 정리<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p><strong>① 형상(shape)</strong></p>
-<p>행이 m 개, 열이 n 개인 행렬의 형상을 m × n 으로 나타낸다.</p>
+<p>행이 <span class="math notranslate nohighlight">\(m\)</span> 개, 열이 <span class="math notranslate nohighlight">\(n\)</span> 개인 행렬의 형상을 <span class="math notranslate nohighlight">\(m \times n\)</span> 으로 나타낸다.</p>
 <p><strong>② 행렬 곱의 정의</strong></p>
-<p>A 가 m × n, B 가 n × k 이면 C = AB 는 m × k 이고</p>
+<p><span class="math notranslate nohighlight">\(A\)</span> 가 <span class="math notranslate nohighlight">\(m \times n, B\)</span> 가 <span class="math notranslate nohighlight">\(n \times k\)</span> 이면 <span class="math notranslate nohighlight">\(C = AB\)</span> 는 <span class="math notranslate nohighlight">\(m \times k\)</span> 이고</p>
 <div class="box box-formula docutils container">
-<p>C 의 (i, j) 성분 = (A 의 i 행) 과 (B 의 j 열) 의 같은 순서 원소끼리 곱한 값의 합<br />
-　　　　　　　 = a<sub>i1</sub>b<sub>1j</sub> + a<sub>i2</sub>b<sub>2j</sub> + … + a<sub>in</sub>b<sub>nj</sub></p>
+<p><span class="math notranslate nohighlight">\(C\)</span> 의 <span class="math notranslate nohighlight">\((i, j)\)</span> 성분 = (<span class="math notranslate nohighlight">\(A\)</span> 의 <span class="math notranslate nohighlight">\(i\)</span> 행) 과 (<span class="math notranslate nohighlight">\(B\)</span> 의 <span class="math notranslate nohighlight">\(j\)</span> 열) 의 같은 순서 원소끼리 곱한 값의 합<br />
+　　　　　　　 <span class="math notranslate nohighlight">\(= a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{in}b_{nj}\)</span></p>
 </div>
-<p>예) A = ( 1 2 3 / 4 5 6 ), B = ( −1 −2 / −3 −4 / −5 −6 ) 이면<br />
-(1, 1) 성분 = 1 × (−1) + 2 × (−3) + 3 × (−5) = −22,　AB = ( −22 −28 / −49 −64 )</p>
+<p>예) <span class="math notranslate nohighlight">\(A =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{pmatrix}\)</span>, <span class="math notranslate nohighlight">\(B =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}-1 &amp; -2 \\ -3 &amp; -4 \\ -5 &amp; -6\end{pmatrix}\)</span> 이면<br />
+(1, 1) 성분 <span class="math notranslate nohighlight">\(= 1 \times (-1) + 2 \times (-3) + 3 \times (-5) = -22\)</span>,　<span class="math notranslate nohighlight">\(AB =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}-22 &amp; -28 \\ -49 &amp; -64\end{pmatrix}\)</span></p>
 <p><strong>③ 크기 조건</strong></p>
-<p>(m × <strong>n</strong>) · (<strong>n</strong> × k) = (m × k) : 앞 행렬의 열의 개수와 뒤 행렬의 행의 개수가 같아야 곱할 수 있다.<br />
-일반적으로 AB ≠ BA 이다.</p>
+<p><span class="math notranslate nohighlight">\((m \times \boldsymbol{n}) \cdot (\boldsymbol{n} \times k) = (m \times k)\)</span> : 앞 행렬의 열의 개수와 뒤 행렬의 행의 개수가 같아야 곱할 수 있다.<br />
+일반적으로 <span class="math notranslate nohighlight">\(AB \ne BA\)</span> 이다.</p>
 <p><strong>④ 전치행렬</strong></p>
-<p>A<sup>T</sup> 의 (i, j) 성분 = A 의 (j, i) 성분.　(AB)<sup>T</sup> = B<sup>T</sup>A<sup>T</sup></p>
+<p><span class="math notranslate nohighlight">\(A^{T}\)</span> 의 <span class="math notranslate nohighlight">\((i, j)\)</span> 성분 <span class="math notranslate nohighlight">\(= A\)</span> 의 <span class="math notranslate nohighlight">\((j, i)\)</span> 성분.　<span class="math notranslate nohighlight">\((AB)^{T} = B^{T}A^{T}\)</span></p>
 <p><strong>⑤ 인공지능과의 연결</strong></p>
-<p>입력 x = (x₁, x₂, x₃) 에 가중치를 곱해 더하는 계산 x₁w₁ + x₂w₂ + x₃w₃ 은 (1 × 3) · (3 × 1) 행렬 곱이다.<br />
-데이터 25 개를 한꺼번에 계산하면 X (25 × 3) · W (3 × 1) = Y (25 × 1). 행렬 곱 한 번이 ‘가중합 25 번’ 이다.</p>
+<p>입력 <span class="math notranslate nohighlight">\(x = (x_{1}, x_{2}, x_{3})\)</span> 에 가중치를 곱해 더하는 계산 <span class="math notranslate nohighlight">\(x_{1}w_{1} + x_{2}w_{2} + x_{3}w_{3}\)</span> 은 <span class="math notranslate nohighlight">\((1 \times 3) \cdot (3 \times 1)\)</span> 행렬 곱이다.<br />
+데이터 25 개를 한꺼번에 계산하면 <span class="math notranslate nohighlight">\(X (25 \times 3) \cdot W (3 \times 1) = Y (25 \times 1)\)</span>. 행렬 곱 한 번이 ‘가중합 25 번’ 이다.</p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
 </div></blockquote>
@@ -437,16 +439,17 @@
 <section id="shape">
 <h2>개념 다지기 1. 벡터와 행렬, 형상(shape)<a class="headerlink" href="#shape" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>벡터</strong>: 숫자를 한 줄로 늘어놓은 것 → 1차원 배열.  예) A = (1, 2, 3)</p></li>
+<li><p><strong>벡터</strong>: 숫자를 한 줄로 늘어놓은 것 → 1차원 배열.  예) <span class="math notranslate nohighlight">\(A = (1, 2, 3)\)</span></p></li>
 <li><p><strong>행렬</strong>: 숫자를 가로(행)·세로(열)로 늘어놓은 것 → 2차원 배열.</p></li>
 </ul>
-<p>A = ( 1　2　3 )
-　　　　( 4　5　6 )　　→ 행 2개, 열 3개 → <strong>형상(shape) 2 × 3</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A = \begin{pmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{pmatrix}\end{split}\]</div>
+<p>→ 행 2개, 열 3개 → <strong>형상(shape) 2 × 3</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>확인할 것</p></th>
 <th class="head text-left"><p>numpy 코드</p></th>
-<th class="head text-left"><p>위 행렬 A 의 결과</p></th>
+<th class="head text-left"><p>위 행렬 <span class="math notranslate nohighlight">\(A\)</span> 의 결과</p></th>
 </tr>
 </thead>
 <tbody>
@@ -466,16 +469,16 @@
 </table>
 </div>
 <div class="box box-practice docutils container">
-<p><strong>[연습 1]</strong> 행렬 B = ( 1　2 ) / ( 3　4 ) / ( 5　6 ) (3행 2열) 의 형상은 ( 　 × 　 ), 원소 개수는 ( 　 ) 개</p>
+<p><strong>[연습 1]</strong> 행렬 <span class="math notranslate nohighlight">\(B =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 \\ 3 &amp; 4 \\ 5 &amp; 6\end{pmatrix}\)</span> (3행 2열) 의 형상은 ( 　 × 　 ), 원소 개수는 ( 　 ) 개</p>
 </div>
 </section>
 <section id="reshape">
 <h2>개념 다지기 2. 같은 자리끼리 하는 사칙연산과 형 변환(reshape)<a class="headerlink" href="#reshape" title="Link to this heading">#</a></h2>
 <p>크기가 같은 두 벡터(행렬)의 +, −, ×, ÷ 는 <strong>같은 자리의 원소끼리</strong> 계산합니다.</p>
-<p>A = (1, 2, 3),　B = (4, 5, 6) 이면
-　A + B = (5, 7, 9),　A × B = ( 　, 　, 　 ),　B / A = (4, 2.5, 2)</p>
+<p><span class="math notranslate nohighlight">\(A = (1, 2, 3)\)</span>,　<span class="math notranslate nohighlight">\(B = (4, 5, 6)\)</span> 이면
+　<span class="math notranslate nohighlight">\(A + B = (5, 7, 9)\)</span>,　<span class="math notranslate nohighlight">\(A \times B =\)</span> ( 　, 　, 　 ),　<span class="math notranslate nohighlight">\(\displaystyle \frac{B}{A} = (4, 2.5, 2)\)</span></p>
 <p><strong>reshape</strong> 는 원소의 순서는 그대로 두고 <strong>모양만</strong> 바꿉니다.
-　(1, 2, 3, 4, 5, 6) → reshape(2, 3) → ( 1 2 3 / 4 5 6 )</p>
+　(1, 2, 3, 4, 5, 6) → <code class="docutils literal notranslate"><span class="pre">reshape(2,</span> <span class="pre">3)</span></code> → <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{pmatrix}\)</span></p>
 <div class="box box-check docutils container">
 <p><strong>[확인 1]</strong> <code class="docutils literal notranslate"><span class="pre">C.reshape(3,</span> <span class="pre">2)</span></code> 의 결과를 손으로 먼저 써 보고 비교하세요. 원소는 ( 행 / 열 ) 방향으로 차례대로 채워집니다.
 <strong>[생각해 보기]</strong> <code class="docutils literal notranslate"><span class="pre">C.reshape(4,</span> <span class="pre">2)</span></code> 는 왜 오류가 날까요? (                                       )</p>
@@ -483,44 +486,43 @@
 </section>
 <section id="dot-product">
 <h2>개념 다지기 3. 행렬 곱 (dot product) ⭐ 가장 중요!<a class="headerlink" href="#dot-product" title="Link to this heading">#</a></h2>
-<p>행렬 곱 A · B 의 (i 행, j 열) 원소 = <strong>A 의 i 번째 행</strong> 과 <strong>B 의 j 번째 열</strong> 에서 같은 순서의 원소끼리 곱해서 모두 더한 값</p>
-<p>A = ( 1　2　3 )　　B = ( −1　−2 )
-　　　( 4　5　6 )　　　　( −3　−4 )
-　　　　　　　　　　　　( −5　−6 )</p>
+<p>행렬 곱 <span class="math notranslate nohighlight">\(A \cdot B\)</span> 의 (<span class="math notranslate nohighlight">\(i\)</span> 행, <span class="math notranslate nohighlight">\(j\)</span> 열) 원소 = <strong><span class="math notranslate nohighlight">\(A\)</span> 의 <span class="math notranslate nohighlight">\(i\)</span> 번째 행</strong> 과 <strong><span class="math notranslate nohighlight">\(B\)</span> 의 <span class="math notranslate nohighlight">\(j\)</span> 번째 열</strong> 에서 같은 순서의 원소끼리 곱해서 모두 더한 값</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A = \begin{pmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{pmatrix}, \qquad B = \begin{pmatrix}-1 &amp; -2 \\ -3 &amp; -4 \\ -5 &amp; -6\end{pmatrix}\end{split}\]</div>
 <ul class="simple">
-<li><p>(1, 1) 원소 = 1 × (−1) + 2 × (−3) + 3 × (−5) = −1 − 6 − 15 = −22</p></li>
-<li><p>(1, 2) 원소 = 1 × (−2) + 2 × (−4) + 3 × (−6) = ( 　　 )</p></li>
-<li><p>(2, 1) 원소 = 4 × (−1) + 5 × (−3) + 6 × (−5) = ( 　　 )</p></li>
-<li><p>(2, 2) 원소 = ( 　　　　　　　　　　　　　　 ) = −64</p></li>
+<li><p>(1, 1) 원소 <span class="math notranslate nohighlight">\(= 1 \times (-1) + 2 \times (-3) + 3 \times (-5) = -1 - 6 - 15 = -22\)</span></p></li>
+<li><p>(1, 2) 원소 <span class="math notranslate nohighlight">\(= 1 \times (-2) + 2 \times (-4) + 3 \times (-6) =\)</span> ( 　　 )</p></li>
+<li><p>(2, 1) 원소 <span class="math notranslate nohighlight">\(= 4 \times (-1) + 5 \times (-3) + 6 \times (-5) =\)</span> ( 　　 )</p></li>
+<li><p>(2, 2) 원소 = ( 　　　　　　　　　　　　　　 ) <span class="math notranslate nohighlight">\(= -64\)</span></p></li>
 </ul>
 <section id="id4">
 <h3>크기 조건<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
-<p><strong>(m × n) · (n × k) = (m × k)</strong>  → 앞 행렬의 <strong>열의 개수</strong> 와 뒤 행렬의 <strong>행의 개수</strong> 가 같아야 곱할 수 있습니다.</p>
-<p>(2 × <u>3</u>) · (<u>3</u> × 2) = (2 × 2)</p>
+<p><strong><span class="math notranslate nohighlight">\((m \times n) \cdot (n \times k) = (m \times k)\)</span></strong>  → 앞 행렬의 <strong>열의 개수</strong> 와 뒤 행렬의 <strong>행의 개수</strong> 가 같아야 곱할 수 있습니다.</p>
+<p><span class="math notranslate nohighlight">\((2 \times \underline{3}) \cdot (\underline{3} \times 2) = (2 \times 2)\)</span></p>
 </section>
 </section>
 <section id="id5">
 <h2>애니메이션 1. 행렬 곱이 계산되는 순서<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
-<p>A 의 행(빨강)과 B 의 열(파랑)이 만나 결과 행렬 C 의 한 칸(초록)이 채워집니다. 실행 후 ▶ 를 누르세요.</p>
+<p><span class="math notranslate nohighlight">\(A\)</span> 의 행(빨강)과 <span class="math notranslate nohighlight">\(B\)</span> 의 열(파랑)이 만나 결과 행렬 <span class="math notranslate nohighlight">\(C\)</span> 의 한 칸(초록)이 채워집니다. 실행 후 ▶ 를 누르세요.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/03_vector_matrix_1.jpg"><source src="videos/03_vector_matrix_1.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 <div class="box box-practice docutils container">
 <p><strong>[연습 2]</strong> 크기 조건만 보고 결과의 형상을 쓰세요. 곱할 수 없으면 × 표시.
-① (3 × 4) · (4 × 1) = ( 　　 ) 　 ② (2 × 2) · (3 × 2) = ( 　　 ) 　 ③ (1 × 784) · (784 × 100) = ( 　　 )</p>
+① <span class="math notranslate nohighlight">\((3 \times 4) \cdot (4 \times 1) =\)</span> ( 　　 ) 　 ② <span class="math notranslate nohighlight">\((2 \times 2) \cdot (3 \times 2) =\)</span> ( 　　 ) 　 ③ <span class="math notranslate nohighlight">\((1 \times 784) \cdot (784 \times 100) =\)</span> ( 　　 )</p>
 </div>
 <div class="box box-note docutils container">
-<p><strong>머신러닝과의 연결</strong>: ③ 은 손글씨 사진 한 장(784개 숫자)에 가중치 행렬(784 × 100)을 곱하는 계산입니다.
-행렬 곱 덕분에 (64 × 64) · (64 × 256) · (256 × 512) · … 처럼 <strong>크기 조건만 맞으면 원하는 만큼 층을 이어 붙일 수 있습니다.</strong> 이것이 딥러닝의 ‘깊은 층’ 입니다.</p>
+<p><strong>머신러닝과의 연결</strong>: ③ 은 손글씨 사진 한 장(784개 숫자)에 가중치 행렬<span class="math notranslate nohighlight">\((784 \times 100)\)</span>을 곱하는 계산입니다.
+행렬 곱 덕분에 <span class="math notranslate nohighlight">\((64 \times 64) \cdot (64 \times 256) \cdot (256 \times 512) \cdot \cdots\)</span> 처럼 <strong>크기 조건만 맞으면 원하는 만큼 층을 이어 붙일 수 있습니다.</strong> 이것이 딥러닝의 ‘깊은 층’ 입니다.</p>
 </div>
 <p>⚠️ <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code> (같은 자리끼리 곱) 와 <code class="docutils literal notranslate"><span class="pre">np.dot(A,</span> <span class="pre">B)</span></code> (행렬 곱) 는 <strong>완전히 다릅니다!</strong></p>
 </section>
 <section id="broadcast">
 <h2>개념 다지기 4. 브로드캐스트 (broadcast)<a class="headerlink" href="#broadcast" title="Link to this heading">#</a></h2>
 <p>수학에서는 크기가 다른 행렬끼리 더할 수 없지만, numpy 는 <strong>작은 쪽을 반복해서 크기를 맞춘 뒤</strong> 계산해 줍니다.</p>
-<p>A = ( 1　2 ) / ( 3　4 ),　b = 5 일 때　A + b = ( 1　2 ) / ( 3　4 ) + ( 5　5 ) / ( 5　5 ) = ( 6　7 ) / ( 8　9 )</p>
-<p>C = ( 1　2 ) / ( 3　4 ),　D = ( 4　5 ) 일 때　C + D = ( 1　2 ) / ( 3　4 ) + ( 4　5 ) / ( 4　5 ) = ( 　　 ) / ( 　　 )</p>
+<p><span class="math notranslate nohighlight">\(A =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 \\ 3 &amp; 4\end{pmatrix}\)</span>,　<span class="math notranslate nohighlight">\(b = 5\)</span> 일 때　<span class="math notranslate nohighlight">\(A + b =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 \\ 3 &amp; 4\end{pmatrix}\)</span> + <span class="math notranslate nohighlight">\(\begin{pmatrix}5 &amp; 5 \\ 5 &amp; 5\end{pmatrix}\)</span> = <span class="math notranslate nohighlight">\(\begin{pmatrix}6 &amp; 7 \\ 8 &amp; 9\end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(C =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 \\ 3 &amp; 4\end{pmatrix}\)</span>,　<span class="math notranslate nohighlight">\(D =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}4 &amp; 5\end{pmatrix}\)</span> 일 때　<span class="math notranslate nohighlight">\(C + D =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 \\ 3 &amp; 4\end{pmatrix}\)</span> + <span class="math notranslate nohighlight">\(\begin{pmatrix}4 &amp; 5 \\ 4 &amp; 5\end{pmatrix}\)</span> = <span class="math notranslate nohighlight">\(\begin{pmatrix}\square &amp; \square \\ \square &amp; \square\end{pmatrix}\)</span></p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/03_vector_matrix_2.jpg"><source src="videos/03_vector_matrix_2.mp4" type="video/mp4"></video></figure></div></div>
@@ -528,16 +530,16 @@
 </section>
 <section id="transpose">
 <h2>개념 다지기 5. 전치행렬 (transpose)<a class="headerlink" href="#transpose" title="Link to this heading">#</a></h2>
-<p>행렬 A 의 <strong>행과 열을 바꾼</strong> 행렬을 전치행렬이라 하고 A<sup>T</sup> 로 씁니다. (1행 → 1열, 2행 → 2열, …)</p>
-<p>A = ( 1　2 ) / ( 3　4 ) / ( 5　6 )  (3 × 2)　→　A<sup>T</sup> = ( 1　3　5 ) / ( 2　4　6 )  ( 　 × 　 )</p>
+<p>행렬 <span class="math notranslate nohighlight">\(A\)</span> 의 <strong>행과 열을 바꾼</strong> 행렬을 전치행렬이라 하고 <span class="math notranslate nohighlight">\(A^{T}\)</span> 로 씁니다. (1행 → 1열, 2행 → 2열, …)</p>
+<p><span class="math notranslate nohighlight">\(A =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 \\ 3 &amp; 4 \\ 5 &amp; 6\end{pmatrix}\)</span>  <span class="math notranslate nohighlight">\((3 \times 2)\)</span>　→　<span class="math notranslate nohighlight">\(A^{T} =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 3 &amp; 5 \\ 2 &amp; 4 &amp; 6\end{pmatrix}\)</span>  ( 　 × 　 )</p>
 <div class="box box-note docutils container">
 <p>행렬 곱의 크기가 안 맞을 때 전치행렬로 맞춰 줍니다.
-예) A 가 (3 × 2) 이면 A · A 는 곱할 수 없지만 A<sup>T</sup> · A 는 (2 × 3) · (3 × 2) = ( 　 × 　 ) 로 계산 가능!</p>
+예) <span class="math notranslate nohighlight">\(A\)</span> 가 <span class="math notranslate nohighlight">\((3 \times 2)\)</span> 이면 <span class="math notranslate nohighlight">\(A \cdot A\)</span> 는 곱할 수 없지만 <span class="math notranslate nohighlight">\(A^{T} \cdot A\)</span> 는 <span class="math notranslate nohighlight">\((2 \times 3) \cdot (3 \times 2) =\)</span> ( 　 × 　 ) 로 계산 가능!</p>
 </div>
 </section>
 <section id="id6">
 <h2>개념 다지기 6. 원하는 부분만 꺼내기 : 인덱싱과 슬라이싱<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
-<p>A = ( 10　20 ) / ( 30　40 ) / ( 50　60 )  (3 × 2)</p>
+<p><span class="math notranslate nohighlight">\(A =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}10 &amp; 20 \\ 30 &amp; 40 \\ 50 &amp; 60\end{pmatrix}\)</span>  <span class="math notranslate nohighlight">\((3 \times 2)\)</span></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>코드</p></th>
@@ -570,7 +572,7 @@
 </table>
 </div>
 <div class="box box-note docutils container">
-<p><strong>머신러닝에서</strong>: 데이터 표에서 앞쪽 열은 입력 x, 마지막 열은 정답 t 로 나눌 때 <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">0:-1]</span></code>, <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">[-1]]</span></code> 을 씁니다.</p>
+<p><strong>머신러닝에서</strong>: 데이터 표에서 앞쪽 열은 입력 <span class="math notranslate nohighlight">\(x\)</span>, 마지막 열은 정답 <span class="math notranslate nohighlight">\(t\)</span> 로 나눌 때 <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">0:-1]</span></code>, <code class="docutils literal notranslate"><span class="pre">data[:,</span> <span class="pre">[-1]]</span></code> 을 씁니다.</p>
 </div>
 </section>
 <section id="id7">
@@ -615,7 +617,7 @@
 </div>
 <div class="box box-check docutils container">
 <p><strong>[확인 2]</strong> <code class="docutils literal notranslate"><span class="pre">x_data</span></code> 의 형상은 ( 　 × 　 ), <code class="docutils literal notranslate"><span class="pre">t_data</span></code> 의 형상은 ( 　 × 　 ) 이다.
-가중치 W 를 곱해 x_data · W 의 형상이 t_data 와 같은 (5 × 1) 이 되려면, W 의 형상은 ( 　 × 　 ) 이어야 한다.</p>
+가중치 <span class="math notranslate nohighlight">\(W\)</span> 를 곱해 x_data · W 의 형상이 t_data 와 같은 <span class="math notranslate nohighlight">\((5 \times 1)\)</span> 이 되려면, <span class="math notranslate nohighlight">\(W\)</span> 의 형상은 ( 　 × 　 ) 이어야 한다.</p>
 </div>
 <section id="id8">
 <h3>자주 쓰는 numpy 함수<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
@@ -627,11 +629,11 @@
 <section id="id9">
 <h2>연습 문제<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <div class="box box-practice docutils container">
-<p><strong>[문제 1]</strong> P = ( 1　0 ) / ( 2　1 ),  Q = ( 3　1 ) / ( 1　2 ) 일 때 P · Q 를 손으로 구하세요.
-P · Q = ( 　　 　　 ) / ( 　　 　　 )</p>
+<p><strong>[문제 1]</strong> <span class="math notranslate nohighlight">\(P =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 0 \\ 2 &amp; 1\end{pmatrix}\)</span>,  <span class="math notranslate nohighlight">\(Q =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}3 &amp; 1 \\ 1 &amp; 2\end{pmatrix}\)</span> 일 때 <span class="math notranslate nohighlight">\(P \cdot Q\)</span> 를 손으로 구하세요.
+<span class="math notranslate nohighlight">\(P \cdot Q =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}\square &amp; \square \\ \square &amp; \square\end{pmatrix}\)</span></p>
 </div>
 <div class="box box-practice docutils container">
-<p><strong>[문제 2]</strong> 1부터 12까지의 수로 3 × 4 행렬 M 을 만들고, ① M 의 형상, ② M<sup>T</sup> 의 형상, ③ M 의 2행 전체, ④ M<sup>T</sup> · M 의 형상을 구하세요.</p>
+<p><strong>[문제 2]</strong> 1부터 12까지의 수로 <span class="math notranslate nohighlight">\(3 \times 4\)</span> 행렬 <span class="math notranslate nohighlight">\(M\)</span> 을 만들고, ① <span class="math notranslate nohighlight">\(M\)</span> 의 형상, ② <span class="math notranslate nohighlight">\(M^{T}\)</span> 의 형상, ③ <span class="math notranslate nohighlight">\(M\)</span> 의 2행 전체, ④ <span class="math notranslate nohighlight">\(M^{T} \cdot M\)</span> 의 형상을 구하세요.</p>
 </div>
 </section>
 <section id="id10">
@@ -650,7 +652,7 @@ P · Q = ( 　　 　　 ) / ( 　　 　　 )</p>
 <td class="text-left"><p>같은 자리끼리. 크기가 다르면 브로드캐스트</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>행렬 곱</p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">np.dot(A,</span> <span class="pre">B)</span></code>, (m × n) · (n × k) = (m × k)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">np.dot(A,</span> <span class="pre">B)</span></code>, <span class="math notranslate nohighlight">\((m \times n) \cdot (n \times k) = (m \times k)\)</span></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>전치</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">A.T</span></code>, 행 ↔ 열</p></td>
@@ -663,9 +665,9 @@ P · Q = ( 　　 　　 ) / ( 　　 　　 )</p>
 </div>
 <section id="id11">
 <h3>도전 과제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
-<p>입력 데이터 X 의 형상이 (25 × 3) 이고 정답 T 의 형상이 (25 × 1) 일 때,
-y = X · W + b 가 T 와 같은 형상이 되도록 하는 가중치 W 의 형상은 ( 　 × 　 ) 입니다.
-→ 다음 시간(제 5편 선형회귀)에는 이 W 와 b 를 <strong>인공지능이 스스로 찾는 방법</strong> 을 배웁니다!</p>
+<p>입력 데이터 <span class="math notranslate nohighlight">\(X\)</span> 의 형상이 <span class="math notranslate nohighlight">\((25 \times 3)\)</span> 이고 정답 <span class="math notranslate nohighlight">\(T\)</span> 의 형상이 <span class="math notranslate nohighlight">\((25 \times 1)\)</span> 일 때,
+<span class="math notranslate nohighlight">\(y = X \cdot W + b\)</span> 가 <span class="math notranslate nohighlight">\(T\)</span> 와 같은 형상이 되도록 하는 가중치 <span class="math notranslate nohighlight">\(W\)</span> 의 형상은 ( 　 × 　 ) 입니다.
+→ 다음 시간(제 5편 선형회귀)에는 이 <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 <strong>인공지능이 스스로 찾는 방법</strong> 을 배웁니다!</p>
 </section>
 </section>
 </section>

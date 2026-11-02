@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '14_cnn';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -380,7 +382,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 14 편</p>
-<section id="cnn">
+<section class="tex2jax_ignore mathjax_ignore" id="cnn">
 <h1>CNN - 합성곱으로 사진의 특징 찾기<a class="headerlink" href="#cnn" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「CNN (I) - 컨볼루션 연산 • 풀링 • 패딩」 (ML_LEC_32)</p>
@@ -398,30 +400,30 @@
 <section id="id2">
 <h2>지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>제 13편 도전 과제: 지금까지의 신경망은 28 × 28 사진을 <strong>784 개짜리 한 줄로 펴서</strong> 넣었습니다. → 픽셀끼리 <strong>위아래·좌우로 이웃</strong> 한다는 정보가 사라집니다.</p></li>
+<li><p>제 13편 도전 과제: 지금까지의 신경망은 <span class="math notranslate nohighlight">\(28 \times 28\)</span> 사진을 <strong>784 개짜리 한 줄로 펴서</strong> 넣었습니다. → 픽셀끼리 <strong>위아래·좌우로 이웃</strong> 한다는 정보가 사라집니다.</p></li>
 <li><p>CNN (Convolutional Neural Network, 합성곱 신경망) 은 사진을 <strong>2차원 그대로</strong> 다루며 특징(feature)을 찾습니다.</p></li>
 </ul>
 </section>
 <section id="id3">
 <h2>핵심 정리<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p><strong>① 합성곱(컨볼루션)</strong></p>
-<p>입력 A, 필터 F (FH × FW) 일 때</p>
+<p>입력 <span class="math notranslate nohighlight">\(A\)</span>, 필터 <span class="math notranslate nohighlight">\(F (\mathrm{FH} \times \mathrm{FW})\)</span> 일 때</p>
 <div class="box box-formula docutils container">
-<p>C(i, j) = Σ<sub>p</sub> Σ<sub>q</sub> A(i + p, j + q) × F(p, q)　(+ 바이어스)</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle C(i, j) = \sum_{p} \sum_{q} A(i + p, j + q) \times F(p, q)\)</span>　(+ 바이어스)</p>
 </div>
 <p>필터가 덮은 부분과 필터의 같은 자리끼리 곱해 모두 더한다. (아래 애니메이션 1)<br />
-예) 왼쪽 위 : 1×2 + 2×0 + 3×1 + 0×0 + 1×1 + 2×2 + 3×1 + 0×0 + 1×2 = 15</p>
+예) 왼쪽 위 : <span class="math notranslate nohighlight">\(1\times 2 + 2\times 0 + 3\times 1 + 0\times 0 + 1\times 1 + 2\times 2 + 3\times 1 + 0\times 0 + 1\times 2 = 15\)</span></p>
 <p><strong>② 출력 크기</strong></p>
-<p>입력 (H, W), 필터 (FH, FW), 패딩 P, 스트라이드 S 이면</p>
+<p>입력 <span class="math notranslate nohighlight">\((H, W)\)</span>, 필터 (FH, FW), 패딩 <span class="math notranslate nohighlight">\(P\)</span>, 스트라이드 <span class="math notranslate nohighlight">\(S\)</span> 이면</p>
 <div class="box box-formula docutils container">
-<p>OH = (H + 2P − FH) / S + 1,　OW = (W + 2P − FW) / S + 1</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \mathrm{OH} = \frac{H + 2P - \mathrm{FH}}{S} + 1\)</span>,　<span class="math notranslate nohighlight">\(\displaystyle \mathrm{OW} = \frac{W + 2P - \mathrm{FW}}{S} + 1\)</span></p>
 </div>
-<p>예) (28, 31), 필터 (5, 5), P = 2, S = 3 → (10, 11)</p>
+<p>예) (28, 31), 필터 <span class="math notranslate nohighlight">\((5, 5), P = 2, S = 3\)</span> → (10, 11)</p>
 <p><strong>③ 필터는 무늬 탐지기</strong></p>
-<p>세로선 필터 ( 1 0 −1 / 1 0 −1 / 1 0 −1 ) 은 왼쪽이 밝고 오른쪽이 어두운 곳에서 큰 값을 낸다. 같은 필터를 사진 전체에서 함께 쓰므로, 3 × 3 필터 하나는 가중치 9 개로 사진 어디서나 같은 무늬를 찾는다. (아래 애니메이션 2)</p>
+<p>세로선 필터 <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 0 &amp; -1 \\ 1 &amp; 0 &amp; -1 \\ 1 &amp; 0 &amp; -1\end{pmatrix}\)</span> 은 왼쪽이 밝고 오른쪽이 어두운 곳에서 큰 값을 낸다. 같은 필터를 사진 전체에서 함께 쓰므로, <span class="math notranslate nohighlight">\(3 \times 3\)</span> 필터 하나는 가중치 9 개로 사진 어디서나 같은 무늬를 찾는다. (아래 애니메이션 2)</p>
 <p><strong>④ ReLU 와 풀링</strong></p>
-<p>ReLU(x) = max(0, x),　2 × 2 max pooling 은 구역의 최댓값만 남겨 크기를 절반으로 줄인다.<br />
-24 × 24 → (3 × 3 컨볼루션) 22 × 22 → (풀링) 11 × 11 (아래 애니메이션 3)</p>
+<p><span class="math notranslate nohighlight">\(\mathrm{ReLU}(x) = \max (0, x)\)</span>,　2 × 2 max pooling 은 구역의 최댓값만 남겨 크기를 절반으로 줄인다.<br />
+<span class="math notranslate nohighlight">\(24 \times 24\)</span> → (<span class="math notranslate nohighlight">\(3 \times 3\)</span> 컨볼루션) <span class="math notranslate nohighlight">\(22 \times 22\)</span> → (풀링) <span class="math notranslate nohighlight">\(11 \times 11\)</span> (아래 애니메이션 3)</p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
 </div></blockquote>
@@ -443,10 +445,10 @@
 <td class="text-left"><p>필터(가중치 묶음)를 사진 위로 옮겨 가며 곱해 <strong>특징(feature)</strong> 을 뽑는다</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><strong>ReLU</strong></p></td>
-<td class="text-left"><p>활성화 함수. 음수는 0, 양수는 그대로 → ReLU(x) = max(0, x)</p></td>
+<td class="text-left"><p>활성화 함수. 음수는 0, 양수는 그대로 → <span class="math notranslate nohighlight">\(\mathrm{ReLU}(x) = \max (0, x)\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><strong>pooling (풀링)</strong></p></td>
-<td class="text-left"><p>작은 구역을 최댓값(max) 등 하나로 <strong>압축</strong> 해서 계산량을 줄인다</p></td>
+<td class="text-left"><p>작은 구역을 최댓값<span class="math notranslate nohighlight">\((\max )\)</span> 등 하나로 <strong>압축</strong> 해서 계산량을 줄인다</p></td>
 </tr>
 </tbody>
 </table>
@@ -455,18 +457,14 @@
 <section id="id5">
 <h2>개념 다지기 2. 합성곱(컨볼루션) 연산 ⭐<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>필터를 일정 간격(<strong>스트라이드</strong>)으로 옮기면서, 입력과 필터의 <strong>같은 자리끼리 곱해 모두 더합니다.</strong></p>
-<p>입력 (4 × 4)　　　　　　 필터 (3 × 3)
-　( 1　2　3　0 )　　　　 ( 2　0　1 )
-　( 0　1　2　3 )　　　　 ( 0　1　2 )
-　( 3　0　1　2 )　　　　 ( 1　0　2 )
-　( 2　3　0　1 )</p>
+<p>입력 <span class="math notranslate nohighlight">\((4 \times 4)\)</span> : <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 &amp; 3 &amp; 0 \\ 0 &amp; 1 &amp; 2 &amp; 3 \\ 3 &amp; 0 &amp; 1 &amp; 2 \\ 2 &amp; 3 &amp; 0 &amp; 1\end{pmatrix}\)</span>　　　필터 <span class="math notranslate nohighlight">\((3 \times 3)\)</span> : <span class="math notranslate nohighlight">\(\begin{pmatrix}2 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 2 \\ 1 &amp; 0 &amp; 2\end{pmatrix}\)</span></p>
 <ul class="simple">
-<li><p>왼쪽 위 (1행 1열):  1×2 + 2×0 + 3×1 + 0×0 + 1×1 + 2×2 + 3×1 + 0×0 + 1×2 = <strong>15</strong></p></li>
-<li><p>오른쪽으로 1칸:　2×2 + 3×0 + 0×1 + 1×0 + 2×1 + 3×2 + 0×1 + 1×0 + 2×2 = ( 　　 )</p></li>
-<li><p>아래로 1칸:　　0×2 + 1×0 + 2×1 + 3×0 + 0×1 + 1×2 + 2×1 + 3×0 + 0×2 = ( 　　 )</p></li>
-<li><p>오른쪽 아래:　 ( 　　　　　　　　　　　　　　　　　　　　 ) = 15</p></li>
+<li><p>왼쪽 위 (1행 1열):  <span class="math notranslate nohighlight">\(1\times 2 + 2\times 0 + 3\times 1 + 0\times 0 + 1\times 1 + 2\times 2 + 3\times 1 + 0\times 0 + 1\times 2 =\)</span> <strong>15</strong></p></li>
+<li><p>오른쪽으로 1칸:　<span class="math notranslate nohighlight">\(2\times 2 + 3\times 0 + 0\times 1 + 1\times 0 + 2\times 1 + 3\times 2 + 0\times 1 + 1\times 0 + 2\times 2 =\)</span> ( 　　 )</p></li>
+<li><p>아래로 1칸:　　<span class="math notranslate nohighlight">\(0\times 2 + 1\times 0 + 2\times 1 + 3\times 0 + 0\times 1 + 1\times 2 + 2\times 1 + 3\times 0 + 0\times 2 =\)</span> ( 　　 )</p></li>
+<li><p>오른쪽 아래:　 ( 　　　　　　　　　　　　　　　　　　　　 ) <span class="math notranslate nohighlight">\(= 15\)</span></p></li>
 </ul>
-<p>결과 (2 × 2) 에 바이어스 3 을 더하면 <strong>특징 맵 (feature map)</strong> :  ( 18　19 ) / ( ( 　 )　18 )</p>
+<p>결과 <span class="math notranslate nohighlight">\((2 \times 2)\)</span> 에 바이어스 3 을 더하면 <strong>특징 맵 (feature map)</strong> :  <span class="math notranslate nohighlight">\(\begin{pmatrix}18 &amp; 19 \\ \square &amp; 18\end{pmatrix}\)</span></p>
 </section>
 <section id="id6">
 <h2>애니메이션 1. 필터가 미끄러지며 계산하는 모습<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
@@ -477,12 +475,12 @@
 </section>
 <section id="relu">
 <h2>개념 다지기 3. ReLU 와 풀링<a class="headerlink" href="#relu" title="Link to this heading">#</a></h2>
-<p><strong>ReLU(x) = max(0, x)</strong> : 음수는 0 으로, 양수는 그대로.  예) ReLU(−3) = ( 　 ), ReLU(5) = ( 　 )</p>
+<p><strong><span class="math notranslate nohighlight">\(\mathrm{ReLU}(x) = \max (0, x)\)</span></strong> : 음수는 0 으로, 양수는 그대로.  예) <span class="math notranslate nohighlight">\(\mathrm{ReLU}(-3) =\)</span> ( 　 ), <span class="math notranslate nohighlight">\(\mathrm{ReLU}(5) =\)</span> ( 　 )</p>
 <p><strong>풀링</strong> : 구역을 대표값 하나로 압축</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>종류</p></th>
-<th class="head text-center"><p>( 15 16 / 6 15 ) 의 결과</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\begin{pmatrix}15 &amp; 16 \\ 6 &amp; 15\end{pmatrix}\)</span> 의 결과</p></th>
 </tr>
 </thead>
 <tbody>
@@ -500,18 +498,18 @@
 </div>
 <p>→ CNN 에서는 <strong>max pooling</strong> 을 가장 많이 씁니다. (가장 강한 특징만 남기기)</p>
 <div class="box box-practice docutils container">
-<p><strong>[연습 1]</strong> 위 X 에 ReLU 를 적용한 뒤 2 × 2 max pooling 한 결과를 손으로 먼저 구하세요.  ( 　 　 ) / ( 　 　 )</p>
+<p><strong>[연습 1]</strong> 위 <span class="math notranslate nohighlight">\(X\)</span> 에 ReLU 를 적용한 뒤 2 × 2 max pooling 한 결과를 손으로 먼저 구하세요.  <span class="math notranslate nohighlight">\(\begin{pmatrix}\square &amp; \square \\ \square &amp; \square\end{pmatrix}\)</span></p>
 </div>
 </section>
 <section id="padding">
 <h2>개념 다지기 4. 패딩(padding)과 출력 크기<a class="headerlink" href="#padding" title="Link to this heading">#</a></h2>
-<p>컨볼루션을 하면 크기가 줄어듭니다. (4 × 4 → 2 × 2) 이를 막으려고 입력 둘레를 0 으로 채우는 것이 <strong>패딩</strong> 입니다.</p>
-<p>패딩 1 : 4 × 4 입력 → 6 × 6 → 3 × 3 필터로 컨볼루션 → <strong>4 × 4</strong> (크기 유지!)</p>
+<p>컨볼루션을 하면 크기가 줄어듭니다. (<span class="math notranslate nohighlight">\(4 \times 4\)</span> → <span class="math notranslate nohighlight">\(2 \times 2\)</span>) 이를 막으려고 입력 둘레를 0 으로 채우는 것이 <strong>패딩</strong> 입니다.</p>
+<p>패딩 1 : <span class="math notranslate nohighlight">\(4 \times 4\)</span> 입력 → <span class="math notranslate nohighlight">\(6 \times 6\)</span> → <span class="math notranslate nohighlight">\(3 \times 3\)</span> 필터로 컨볼루션 → <strong><span class="math notranslate nohighlight">\(4 \times 4\)</span></strong> (크기 유지!)</p>
 <section id="id7">
 <h3>출력 크기 공식<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
-<p>입력 (H, W), 필터 (FH, FW), 패딩 P, 스트라이드 S 일 때</p>
+<p>입력 <span class="math notranslate nohighlight">\((H, W)\)</span>, 필터 (FH, FW), 패딩 <span class="math notranslate nohighlight">\(P\)</span>, 스트라이드 <span class="math notranslate nohighlight">\(S\)</span> 일 때</p>
 <div class="box box-note docutils container">
-<p><strong>OH = (H + 2P − FH) / S + 1,　 OW = (W + 2P − FW) / S + 1</strong></p>
+<p><strong><span class="math notranslate nohighlight">\(\displaystyle \mathrm{OH} = \frac{H + 2P - \mathrm{FH}}{S} + 1\)</span>,　 <span class="math notranslate nohighlight">\(\displaystyle \mathrm{OW} = \frac{W + 2P - \mathrm{FW}}{S} + 1\)</span></strong></p>
 </div>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -529,7 +527,7 @@
 <td class="text-center"><p>(3, 3)</p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
-<td class="text-center"><p>(4 + 2 − 3)/1 + 1 = 4 → (4, 4)</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\displaystyle \frac{4 + 2 - 3}{1} + 1 = 4\)</span> → (4, 4)</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>예2</p></td>
 <td class="text-center"><p>(7, 7)</p></td>
@@ -562,11 +560,11 @@
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p>세로선 필터</p></td>
-<td class="text-center"><p>( 1 0 −1 / 1 0 −1 / 1 0 −1 )</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 0 &amp; -1 \\ 1 &amp; 0 &amp; -1 \\ 1 &amp; 0 &amp; -1\end{pmatrix}\)</span></p></td>
 <td class="text-left"><p>왼쪽이 밝고 오른쪽이 어두운 <strong>세로 경계</strong></p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>가로선 필터</p></td>
-<td class="text-center"><p>( 1 1 1 / 0 0 0 / −1 −1 −1 )</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 0 \\ -1 &amp; -1 &amp; -1\end{pmatrix}\)</span></p></td>
 <td class="text-left"><p>위가 밝고 아래가 어두운 <strong>가로 경계</strong></p></td>
 </tr>
 </tbody>
@@ -592,13 +590,13 @@
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/14_cnn_3.jpg"><source src="videos/14_cnn_3.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 <div class="box box-note docutils container">
-<p>크기는 24 × 24 → 22 × 22 → 11 × 11 로 줄어들었지만, <strong>세로 획이 있는 곳</strong> 이라는 핵심 정보는 남아 있습니다. CNN 은 이런 층을 여러 번 쌓아 점점 복잡한 특징(획 → 곡선 → 숫자 모양)을 찾습니다.</p>
+<p>크기는 <span class="math notranslate nohighlight">\(24 \times 24\)</span> → <span class="math notranslate nohighlight">\(22 \times 22\)</span> → <span class="math notranslate nohighlight">\(11 \times 11\)</span> 로 줄어들었지만, <strong>세로 획이 있는 곳</strong> 이라는 핵심 정보는 남아 있습니다. CNN 은 이런 층을 여러 번 쌓아 점점 복잡한 특징(획 → 곡선 → 숫자 모양)을 찾습니다.</p>
 </div>
 </section>
 <section id="id10">
 <h2>연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <div class="box box-practice docutils container">
-<p><strong>[문제 1]</strong> 입력 ( 1 0 1 / 0 1 0 / 1 0 1 ), 필터 ( 1 0 / 0 1 ), 스트라이드 1 의 컨볼루션 결과를 손으로 구하세요.  ( 　 　 ) / ( 　 　 )</p>
+<p><strong>[문제 1]</strong> 입력 <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1\end{pmatrix}\)</span>, 필터 <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 0 \\ 0 &amp; 1\end{pmatrix}\)</span>, 스트라이드 1 의 컨볼루션 결과를 손으로 구하세요.  <span class="math notranslate nohighlight">\(\begin{pmatrix}\square &amp; \square \\ \square &amp; \square\end{pmatrix}\)</span></p>
 </div>
 <div class="box box-practice docutils container">
 <p><strong>[문제 2]</strong> MNIST 사진 (28, 28) 에 필터 (3, 3), 패딩 1, 스트라이드 1 로 컨볼루션한 뒤 2 × 2 max pooling 을 하면 크기는? ( 　 , 　 )</p>
@@ -618,7 +616,7 @@
 <td class="text-left"><p>필터를 옮기며 같은 자리끼리 곱해서 더하기 → 특징 맵</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>ReLU</p></td>
-<td class="text-left"><p>max(0, x)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\max (0, x)\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>풀링</p></td>
 <td class="text-left"><p>구역을 최댓값 등으로 압축 (max pooling)</p></td>
@@ -627,10 +625,10 @@
 <td class="text-left"><p>둘레를 0 으로 채워 크기 유지</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>출력 크기</p></td>
-<td class="text-left"><p>OH = (H + 2P − FH)/S + 1</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle \mathrm{OH} = \frac{H + 2P - \mathrm{FH}}{S} + 1\)</span></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>학습</p></td>
-<td class="text-left"><p>필터의 숫자도 W 처럼 오차역전파로 학습된다</p></td>
+<td class="text-left"><p>필터의 숫자도 <span class="math notranslate nohighlight">\(W\)</span> 처럼 오차역전파로 학습된다</p></td>
 </tr>
 </tbody>
 </table>

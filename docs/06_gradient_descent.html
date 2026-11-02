@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '06_gradient_descent';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -358,12 +360,12 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">애니메이션 1. 공이 그릇 바닥으로 굴러간다</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">애니메이션 2. 학습률 α 가 너무 작거나 크면?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">개념 다지기 3. W 와 b 를 함께 내려가기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">개념 다지기 4. 학습 과정 한눈에 보기 (순서도)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alpha">애니메이션 2. 학습률 <span class="math notranslate nohighlight">\(\alpha\)</span> 가 너무 작거나 크면?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">개념 다지기 3. <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 함께 내려가기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 4. 학습 과정 한눈에 보기 (순서도)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">도전 과제</a></li>
 </ul>
 </li>
 </ul>
@@ -378,7 +380,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 6 편</p>
-<section id="id1">
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>선형 회귀 (2) - 경사하강법<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「Linear Regression (II) - 경사하강법(gradient descent algorithm)」 (ML_LEC_14)</p>
@@ -387,16 +389,16 @@
 <section id="id2">
 <h2>학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>손실함수의 미분값(접선의 기울기)의 부호로 W 를 늘릴지 줄일지 판단할 수 있다.</p></li>
-<li><p>경사하강법의 갱신 식 W ← W − α × ∂E/∂W 를 손으로 몇 번 반복 계산할 수 있다.</p></li>
-<li><p>학습률 α 의 크기에 따라 학습이 어떻게 달라지는지 설명할 수 있다.</p></li>
+<li><p>손실함수의 미분값(접선의 기울기)의 부호로 <span class="math notranslate nohighlight">\(W\)</span> 를 늘릴지 줄일지 판단할 수 있다.</p></li>
+<li><p>경사하강법의 갱신 식 <span class="math notranslate nohighlight">\(\displaystyle W \leftarrow W - \alpha \times \frac{\partial E}{\partial W}\)</span> 를 손으로 몇 번 반복 계산할 수 있다.</p></li>
+<li><p>학습률 <span class="math notranslate nohighlight">\(\alpha\)</span> 의 크기에 따라 학습이 어떻게 달라지는지 설명할 수 있다.</p></li>
 </ol>
 </section>
 <hr class="docutils" />
 <section id="id3">
 <h2>지난 시간 복습<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>제 5편: 손실함수 E(W) 는 아래로 볼록한 그릇 모양이고, <strong>가장 낮은 곳의 W</strong> 를 찾는 것이 학습입니다.</p></li>
+<li><p>제 5편: 손실함수 <span class="math notranslate nohighlight">\(E(W)\)</span> 는 아래로 볼록한 그릇 모양이고, <strong>가장 낮은 곳의 <span class="math notranslate nohighlight">\(W\)</span></strong> 를 찾는 것이 학습입니다.</p></li>
 <li><p>제 2편: 수치미분으로 어떤 점에서의 <strong>접선의 기울기</strong>를 계산할 수 있습니다.</p></li>
 </ul>
 <div class="box box-note docutils container">
@@ -407,19 +409,19 @@
 <section id="id4">
 <h2>핵심 정리<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p><strong>① 기울기의 부호로 방향 정하기</strong></p>
-<p>E′(W) &gt; 0 이면 W 를 줄여야, E′(W) &lt; 0 이면 W 를 늘려야 E 가 작아진다. 두 경우를 하나로 쓰면</p>
+<p><span class="math notranslate nohighlight">\(E'(W) &gt; 0\)</span> 이면 <span class="math notranslate nohighlight">\(W\)</span> 를 줄여야, <span class="math notranslate nohighlight">\(E'(W) &lt; 0\)</span> 이면 <span class="math notranslate nohighlight">\(W\)</span> 를 늘려야 <span class="math notranslate nohighlight">\(E\)</span> 가 작아진다. 두 경우를 하나로 쓰면</p>
 <div class="box box-formula docutils container">
-<p>W ← W − α × E′(W)　　(α : 학습률, 작은 양수)</p>
+<p><span class="math notranslate nohighlight">\(W \leftarrow W - \alpha \times E'(W)\)</span>　　(<span class="math notranslate nohighlight">\(\alpha\)</span> : 학습률, 작은 양수)</p>
 </div>
 <p><strong>② 경사하강법은 등비수열이다</strong></p>
-<p>E(W) = (W − 3)² 이면 E′(W) = 2(W − 3) 이므로</p>
-<p>W<sub>k+1</sub> = W<sub>k</sub> − 2α(W<sub>k</sub> − 3)　⇒　<strong>W<sub>k+1</sub> − 3 = (1 − 2α)(W<sub>k</sub> − 3)</strong></p>
-<p>즉 (W<sub>k</sub> − 3) 은 공비가 (1 − 2α) 인 등비수열이다.</p>
+<p><span class="math notranslate nohighlight">\(E(W) = (W - 3)^{2}\)</span> 이면 <span class="math notranslate nohighlight">\(E'(W) = 2(W - 3)\)</span> 이므로</p>
+<p><span class="math notranslate nohighlight">\(W_{k+1} = W_{k} - 2\alpha(W_{k} - 3)\)</span>　⇒　<strong><span class="math notranslate nohighlight">\(W_{k+1} - 3 = (1 - 2\alpha)(W_{k} - 3)\)</span></strong></p>
+<p>즉 <span class="math notranslate nohighlight">\((W_{k} - 3)\)</span> 은 공비가 <span class="math notranslate nohighlight">\((1 - 2\alpha)\)</span> 인 등비수열이다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>학습률 α</p></th>
-<th class="head text-center"><p>공비 1 − 2α</p></th>
-<th class="head text-left"><p>W<sub>k</sub> 의 움직임</p></th>
+<tr class="row-odd"><th class="head text-center"><p>학습률 <span class="math notranslate nohighlight">\(\alpha\)</span></p></th>
+<th class="head text-center"><p>공비 <span class="math notranslate nohighlight">\(1 - 2\alpha\)</span></p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(W_{k}\)</span> 의 움직임</p></th>
 </tr>
 </thead>
 <tbody>
@@ -442,39 +444,39 @@
 </tbody>
 </table>
 </div>
-<p>수렴 조건 |1 − 2α| &lt; 1 ⇔ 0 &lt; α &lt; 1. (아래 애니메이션 2)<br />
-예) α = 0.1, W₀ = 0 이면 W<sub>k</sub> = 3 − 3 × 0.8<sup>k</sup> : 0.6, 1.08, 1.464, …</p>
+<p>수렴 조건 <span class="math notranslate nohighlight">\(|1 - 2\alpha| &lt; 1 \Leftrightarrow 0 &lt; \alpha &lt; 1\)</span>. (아래 애니메이션 2)<br />
+예) <span class="math notranslate nohighlight">\(\alpha = 0.1, W_{0} = 0\)</span> 이면 <span class="math notranslate nohighlight">\(W_{k} = 3 - 3 \times 0.8^{k}\)</span> : 0.6, 1.08, 1.464, …</p>
 <p><strong>③ 선형 회귀에 적용</strong></p>
-<p>E(W, b) = (1/n) Σ (t<sub>i</sub> − Wx<sub>i</sub> − b)² 이면</p>
-<p>∂E/∂W = −(2/n) Σ x<sub>i</sub>(t<sub>i</sub> − y<sub>i</sub>),　∂E/∂b = −(2/n) Σ (t<sub>i</sub> − y<sub>i</sub>)</p>
-<p>W 와 b 를 동시에 갱신하면 (W, b) 가 손실함수의 등고선을 따라 바닥으로 내려간다. (아래 애니메이션 3)</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle E(W, b) = \frac{1}{n} \sum(t_{i} - Wx_{i} - b)^{2}\)</span> 이면</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial W} = -\frac{2}{n} \sum x_{i}(t_{i} - y_{i})\)</span>,　<span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial b} = -\frac{2}{n} \sum(t_{i} - y_{i})\)</span></p>
+<p><span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 동시에 갱신하면 <span class="math notranslate nohighlight">\((W, b)\)</span> 가 손실함수의 등고선을 따라 바닥으로 내려간다. (아래 애니메이션 3)</p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
 </div></blockquote>
 </section>
 <section id="id5">
 <h2>개념 다지기 1. 기울기의 부호가 알려 주는 방향<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
-<p>E(W) = (W − 3)² (W = 3 에서 최솟값) 를 예로 들어 봅시다.  E’(W) = 2(W − 3)</p>
+<p><span class="math notranslate nohighlight">\(E(W) = (W - 3)^{2}\)</span> (<span class="math notranslate nohighlight">\(W = 3\)</span> 에서 최솟값) 를 예로 들어 봅시다.  <span class="math notranslate nohighlight">\(E'(W) = 2(W - 3)\)</span></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>현재 W</p></th>
-<th class="head text-center"><p>접선의 기울기 E’(W)</p></th>
+<tr class="row-odd"><th class="head text-center"><p>현재 <span class="math notranslate nohighlight">\(W\)</span></p></th>
+<th class="head text-center"><p>접선의 기울기 <span class="math notranslate nohighlight">\(E'(W)\)</span></p></th>
 <th class="head text-center"><p>최솟값은 어느 쪽?</p></th>
-<th class="head text-center"><p>W 를 어떻게?</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(W\)</span> 를 어떻게?</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p>W = 5</p></td>
-<td class="text-center"><p>2(5 − 3) = 4 <strong>(+)</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(W = 5\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(2(5 - 3) = 4\)</span> <strong>(+)</strong></p></td>
 <td class="text-center"><p>왼쪽</p></td>
 <td class="text-center"><p>( 늘린다 / 줄인다 )</p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p>W = 1</p></td>
-<td class="text-center"><p>2(1 − 3) = −4 <strong>(−)</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(W = 1\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(2(1 - 3) = -4\)</span> <strong>(−)</strong></p></td>
 <td class="text-center"><p>오른쪽</p></td>
 <td class="text-center"><p>( 늘린다 / 줄인다 )</p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p>W = 3</p></td>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(W = 3\)</span></p></td>
 <td class="text-center"><p>0</p></td>
 <td class="text-center"><p>바로 여기!</p></td>
 <td class="text-center"><p>멈춘다</p></td>
@@ -483,37 +485,37 @@
 </table>
 </div>
 <div class="box box-note docutils container">
-<p><strong>규칙</strong>: 기울기가 양수이면 W 를 줄이고, 음수이면 W 를 늘린다.
-→ 한 식으로 쓰면 <strong>W 에서 기울기를 빼 주면 된다!</strong></p>
+<p><strong>규칙</strong>: 기울기가 양수이면 <span class="math notranslate nohighlight">\(W\)</span> 를 줄이고, 음수이면 <span class="math notranslate nohighlight">\(W\)</span> 를 늘린다.
+→ 한 식으로 쓰면 <strong><span class="math notranslate nohighlight">\(W\)</span> 에서 기울기를 빼 주면 된다!</strong></p>
 </div>
 </section>
 <section id="gradient-descent">
 <h2>개념 다지기 2. 경사하강법 (Gradient Descent)<a class="headerlink" href="#gradient-descent" title="Link to this heading">#</a></h2>
 <div class="box box-note docutils container">
-<p><strong>W ← W − α × ∂E(W)/∂W</strong></p>
+<p><strong><span class="math notranslate nohighlight">\(\displaystyle W \leftarrow W - \alpha \times \frac{\partial E(W)}{\partial W}\)</span></strong></p>
 </div>
 <ul class="simple">
-<li><p>∂E(W)/∂W : 지금 위치에서 손실함수의 기울기 (편미분, 변수가 여럿이므로 ∂ 기호)</p></li>
-<li><p><strong>α (알파) : 학습률(learning rate)</strong> - 한 번에 얼마나 크게 움직일지 정하는 작은 양수 (예: 0.1, 0.01, 0.0001)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E(W)}{\partial W}\)</span> : 지금 위치에서 손실함수의 기울기 (편미분, 변수가 여럿이므로 ∂ 기호)</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\alpha\)</span> (알파) : 학습률(learning rate)</strong> - 한 번에 얼마나 크게 움직일지 정하는 작은 양수 (예: 0.1, 0.01, 0.0001)</p></li>
 <li><p>이 계산을 기울기가 거의 0 이 될 때까지 <strong>반복</strong> 합니다.</p></li>
 </ul>
-<p>바이어스 b 도 똑같이:  <strong>b ← b − α × ∂E(W, b)/∂b</strong></p>
+<p>바이어스 <span class="math notranslate nohighlight">\(b\)</span> 도 똑같이:  <strong><span class="math notranslate nohighlight">\(\displaystyle b \leftarrow b - \alpha \times \frac{\partial E(W, b)}{\partial b}\)</span></strong></p>
 <section id="id6">
 <h3>[연습 1] 손으로 경사하강법 3번 하기<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
-<p>E(W) = (W − 3)²,  E’(W) = 2(W − 3),  α = 0.1,  시작점 W = 0</p>
+<p><span class="math notranslate nohighlight">\(E(W) = (W - 3)^{2}, E'(W) = 2(W - 3), \alpha = 0.1\)</span>,  시작점 <span class="math notranslate nohighlight">\(W = 0\)</span></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>반복</p></th>
-<th class="head text-center"><p>현재 W</p></th>
-<th class="head text-center"><p>기울기 E’(W)</p></th>
-<th class="head text-center"><p>새로운 W = W − 0.1 × E’(W)</p></th>
+<th class="head text-center"><p>현재 <span class="math notranslate nohighlight">\(W\)</span></p></th>
+<th class="head text-center"><p>기울기 <span class="math notranslate nohighlight">\(E'(W)\)</span></p></th>
+<th class="head text-center"><p>새로운 <span class="math notranslate nohighlight">\(W = W - 0.1 \times E'(W)\)</span></p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p>1</p></td>
 <td class="text-center"><p>0</p></td>
-<td class="text-center"><p>2(0 − 3) = −6</p></td>
-<td class="text-center"><p>0 − 0.1 × (−6) = 0.6</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(2(0 - 3) = -6\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0 - 0.1 \times (-6) = 0.6\)</span></p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>2</p></td>
 <td class="text-center"><p>0.6</p></td>
@@ -529,14 +531,14 @@
 </table>
 </div>
 <div class="box box-think docutils container">
-<p><strong>[생각해 보기]</strong> W 는 3 에 ( 가까워진다 / 멀어진다 ). 한 번에 움직이는 거리는 점점 ( 커진다 / 작아진다 ). 그 이유는?
+<p><strong>[생각해 보기]</strong> <span class="math notranslate nohighlight">\(W\)</span> 는 3 에 ( 가까워진다 / 멀어진다 ). 한 번에 움직이는 거리는 점점 ( 커진다 / 작아진다 ). 그 이유는?
 (                                                                                   )</p>
 </div>
 </section>
 </section>
 <section id="id7">
 <h2>애니메이션 1. 공이 그릇 바닥으로 굴러간다<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
-<p>E(W) = (W − 3)² 위에서 W = 0 에서 출발하여 경사하강법으로 움직입니다. 빨간 선은 그 점에서의 <strong>접선</strong>입니다.</p>
+<p><span class="math notranslate nohighlight">\(E(W) = (W - 3)^{2}\)</span> 위에서 <span class="math notranslate nohighlight">\(W = 0\)</span> 에서 출발하여 경사하강법으로 움직입니다. 빨간 선은 그 점에서의 <strong>접선</strong>입니다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/06_gradient_descent_1.jpg"><source src="videos/06_gradient_descent_1.mp4" type="video/mp4"></video></figure></div></div>
@@ -546,11 +548,11 @@
 ② 초록 화살표는 기울기가 음수일 때 ( 오른쪽 / 왼쪽 ) 을 가리킨다.</p>
 </div>
 </section>
-<section id="id8">
-<h2>애니메이션 2. 학습률 α 가 너무 작거나 크면?<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
-<p>같은 출발점(W = 0)에서 학습률만 바꿔서 비교합니다.</p>
+<section id="alpha">
+<h2>애니메이션 2. 학습률 <span class="math notranslate nohighlight">\(\alpha\)</span> 가 너무 작거나 크면?<a class="headerlink" href="#alpha" title="Link to this heading">#</a></h2>
+<p>같은 출발점<span class="math notranslate nohighlight">\((W = 0)\)</span>에서 학습률만 바꿔서 비교합니다.</p>
 <ul class="simple">
-<li><p>α = 0.02 (너무 작음),  α = 0.3 (적당함),  α = 0.95 (큼),  α = 1.05 (너무 큼)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha = 0.02\)</span> (너무 작음),  <span class="math notranslate nohighlight">\(\alpha = 0.3\)</span> (적당함),  <span class="math notranslate nohighlight">\(\alpha = 0.95\)</span> (큼),  <span class="math notranslate nohighlight">\(\alpha = 1.05\)</span> (너무 큼)</p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -560,8 +562,8 @@
 <p><strong>[관찰 2]</strong> 표를 완성하세요.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>α</p></th>
-<th class="head text-center"><p>20번 반복 뒤 W</p></th>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(\alpha\)</span></p></th>
+<th class="head text-center"><p>20번 반복 뒤 <span class="math notranslate nohighlight">\(W\)</span></p></th>
 <th class="head text-left"><p>결과</p></th>
 </tr>
 </thead>
@@ -581,26 +583,26 @@
 </tbody>
 </table>
 </div>
-<p>💡 학습률은 사람이 정해 주는 값(<strong>하이퍼파라미터</strong>)입니다. 보통 10<sup>−2</sup>, 10<sup>−3</sup>, 10<sup>−4</sup> 등을 바꿔 가며 실험해서 정합니다.</p>
+<p>💡 학습률은 사람이 정해 주는 값(<strong>하이퍼파라미터</strong>)입니다. 보통 <span class="math notranslate nohighlight">\(10^{-2}, 10^{-3}, 10^{-4}\)</span> 등을 바꿔 가며 실험해서 정합니다.</p>
 </div>
 </section>
 <section id="w-b">
-<h2>개념 다지기 3. W 와 b 를 함께 내려가기<a class="headerlink" href="#w-b" title="Link to this heading">#</a></h2>
-<p>실제 선형 회귀에서는 W 와 b 를 <strong>동시에</strong> 갱신합니다.</p>
-<p>W ← W − α × ∂E/∂W,　　b ← b − α × ∂E/∂b</p>
-<p>데이터 x = (1, 2, 3, 4, 5), t = (2, 3, 4, 5, 6) 에 대해 E(W, b) 의 등고선 지도 위에서 (W, b) 가 움직이는 길을 봅시다.
-(정답은 t = x + 1 이므로 W = 1, b = 1 에 도착해야 합니다)</p>
+<h2>개념 다지기 3. <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 함께 내려가기<a class="headerlink" href="#w-b" title="Link to this heading">#</a></h2>
+<p>실제 선형 회귀에서는 <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 <strong>동시에</strong> 갱신합니다.</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle W \leftarrow W - \alpha \times \frac{\partial E}{\partial W}\)</span>,　　<span class="math notranslate nohighlight">\(\displaystyle b \leftarrow b - \alpha \times \frac{\partial E}{\partial b}\)</span></p>
+<p>데이터 <span class="math notranslate nohighlight">\(x = (1, 2, 3, 4, 5), t = (2, 3, 4, 5, 6)\)</span> 에 대해 <span class="math notranslate nohighlight">\(E(W, b)\)</span> 의 등고선 지도 위에서 <span class="math notranslate nohighlight">\((W, b)\)</span> 가 움직이는 길을 봅시다.
+(정답은 <span class="math notranslate nohighlight">\(t = x + 1\)</span> 이므로 <span class="math notranslate nohighlight">\(W = 1, b = 1\)</span> 에 도착해야 합니다)</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/06_gradient_descent_3.jpg"><source src="videos/06_gradient_descent_3.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 <div class="box box-check docutils container">
-<p><strong>[관찰 3]</strong> 처음에는 b 가 크게 변하지 않고 주로 ( W / b ) 가 먼저 빠르게 변한 뒤, 골짜기를 따라 천천히 정답으로 다가간다.
+<p><strong>[관찰 3]</strong> 처음에는 <span class="math notranslate nohighlight">\(b\)</span> 가 크게 변하지 않고 주로 ( <span class="math notranslate nohighlight">\(W\)</span> / <span class="math notranslate nohighlight">\(b\)</span> ) 가 먼저 빠르게 변한 뒤, 골짜기를 따라 천천히 정답으로 다가간다.
 왼쪽 지도의 점이 정답 ★ 에 가까워질수록 오른쪽 직선은 ( 　　　　　 ).</p>
 </div>
 </section>
-<section id="id9">
-<h2>개념 다지기 4. 학습 과정 한눈에 보기 (순서도)<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h2>개념 다지기 4. 학습 과정 한눈에 보기 (순서도)<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span> ① 학습 데이터 입력 (x, t)
         ↓
  ② y = Wx + b 계산 → 손실함수 E(W, b) 계산
@@ -612,18 +614,18 @@
 </pre></div>
 </div>
 </section>
-<section id="id10">
-<h2>연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<section id="id9">
+<h2>연습 문제<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <div class="box box-practice docutils container">
-<p><strong>[문제 1]</strong> E(W) = (W + 1)² + 2 일 때 E’(W) = ( 　　　　 ). α = 0.25, 시작점 W = 3 에서 경사하강법을 2번 하면 W = ( 　 ) → ( 　 ) 이다.</p>
+<p><strong>[문제 1]</strong> <span class="math notranslate nohighlight">\(E(W) = (W + 1)^{2} + 2\)</span> 일 때 <span class="math notranslate nohighlight">\(E'(W) =\)</span> ( 　　　　 ). <span class="math notranslate nohighlight">\(\alpha = 0.25\)</span>, 시작점 <span class="math notranslate nohighlight">\(W = 3\)</span> 에서 경사하강법을 2번 하면 <span class="math notranslate nohighlight">\(W =\)</span> ( 　 ) → ( 　 ) 이다.</p>
 </div>
 <div class="box box-practice docutils container">
-<p><strong>[문제 2]</strong> 학습률 α = 1 로 [문제 1] 을 하면 어떻게 될까요? 예상한 뒤 코드로 확인하세요.
+<p><strong>[문제 2]</strong> 학습률 <span class="math notranslate nohighlight">\(\alpha = 1\)</span> 로 [문제 1] 을 하면 어떻게 될까요? 예상한 뒤 코드로 확인하세요.
 예상: (                                         )</p>
 </div>
 </section>
-<section id="id11">
-<h2>정리<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<section id="id10">
+<h2>정리<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>핵심</p></th>
@@ -632,12 +634,12 @@
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p>기울기 부호</p></td>
-<td class="text-left"><p>양수 → W 줄이기, 음수 → W 늘리기</p></td>
+<td class="text-left"><p>양수 → <span class="math notranslate nohighlight">\(W\)</span> 줄이기, 음수 → <span class="math notranslate nohighlight">\(W\)</span> 늘리기</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>경사하강법</p></td>
-<td class="text-left"><p>W ← W − α × ∂E/∂W,  b ← b − α × ∂E/∂b  를 반복</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle W \leftarrow W - \alpha \times \frac{\partial E}{\partial W}, b \leftarrow b - \alpha \times \frac{\partial E}{\partial b}\)</span>  를 반복</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>학습률 α</p></td>
+<tr class="row-even"><td class="text-left"><p>학습률 <span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
 <td class="text-left"><p>너무 작으면 느리고, 너무 크면 발산한다</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>기울기 계산</p></td>
@@ -646,8 +648,8 @@
 </tbody>
 </table>
 </div>
-<section id="id12">
-<h3>도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<section id="id11">
+<h3>도전 과제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>경사하강법은 “지금 서 있는 곳의 기울기” 만 보고 내려갑니다. 만약 그릇이 아니라 <strong>움푹한 곳이 여러 개인 산</strong> 이라면 어떤 문제가 생길까요?
 (                                                                                                                            )</p>
 </section>
@@ -729,12 +731,12 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">애니메이션 1. 공이 그릇 바닥으로 굴러간다</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">애니메이션 2. 학습률 α 가 너무 작거나 크면?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">개념 다지기 3. W 와 b 를 함께 내려가기</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">개념 다지기 4. 학습 과정 한눈에 보기 (순서도)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">연습 문제</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">도전 과제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alpha">애니메이션 2. 학습률 <span class="math notranslate nohighlight">\(\alpha\)</span> 가 너무 작거나 크면?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#w-b">개념 다지기 3. <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 를 함께 내려가기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 4. 학습 과정 한눈에 보기 (순서도)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">연습 문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">정리</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">도전 과제</a></li>
 </ul>
 </li>
 </ul>

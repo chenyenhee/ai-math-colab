@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '11_mnist';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -380,7 +382,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 11 편</p>
-<section id="mnist">
+<section class="tex2jax_ignore mathjax_ignore" id="mnist">
 <h1>MNIST - 손글씨 숫자를 읽는 신경망<a class="headerlink" href="#mnist" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「Deep Learning (IV) - MNIST (필기체숫자) 인식」 (ML_LEC_22)</p>
@@ -398,26 +400,26 @@
 <section id="id2">
 <h2>지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>제 10편: 입력층 → 은닉층 → 출력층 으로 피드포워드하고, 손실을 줄이도록 모든 W, b 를 학습시켜 XOR 을 풀었습니다.</p></li>
+<li><p>제 10편: 입력층 → 은닉층 → 출력층 으로 피드포워드하고, 손실을 줄이도록 모든 <span class="math notranslate nohighlight">\(W, b\)</span> 를 학습시켜 XOR 을 풀었습니다.</p></li>
 <li><p>오늘은 같은 방법을 <strong>진짜 손글씨 숫자 사진</strong> 에 적용합니다.</p></li>
 </ul>
 </section>
 <section id="id3">
 <h2>핵심 정리<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p><strong>① 사진은 784 차원 벡터</strong></p>
-<p>28 × 28 흑백 사진의 픽셀 값(0 ~ 255) 784 개를 한 줄로 펴면 x = (x₁, x₂, … , x₇₈₄) 이다. (아래 애니메이션 1)</p>
+<p><span class="math notranslate nohighlight">\(28 \times 28\)</span> 흑백 사진의 픽셀 값(0 ~ 255) 784 개를 한 줄로 펴면 <span class="math notranslate nohighlight">\(x = (x_{1}, x_{2}, \cdots , x_{784})\)</span> 이다. (아래 애니메이션 1)</p>
 <p><strong>② 정규화</strong></p>
 <div class="box box-formula docutils container">
-<p>x′ = (x / 255) × 0.99 + 0.01　→　0.01 ≤ x′ ≤ 1</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle x' = \frac{x}{255} \times 0.99 + 0.01\)</span>　→　<span class="math notranslate nohighlight">\(0.01 \le x' \le 1\)</span></p>
 </div>
-<p>입력이 크면 z = x · W + b 가 커져 e<sup>−z</sup> 계산이 불안정해지므로 범위를 맞춘다.</p>
+<p>입력이 크면 <span class="math notranslate nohighlight">\(z = x \cdot W + b\)</span> 가 커져 <span class="math notranslate nohighlight">\(e^{-z}\)</span> 계산이 불안정해지므로 범위를 맞춘다.</p>
 <p><strong>③ 원-핫 인코딩과 argmax</strong></p>
 <p>정답 5 → (0.01, 0.01, 0.01, 0.01, 0.01, <strong>0.99</strong>, 0.01, 0.01, 0.01, 0.01)<br />
 출력 노드 10 개 중 가장 큰 값의 위치(argmax)를 답으로 고른다. (아래 애니메이션 2)</p>
 <p><strong>④ 784 - 100 - 10 신경망의 크기</strong></p>
-<p>W<sup>(2)</sup> 784 × 100 + b<sup>(2)</sup> 100 + W<sup>(3)</sup> 100 × 10 + b<sup>(3)</sup> 10 = <strong>79 510 개</strong></p>
+<p><span class="math notranslate nohighlight">\(W^{(2)} 784 \times 100 + b^{(2)} 100 + W^{(3)} 100 \times 10 + b^{(3)} 10 =\)</span> <strong>79 510 개</strong></p>
 <p><strong>⑤ 수치미분의 비용</strong></p>
-<p>값 하나를 수치미분하려면 피드포워드를 2 번 해야 한다. 사진 1 장으로 한 번 학습하려면 피드포워드를 약 2 × 79 510 = 159 020 번 해야 하고, 30 000 장이면 수십 시간이 걸린다.<br />
+<p>값 하나를 수치미분하려면 피드포워드를 2 번 해야 한다. 사진 1 장으로 한 번 학습하려면 피드포워드를 약 <span class="math notranslate nohighlight">\(2 \times 79 510 = 159 020\)</span> 번 해야 하고, 30 000 장이면 수십 시간이 걸린다.<br />
 → 미분을 한꺼번에 공식으로 구하는 <strong>오차역전파</strong> 가 필요하다.</p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
@@ -428,7 +430,7 @@
 <ul class="simple">
 <li><p>사람이 손으로 쓴 숫자 0 ~ 9 의 흑백 사진 모음 (학습용 <strong>60,000</strong> 장, 테스트용 <strong>10,000</strong> 장)</p></li>
 <li><p>프로그래밍을 배울 때 처음 출력하는 ‘Hello, World’ 처럼, <strong>딥러닝을 배우면 처음 해 보는 데이터</strong></p></li>
-<li><p>사진 1장 = 가로 28 × 세로 28 = ( 　　 ) 개의 숫자 (0 = 검정 ~ 255 = 흰색)</p></li>
+<li><p>사진 1장 = 가로 <span class="math notranslate nohighlight">\(28 \times\)</span> 세로 <span class="math notranslate nohighlight">\(28 =\)</span> ( 　　 ) 개의 숫자 (<span class="math notranslate nohighlight">\(0 =\)</span> 검정 ~ 255 = 흰색)</p></li>
 </ul>
 <p>원본 강의의 mnist_train.csv 는 한 줄에 숫자가 <strong>785 개</strong> 있습니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -486,7 +488,7 @@
 </tbody>
 </table>
 </div>
-<p>W2 : (784 × 100),  b2 : 100,  W3 : (100 × 10),  b3 : 10  → 학습할 값이 무려 ( 　　　　 ) 개!</p>
+<p><span class="math notranslate nohighlight">\(W2\)</span> : <span class="math notranslate nohighlight">\((784 \times 100), b2\)</span> : <span class="math notranslate nohighlight">\(100, W3\)</span> : <span class="math notranslate nohighlight">\((100 \times 10), b3\)</span> : 10  → 학습할 값이 무려 ( 　　　　 ) 개!</p>
 <section id="one-hot-encoding">
 <h3>원-핫 인코딩 (one-hot encoding)<a class="headerlink" href="#one-hot-encoding" title="Link to this heading">#</a></h3>
 <p>정답 5 를 출력 노드 10 개에 맞춰 <strong>5 번 자리만 크고 나머지는 작은</strong> 리스트로 바꿉니다. (sigmoid 출력에 맞춰 0, 1 대신 0.01, 0.99 사용)</p>
@@ -525,7 +527,7 @@
 </section>
 <section id="normalize">
 <h3>입력 정규화 (normalize)<a class="headerlink" href="#normalize" title="Link to this heading">#</a></h3>
-<p>픽셀 값 0 ~ 255 를 그대로 넣으면 e<sup>−z</sup> 계산에서 너무 큰 수가 나와 문제(overflow)가 생길 수 있습니다.
+<p>픽셀 값 0 ~ 255 를 그대로 넣으면 <span class="math notranslate nohighlight">\(e^{-z}\)</span> 계산에서 너무 큰 수가 나와 문제(overflow)가 생길 수 있습니다.
 → <strong>(픽셀 / 255) × 0.99 + 0.01</strong> 로 0.01 ~ 1 사이 값으로 바꿉니다.</p>
 <div class="box box-practice docutils container">
 <p><strong>[연습 1]</strong> 정답 3 의 원-핫 인코딩: [ 0.01, 0.01, 0.01, ( 　 ), 0.01, … ]
@@ -588,7 +590,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p>MNIST</p></td>
-<td class="text-left"><p>28 × 28 = 784 픽셀 손글씨 숫자, 학습 60,000 / 테스트 10,000</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(28 \times 28 = 784\)</span> 픽셀 손글씨 숫자, 학습 60,000 / 테스트 10,000</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>데이터 모양</p></td>
 <td class="text-left"><p>1열 정답 + 784열 픽셀 → <code class="docutils literal notranslate"><span class="pre">row[0]</span></code>, <code class="docutils literal notranslate"><span class="pre">row[1:]</span></code></p></td>
@@ -610,7 +612,7 @@
 </div>
 <section id="id12">
 <h3>도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
-<p>수치미분은 W 값 8만 개를 <strong>하나씩</strong> 조금씩 움직여 봐야 했습니다. 제 1편에서 배운 <strong>연쇄법칙 (chain rule)</strong> 을 쓰면, 출력층의 오차 하나로부터 모든 W 의 미분값을 한꺼번에 구할 수 있을까요?
+<p>수치미분은 <span class="math notranslate nohighlight">\(W\)</span> 값 8만 개를 <strong>하나씩</strong> 조금씩 움직여 봐야 했습니다. 제 1편에서 배운 <strong>연쇄법칙 (chain rule)</strong> 을 쓰면, 출력층의 오차 하나로부터 모든 <span class="math notranslate nohighlight">\(W\)</span> 의 미분값을 한꺼번에 구할 수 있을까요?
 → 다음 시간: <strong>오차역전파</strong></p>
 </section>
 </section>

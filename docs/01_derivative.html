@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '01_derivative';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -353,7 +355,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">핵심 정리</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 1. 미분이란? - 입력에 대한 민감도</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-x2-f-x-2x">[이해해 보기] f(x) = x² 이면 f′(x) = 2x</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-x-2-f-x-2x">[이해해 보기] <span class="math notranslate nohighlight">\(f(x) = x^{2}\)</span> 이면 <span class="math notranslate nohighlight">\(f'(x) = 2x\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">애니메이션 1. 곳곳의 민감도 = 도함수</a></li>
@@ -361,8 +363,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 3. 변수가 여러 개라면? 편미분</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 2. 편미분 = 곡면을 한 방향으로 자른 단면의 기울기</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-rule">개념 다지기 4. 양파 껍질 까듯이 - 연쇄법칙 (chain rule)</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-e3x2">[예 1] f(x) = e<sup>3x²</sup></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-ex">[예 2] f(x) = e<sup>−x</sup></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-e-3x-2">[예 1] <span class="math notranslate nohighlight">\(f(x) = e^{3x^{2}}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-e-x">[예 2] <span class="math notranslate nohighlight">\(f(x) = e^{-x}\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">애니메이션 3. 변화가 전달되는 연쇄법칙</a></li>
@@ -383,7 +385,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 1 편</p>
-<section id="id1">
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>머신러닝을 위한 미분 기초<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「머신러닝/딥러닝을 위한 수치미분 (I) - 미분 • 편미분 • 체인룰」 (ML_LEC_09)</p>
@@ -409,24 +411,24 @@
 <section id="id4">
 <h2>핵심 정리<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p><strong>① 평균변화율에서 미분계수로</strong></p>
-<p>x 가 a 에서 a + h 로 변할 때 f(x) 의 평균변화율은 {f(a + h) − f(a)} / h 이고, 이는 두 점을 잇는 할선의 기울기이다.<br />
-h 를 0 에 한없이 가깝게 하면</p>
+<p><span class="math notranslate nohighlight">\(x\)</span> 가 <span class="math notranslate nohighlight">\(a\)</span> 에서 <span class="math notranslate nohighlight">\(a + h\)</span> 로 변할 때 <span class="math notranslate nohighlight">\(f(x)\)</span> 의 평균변화율은 <span class="math notranslate nohighlight">\(\displaystyle \frac{f(a + h) - f(a)}{h}\)</span> 이고, 이는 두 점을 잇는 할선의 기울기이다.<br />
+<span class="math notranslate nohighlight">\(h\)</span> 를 0 에 한없이 가깝게 하면</p>
 <div class="box box-formula docutils container">
-<p>f′(a) = lim<sub>h→0</sub> {f(a + h) − f(a)} / h</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle f'(a) = \lim_{h\to 0} \frac{f(a + h) - f(a)}{h}\)</span></p>
 </div>
-<p>이 값은 x = a 에서의 접선의 기울기이다.</p>
+<p>이 값은 <span class="math notranslate nohighlight">\(x = a\)</span> 에서의 접선의 기울기이다.</p>
 <p><strong>② 미분계수 = 민감도</strong></p>
-<p>h 가 충분히 작으면 f(a + h) ≒ f(a) + f′(a) × h 이다. 즉 입력을 h 만큼 바꾸면 출력은 약 f′(a) 배인 f′(a)h 만큼 변한다.<br />
-예) f(x) = x² 에서 f′(3) = 6 이므로 f(3.01) ≒ 9 + 6 × 0.01 = 9.06 (실제 값 9.0601)</p>
+<p><span class="math notranslate nohighlight">\(h\)</span> 가 충분히 작으면 <span class="math notranslate nohighlight">\(f(a + h) \fallingdotseq f(a) + f'(a) \times h\)</span> 이다. 즉 입력을 <span class="math notranslate nohighlight">\(h\)</span> 만큼 바꾸면 출력은 약 <span class="math notranslate nohighlight">\(f'(a)\)</span> 배인 <span class="math notranslate nohighlight">\(f'(a)h\)</span> 만큼 변한다.<br />
+예) <span class="math notranslate nohighlight">\(f(x) = x^{2}\)</span> 에서 <span class="math notranslate nohighlight">\(f'(3) = 6\)</span> 이므로 <span class="math notranslate nohighlight">\(f(3.01) \fallingdotseq 9 + 6 \times 0.01 = 9.06\)</span> (실제 값 9.0601)</p>
 <p><strong>③ 자주 쓰는 도함수</strong></p>
-<p>(c)′ = 0,　(ax<sup>n</sup>)′ = nax<sup>n−1</sup>,　(e<sup>x</sup>)′ = e<sup>x</sup>,　(e<sup>−x</sup>)′ = −e<sup>−x</sup>,　(ln x)′ = 1/x</p>
+<p><span class="math notranslate nohighlight">\((c)' = 0\)</span>,　<span class="math notranslate nohighlight">\((ax^{n})' = nax^{n-1}\)</span>,　<span class="math notranslate nohighlight">\((e^{x})' = e^{x}\)</span>,　<span class="math notranslate nohighlight">\((e^{-x})' = -e^{-x}\)</span>,　<span class="math notranslate nohighlight">\(\displaystyle (\ln x)' = \frac{1}{x}\)</span></p>
 <p><strong>④ 편미분</strong></p>
 <p>변수가 여러 개인 함수에서 한 변수만 움직이고 나머지는 상수로 본다.<br />
-f(x, y) = 2x + 3xy + y³ 이면 ∂f/∂x = 2 + 3y,　∂f/∂y = 3x + 3y²<br />
-기하학적으로 ∂f/∂x 는 곡면을 y = (상수) 인 평면으로 자른 단면 곡선의 접선의 기울기이다.</p>
+<span class="math notranslate nohighlight">\(f(x, y) = 2x + 3xy + y^{3}\)</span> 이면 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x} = 2 + 3y\)</span>,　<span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial y} = 3x + 3y^{2}\)</span><br />
+기하학적으로 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x}\)</span> 는 곡면을 <span class="math notranslate nohighlight">\(y =\)</span> (상수) 인 평면으로 자른 단면 곡선의 접선의 기울기이다.</p>
 <p><strong>⑤ 연쇄법칙</strong></p>
-<p>y = f(t), t = g(x) 이면　dy/dx = (dy/dt) × (dt/dx) = f′(g(x)) × g′(x)<br />
-예) y = e<sup>3x²</sup> : t = 3x² 로 놓으면 dy/dx = e<sup>t</sup> × 6x = 6x e<sup>3x²</sup><br />
+<p><span class="math notranslate nohighlight">\(y = f(t), t = g(x)\)</span> 이면　<span class="math notranslate nohighlight">\(\displaystyle \frac{dy}{dx} = \frac{dy}{dt} \times \frac{dt}{dx} = f'(g(x)) \times g'(x)\)</span><br />
+예) <span class="math notranslate nohighlight">\(y = e^{3x^{2}}\)</span> : <span class="math notranslate nohighlight">\(t = 3x^{2}\)</span> 로 놓으면 <span class="math notranslate nohighlight">\(\displaystyle \frac{dy}{dx} = e^{t} \times 6x = 6x e^{3x^{2}}\)</span><br />
 변화가 단계마다 ‘몇 배’ 로 커지는지 곱해 가는 것이 연쇄법칙의 뜻이다. (아래 애니메이션 3)</p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
@@ -435,37 +437,37 @@ f(x, y) = 2x + 3xy + y³ 이면 ∂f/∂x = 2 + 3y,　∂f/∂y = 3x + 3y²<br /
 <section id="id5">
 <h2>개념 다지기 1. 미분이란? - 입력에 대한 민감도<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <div class="box box-note docutils container">
-<p><strong>f′(x) = lim<sub>Δx→0</sub> {f(x + Δx) − f(x)} / Δx</strong></p>
+<p><strong><span class="math notranslate nohighlight">\(\displaystyle f'(x) = \lim_{\Delta x\to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}\)</span></strong></p>
 </div>
 <p>미분은 한마디로</p>
 <div class="box box-note docutils container">
-<p><strong>“입력 x 를 지금 값에서 아주 조금 바꾸면, 출력 f(x) 는 얼마나 변하는가?”</strong>
-= 함수 f(x) 가 입력의 미세한 변화에 <strong>얼마나 민감하게 반응하는가?</strong></p>
+<p><strong>“입력 <span class="math notranslate nohighlight">\(x\)</span> 를 지금 값에서 아주 조금 바꾸면, 출력 <span class="math notranslate nohighlight">\(f(x)\)</span> 는 얼마나 변하는가?”</strong>
+= 함수 <span class="math notranslate nohighlight">\(f(x)\)</span> 가 입력의 미세한 변화에 <strong>얼마나 민감하게 반응하는가?</strong></p>
 </div>
-<section id="f-x-x2-f-x-2x">
-<h3>[이해해 보기] f(x) = x² 이면 f′(x) = 2x<a class="headerlink" href="#f-x-x2-f-x-2x" title="Link to this heading">#</a></h3>
+<section id="f-x-x-2-f-x-2x">
+<h3>[이해해 보기] <span class="math notranslate nohighlight">\(f(x) = x^{2}\)</span> 이면 <span class="math notranslate nohighlight">\(f'(x) = 2x\)</span><a class="headerlink" href="#f-x-x-2-f-x-2x" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>f(3) = 9 → 입력 x = 3 일 때 출력은 9</p></li>
-<li><p>f′(3) = 6 → x = 3 에서 x 를 아주 조금 변화시키면, f(x) 는 그 변화량의 ( 　 ) 배만큼 변한다.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(3) = 9\)</span> → 입력 <span class="math notranslate nohighlight">\(x = 3\)</span> 일 때 출력은 9</p></li>
+<li><p><span class="math notranslate nohighlight">\(f'(3) = 6\)</span> → <span class="math notranslate nohighlight">\(x = 3\)</span> 에서 <span class="math notranslate nohighlight">\(x\)</span> 를 아주 조금 변화시키면, <span class="math notranslate nohighlight">\(f(x)\)</span> 는 그 변화량의 ( 　 ) 배만큼 변한다.</p></li>
 </ul>
 <div class="box box-check docutils container">
-<p><strong>[확인 1]</strong> x 를 3 에서 3.01 로 0.01 만큼 늘리면 f(x) 는 약 6 × 0.01 = ( 　　 ) 만큼 늘어난다.
-실제로 계산하면 f(3.01) − f(3) = 9.0601 − 9 = ( 　　　 ) 으로 거의 같다!</p>
+<p><strong>[확인 1]</strong> <span class="math notranslate nohighlight">\(x\)</span> 를 3 에서 3.01 로 0.01 만큼 늘리면 <span class="math notranslate nohighlight">\(f(x)\)</span> 는 약 <span class="math notranslate nohighlight">\(6 \times 0.01 =\)</span> ( 　　 ) 만큼 늘어난다.
+실제로 계산하면 <span class="math notranslate nohighlight">\(f(3.01) - f(3) = 9.0601 - 9 =\)</span> ( 　　　 ) 으로 거의 같다!</p>
 </div>
 <div class="box box-note docutils container">
-<p>Δx 가 작아질수록 (변화량 ÷ Δx) 가 6 에 가까워집니다. 이 값이 바로 <strong>미분계수 f′(3) = 6</strong> 입니다.</p>
+<p><span class="math notranslate nohighlight">\(\Delta x\)</span> 가 작아질수록 (변화량 <span class="math notranslate nohighlight">\(\div \Delta x\)</span>) 가 6 에 가까워집니다. 이 값이 바로 <strong>미분계수 <span class="math notranslate nohighlight">\(f'(3) = 6\)</span></strong> 입니다.</p>
 </div>
 </section>
 </section>
 <section id="id6">
 <h2>애니메이션 1. 곳곳의 민감도 = 도함수<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
-<p>점이 f(x) = x² 위를 움직이면서 그 점의 <strong>접선의 기울기 (민감도)</strong> 를 오른쪽 그래프에 찍습니다. 찍힌 점들을 이으면 <strong>도함수 f′(x) = 2x</strong> 가 됩니다.</p>
+<p>점이 <span class="math notranslate nohighlight">\(f(x) = x^{2}\)</span> 위를 움직이면서 그 점의 <strong>접선의 기울기 (민감도)</strong> 를 오른쪽 그래프에 찍습니다. 찍힌 점들을 이으면 <strong>도함수 <span class="math notranslate nohighlight">\(f'(x) = 2x\)</span></strong> 가 됩니다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/01_derivative_1.jpg"><source src="videos/01_derivative_1.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 <div class="box box-check docutils container">
-<p><strong>[관찰 1]</strong> 기울기가 음수인 곳에서 x 를 늘리면 f(x) 는 ( 늘어난다 / 줄어든다 ). 기울기가 0 인 곳 x = ( 　 ) 에서 f(x) 는 가장 ( 크다 / 작다 ).</p>
+<p><strong>[관찰 1]</strong> 기울기가 음수인 곳에서 <span class="math notranslate nohighlight">\(x\)</span> 를 늘리면 <span class="math notranslate nohighlight">\(f(x)\)</span> 는 ( 늘어난다 / 줄어든다 ). 기울기가 0 인 곳 <span class="math notranslate nohighlight">\(x =\)</span> ( 　 ) 에서 <span class="math notranslate nohighlight">\(f(x)\)</span> 는 가장 ( 크다 / 작다 ).</p>
 </div>
 <ul class="simple">
 <li><p><strong>머신러닝에서 미분을 왜 할까?</strong>
@@ -481,34 +483,34 @@ f(x, y) = 2x + 3xy + y³ 이면 ∂f/∂x = 2 + 3y,　∂f/∂y = 3x + 3y²<br /
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p>f(x) = c (상수)</p></td>
-<td class="text-left"><p>f′(x) = 0</p></td>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(f(x) = c\)</span> (상수)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(f'(x) = 0\)</span></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>f(x) = ax<sup>n</sup></p></td>
-<td class="text-left"><p>f′(x) = n·a·x<sup>n−1</sup></p></td>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(f(x) = ax^{n}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(f'(x) = n\cdot a\cdot x^{n-1}\)</span></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>f(x) = e<sup>x</sup></p></td>
-<td class="text-left"><p>f′(x) = e<sup>x</sup> (모양이 그대로!)</p></td>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(f(x) = e^{x}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(f'(x) = e^{x}\)</span> (모양이 그대로!)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>f(x) = e<sup>−x</sup></p></td>
-<td class="text-left"><p>f′(x) = −e<sup>−x</sup></p></td>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(f(x) = e^{-x}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(f'(x) = -e^{-x}\)</span></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>f(x) = ln x</p></td>
-<td class="text-left"><p>f′(x) = 1/x</p></td>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(f(x) = \ln x\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle f'(x) = \frac{1}{x}\)</span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="box box-practice docutils container">
 <p><strong>[연습 1]</strong> 다음 함수를 미분하세요.
-① f(x) = 3x² + e<sup>x</sup> + 7　→　f′(x) = ( 　　　　　　 )
-② f(x) = ln x + 1/x　→　f′(x) = ( 　　　　　　 )　(힌트: 1/x = x<sup>−1</sup>)
-③ f(x) = 2x³ − 5x　→　f′(x) = ( 　　　　　　 )</p>
+① <span class="math notranslate nohighlight">\(f(x) = 3x^{2} + e^{x} + 7\)</span>　→　<span class="math notranslate nohighlight">\(f'(x) =\)</span> ( 　　　　　　 )
+② <span class="math notranslate nohighlight">\(\displaystyle f(x) = \ln x + \frac{1}{x}\)</span>　→　<span class="math notranslate nohighlight">\(f'(x) =\)</span> ( 　　　　　　 )　(힌트: <span class="math notranslate nohighlight">\(\displaystyle \frac{1}{x} = x^{-1}\)</span>)
+③ <span class="math notranslate nohighlight">\(f(x) = 2x^{3} - 5x\)</span>　→　<span class="math notranslate nohighlight">\(f'(x) =\)</span> ( 　　　　　　 )</p>
 </div>
 </section>
 <section id="id8">
 <h2>개념 다지기 3. 변수가 여러 개라면? 편미분<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
-<p>체중은 ‘야식’ 과 ‘운동량’ 둘 다의 영향을 받습니다.  →  체중 = f(야식, 운동량)</p>
+<p>체중은 ‘야식’ 과 ‘운동량’ 둘 다의 영향을 받습니다.  →  체중 <span class="math notranslate nohighlight">\(= f\)</span>(야식, 운동량)</p>
 <p><strong>편미분</strong> : 여러 변수 중 <strong>관심 있는 변수 1개만</strong> 진짜 변수로 보고, <strong>나머지는 상수로 고정</strong> 하고 미분하는 것</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -527,41 +529,41 @@ f(x, y) = 2x + 3xy + y³ 이면 ∂f/∂x = 2 + 3y,　∂f/∂y = 3x + 3y²<br /
 </table>
 </div>
 <div class="box box-practice docutils container">
-<p><strong>[연습 2]</strong> f(x, y) = 2x + 3xy + y³ 일 때
-① ∂f/∂x (y 는 상수 취급) = ( 　　　　 )
-② ∂f/∂y (x 는 상수 취급) = ( 　　　　 )
-③ 점 (1, 2) 에서 ∂f/∂x = ( 　 ),  ∂f/∂y = ( 　 )</p>
+<p><strong>[연습 2]</strong> <span class="math notranslate nohighlight">\(f(x, y) = 2x + 3xy + y^{3}\)</span> 일 때
+① <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x}\)</span> (<span class="math notranslate nohighlight">\(y\)</span> 는 상수 취급) = ( 　　　　 )
+② <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial y}\)</span> (<span class="math notranslate nohighlight">\(x\)</span> 는 상수 취급) = ( 　　　　 )
+③ 점 (1, 2) 에서 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x} =\)</span> ( 　 ),  <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial y} =\)</span> ( 　 )</p>
 </div>
 </section>
 <section id="id9">
 <h2>애니메이션 2. 편미분 = 곡면을 한 방향으로 자른 단면의 기울기<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
-<p>곡면 f(x, y) = x² + y² 을 <strong>y = 1 평면으로 자르면</strong> 단면은 곡선 f(x, 1) = x² + 1 이 됩니다.
-이 단면 곡선의 x = 1 에서의 접선 기울기가 바로 <strong>∂f/∂x = 2x = 2</strong> 입니다. (곡면이 천천히 돌아갑니다)</p>
+<p>곡면 <span class="math notranslate nohighlight">\(f(x, y) = x^{2} + y^{2}\)</span> 을 <strong><span class="math notranslate nohighlight">\(y = 1\)</span> 평면으로 자르면</strong> 단면은 곡선 <span class="math notranslate nohighlight">\(f(x, 1) = x^{2} + 1\)</span> 이 됩니다.
+이 단면 곡선의 <span class="math notranslate nohighlight">\(x = 1\)</span> 에서의 접선 기울기가 바로 <strong><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x} = 2x = 2\)</span></strong> 입니다. (곡면이 천천히 돌아갑니다)</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/01_derivative_2.jpg"><source src="videos/01_derivative_2.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 <div class="box box-check docutils container">
-<p><strong>[관찰 2]</strong> 같은 점 (1, 1) 에서 <strong>x = 1 평면</strong> 으로 자르면 단면은 f(1, y) = ( 　　　 ) 이고, 그 기울기 ∂f/∂y = ( 　 ) 이다.</p>
+<p><strong>[관찰 2]</strong> 같은 점 (1, 1) 에서 <strong><span class="math notranslate nohighlight">\(x = 1\)</span> 평면</strong> 으로 자르면 단면은 <span class="math notranslate nohighlight">\(f(1, y) =\)</span> ( 　　　 ) 이고, 그 기울기 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial y} =\)</span> ( 　 ) 이다.</p>
 </div>
 </section>
 <section id="chain-rule">
 <h2>개념 다지기 4. 양파 껍질 까듯이 - 연쇄법칙 (chain rule)<a class="headerlink" href="#chain-rule" title="Link to this heading">#</a></h2>
 <p>함수 안에 함수가 들어 있는 <strong>합성함수</strong> 는 <strong>겉 함수의 미분 × 속 함수의 미분</strong> 으로 구합니다.</p>
 <div class="box box-note docutils container">
-<p><strong>df/dx = (df/dt) × (dt/dx)</strong>　　(마치 분수의 약분처럼 dt 가 사라진다고 생각하면 쉽습니다)</p>
+<p><strong><span class="math notranslate nohighlight">\(\displaystyle \frac{df}{dx} = \frac{df}{dt} \times \frac{dt}{dx}\)</span></strong>　　(마치 분수의 약분처럼 dt 가 사라진다고 생각하면 쉽습니다)</p>
 </div>
-<section id="f-x-e3x2">
-<h3>[예 1] f(x) = e<sup>3x²</sup><a class="headerlink" href="#f-x-e3x2" title="Link to this heading">#</a></h3>
+<section id="f-x-e-3x-2">
+<h3>[예 1] <span class="math notranslate nohighlight">\(f(x) = e^{3x^{2}}\)</span><a class="headerlink" href="#f-x-e-3x-2" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>치환: t = 3x² 으로 놓으면 f = e<sup>t</sup></p></li>
-<li><p>각각 미분:  df/dt = ( 　　 ),  dt/dx = ( 　　 )</p></li>
-<li><p>곱하기:  df/dx = e<sup>t</sup> × 6x = ( 　　　　 )</p></li>
+<li><p>치환: <span class="math notranslate nohighlight">\(t = 3x^{2}\)</span> 으로 놓으면 <span class="math notranslate nohighlight">\(f = e^{t}\)</span></p></li>
+<li><p>각각 미분:  <span class="math notranslate nohighlight">\(\displaystyle \frac{df}{dt} =\)</span> ( 　　 ),  <span class="math notranslate nohighlight">\(\displaystyle \frac{dt}{dx} =\)</span> ( 　　 )</p></li>
+<li><p>곱하기:  <span class="math notranslate nohighlight">\(\displaystyle \frac{df}{dx} = e^{t} \times 6x =\)</span> ( 　　　　 )</p></li>
 </ol>
 </section>
-<section id="f-x-ex">
-<h3>[예 2] f(x) = e<sup>−x</sup><a class="headerlink" href="#f-x-ex" title="Link to this heading">#</a></h3>
-<p>t = −x 로 놓으면  df/dx = e<sup>t</sup> × ( 　 ) = −e<sup>−x</sup></p>
+<section id="f-x-e-x">
+<h3>[예 2] <span class="math notranslate nohighlight">\(f(x) = e^{-x}\)</span><a class="headerlink" href="#f-x-e-x" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(t = -x\)</span> 로 놓으면  <span class="math notranslate nohighlight">\(\displaystyle \frac{df}{dx} = e^{t} \times\)</span> ( 　 ) <span class="math notranslate nohighlight">\(= -e^{-x}\)</span></p>
 <div class="box box-note docutils container">
 <p>딥러닝의 신경망은 함수가 <strong>겹겹이 쌓인 거대한 합성함수</strong> 입니다. 그래서 연쇄법칙이 딥러닝 학습(오차역전파, 제 12 ~ 13편)의 핵심입니다!</p>
 </div>
@@ -569,26 +571,26 @@ f(x, y) = 2x + 3xy + y³ 이면 ∂f/∂x = 2 + 3y,　∂f/∂y = 3x + 3y²<br /
 </section>
 <section id="id10">
 <h2>애니메이션 3. 변화가 전달되는 연쇄법칙<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
-<p>f(x) = e<sup>3x²</sup> 에서 x = 0.5 근처를 생각합니다. x 가 조금 흔들리면 → t = 3x² 가 흔들리고 → f = e<sup>t</sup> 가 흔들립니다.
+<p><span class="math notranslate nohighlight">\(f(x) = e^{3x^{2}}\)</span> 에서 <span class="math notranslate nohighlight">\(x = 0.5\)</span> 근처를 생각합니다. <span class="math notranslate nohighlight">\(x\)</span> 가 조금 흔들리면 → <span class="math notranslate nohighlight">\(t = 3x^{2}\)</span> 가 흔들리고 → <span class="math notranslate nohighlight">\(f = e^{t}\)</span> 가 흔들립니다.
 각 단계에서 흔들림이 <strong>몇 배로 커지는지</strong> (dt/dx, df/dt) 곱하면 전체 배율 df/dx 가 됩니다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/01_derivative_3.jpg"><source src="videos/01_derivative_3.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 <div class="box box-check docutils container">
-<p><strong>[관찰 3]</strong> Δx = 0.05 일 때 Δf 는 약 ( 　　 ) 이다. 이것은 Δx 의 약 ( 　　 ) 배이며, 공식 6x·e<sup>3x²</sup> 에 x = 0.5 를 넣은 값 ( 　　 ) 과 같다.</p>
+<p><strong>[관찰 3]</strong> <span class="math notranslate nohighlight">\(\Delta x = 0.05\)</span> 일 때 <span class="math notranslate nohighlight">\(\Delta f\)</span> 는 약 ( 　　 ) 이다. 이것은 <span class="math notranslate nohighlight">\(\Delta x\)</span> 의 약 ( 　　 ) 배이며, 공식 <span class="math notranslate nohighlight">\(6x\cdot e^{3x^{2}}\)</span> 에 <span class="math notranslate nohighlight">\(x = 0.5\)</span> 를 넣은 값 ( 　　 ) 과 같다.</p>
 </div>
 </section>
 <section id="id11">
 <h2>연습 문제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <div class="box box-practice docutils container">
-<p><strong>[문제 1]</strong> f(x) = 4x³ − 2x + ln x 의 도함수와 f′(1) 을 구하세요.  f′(x) = ( 　　　　　 ),  f′(1) = ( 　 )</p>
+<p><strong>[문제 1]</strong> <span class="math notranslate nohighlight">\(f(x) = 4x^{3} - 2x + \ln x\)</span> 의 도함수와 <span class="math notranslate nohighlight">\(f'(1)\)</span> 을 구하세요.  <span class="math notranslate nohighlight">\(f'(x) =\)</span> ( 　　　　　 ),  <span class="math notranslate nohighlight">\(f'(1) =\)</span> ( 　 )</p>
 </div>
 <div class="box box-practice docutils container">
-<p><strong>[문제 2]</strong> f(x, y) = x²y + e<sup>y</sup> 의 ∂f/∂x, ∂f/∂y 를 구하세요.  ( 　　 ),  ( 　　 )</p>
+<p><strong>[문제 2]</strong> <span class="math notranslate nohighlight">\(f(x, y) = x^{2}y + e^{y}\)</span> 의 <span class="math notranslate nohighlight">\(\displaystyle \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\)</span> 를 구하세요.  ( 　　 ),  ( 　　 )</p>
 </div>
 <div class="box box-practice docutils container">
-<p><strong>[문제 3]</strong> f(x) = e<sup>−2x</sup> 을 연쇄법칙으로 미분하세요. t = ( 　　 ) 로 놓으면 f′(x) = ( 　　　 )</p>
+<p><strong>[문제 3]</strong> <span class="math notranslate nohighlight">\(f(x) = e^{-2x}\)</span> 을 연쇄법칙으로 미분하세요. <span class="math notranslate nohighlight">\(t =\)</span> ( 　　 ) 로 놓으면 <span class="math notranslate nohighlight">\(f'(x) =\)</span> ( 　　　 )</p>
 </div>
 </section>
 <section id="id12">
@@ -604,20 +606,20 @@ f(x, y) = 2x + 3xy + y³ 이면 ∂f/∂x = 2 + 3y,　∂f/∂y = 3x + 3y²<br /
 <td class="text-left"><p>입력을 아주 조금 바꿀 때 출력이 얼마나 변하는지 (민감도)</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>공식</p></td>
-<td class="text-left"><p>(ax<sup>n</sup>)′ = nax<sup>n−1</sup>, (e<sup>x</sup>)′ = e<sup>x</sup>, (ln x)′ = 1/x</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle (ax^{n})' = nax^{n-1}, (e^{x})' = e^{x}, (\ln x)' = \frac{1}{x}\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>편미분</p></td>
 <td class="text-left"><p>한 변수만 움직이고 나머지는 상수로 고정</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>연쇄법칙</p></td>
-<td class="text-left"><p>df/dx = (df/dt) × (dt/dx)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle \frac{df}{dx} = \frac{df}{dt} \times \frac{dt}{dx}\)</span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <section id="id13">
 <h3>도전 과제<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
-<p>컴퓨터는 “x² 을 미분하면 2x” 라는 공식을 모릅니다. 그렇다면 컴퓨터로 f′(3) 을 구하려면 어떻게 하면 될까요? (힌트: 확인 1 의 표)
+<p>컴퓨터는 “<span class="math notranslate nohighlight">\(x^{2}\)</span> 을 미분하면 <span class="math notranslate nohighlight">\(2x\)</span>” 라는 공식을 모릅니다. 그렇다면 컴퓨터로 <span class="math notranslate nohighlight">\(f'(3)\)</span> 을 구하려면 어떻게 하면 될까요? (힌트: 확인 1 의 표)
 → 다음 시간: <strong>수치미분 - 파이썬으로 미분하기</strong></p>
 <p>(                                                                                                                            )</p>
 </section>
@@ -694,7 +696,7 @@ f(x, y) = 2x + 3xy + y³ 이면 ∂f/∂x = 2 + 3y,　∂f/∂y = 3x + 3y²<br /
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">핵심 정리</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 1. 미분이란? - 입력에 대한 민감도</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-x2-f-x-2x">[이해해 보기] f(x) = x² 이면 f′(x) = 2x</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-x-2-f-x-2x">[이해해 보기] <span class="math notranslate nohighlight">\(f(x) = x^{2}\)</span> 이면 <span class="math notranslate nohighlight">\(f'(x) = 2x\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">애니메이션 1. 곳곳의 민감도 = 도함수</a></li>
@@ -702,8 +704,8 @@ f(x, y) = 2x + 3xy + y³ 이면 ∂f/∂x = 2 + 3y,　∂f/∂y = 3x + 3y²<br /
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">개념 다지기 3. 변수가 여러 개라면? 편미분</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">애니메이션 2. 편미분 = 곡면을 한 방향으로 자른 단면의 기울기</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-rule">개념 다지기 4. 양파 껍질 까듯이 - 연쇄법칙 (chain rule)</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-e3x2">[예 1] f(x) = e<sup>3x²</sup></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-ex">[예 2] f(x) = e<sup>−x</sup></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-e-3x-2">[예 1] <span class="math notranslate nohighlight">\(f(x) = e^{3x^{2}}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-x-e-x">[예 2] <span class="math notranslate nohighlight">\(f(x) = e^{-x}\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">애니메이션 3. 변화가 전달되는 연쇄법칙</a></li>

@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '10_neural_network';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -380,7 +382,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 10 편</p>
-<section id="xor">
+<section class="tex2jax_ignore mathjax_ignore" id="xor">
 <h1>신경망과 딥러닝 - 피드포워드로 XOR 풀기<a class="headerlink" href="#xor" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「Deep Learning (I) 신경망 개념 • 아키텍처」, 「(II) feed forward • loss」, 「(III) 딥러닝으로 XOR 문제 해결」 (ML_LEC_19, 20, 21)</p>
@@ -405,21 +407,21 @@
 <section id="id3">
 <h2>핵심 정리<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p><strong>① 노드 하나 = 로지스틱 회귀 하나</strong></p>
-<p>z = x₁w₁ + x₂w₂ + … + b,　a = sigmoid(z)</p>
+<p><span class="math notranslate nohighlight">\(z = x_{1}w_{1} + x_{2}w_{2} + \cdots + b\)</span>,　<span class="math notranslate nohighlight">\(a = \mathrm{sigmoid}(z)\)</span></p>
 <p><strong>② 피드포워드 (행렬 식)</strong></p>
 <div class="box box-formula docutils container">
-<p>Z<sup>(2)</sup> = A<sup>(1)</sup> · W<sup>(2)</sup> + b<sup>(2)</sup>,　A<sup>(2)</sup> = sigmoid(Z<sup>(2)</sup>)<br />
-Z<sup>(3)</sup> = A<sup>(2)</sup> · W<sup>(3)</sup> + b<sup>(3)</sup>,　y = A<sup>(3)</sup> = sigmoid(Z<sup>(3)</sup>)</p>
+<p><span class="math notranslate nohighlight">\(Z^{(2)} = A^{(1)} \cdot W^{(2)} + b^{(2)}\)</span>,　<span class="math notranslate nohighlight">\(A^{(2)} = \mathrm{sigmoid}(Z^{(2)})\)</span><br />
+<span class="math notranslate nohighlight">\(Z^{(3)} = A^{(2)} \cdot W^{(3)} + b^{(3)}\)</span>,　<span class="math notranslate nohighlight">\(y = A^{(3)} = \mathrm{sigmoid}(Z^{(3)})\)</span></p>
 </div>
-<p>전체로 보면 y = sigmoid( sigmoid(x · W<sup>(2)</sup> + b<sup>(2)</sup>) · W<sup>(3)</sup> + b<sup>(3)</sup> ) 인 <strong>합성함수</strong> 이다.</p>
+<p>전체로 보면 <span class="math notranslate nohighlight">\(y = \mathrm{sigmoid}( \mathrm{sigmoid}(x \cdot W^{(2)} + b^{(2)}) \cdot W^{(3)} + b^{(3)} )\)</span> 인 <strong>합성함수</strong> 이다.</p>
 <p><strong>③ 손으로 확인하는 XOR 신경망</strong></p>
-<p>은닉 노드 z₁ = 20x₁ + 20x₂ − 10 (OR 역할), z₂ = −20x₁ − 20x₂ + 30 (NAND 역할), 출력 z = 20a₁ + 20a₂ − 30 (AND 역할)<br />
-sigmoid(10) ≒ 1, sigmoid(−10) ≒ 0 으로 계산하면 (0, 0) → 0, (0, 1) → 1, (1, 0) → 1, (1, 1) → 0 으로 XOR 이 된다. (아래 애니메이션 1)</p>
+<p>은닉 노드 <span class="math notranslate nohighlight">\(z_{1} = 20x_{1} + 20x_{2} - 10\)</span> (OR 역할), <span class="math notranslate nohighlight">\(z_{2} = -20x_{1} - 20x_{2} + 30\)</span> (NAND 역할), 출력 <span class="math notranslate nohighlight">\(z = 20a_{1} + 20a_{2} - 30\)</span> (AND 역할)<br />
+<span class="math notranslate nohighlight">\(\mathrm{sigmoid}(10) \fallingdotseq 1, \mathrm{sigmoid}(-10) \fallingdotseq 0\)</span> 으로 계산하면 (0, 0) → 0, (0, 1) → 1, (1, 0) → 1, (1, 1) → 0 으로 XOR 이 된다. (아래 애니메이션 1)</p>
 <p><strong>④ 활성화 함수가 꼭 필요한 이유</strong></p>
-<p>활성화 함수가 없으면 (x · W<sup>(2)</sup>) · W<sup>(3)</sup> = x · (W<sup>(2)</sup>W<sup>(3)</sup>) 이므로 층을 아무리 쌓아도 행렬 하나, 즉 직선 하나와 같다.<br />
+<p>활성화 함수가 없으면 <span class="math notranslate nohighlight">\((x \cdot W^{(2)}) \cdot W^{(3)} = x \cdot (W^{(2)}W^{(3)})\)</span> 이므로 층을 아무리 쌓아도 행렬 하나, 즉 직선 하나와 같다.<br />
 sigmoid 같은 비선형 함수가 있어야 결정 경계가 휘어질 수 있다. (아래 애니메이션 2)</p>
 <p><strong>⑤ 학습할 값의 개수</strong></p>
-<p>입력 2, 은닉 6, 출력 1 이면 W<sup>(2)</sup> 2 × 6 = 12, b<sup>(2)</sup> 6, W<sup>(3)</sup> 6 × 1 = 6, b<sup>(3)</sup> 1 → 모두 25 개</p>
+<p>입력 2, 은닉 6, 출력 1 이면 <span class="math notranslate nohighlight">\(W^{(2)}\)</span> : <span class="math notranslate nohighlight">\(2 \times 6 = 12\)</span> 개, <span class="math notranslate nohighlight">\(b^{(2)}\)</span> : 6 개, <span class="math notranslate nohighlight">\(W^{(3)}\)</span> : <span class="math notranslate nohighlight">\(6 \times 1 = 6\)</span> 개, <span class="math notranslate nohighlight">\(b^{(3)}\)</span> : 1 개 → 모두 25 개</p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
 </div></blockquote>
@@ -435,7 +437,7 @@ sigmoid 같은 비선형 함수가 있어야 결정 경계가 휘어질 수 있�
 지금까지 써 온 <strong>sigmoid</strong> 가 대표적인 활성화 함수입니다. (그 밖에 ReLU, tanh 등)</p>
 <div class="box box-note docutils container">
 <p><strong>인공 뉴런 (노드) 1개 = 로지스틱 회귀 1개</strong>
-z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (활성화)</p>
+<span class="math notranslate nohighlight">\(z = x_{1}w_{1} + x_{2}w_{2} + \cdots + b\)</span>  (선형 회귀) 　→　 <span class="math notranslate nohighlight">\(a = \mathrm{sigmoid}(z)\)</span>  (활성화)</p>
 </div>
 </section>
 <section id="id5">
@@ -454,7 +456,7 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 <td class="text-left"><p>중간 계산. 1개 이상, 노드 개수는 마음대로 정할 수 있다</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><strong>출력층 (output layer)</strong></p></td>
-<td class="text-left"><p>최종 결과 y 를 낸다</p></td>
+<td class="text-left"><p>최종 결과 <span class="math notranslate nohighlight">\(y\)</span> 를 낸다</p></td>
 </tr>
 </tbody>
 </table>
@@ -465,7 +467,7 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </section>
 <section id="notation">
 <h2>개념 다지기 3. 표기법 (notation)<a class="headerlink" href="#notation" title="Link to this heading">#</a></h2>
-<p>층 번호는 입력층 = 1, 은닉층 = 2, 출력층 = 3 으로 셉니다.</p>
+<p>층 번호는 입력층 <span class="math notranslate nohighlight">\(= 1\)</span>, 은닉층 <span class="math notranslate nohighlight">\(= 2\)</span>, 출력층 <span class="math notranslate nohighlight">\(= 3\)</span> 으로 셉니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>기호</p></th>
@@ -473,67 +475,67 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p>w<sub>21</sub><sup>(2)</sup></p></td>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(w_{21}^{(2)}\)</span></p></td>
 <td class="text-left"><p><strong>계층 2</strong> 에 적용되는 가중치. 계층 1 의 <strong>노드 1</strong> 에서 계층 2 의 <strong>노드 2</strong> 로 가는 신호에 곱한다 (다음 층 노드 번호가 <strong>먼저</strong>!)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>b<sub>1</sub><sup>(2)</sup></p></td>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(b_{1}^{(2)}\)</span></p></td>
 <td class="text-left"><p>계층 2 의 노드 1 에 더하는 바이어스</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>z<sub>2</sub><sup>(2)</sup></p></td>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(z_{2}^{(2)}\)</span></p></td>
 <td class="text-left"><p>계층 2 의 노드 2 의 선형 회귀 값</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>a<sub>2</sub><sup>(2)</sup></p></td>
-<td class="text-left"><p>계층 2 의 노드 2 의 출력 = sigmoid(z<sub>2</sub><sup>(2)</sup>)</p></td>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(a_{2}^{(2)}\)</span></p></td>
+<td class="text-left"><p>계층 2 의 노드 2 의 출력 <span class="math notranslate nohighlight">\(= \mathrm{sigmoid}(z_{2}^{(2)})\)</span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="box box-practice docutils container">
-<p><strong>[연습 1]</strong> w<sub>13</sub><sup>(3)</sup> 은 계층 ( 　 ) 의 노드 ( 　 ) 에서 계층 ( 　 ) 의 노드 ( 　 ) 로 가는 신호의 가중치이다.</p>
+<p><strong>[연습 1]</strong> <span class="math notranslate nohighlight">\(w_{13}^{(3)}\)</span> 은 계층 ( 　 ) 의 노드 ( 　 ) 에서 계층 ( 　 ) 의 노드 ( 　 ) 로 가는 신호의 가중치이다.</p>
 </div>
 </section>
 <section id="feed-forward">
 <h2>개념 다지기 4. 피드포워드 (feed forward, 순전파)<a class="headerlink" href="#feed-forward" title="Link to this heading">#</a></h2>
 <p>입력층 → 은닉층 → 출력층 으로 값이 <strong>앞으로 전달</strong> 되며 계산되는 과정입니다. (입력 2개, 은닉 노드 2개, 출력 1개)</p>
-<p><strong>① 입력층 출력</strong>:  a<sub>1</sub><sup>(1)</sup> = x₁,  a<sub>2</sub><sup>(1)</sup> = x₂</p>
+<p><strong>① 입력층 출력</strong>:  <span class="math notranslate nohighlight">\(a_{1}^{(1)} = x_{1}, a_{2}^{(1)} = x_{2}\)</span></p>
 <p><strong>② 은닉층</strong></p>
 <ul class="simple">
-<li><p>z<sub>1</sub><sup>(2)</sup> = a<sub>1</sub><sup>(1)</sup> w<sub>11</sub><sup>(2)</sup> + a<sub>2</sub><sup>(1)</sup> w<sub>12</sub><sup>(2)</sup> + b<sub>1</sub><sup>(2)</sup>,　 a<sub>1</sub><sup>(2)</sup> = sigmoid(z<sub>1</sub><sup>(2)</sup>)</p></li>
-<li><p>z<sub>2</sub><sup>(2)</sup> = a<sub>1</sub><sup>(1)</sup> w<sub>21</sub><sup>(2)</sup> + a<sub>2</sub><sup>(1)</sup> w<sub>22</sub><sup>(2)</sup> + b<sub>2</sub><sup>(2)</sup>,　 a<sub>2</sub><sup>(2)</sup> = sigmoid(z<sub>2</sub><sup>(2)</sup>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(z_{1}^{(2)} = a_{1}^{(1)} w_{11}^{(2)} + a_{2}^{(1)} w_{12}^{(2)} + b_{1}^{(2)}\)</span>,　 <span class="math notranslate nohighlight">\(a_{1}^{(2)} = \mathrm{sigmoid}(z_{1}^{(2)})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(z_{2}^{(2)} = a_{1}^{(1)} w_{21}^{(2)} + a_{2}^{(1)} w_{22}^{(2)} + b_{2}^{(2)}\)</span>,　 <span class="math notranslate nohighlight">\(a_{2}^{(2)} = \mathrm{sigmoid}(z_{2}^{(2)})\)</span></p></li>
 </ul>
 <p><strong>③ 출력층</strong></p>
 <ul class="simple">
-<li><p>z<sub>1</sub><sup>(3)</sup> = a<sub>1</sub><sup>(2)</sup> w<sub>11</sub><sup>(3)</sup> + a<sub>2</sub><sup>(2)</sup> w<sub>12</sub><sup>(3)</sup> + b<sub>1</sub><sup>(3)</sup>,　 y = a<sub>1</sub><sup>(3)</sup> = sigmoid(z<sub>1</sub><sup>(3)</sup>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(z_{1}^{(3)} = a_{1}^{(2)} w_{11}^{(3)} + a_{2}^{(2)} w_{12}^{(3)} + b_{1}^{(3)}\)</span>,　 <span class="math notranslate nohighlight">\(y = a_{1}^{(3)} = \mathrm{sigmoid}(z_{1}^{(3)})\)</span></p></li>
 </ul>
 <section id="id6">
 <h3>행렬 식으로 쓰면 한 줄!<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <div class="box box-note docutils container">
-<p><strong>Z<sup>(2)</sup> = A<sup>(1)</sup> · W<sup>(2)</sup> + b<sup>(2)</sup>,　A<sup>(2)</sup> = sigmoid(Z<sup>(2)</sup>)</strong>
-<strong>Z<sup>(3)</sup> = A<sup>(2)</sup> · W<sup>(3)</sup> + b<sup>(3)</sup>,　y = A<sup>(3)</sup> = sigmoid(Z<sup>(3)</sup>)</strong></p>
+<p><strong><span class="math notranslate nohighlight">\(Z^{(2)} = A^{(1)} \cdot W^{(2)} + b^{(2)}\)</span>,　<span class="math notranslate nohighlight">\(A^{(2)} = \mathrm{sigmoid}(Z^{(2)})\)</span></strong>
+<strong><span class="math notranslate nohighlight">\(Z^{(3)} = A^{(2)} \cdot W^{(3)} + b^{(3)}\)</span>,　<span class="math notranslate nohighlight">\(y = A^{(3)} = \mathrm{sigmoid}(Z^{(3)})\)</span></strong></p>
 </div>
-<p>(1 × 2) · (2 × 2) = (1 × 2),　(1 × 2) · (2 × 1) = (1 × 1)</p>
+<p><span class="math notranslate nohighlight">\((1 \times 2) \cdot (2 \times 2) = (1 \times 2)\)</span>,　<span class="math notranslate nohighlight">\((1 \times 2) \cdot (2 \times 1) = (1 \times 1)\)</span></p>
 </section>
 <section id="id7">
 <h3>[연습 2] 손으로 피드포워드 계산하기<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
-<p>아래 가중치는 <strong>제 9편의 OR, NAND, AND</strong> 를 흉내 내도록 골랐습니다. (sigmoid(10) ≒ 1, sigmoid(−10) ≒ 0 으로 계산하세요)</p>
+<p>아래 가중치는 <strong>제 9편의 OR, NAND, AND</strong> 를 흉내 내도록 골랐습니다. (<span class="math notranslate nohighlight">\(\mathrm{sigmoid}(10) \fallingdotseq 1, \mathrm{sigmoid}(-10) \fallingdotseq 0\)</span> 으로 계산하세요)</p>
 <ul class="simple">
-<li><p>은닉 노드 1 (OR 역할):  z<sub>1</sub><sup>(2)</sup> = 20x₁ + 20x₂ − 10</p></li>
-<li><p>은닉 노드 2 (NAND 역할): z<sub>2</sub><sup>(2)</sup> = −20x₁ − 20x₂ + 30</p></li>
-<li><p>출력 노드 (AND 역할):  z<sup>(3)</sup> = 20a<sub>1</sub><sup>(2)</sup> + 20a<sub>2</sub><sup>(2)</sup> − 30</p></li>
+<li><p>은닉 노드 1 (OR 역할):  <span class="math notranslate nohighlight">\(z_{1}^{(2)} = 20x_{1} + 20x_{2} - 10\)</span></p></li>
+<li><p>은닉 노드 2 (NAND 역할): <span class="math notranslate nohighlight">\(z_{2}^{(2)} = -20x_{1} - 20x_{2} + 30\)</span></p></li>
+<li><p>출력 노드 (AND 역할):  <span class="math notranslate nohighlight">\(z^{(3)} = 20a_{1}^{(2)} + 20a_{2}^{(2)} - 30\)</span></p></li>
 </ul>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>(x₁, x₂)</p></th>
-<th class="head text-center"><p>z<sub>1</sub><sup>(2)</sup> → a<sub>1</sub><sup>(2)</sup></p></th>
-<th class="head text-center"><p>z<sub>2</sub><sup>(2)</sup> → a<sub>2</sub><sup>(2)</sup></p></th>
-<th class="head text-center"><p>z<sup>(3)</sup> → y</p></th>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\((x_{1}, x_{2})\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(z_{1}^{(2)}\)</span> → <span class="math notranslate nohighlight">\(a_{1}^{(2)}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(z_{2}^{(2)}\)</span> → <span class="math notranslate nohighlight">\(a_{2}^{(2)}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(z^{(3)}\)</span> → <span class="math notranslate nohighlight">\(y\)</span></p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p>(0, 0)</p></td>
 <td class="text-center"><p>−10 → 0</p></td>
 <td class="text-center"><p>30 → 1</p></td>
-<td class="text-center"><p>20·0 + 20·1 − 30 = −10 → 0</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(20\cdot 0 + 20\cdot 1 - 30 = -10\)</span> → 0</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>(0, 1)</p></td>
 <td class="text-center"><p>10 → ( 　 )</p></td>
@@ -554,13 +556,13 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 </table>
 </div>
 <div class="box box-note docutils container">
-<p>결과 y 는 ( AND / OR / XOR ) 의 진리표와 같다!</p>
+<p>결과 <span class="math notranslate nohighlight">\(y\)</span> 는 ( AND / OR / XOR ) 의 진리표와 같다!</p>
 </div>
 </section>
 </section>
 <section id="id8">
 <h2>애니메이션 1. 신호가 앞으로 흘러가는 피드포워드<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
-<p>위 신경망에 입력 (0,0), (0,1), (1,0), (1,1) 을 차례로 넣습니다. 노드 안의 숫자는 그 노드의 출력 a, 선의 굵기는 가중치의 크기(빨강 +, 파랑 −) 입니다.</p>
+<p>위 신경망에 입력 (0,0), (0,1), (1,0), (1,1) 을 차례로 넣습니다. 노드 안의 숫자는 그 노드의 출력 <span class="math notranslate nohighlight">\(a\)</span>, 선의 굵기는 가중치의 크기(빨강 +, 파랑 −) 입니다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/10_neural_network_1.jpg"><source src="videos/10_neural_network_1.mp4" type="video/mp4"></video></figure></div></div>
@@ -571,8 +573,8 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 <p>이번에는 가중치를 정해 주지 않고 <strong>무작위 값에서 시작해 스스로 학습</strong> 시킵니다.</p>
 <ul class="simple">
 <li><p>입력층 노드 2개, <strong>은닉층 노드 6개</strong>, 출력층 노드 1개</p></li>
-<li><p>W2 : (2 × 6),  b2 : 6개,  W3 : (6 × 1),  b3 : 1개 → 학습할 값이 모두 ( 　 ) 개</p></li>
-<li><p>학습: W2, b2, W3, b3 를 <strong>모두</strong> 경사하강법으로 갱신</p></li>
+<li><p><span class="math notranslate nohighlight">\(W2\)</span> : <span class="math notranslate nohighlight">\((2 \times 6), b2\)</span> : 6개,  <span class="math notranslate nohighlight">\(W3\)</span> : <span class="math notranslate nohighlight">\((6 \times 1), b3\)</span> : 1개 → 학습할 값이 모두 ( 　 ) 개</p></li>
+<li><p>학습: <span class="math notranslate nohighlight">\(W2, b2, W3, b3\)</span> 를 <strong>모두</strong> 경사하강법으로 갱신</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span> ① 입력 → ② feed forward → ③ 출력 y 와 정답 t 로 손실 계산 → ④ W2, b2, W3, b3 갱신 → ① 반복
 </pre></div>
@@ -597,8 +599,8 @@ z = x₁w₁ + x₂w₂ + … + b  (선형 회귀) 　→　 a = sigmoid(z)  (�
 <section id="id10">
 <h2>연습 문제<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <div class="box box-practice docutils container">
-<p><strong>[문제 1]</strong> 입력 2개, 은닉층 노드 10개, 출력 1개인 신경망에서 W2, b2, W3, b3 의 형상과 학습할 값의 총 개수를 구하세요.
-W2 ( 　 × 　 ), b2 ( 　 ), W3 ( 　 × 　 ), b3 ( 　 ) → 총 ( 　 ) 개</p>
+<p><strong>[문제 1]</strong> 입력 2개, 은닉층 노드 10개, 출력 1개인 신경망에서 <span class="math notranslate nohighlight">\(W2, b2, W3, b3\)</span> 의 형상과 학습할 값의 총 개수를 구하세요.
+<span class="math notranslate nohighlight">\(W2\)</span> ( 　 × 　 ), <span class="math notranslate nohighlight">\(b2\)</span> ( 　 ), <span class="math notranslate nohighlight">\(W3\)</span> ( 　 × 　 ), <span class="math notranslate nohighlight">\(b3\)</span> ( 　 ) → 총 ( 　 ) 개</p>
 </div>
 <div class="box box-practice docutils container">
 <p><strong>[문제 2]</strong> 실습의 피드포워드를 행렬 식으로 직접 써서, 학습이 끝난 XOR 신경망으로 입력 (1, 0) 의 출력을 계산하는 코드를 완성하세요.</p>
@@ -620,10 +622,10 @@ W2 ( 　 × 　 ), b2 ( 　 ), W3 ( 　 × 　 ), b3 ( 　 ) → 총 ( 　 ) 개
 <td class="text-left"><p>입력층 → 은닉층(1개 이상) → 출력층</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>피드포워드</p></td>
-<td class="text-left"><p>A<sup>(2)</sup> = sigmoid(A<sup>(1)</sup> · W<sup>(2)</sup> + b<sup>(2)</sup>),  A<sup>(3)</sup> = sigmoid(A<sup>(2)</sup> · W<sup>(3)</sup> + b<sup>(3)</sup>)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(A^{(2)} = \mathrm{sigmoid}(A^{(1)} \cdot W^{(2)} + b^{(2)}), A^{(3)} = \mathrm{sigmoid}(A^{(2)} \cdot W^{(3)} + b^{(3)})\)</span></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>학습</p></td>
-<td class="text-left"><p>출력층의 손실을 줄이도록 <strong>모든 층의</strong> W, b 를 경사하강법으로 갱신</p></td>
+<td class="text-left"><p>출력층의 손실을 줄이도록 <strong>모든 층의</strong> <span class="math notranslate nohighlight">\(W, b\)</span> 를 경사하강법으로 갱신</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>의미</p></td>
 <td class="text-left"><p>은닉층 덕분에 직선으로 나눌 수 없는 문제(XOR)도 풀 수 있다</p></td>
@@ -633,7 +635,7 @@ W2 ( 　 × 　 ), b2 ( 　 ), W3 ( 　 × 　 ), b3 ( 　 ) → 총 ( 　 ) 개
 </div>
 <section id="id12">
 <h3>도전 과제<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
-<p>XOR 은 입력이 2개였습니다. 28 × 28 손글씨 숫자 사진은 입력이 ( 　 ) 개, 정답은 0 ~ 9 중 하나이므로 출력 노드는 ( 　 ) 개가 필요합니다.
+<p>XOR 은 입력이 2개였습니다. <span class="math notranslate nohighlight">\(28 \times 28\)</span> 손글씨 숫자 사진은 입력이 ( 　 ) 개, 정답은 0 ~ 9 중 하나이므로 출력 노드는 ( 　 ) 개가 필요합니다.
 → 다음 시간: <strong>MNIST 손글씨 숫자 인식</strong></p>
 </section>
 </section>

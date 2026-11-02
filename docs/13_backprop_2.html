@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '13_backprop_2';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -383,7 +385,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 13 편</p>
-<section id="mnist">
+<section class="tex2jax_ignore mathjax_ignore" id="mnist">
 <h1>오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습<a class="headerlink" href="#mnist" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「오차역전파 (III) 은닉층」, 「(IV) 일반 공식」, 「(V) 오차역전파를 이용한 MNIST 인식」 (ML_LEC_25, 26, 27)</p>
@@ -407,18 +409,18 @@
 <section id="id3">
 <h2>핵심 정리<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p><strong>① 은닉층 가중치는 길이 두 갈래</strong></p>
-<p>은닉 노드 1 의 출력 a<sub>1</sub><sup>(2)</sup> 은 출력 노드 1, 2 모두에 영향을 주므로 연쇄법칙의 길을 모두 더한다.</p>
-<p>∂E/∂w<sub>11</sub><sup>(2)</sup> = {loss₃(1) × w<sub>11</sub><sup>(3)</sup> + loss₃(2) × w<sub>21</sub><sup>(3)</sup>} × a<sub>1</sub><sup>(2)</sup>(1 − a<sub>1</sub><sup>(2)</sup>) × a<sub>1</sub><sup>(1)</sup></p>
+<p>은닉 노드 1 의 출력 <span class="math notranslate nohighlight">\(a_{1}^{(2)}\)</span> 은 출력 노드 1, 2 모두에 영향을 주므로 연쇄법칙의 길을 모두 더한다.</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w_{11}^{(2)}} = \{\mathrm{loss}_{3}(1) \times w_{11}^{(3)} + \mathrm{loss}_{3}(2) \times w_{21}^{(3)}\} \times a_{1}^{(2)}(1 - a_{1}^{(2)}) \times a_{1}^{(1)}\)</span></p>
 <div class="box box-formula docutils container">
-<p>loss₂ = (loss₃ · W<sup>(3)T</sup>) × A₂ × (1 − A₂)<br />
-∂E/∂W<sup>(2)</sup> = A₁<sup>T</sup> · loss₂,　∂E/∂b<sup>(2)</sup> = loss₂</p>
+<p><span class="math notranslate nohighlight">\(\mathrm{loss}_{2} = (\mathrm{loss}_{3} \cdot W^{(3)T}) \times A_{2} \times (1 - A_{2})\)</span><br />
+<span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial W^{(2)}} = A_{1}^{T} \cdot \mathrm{loss}_{2}\)</span>,　<span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial b^{(2)}} = \mathrm{loss}_{2}\)</span></p>
 </div>
-<p>예) loss₃ = (0.1, −0.2), W<sup>(3)</sup> = ( 1 2 / 3 4 ), A₂ = (0.5, 0.5) 이면<br />
-loss₃ · W<sup>(3)T</sup> = (−0.3, −0.5),　loss₂ = (−0.3, −0.5) × 0.25 = (−0.075, −0.125)</p>
+<p>예) <span class="math notranslate nohighlight">\(\mathrm{loss}_{3} = (0.1, -0.2), W^{(3)} =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 \\ 3 &amp; 4\end{pmatrix}\)</span>, <span class="math notranslate nohighlight">\(A_{2} = (0.5, 0.5)\)</span> 이면<br />
+<span class="math notranslate nohighlight">\(\mathrm{loss}_{3} \cdot W^{(3)T} = (-0.3, -0.5)\)</span>,　<span class="math notranslate nohighlight">\(\mathrm{loss}_{2} = (-0.3, -0.5) \times 0.25 = (-0.075, -0.125)\)</span></p>
 <p><strong>② 일반 공식</strong></p>
 <div class="box box-formula docutils container">
-<p>현재 층 손실 = (다음 층 손실 · 다음 층 W<sup>T</sup>) × A(1 − A)<br />
-현재 층 W 의 미분 = (이전 층 출력)<sup>T</sup> · 현재 층 손실</p>
+<p>현재 층 손실 = (다음 층 손실 <span class="math notranslate nohighlight">\(\cdot\)</span> 다음 층 <span class="math notranslate nohighlight">\(W^{T}\)</span>) <span class="math notranslate nohighlight">\(\times A(1 - A)\)</span><br />
+현재 층 <span class="math notranslate nohighlight">\(W\)</span> 의 미분 = (이전 층 출력)<span class="math notranslate nohighlight">\(^{T} \cdot\)</span> 현재 층 손실</p>
 </div>
 <p>출력층의 손실에서 출발해 한 층씩 거꾸로 계산한다. (아래 애니메이션 1)</p>
 <p><strong>③ 왜 빠른가</strong></p>
@@ -430,14 +432,14 @@ loss₃ · W<sup>(3)T</sup> = (−0.3, −0.5),　loss₂ = (−0.3, −0.5) × 
 </section>
 <section id="id4">
 <h2>개념 다지기 1. 은닉층 가중치는 길이 두 갈래!<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<p>2 - 2 - 2 신경망에서 은닉층 가중치 w<sub>11</sub><sup>(2)</sup> (입력 노드 1 → 은닉 노드 1) 를 생각합니다.</p>
-<p>w<sub>11</sub><sup>(2)</sup> 가 바뀌면 → a<sub>1</sub><sup>(2)</sup> 가 바뀌고 → 출력 노드 <strong>1 과 2 모두</strong> 가 바뀝니다. 그래서 연쇄법칙의 길도 두 갈래입니다.</p>
+<p>2 - 2 - 2 신경망에서 은닉층 가중치 <span class="math notranslate nohighlight">\(w_{11}^{(2)}\)</span> (입력 노드 1 → 은닉 노드 1) 를 생각합니다.</p>
+<p><span class="math notranslate nohighlight">\(w_{11}^{(2)}\)</span> 가 바뀌면 → <span class="math notranslate nohighlight">\(a_{1}^{(2)}\)</span> 가 바뀌고 → 출력 노드 <strong>1 과 2 모두</strong> 가 바뀝니다. 그래서 연쇄법칙의 길도 두 갈래입니다.</p>
 <div class="box box-note docutils container">
-<p>∂E/∂w<sub>11</sub><sup>(2)</sup> = { <strong>(출력 노드 1 의 손실) × w<sub>11</sub><sup>(3)</sup></strong> + <strong>(출력 노드 2 의 손실) × w<sub>21</sub><sup>(3)</sup></strong> } × a<sub>1</sub><sup>(2)</sup>(1 − a<sub>1</sub><sup>(2)</sup>) × a<sub>1</sub><sup>(1)</sup></p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial w_{11}^{(2)}} = \{\)</span> <strong>(출력 노드 1 의 손실) <span class="math notranslate nohighlight">\(\times w_{11}^{(3)}\)</span></strong> + <strong>(출력 노드 2 의 손실) <span class="math notranslate nohighlight">\(\times w_{21}^{(3)}\)</span></strong> <span class="math notranslate nohighlight">\(\} \times a_{1}^{(2)}(1 - a_{1}^{(2)}) \times a_{1}^{(1)}\)</span></p>
 </div>
 <ul class="simple">
 <li><p>{ } 안 : 출력층의 손실들이 가중치를 타고 <strong>거꾸로</strong> 은닉 노드 1 로 모여든 것</p></li>
-<li><p>여기에 은닉 노드의 sigmoid 미분 a(1 − a) 를 곱한 것을 <strong>은닉층 손실 (loss_2)</strong> 이라 합니다.</p></li>
+<li><p>여기에 은닉 노드의 sigmoid 미분 <span class="math notranslate nohighlight">\(a(1 - a)\)</span> 를 곱한 것을 <strong>은닉층 손실 (loss_2)</strong> 이라 합니다.</p></li>
 </ul>
 <section id="id5">
 <h3>행렬로 쓰면<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
@@ -449,9 +451,9 @@ loss₃ · W<sup>(3)T</sup> = (−0.3, −0.5),　loss₂ = (−0.3, −0.5) × 
 </section>
 <section id="id6">
 <h3>[연습 1] 은닉층 손실 손으로 계산하기<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
-<p>loss_3 = (0.1, −0.2),　W3 = ( 1　2 ) / ( 3　4 ) (은닉 2 × 출력 2),　A2 = (0.5, 0.5) 일 때</p>
-<p>① loss_3 · W3<sup>T</sup> = (0.1 × 1 + (−0.2) × 2,　0.1 × 3 + (−0.2) × 4) = ( 　　,　　 )
-② A2 × (1 − A2) = (0.25, 0.25)
+<p>loss_3 = (0.1, −0.2),　<span class="math notranslate nohighlight">\(W3 =\)</span> <span class="math notranslate nohighlight">\(\begin{pmatrix}1 &amp; 2 \\ 3 &amp; 4\end{pmatrix}\)</span> (은닉 <span class="math notranslate nohighlight">\(2 \times\)</span> 출력 2),　<span class="math notranslate nohighlight">\(A2 = (0.5, 0.5)\)</span> 일 때</p>
+<p>① loss_3 <span class="math notranslate nohighlight">\(\cdot W3^{T} = (0.1 \times 1 + (-0.2) \times 2,\ 0.1 \times 3 + (-0.2) \times 4) =\)</span> ( 　　,　　 )
+② <span class="math notranslate nohighlight">\(A2 \times (1 - A2) = (0.25, 0.25)\)</span>
 ③ loss_2 = ① × ② = ( 　　　,　　　 )</p>
 </section>
 </section>
@@ -475,22 +477,22 @@ loss₃ · W<sup>(3)T</sup> = (−0.3, −0.5),　loss₂ = (−0.3, −0.5) × 
 <td class="text-left"><p>(출력층 출력 − 정답) × 출력층 출력 × (1 − 출력층 출력)</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>은닉층(현재 층) 손실</p></td>
-<td class="text-left"><p>(다음 층 손실 · 다음 층 W<sup>T</sup>) × 현재 층 출력 × (1 − 현재 층 출력)</p></td>
+<td class="text-left"><p>(다음 층 손실 <span class="math notranslate nohighlight">\(\cdot\)</span> 다음 층 <span class="math notranslate nohighlight">\(W^{T}\)</span>) <span class="math notranslate nohighlight">\(\times\)</span> 현재 층 출력 <span class="math notranslate nohighlight">\(\times\)</span> (1 <span class="math notranslate nohighlight">\(-\)</span> 현재 층 출력)</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p>현재 층 W 의 미분</p></td>
-<td class="text-left"><p>(이전 층 출력)<sup>T</sup> · 현재 층 손실</p></td>
+<tr class="row-even"><td class="text-left"><p>현재 층 <span class="math notranslate nohighlight">\(W\)</span> 의 미분</p></td>
+<td class="text-left"><p>(이전 층 출력)<span class="math notranslate nohighlight">\(^{T} \cdot\)</span> 현재 층 손실</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>현재 층 b 의 미분</p></td>
+<tr class="row-odd"><td class="text-left"><p>현재 층 <span class="math notranslate nohighlight">\(b\)</span> 의 미분</p></td>
 <td class="text-left"><p>현재 층 손실</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>입력층 → 은닉층1 → 은닉층2 → 출력층 (W2, W3, W4) 인 신경망이라면</p>
+<p>입력층 → 은닉층1 → 은닉층2 → 출력층 <span class="math notranslate nohighlight">\((W2, W3, W4)\)</span> 인 신경망이라면</p>
 <p>loss_4 = (A4 − T) × A4(1 − A4) 　→　 loss_3 = (loss_4 · W4<sup>T</sup>) × A3(1 − A3) 　→　 loss_2 = (loss_3 · W3<sup>T</sup>) × A2(1 − A2)</p>
 <p>W4 ← W4 − α × (A3<sup>T</sup> · loss_4),　W3 ← W3 − α × (A2<sup>T</sup> · loss_3),　W2 ← W2 − α × (A1<sup>T</sup> · loss_2)</p>
 <div class="box box-practice docutils container">
-<p><strong>[연습 2]</strong> 은닉층이 3개인 신경망 (W2, W3, W4, W5) 에서 loss_3 을 구하려면 ( 　 ) 층의 손실과 W( 　 ) 가 필요하다.</p>
+<p><strong>[연습 2]</strong> 은닉층이 3개인 신경망 <span class="math notranslate nohighlight">\((W2, W3, W4, W5)\)</span> 에서 loss_3 을 구하려면 ( 　 ) 층의 손실과 <span class="math notranslate nohighlight">\(W\)</span>( 　 ) 가 필요하다.</p>
 </div>
 </section>
 <section id="id8">
@@ -510,7 +512,7 @@ loss₃ · W<sup>(3)T</sup> = (−0.3, −0.5),　loss₂ = (−0.3, −0.5) × 
 <li><p>학습률 0.3</p></li>
 </ul>
 <div class="box box-note docutils container">
-<p>원본 코드에서는 W3 를 먼저 갱신한 뒤 loss_2 를 계산하지만, 수학적으로 정확하려면 <strong>갱신 전의 W3</strong> 로 loss_2 를 구해야 합니다. 이 학습지에서는 이 부분을 바로잡았습니다.</p>
+<p>원본 코드에서는 <span class="math notranslate nohighlight">\(W3\)</span> 를 먼저 갱신한 뒤 loss_2 를 계산하지만, 수학적으로 정확하려면 <strong>갱신 전의 <span class="math notranslate nohighlight">\(W3\)</span></strong> 로 loss_2 를 구해야 합니다. 이 학습지에서는 이 부분을 바로잡았습니다.</p>
 </div>
 <section id="id10">
 <h3>속도 비교 : 사진 1장 학습 시간<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
@@ -527,7 +529,7 @@ loss₃ · W<sup>(3)T</sup> = (−0.3, −0.5),　loss₂ = (−0.3, −0.5) × 
 </section>
 <section id="id11">
 <h2>애니메이션 2. 은닉 노드는 무엇을 볼까?<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
-<p>은닉 노드 하나에 연결된 가중치 784 개 (W2 의 한 열) 를 28 × 28 그림으로 그리면 <strong>그 노드가 좋아하는 무늬</strong> 가 보입니다. (빨강 +, 파랑 −)
+<p>은닉 노드 하나에 연결된 가중치 784 개 (<span class="math notranslate nohighlight">\(W2\)</span> 의 한 열) 를 <span class="math notranslate nohighlight">\(28 \times 28\)</span> 그림으로 그리면 <strong>그 노드가 좋아하는 무늬</strong> 가 보입니다. (빨강 +, 파랑 −)
 학습이 진행되며 무작위 점무늬가 <strong>획(선)의 일부를 닮은 무늬</strong> 로 바뀌는지 관찰하세요.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -557,10 +559,10 @@ loss_( 　 ) → loss_( 　 ) → loss_( 　 )</p>
 <td class="text-left"><p>loss_2 = (loss_3 · W3<sup>T</sup>) × A2(1 − A2)</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>일반 공식</p></td>
-<td class="text-left"><p>현재 층 손실 = (다음 층 손실 · 다음 층 W<sup>T</sup>) × A(1 − A)</p></td>
+<td class="text-left"><p>현재 층 손실 = (다음 층 손실 <span class="math notranslate nohighlight">\(\cdot\)</span> 다음 층 <span class="math notranslate nohighlight">\(W^{T}\)</span>) <span class="math notranslate nohighlight">\(\times A(1 - A)\)</span></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>갱신</p></td>
-<td class="text-left"><p>W ← W − α × (이전 층 출력<sup>T</sup> · 현재 층 손실),  b ← b − α × 현재 층 손실</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(W \leftarrow W - \alpha \times\)</span> (이전 층 출력<span class="math notranslate nohighlight">\(^{T} \cdot\)</span> 현재 층 손실),  <span class="math notranslate nohighlight">\(b \leftarrow b - \alpha \times\)</span> 현재 층 손실</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>순서</p></td>
 <td class="text-left"><p>순전파(입력 → 출력) 후, 역전파(출력 → 입력)</p></td>

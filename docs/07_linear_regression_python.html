@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '07_linear_regression_python';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -358,7 +360,7 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">실습 1. 단순 선형 회귀 (입력 변수 1개)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">[1] 학습 데이터 준비</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#y-wx-b-w-b">[2] 임의의 직선 y = Wx + b (W, b 를 아무 값으로 시작)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#y-wx-b-w-b">[2] 임의의 직선 <span class="math notranslate nohighlight">\(y = Wx + b\)</span> (<span class="math notranslate nohighlight">\(W, b\)</span> 를 아무 값으로 시작)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">[3] 손실함수, 오차 확인 함수, 예측 함수</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">[4] 학습 - 경사하강법 반복</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">[5] 결과 확인과 예측</a></li>
@@ -389,7 +391,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 7 편</p>
-<section id="id1">
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>선형 회귀 (3) - 파이썬으로 직접 학습시키기<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「Linear Regression (III) - simple • multi-variable example」 (ML_LEC_15)</p>
@@ -398,8 +400,8 @@
 <section id="id2">
 <h2>학습 목표<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>선형 회귀를 행렬 식 Y = X · W + b 로 나타내고 각 행렬의 형상을 설명할 수 있다.</p></li>
-<li><p>수치미분과 경사하강법으로 W, b 를 학습시키는 코드를 단계별로 완성할 수 있다.</p></li>
+<li><p>선형 회귀를 행렬 식 <span class="math notranslate nohighlight">\(Y = X \cdot W + b\)</span> 로 나타내고 각 행렬의 형상을 설명할 수 있다.</p></li>
+<li><p>수치미분과 경사하강법으로 <span class="math notranslate nohighlight">\(W, b\)</span> 를 학습시키는 코드를 단계별로 완성할 수 있다.</p></li>
 <li><p>입력 변수가 여러 개인 다변수 선형 회귀로 미래 값을 예측할 수 있다.</p></li>
 </ol>
 </section>
@@ -413,24 +415,24 @@
 <section id="id4">
 <h2>핵심 정리<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p><strong>① 행렬로 쓴 선형 회귀</strong></p>
-<p>데이터 n 개, 입력 변수 m 개이면</p>
+<p>데이터 <span class="math notranslate nohighlight">\(n\)</span> 개, 입력 변수 <span class="math notranslate nohighlight">\(m\)</span> 개이면</p>
 <div class="box box-formula docutils container">
-<p>Y = X · W + b　　(n × m) · (m × 1) = (n × 1)<br />
-E = (1/n) × Σ (T − Y)²</p>
+<p><span class="math notranslate nohighlight">\(Y = X \cdot W + b\)</span>　　<span class="math notranslate nohighlight">\((n \times m) \cdot (m \times 1) = (n \times 1)\)</span><br />
+<span class="math notranslate nohighlight">\(\displaystyle E = \frac{1}{n} \times \sum(T - Y)^{2}\)</span></p>
 </div>
 <p><strong>② 기울기도 행렬 하나로</strong></p>
 <div class="box box-formula docutils container">
-<p>∂E/∂W = −(2/n) × X<sup>T</sup> · (T − Y)　　(m × n) · (n × 1) = (m × 1)</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial W} = -\frac{2}{n} \times X^{T} \cdot (T - Y)\)</span>　　<span class="math notranslate nohighlight">\((m \times n) \cdot (n \times 1) = (m \times 1)\)</span></p>
 </div>
-<p>W 와 같은 형상이 나오므로 W ← W − α × ∂E/∂W 를 그대로 할 수 있다.</p>
+<p><span class="math notranslate nohighlight">\(W\)</span> 와 같은 형상이 나오므로 <span class="math notranslate nohighlight">\(\displaystyle W \leftarrow W - \alpha \times \frac{\partial E}{\partial W}\)</span> 를 그대로 할 수 있다.</p>
 <p><strong>③ 학습 과정</strong></p>
-<p>① 데이터 입력 → ② Y = XW + b, 손실 E 계산 → ③ E 가 충분히 작으면 끝 → ④ 아니면 W, b 갱신 후 ② 로</p>
-<p>t = x + 1 인 데이터 (1, 2), (2, 3), … , (5, 6) 은 학습하면 W = 1, b = 1 이 되고, x = 43 의 예측은 44 이다. (아래 애니메이션 1)</p>
+<p>① 데이터 입력 → ② <span class="math notranslate nohighlight">\(Y = XW + b\)</span>, 손실 <span class="math notranslate nohighlight">\(E\)</span> 계산 → ③ <span class="math notranslate nohighlight">\(E\)</span> 가 충분히 작으면 끝 → ④ 아니면 <span class="math notranslate nohighlight">\(W, b\)</span> 갱신 후 ② 로</p>
+<p><span class="math notranslate nohighlight">\(t = x + 1\)</span> 인 데이터 (1, 2), (2, 3), … , (5, 6) 은 학습하면 <span class="math notranslate nohighlight">\(W = 1, b = 1\)</span> 이 되고, <span class="math notranslate nohighlight">\(x = 43\)</span> 의 예측은 44 이다. (아래 애니메이션 1)</p>
 <p><strong>④ 학습률과 입력의 크기</strong></p>
-<p>∂E/∂W 에는 입력 x 가 곱해진다. 점수 데이터처럼 x 가 70 ~ 100 이면 기울기도 커지므로 학습률을 10<sup>−5</sup> 정도로 아주 작게 해야 발산하지 않는다.</p>
+<p><span class="math notranslate nohighlight">\(\displaystyle \frac{\partial E}{\partial W}\)</span> 에는 입력 <span class="math notranslate nohighlight">\(x\)</span> 가 곱해진다. 점수 데이터처럼 <span class="math notranslate nohighlight">\(x\)</span> 가 70 ~ 100 이면 기울기도 커지므로 학습률을 <span class="math notranslate nohighlight">\(10^{-5}\)</span> 정도로 아주 작게 해야 발산하지 않는다.</p>
 <p><strong>⑤ 가중치의 해석</strong></p>
-<p>1차 · 2차 · 3차 시험 점수로 최종 점수를 예측하면 W ≒ (0.37, 0.52, 1.11) 로, 3차 시험의 영향이 가장 크다.<br />
-예측이 정답과 같으면 (정답, 예측) 점은 직선 y = t 위에 놓인다. (아래 애니메이션 2)</p>
+<p>1차 · 2차 · 3차 시험 점수로 최종 점수를 예측하면 <span class="math notranslate nohighlight">\(W \fallingdotseq (0.37, 0.52, 1.11)\)</span> 로, 3차 시험의 영향이 가장 크다.<br />
+예측이 정답과 같으면 (정답, 예측) 점은 직선 <span class="math notranslate nohighlight">\(y = t\)</span> 위에 놓인다. (아래 애니메이션 2)</p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
 </div></blockquote>
@@ -446,23 +448,23 @@ E = (1/n) × Σ (T − Y)²</p>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p>1</p></td>
-<td class="text-left"><p>학습 데이터 (x, t)</p></td>
+<td class="text-left"><p>학습 데이터 <span class="math notranslate nohighlight">\((x, t)\)</span></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">x_data</span></code>, <code class="docutils literal notranslate"><span class="pre">t_data</span></code> (numpy 행렬)</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>2</p></td>
-<td class="text-left"><p>y = Wx + b</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(y = Wx + b\)</span></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">W</span> <span class="pre">=</span> <span class="pre">np.random.rand(...)</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">np.random.rand(...)</span></code> 임의의 값으로 시작</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>3</p></td>
-<td class="text-left"><p>E(W, b) = (1/n) × Σ {t<sub>i</sub> − (W x<sub>i</sub> + b)}²</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle E(W, b) = \frac{1}{n} \times \sum \{t_{i} - (W x_{i} + b)\}^{2}\)</span></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">loss_func(x,</span> <span class="pre">t)</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>4</p></td>
-<td class="text-left"><p>학습률 α</p></td>
+<td class="text-left"><p>학습률 <span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">learning_rate</span> <span class="pre">=</span> <span class="pre">1e-2</span></code> 등</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>5</p></td>
-<td class="text-left"><p>W ← W − α × ∂E/∂W,  b ← b − α × ∂E/∂b</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\displaystyle W \leftarrow W - \alpha \times \frac{\partial E}{\partial W}, b \leftarrow b - \alpha \times \frac{\partial E}{\partial b}\)</span></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">W</span> <span class="pre">-=</span> <span class="pre">learning_rate</span> <span class="pre">*</span> <span class="pre">numerical_derivative(f,</span> <span class="pre">W)</span></code> 를 반복</p></td>
 </tr>
 </tbody>
@@ -470,15 +472,12 @@ E = (1/n) × Σ (T − Y)²</p>
 </div>
 <section id="id6">
 <h3>행렬로 한꺼번에 계산하기<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
-<p>데이터가 5개이면 y = Wx + b 를 5번 계산해야 합니다. 행렬 곱을 쓰면 <strong>한 번에</strong> 계산됩니다.</p>
-<p>X · W + b = Y 　→ 　(5 × 1) · (1 × 1) = (5 × 1)</p>
-<p>( 1 )　　　　　　 ( 1W + b )
-　( 2 )　　　　　　 ( 2W + b )
-　( 3 ) · ( W ) + b = ( 3W + b )
-　( 4 )　　　　　　 ( 4W + b )
-　( 5 )　　　　　　 ( 5W + b )</p>
+<p>데이터가 5개이면 <span class="math notranslate nohighlight">\(y = Wx + b\)</span> 를 5번 계산해야 합니다. 행렬 곱을 쓰면 <strong>한 번에</strong> 계산됩니다.</p>
+<p><span class="math notranslate nohighlight">\(X \cdot W + b = Y\)</span> 　→ 　<span class="math notranslate nohighlight">\((5 \times 1) \cdot (1 \times 1) = (5 \times 1)\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{pmatrix}1 \\ 2 \\ 3 \\ 4 \\ 5\end{pmatrix} \cdot \begin{pmatrix}W\end{pmatrix} + b = \begin{pmatrix}1W + b \\ 2W + b \\ 3W + b \\ 4W + b \\ 5W + b\end{pmatrix}\end{split}\]</div>
 <div class="box box-practice docutils container">
-<p><strong>[연습 1]</strong> 입력이 25개 데이터 × 3개 변수인 X (25 × 3) 에 대해 Y 가 (25 × 1) 이 되려면 W 의 형상은 ( 　 × 　 ) 이다.</p>
+<p><strong>[연습 1]</strong> 입력이 25개 데이터 <span class="math notranslate nohighlight">\(\times 3\)</span>개 변수인 <span class="math notranslate nohighlight">\(X (25 \times 3)\)</span> 에 대해 <span class="math notranslate nohighlight">\(Y\)</span> 가 <span class="math notranslate nohighlight">\((25 \times 1)\)</span> 이 되려면 <span class="math notranslate nohighlight">\(W\)</span> 의 형상은 ( 　 × 　 ) 이다.</p>
 </div>
 </section>
 </section>
@@ -486,7 +485,7 @@ E = (1/n) × Σ (T − Y)²</p>
 <h2>실습 1. 단순 선형 회귀 (입력 변수 1개)<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>입력 x</p></th>
+<tr class="row-odd"><th class="head text-center"><p>입력 <span class="math notranslate nohighlight">\(x\)</span></p></th>
 <th class="head text-center"><p>1</p></th>
 <th class="head text-center"><p>2</p></th>
 <th class="head text-center"><p>3</p></th>
@@ -495,7 +494,7 @@ E = (1/n) × Σ (T − Y)²</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p>정답 t</p></td>
+<tr class="row-even"><td class="text-center"><p>정답 <span class="math notranslate nohighlight">\(t\)</span></p></td>
 <td class="text-center"><p>2</p></td>
 <td class="text-center"><p>3</p></td>
 <td class="text-center"><p>4</p></td>
@@ -505,12 +504,12 @@ E = (1/n) × Σ (T − Y)²</p>
 </tbody>
 </table>
 </div>
-<p>표를 보면 t = x + 1 입니다. 인공지능이 <strong>스스로 W = 1, b = 1 을 찾아내는지</strong> 확인해 봅시다!</p>
+<p>표를 보면 <span class="math notranslate nohighlight">\(t = x + 1\)</span> 입니다. 인공지능이 <strong>스스로 <span class="math notranslate nohighlight">\(W = 1, b = 1\)</span> 을 찾아내는지</strong> 확인해 봅시다!</p>
 <section id="id8">
 <h3>[1] 학습 데이터 준비<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 </section>
 <section id="y-wx-b-w-b">
-<h3>[2] 임의의 직선 y = Wx + b (W, b 를 아무 값으로 시작)<a class="headerlink" href="#y-wx-b-w-b" title="Link to this heading">#</a></h3>
+<h3>[2] 임의의 직선 <span class="math notranslate nohighlight">\(y = Wx + b\)</span> (<span class="math notranslate nohighlight">\(W, b\)</span> 를 아무 값으로 시작)<a class="headerlink" href="#y-wx-b-w-b" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">np.random.rand</span></code> 는 0 ~ 1 사이의 수를 무작위로 만듭니다. (모두 같은 결과가 나오도록 <code class="docutils literal notranslate"><span class="pre">seed</span></code> 를 고정)</p>
 </section>
 <section id="id9">
@@ -521,14 +520,14 @@ E = (1/n) × Σ (T − Y)²</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">t_data</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>❓ 입력 x 를 쓰지도 않는데 왜 이렇게 만들까?
-→ <code class="docutils literal notranslate"><span class="pre">numerical_derivative(f,</span> <span class="pre">W)</span></code> 는 <strong>W 안의 값을 직접 ±Δx 만큼 바꾼 뒤</strong> f 를 부릅니다. loss_func 는 바깥의 W 를 그대로 쓰므로, 바뀐 W 로 손실이 계산됩니다.
-　즉 f 는 “<strong>현재 W, b 로 계산한 손실 값</strong>” 을 돌려주는 함수입니다.</p>
+<p>❓ 입력 <span class="math notranslate nohighlight">\(x\)</span> 를 쓰지도 않는데 왜 이렇게 만들까?
+→ <code class="docutils literal notranslate"><span class="pre">numerical_derivative(f,</span> <span class="pre">W)</span></code> 는 <strong><span class="math notranslate nohighlight">\(W\)</span> 안의 값을 직접 <span class="math notranslate nohighlight">\(\pm \Delta x\)</span> 만큼 바꾼 뒤</strong> <span class="math notranslate nohighlight">\(f\)</span> 를 부릅니다. loss_func 는 바깥의 <span class="math notranslate nohighlight">\(W\)</span> 를 그대로 쓰므로, 바뀐 <span class="math notranslate nohighlight">\(W\)</span> 로 손실이 계산됩니다.
+　즉 <span class="math notranslate nohighlight">\(f\)</span> 는 “<strong>현재 <span class="math notranslate nohighlight">\(W, b\)</span> 로 계산한 손실 값</strong>” 을 돌려주는 함수입니다.</p>
 </section>
 <section id="id11">
 <h3>[5] 결과 확인과 예측<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <div class="box box-check docutils container">
-<p><strong>[확인 1]</strong> 학습 후 W ≒ ( 　 ), b ≒ ( 　 ) 이고, x = 43 의 예측값은 ( 　 ) 이다. t = x + 1 과 일치하나요?</p>
+<p><strong>[확인 1]</strong> 학습 후 <span class="math notranslate nohighlight">\(W \fallingdotseq\)</span> ( 　 ), <span class="math notranslate nohighlight">\(b \fallingdotseq\)</span> ( 　 ) 이고, <span class="math notranslate nohighlight">\(x = 43\)</span> 의 예측값은 ( 　 ) 이다. <span class="math notranslate nohighlight">\(t = x + 1\)</span> 과 일치하나요?</p>
 </div>
 </section>
 </section>
@@ -546,8 +545,8 @@ E = (1/n) × Σ (T − Y)²</p>
 </section>
 <section id="id13">
 <h2>실습 2. 다변수 선형 회귀 (입력 변수 3개)<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
-<p>1차, 2차, 3차 시험 점수(x₁, x₂, x₃)로 최종 점수(t)를 예측합니다. (학생 25명 데이터, 원본 강의의 data-01-test-score.csv)</p>
-<p>y = W₁x₁ + W₂x₂ + W₃x₃ + b 　→ 　X · W + b = Y,　(25 × 3) · (3 × 1) = (25 × 1)</p>
+<p>1차, 2차, 3차 시험 점수<span class="math notranslate nohighlight">\((x_{1}, x_{2}, x_{3})\)</span>로 최종 점수<span class="math notranslate nohighlight">\((t)\)</span>를 예측합니다. (학생 25명 데이터, 원본 강의의 data-01-test-score.csv)</p>
+<p><span class="math notranslate nohighlight">\(y = W_{1}x_{1} + W_{2}x_{2} + W_{3}x_{3} + b\)</span> 　→ 　<span class="math notranslate nohighlight">\(X \cdot W + b = Y\)</span>,　<span class="math notranslate nohighlight">\((25 \times 3) \cdot (3 \times 1) = (25 \times 1)\)</span></p>
 <section id="id14">
 <h3>[1] 데이터 준비<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 </section>
@@ -558,14 +557,14 @@ E = (1/n) × Σ (T − Y)²</p>
 <section id="id16">
 <h3>[5] 결과와 예측<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
 <div class="box box-check docutils container">
-<p><strong>[확인 2]</strong> 학습된 W₁, W₂, W₃ 중 가장 큰 값은 ( 　 ) 이다. 이것은 ( 1차 / 2차 / 3차 ) 시험이 최종 점수에 가장 큰 영향을 준다는 뜻이다.
+<p><strong>[확인 2]</strong> 학습된 <span class="math notranslate nohighlight">\(W_{1}, W_{2}, W_{3}\)</span> 중 가장 큰 값은 ( 　 ) 이다. 이것은 ( 1차 / 2차 / 3차 ) 시험이 최종 점수에 가장 큰 영향을 준다는 뜻이다.
 1차 100, 2차 98, 3차 81 점 학생의 최종 점수 예측값은 약 ( 　　 ) 점이다.</p>
 </div>
 </section>
 </section>
 <section id="id17">
 <h2>애니메이션 2. 예측이 정답에 가까워지는 과정<a class="headerlink" href="#id17" title="Link to this heading">#</a></h2>
-<p>가로축은 <strong>정답 t</strong>, 세로축은 <strong>예측 y</strong> 입니다. 예측이 완벽하면 모든 점이 대각선 y = t 위에 놓입니다.</p>
+<p>가로축은 <strong>정답 <span class="math notranslate nohighlight">\(t\)</span></strong>, 세로축은 <strong>예측 <span class="math notranslate nohighlight">\(y\)</span></strong> 입니다. 예측이 완벽하면 모든 점이 대각선 <span class="math notranslate nohighlight">\(y = t\)</span> 위에 놓입니다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/07_linear_regression_python_2.jpg"><source src="videos/07_linear_regression_python_2.mp4" type="video/mp4"></video></figure></div></div>
@@ -574,11 +573,11 @@ E = (1/n) × Σ (T − Y)²</p>
 <section id="id18">
 <h2>연습 문제<a class="headerlink" href="#id18" title="Link to this heading">#</a></h2>
 <div class="box box-practice docutils container">
-<p><strong>[문제 1]</strong> 아래 데이터는 t = 2x − 1 을 따릅니다. 실습 1 의 코드를 그대로 이용해 학습시키고, W 와 b 가 각각 2, −1 에 가까워지는지 확인하세요. 그리고 x = 10 일 때의 예측값을 구하세요.</p>
+<p><strong>[문제 1]</strong> 아래 데이터는 <span class="math notranslate nohighlight">\(t = 2x - 1\)</span> 을 따릅니다. 실습 1 의 코드를 그대로 이용해 학습시키고, <span class="math notranslate nohighlight">\(W\)</span> 와 <span class="math notranslate nohighlight">\(b\)</span> 가 각각 2, −1 에 가까워지는지 확인하세요. 그리고 <span class="math notranslate nohighlight">\(x = 10\)</span> 일 때의 예측값을 구하세요.</p>
 </div>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>x</p></th>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
 <th class="head text-center"><p>1</p></th>
 <th class="head text-center"><p>2</p></th>
 <th class="head text-center"><p>3</p></th>
@@ -587,7 +586,7 @@ E = (1/n) × Σ (T − Y)²</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p>t</p></td>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(t\)</span></p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>3</p></td>
 <td class="text-center"><p>5</p></td>
@@ -630,7 +629,7 @@ E = (1/n) × Σ (T − Y)²</p>
 </div>
 <section id="id20">
 <h3>도전 과제<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
-<p>선형 회귀는 <strong>숫자</strong>(점수)를 예측합니다. 그런데 “합격 / 불합격” 처럼 <strong>두 가지 중 하나</strong>를 맞히려면 y = Wx + b 를 어떻게 바꿔야 할까요?
+<p>선형 회귀는 <strong>숫자</strong>(점수)를 예측합니다. 그런데 “합격 / 불합격” 처럼 <strong>두 가지 중 하나</strong>를 맞히려면 <span class="math notranslate nohighlight">\(y = Wx + b\)</span> 를 어떻게 바꿔야 할까요?
 힌트: 출력이 항상 0 과 1 사이가 되는 함수가 있다면…?  → 다음 시간: <strong>로지스틱 회귀</strong>
 (                                                                                                                            )</p>
 </section>
@@ -712,7 +711,7 @@ E = (1/n) × Σ (T − Y)²</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">실습 1. 단순 선형 회귀 (입력 변수 1개)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">[1] 학습 데이터 준비</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#y-wx-b-w-b">[2] 임의의 직선 y = Wx + b (W, b 를 아무 값으로 시작)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#y-wx-b-w-b">[2] 임의의 직선 <span class="math notranslate nohighlight">\(y = Wx + b\)</span> (<span class="math notranslate nohighlight">\(W, b\)</span> 를 아무 값으로 시작)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">[3] 손실함수, 오차 확인 함수, 예측 함수</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">[4] 학습 - 경사하강법 반복</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">[5] 결과 확인과 예측</a></li>

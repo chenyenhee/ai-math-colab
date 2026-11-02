@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=30d2f1f0" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -63,6 +63,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '09_xor';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -380,7 +382,7 @@
                 <article class="bd-article">
                   
   <p class="unit-mark">제 9 편</p>
-<section id="xor">
+<section class="tex2jax_ignore mathjax_ignore" id="xor">
 <h1>XOR 문제 - 직선 하나로는 나눌 수 없다<a class="headerlink" href="#xor" title="Link to this heading">#</a></h1>
 <div class="box box-note docutils container">
 <p>근거 자료: 박성호, 「머신러닝 XOR 문제 - AND • OR • NAND • XOR」 (ML_LEC_18), 「Python class」 (ML_LEC_05)</p>
@@ -398,7 +400,7 @@
 <section id="id2">
 <h2>지난 시간 복습<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>제 8편: 로지스틱 회귀의 <strong>결정 경계는 직선</strong> (W₁x₁ + W₂x₂ + b = 0) 입니다.</p></li>
+<li><p>제 8편: 로지스틱 회귀의 <strong>결정 경계는 직선</strong> <span class="math notranslate nohighlight">\((W_{1}x_{1} + W_{2}x_{2} + b = 0)\)</span> 입니다.</p></li>
 <li><p>도전 과제: (0,0)·(1,1) 은 0, (0,1)·(1,0) 은 1 인 점들을 <strong>직선 하나로 나눌 수 있을까?</strong></p></li>
 </ul>
 </section>
@@ -407,7 +409,7 @@
 <p><strong>① 논리게이트를 직선으로 나누기</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>(x₁, x₂)</p></th>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\((x_{1}, x_{2})\)</span></p></th>
 <th class="head text-center"><p>AND</p></th>
 <th class="head text-center"><p>OR</p></th>
 <th class="head text-center"><p>NAND</p></th>
@@ -442,22 +444,22 @@
 </tbody>
 </table>
 </div>
-<p>AND 는 직선 x₁ + x₂ = 1.5, OR 는 직선 x₁ + x₂ = 0.5 로 0 과 1 을 나눌 수 있다. (아래 애니메이션 1)</p>
+<p>AND 는 직선 <span class="math notranslate nohighlight">\(x_{1} + x_{2} = 1.5\)</span>, OR 는 직선 <span class="math notranslate nohighlight">\(x_{1} + x_{2} = 0.5\)</span> 로 0 과 1 을 나눌 수 있다. (아래 애니메이션 1)</p>
 <p><strong>② XOR 은 직선 하나로 나눌 수 없다 (증명)</strong></p>
-<p>어떤 직선 w₁x₁ + w₂x₂ + b = 0 이 XOR 을 나눈다고 하자. 1 인 점에서는 양수, 0 인 점에서는 음수라 하면</p>
+<p>어떤 직선 <span class="math notranslate nohighlight">\(w_{1}x_{1} + w_{2}x_{2} + b = 0\)</span> 이 XOR 을 나눈다고 하자. 1 인 점에서는 양수, 0 인 점에서는 음수라 하면</p>
 <ul class="simple">
-<li><p>(0, 0) : b &lt; 0</p></li>
-<li><p>(1, 1) : w₁ + w₂ + b &lt; 0</p></li>
-<li><p>(0, 1) : w₂ + b &gt; 0</p></li>
-<li><p>(1, 0) : w₁ + b &gt; 0</p></li>
+<li><p>(0, 0) : <span class="math notranslate nohighlight">\(b &lt; 0\)</span></p></li>
+<li><p>(1, 1) : <span class="math notranslate nohighlight">\(w_{1} + w_{2} + b &lt; 0\)</span></p></li>
+<li><p>(0, 1) : <span class="math notranslate nohighlight">\(w_{2} + b &gt; 0\)</span></p></li>
+<li><p>(1, 0) : <span class="math notranslate nohighlight">\(w_{1} + b &gt; 0\)</span></p></li>
 </ul>
-<p>위의 두 식을 더하면 w₁ + w₂ + 2b &lt; 0, 아래 두 식을 더하면 w₁ + w₂ + 2b &gt; 0 → <strong>모순</strong>.<br />
+<p>위의 두 식을 더하면 <span class="math notranslate nohighlight">\(w_{1} + w_{2} + 2b &lt; 0\)</span>, 아래 두 식을 더하면 <span class="math notranslate nohighlight">\(w_{1} + w_{2} + 2b &gt; 0\)</span> → <strong>모순</strong>.<br />
 따라서 로지스틱 회귀 하나(직선 하나)로는 XOR 을 학습할 수 없다. (아래 애니메이션 2)</p>
 <p><strong>③ 층을 쌓으면 풀린다</strong></p>
 <div class="box box-formula docutils container">
-<p>XOR(x₁, x₂) = AND( NAND(x₁, x₂), OR(x₁, x₂) )</p>
+<p><span class="math notranslate nohighlight">\(\mathrm{XOR}(x_{1}, x_{2}) = \mathrm{AND}( \mathrm{NAND}(x_{1}, x_{2}), \mathrm{OR}(x_{1}, x_{2}) )\)</span></p>
 </div>
-<p>1층의 출력 (s₁, s₂) = (NAND, OR) 로 점을 옮기면 (0, 0) → (1, 0), (0, 1) 과 (1, 0) → (1, 1), (1, 1) → (0, 1) 이 되어, 새 평면에서는 직선 s₁ + s₂ = 1.5 로 나눌 수 있다. (아래 애니메이션 3)<br />
+<p>1층의 출력 <span class="math notranslate nohighlight">\((s_{1}, s_{2}) = (\mathrm{NAND}, \mathrm{OR})\)</span> 로 점을 옮기면 (0, 0) → (1, 0), (0, 1) 과 (1, 0) → (1, 1), (1, 1) → (0, 1) 이 되어, 새 평면에서는 직선 <span class="math notranslate nohighlight">\(s_{1} + s_{2} = 1.5\)</span> 로 나눌 수 있다. (아래 애니메이션 3)<br />
 층이 데이터를 ‘나누기 쉬운 공간으로 옮기는 것’ 이 신경망의 핵심 아이디어이다.</p>
 <blockquote>
 <div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
@@ -466,11 +468,11 @@
 <section id="id4">
 <h2>개념 다지기 1. 논리게이트 = 학습 데이터<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>컴퓨터 회로의 기본 부품인 논리게이트는 입력 2개 (0 또는 1) 를 받아 0 또는 1 을 출력합니다.
-진리표를 <strong>입력 (x₁, x₂), 정답 t</strong> 로 보면 그대로 <strong>분류 문제의 학습 데이터</strong> 입니다.</p>
+진리표를 <strong>입력 <span class="math notranslate nohighlight">\((x_{1}, x_{2})\)</span>, 정답 <span class="math notranslate nohighlight">\(t\)</span></strong> 로 보면 그대로 <strong>분류 문제의 학습 데이터</strong> 입니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>x₁</p></th>
-<th class="head text-center"><p>x₂</p></th>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(x_{1}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(x_{2}\)</span></p></th>
 <th class="head text-center"><p>AND</p></th>
 <th class="head text-center"><p>OR</p></th>
 <th class="head text-center"><p>NAND</p></th>
@@ -527,7 +529,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">__init__</span></code></p></td>
-<td class="text-left"><p>게이트 이름, 입력/정답 데이터 저장, W(2 × 1), b 를 무작위로 초기화</p></td>
+<td class="text-left"><p>게이트 이름, 입력/정답 데이터 저장, <span class="math notranslate nohighlight">\(W(2 \times 1), b\)</span> 를 무작위로 초기화</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">__loss_func</span></code></p></td>
 <td class="text-left"><p>cross-entropy 손실 계산 (밖에서 못 쓰게 이름 앞에 <code class="docutils literal notranslate"><span class="pre">__</span></code>)</p></td>
@@ -592,11 +594,11 @@
 <p><strong>[연습 1]</strong> 표를 완성하세요.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>x₁</p></th>
-<th class="head text-center"><p>x₂</p></th>
-<th class="head text-center"><p>s₁ = NAND(x₁, x₂)</p></th>
-<th class="head text-center"><p>s₂ = OR(x₁, x₂)</p></th>
-<th class="head text-center"><p>y = AND(s₁, s₂)</p></th>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(x_{1}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(x_{2}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(s_{1} = \mathrm{NAND}(x_{1}, x_{2})\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(s_{2} = \mathrm{OR}(x_{1}, x_{2})\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(y = \mathrm{AND}(s_{1}, s_{2})\)</span></p></th>
 <th class="head text-center"><p>XOR 정답</p></th>
 </tr>
 </thead>
@@ -635,7 +637,7 @@
 </section>
 <section id="id9">
 <h2>애니메이션 3. 1층이 ‘공간을 바꿔’ 준다<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
-<p>1층(NAND, OR)을 지나면 점 (x₁, x₂) 가 새로운 점 (s₁, s₂) 로 <strong>옮겨집니다.</strong>
+<p>1층(NAND, OR)을 지나면 점 <span class="math notranslate nohighlight">\((x_{1}, x_{2})\)</span> 가 새로운 점 <span class="math notranslate nohighlight">\((s_{1}, s_{2})\)</span> 로 <strong>옮겨집니다.</strong>
 옮겨진 공간에서는 <strong>직선 하나(AND 의 결정 경계)로 나눌 수 있게</strong> 됩니다!</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -671,7 +673,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p>논리게이트</p></td>
-<td class="text-left"><p>진리표 = 입력 (x₁, x₂) 와 정답 t 로 된 분류 학습 데이터</p></td>
+<td class="text-left"><p>진리표 = 입력 <span class="math notranslate nohighlight">\((x_{1}, x_{2})\)</span> 와 정답 <span class="math notranslate nohighlight">\(t\)</span> 로 된 분류 학습 데이터</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>AND, OR, NAND</p></td>
 <td class="text-left"><p>직선 하나로 나뉜다 → 로지스틱 회귀 하나로 학습 성공</p></td>
