@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -351,7 +351,7 @@
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">핵심 정리</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 1. 데이터를 가장 잘 나타내는 직선 찾기</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error">개념 다지기 2. 오차(error) = 정답 − 예측값</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">개념 다지기 3. 왜 오차를 ‘제곱’ 할까?</a></li>
@@ -398,48 +398,31 @@
 <li><p>제 3편: 데이터 표를 입력 <code class="docutils literal notranslate"><span class="pre">x_data</span></code> 와 정답 <code class="docutils literal notranslate"><span class="pre">t_data</span></code> 로 나눴습니다.</p></li>
 <li><p>제 4편: <strong>회귀</strong>는 공부 시간으로 시험 점수처럼 <strong>연속적인 숫자</strong>를 예측하는 지도학습입니다.</p></li>
 </ul>
-<div class="box box-note docutils container">
-<p><strong>실습은 코랩에서</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르면 이 학습지가 코랩으로 열립니다. 코드 실행, 애니메이션, 정답 확인은 코랩에서 합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
-</div>
 </section>
 <section id="id4">
-<h2>0단계. 준비하기<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title ▶ 준비 셀 (먼저 실행하세요)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.font_manager</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">animation</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
-
-<span class="n">font_path</span> <span class="o">=</span> <span class="s1">'NanumGothic.ttf'</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">font_path</span><span class="p">):</span>
-        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/google/fonts/main/ofl/nanumgothic/NanumGothic-Regular.ttf'</span><span class="p">,</span> <span class="n">font_path</span><span class="p">)</span>
-    <span class="n">fm</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">font_path</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">'font'</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">font_path</span><span class="p">)</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'글꼴을 내려받지 못했습니다(그래프의 한글이 깨질 수 있음):'</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'axes.unicode_minus'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'animation.embed_limit'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">):</span>
-    <span class="c1"># 애니메이션을 코랩 화면에 재생 버튼과 함께 보여 주기</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_jshtml</span><span class="p">()))</span>
-<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'✅ 준비 완료!'</span><span class="p">)</span>
-</pre></div>
+<h2>핵심 정리<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p><strong>① 모델과 오차</strong></p>
+<p>y = Wx + b,　오차 = t − y</p>
+<p><strong>② 손실함수 (평균제곱오차)</strong></p>
+<div class="box box-formula docutils container">
+<p>E(W, b) = (1/n) × {(t₁ − y₁)² + (t₂ − y₂)² + … + (t<sub>n</sub> − y<sub>n</sub>)²}</p>
 </div>
+<p>오차를 제곱하면 부호가 사라져 서로 지워지지 않고, 큰 오차일수록 더 크게 벌을 준다.<br />
+오차² 은 한 변이 |t − y| 인 정사각형의 넓이이므로, E 는 ‘정사각형 넓이의 평균’ 이다. (아래 애니메이션 1)</p>
+<p><strong>③ 손실함수는 W 의 이차함수</strong></p>
+<p>x = (1, 2, 3), t = (1, 2, 3), b = 0 이면</p>
+<p>E(W) = {(1 − W)² + (2 − 2W)² + (3 − 3W)²} / 3 = (1 + 4 + 9)(1 − W)² / 3 = (14/3)(W − 1)²</p>
+<p>→ 아래로 볼록한 포물선, W = 1 에서 최솟값 0.</p>
+<p><strong>④ 최솟값을 주는 W, b (최소제곱법)</strong></p>
+<p>E 를 W, b 로 각각 편미분한 값이 0 이 되는 점에서</p>
+<div class="box box-formula docutils container">
+<p>W = Σ(x<sub>i</sub> − x̄)(t<sub>i</sub> − t̄) / Σ(x<sub>i</sub> − x̄)²,　b = t̄ − W x̄</p>
 </div>
-</details>
-</div>
+<p>공부 시간 – 점수 데이터에서는 W ≒ 0.58, b ≒ 71.6 이다.<br />
+W, b 를 함께 바꾸면 E(W, b) 는 그릇(골짜기) 모양의 곡면이고, 그 바닥이 이 점이다. (아래 애니메이션 2)</p>
+<blockquote>
+<div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
+</div></blockquote>
 </section>
 <section id="id5">
 <h2>개념 다지기 1. 데이터를 가장 잘 나타내는 직선 찾기<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
@@ -475,20 +458,9 @@
 <p><strong>[생각해 보기]</strong> 💡 아래 그래프의 세 직선 ①, ②, ③ 중 데이터를 가장 잘 나타내는 직선은? ( 　 )
 그렇게 판단한 기준은 무엇인가요? (                                                            )</p>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">37</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">74</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-
-<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'royalblue'</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'학습 데이터'</span><span class="p">)</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">,</span> <span class="s1">'①  y = 1.0x + 60'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.58</span><span class="p">,</span> <span class="mf">71.6</span><span class="p">,</span> <span class="s1">'crimson'</span><span class="p">,</span> <span class="s1">'②  y = 0.58x + 71.6'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="s1">'orange'</span><span class="p">,</span> <span class="s1">'③  y = 0.3x + 75'</span><span class="p">)]:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">W</span><span class="o">*</span><span class="n">xs</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'공부 시간 (x)'</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'시험 성적 (t)'</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'어느 직선이 가장 잘 맞을까?'</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/fc686d0894538802b2e4008f4bc6b0e5c630f5ee262024f0585c585d2dfd739d.png" src="_images/fc686d0894538802b2e4008f4bc6b0e5c630f5ee262024f0585c585d2dfd739d.png" />
 </div>
 </div>
 </section>
@@ -546,17 +518,6 @@
 </tbody>
 </table>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">W</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">70</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">W</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'예측 y   ='</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'오차 t-y ='</span><span class="p">,</span> <span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'오차²    ='</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="id6">
 <h2>개념 다지기 3. 왜 오차를 ‘제곱’ 할까?<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
@@ -589,19 +550,6 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 <div class="box box-note docutils container">
 <p><strong>선형 회귀의 최종 목표</strong>: 손실함수 E(W, b) 가 <strong>가장 작아지는</strong> W 와 b 를 찾는 것!</p>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">loss_func</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">W</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>          <span class="c1"># 오차² 의 평균</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">'E(0.5, 70)  ='</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'E(1.0, 60)  ='</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'E(0.58, 71.6) ='</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">loss_func</span><span class="p">(</span><span class="mf">0.58</span><span class="p">,</span> <span class="mf">71.6</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="box box-check docutils container">
 <p><strong>[확인 2]</strong> 세 직선 중 손실함수 값이 가장 작은 직선은 ( 　 ) 번이고, 이것이 처음 그래프에서 고른 직선과 같은가요?</p>
 </div>
@@ -611,46 +559,9 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 <p>오차가 t − y 이면 오차² 은 <strong>한 변이 |t − y| 인 정사각형의 넓이</strong> 입니다.
 기울기 W 를 0 → 1.2 로 바꿀 때 정사각형들의 넓이(빨강)와 손실함수 E(W) (오른쪽)가 어떻게 변하는지 보세요.
 (이 애니메이션에서는 바이어스를 b = 71.6 으로 고정합니다)</p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 1 실행 (오차 정사각형과 손실함수)</span>
-<span class="n">b_fix</span> <span class="o">=</span> <span class="mf">71.6</span>
-<span class="n">Ws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.58</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.58</span><span class="p">)])</span>
-<span class="n">W_curve</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">E_curve</span> <span class="o">=</span> <span class="p">[</span><span class="n">loss_func</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b_fix</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W_curve</span><span class="p">]</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axL</span><span class="p">,</span> <span class="n">axR</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-    <span class="n">W</span> <span class="o">=</span> <span class="n">Ws</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">y</span> <span class="o">=</span> <span class="n">W</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">b_fix</span><span class="p">;</span> <span class="n">E</span> <span class="o">=</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">b_fix</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-    <span class="n">axL</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">axR</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-    <span class="n">axL</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">W</span><span class="o">*</span><span class="n">xs</span> <span class="o">+</span> <span class="n">b_fix</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'crimson'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">'y = </span><span class="si">{</span><span class="n">W</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">x + </span><span class="si">{</span><span class="n">b_fix</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">ti</span><span class="p">,</span> <span class="n">yi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">ti</span> <span class="o">-</span> <span class="n">yi</span>
-        <span class="n">axL</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xi</span><span class="p">,</span> <span class="n">xi</span><span class="p">],</span> <span class="p">[</span><span class="n">yi</span><span class="p">,</span> <span class="n">ti</span><span class="p">],</span> <span class="s1">'k:'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="c1"># 오차를 한 변으로 하는 정사각형 (x 축, y 축 눈금이 같도록 aspect='equal')</span>
-        <span class="n">axL</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">xi</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">ti</span><span class="p">)),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">fc</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">'red'</span><span class="p">))</span>
-    <span class="n">axL</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'royalblue'</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'정답 t'</span><span class="p">)</span>
-    <span class="n">axL</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">);</span> <span class="n">axL</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">115</span><span class="p">);</span> <span class="n">axL</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">'equal'</span><span class="p">)</span>
-    <span class="n">axL</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'공부 시간 x'</span><span class="p">);</span> <span class="n">axL</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'성적'</span><span class="p">);</span> <span class="n">axL</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">)</span>
-    <span class="n">axL</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'빨간 정사각형 넓이의 평균 = E = </span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-    <span class="n">axR</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">W_curve</span><span class="p">,</span> <span class="n">E_curve</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'purple'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">axR</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">W</span><span class="p">],</span> <span class="p">[</span><span class="n">E</span><span class="p">],</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'crimson'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
-    <span class="n">axR</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'가중치 W'</span><span class="p">);</span> <span class="n">axR</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'손실함수 E(W)'</span><span class="p">);</span> <span class="n">axR</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="n">axR</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'W 에 따른 손실함수 E(W)  (b = 71.6 고정)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-    <span class="n">axR</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">E_curve</span><span class="p">)</span><span class="o">*</span><span class="mf">1.05</span><span class="p">)</span>
-<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">Ws</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</details>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/05_linear_regression_loss_1.jpg"><source src="videos/05_linear_regression_loss_1.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 <div class="box box-check docutils container">
 <p><strong>[관찰 1]</strong>
@@ -663,33 +574,6 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 <p>슬라이더로 W 와 b 를 바꿔 가며 <strong>손실함수 값이 가장 작아지는 직선</strong>을 찾아보세요. 친구와 누가 더 작은 E 를 찾는지 겨뤄 보세요!</p>
 <div class="box box-note docutils container">
 <p>내가 찾은 값:  W = ( 　　 ),  b = ( 　　 ),  E = ( 　　 )</p>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎛️ 슬라이더 실행</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">widgets</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="n">W</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">70.0</span><span class="p">):</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">W</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span> <span class="n">E</span> <span class="o">=</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">W</span><span class="o">*</span><span class="n">xs</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'crimson'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">ti</span><span class="p">,</span> <span class="n">yi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">xi</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">ti</span><span class="p">)),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ti</span> <span class="o">-</span> <span class="n">yi</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ti</span> <span class="o">-</span> <span class="n">yi</span><span class="p">),</span> <span class="n">fc</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">'red'</span><span class="p">))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'royalblue'</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">115</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">'equal'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'y = </span><span class="si">{</span><span class="n">W</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">x + </span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">    →    E(W, b) = </span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">show</span><span class="p">,</span> <span class="n">W</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">),</span>
-                       <span class="n">b</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</details>
 </div>
 </section>
 <section id="id9">
@@ -739,19 +623,16 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 이번처럼 식이 간단하면 손으로 꼭짓점을 찾을 수 있지만, 변수(W)가 수백만 개인 인공지능은 어떻게 최솟값을 찾을까요?
 → <strong>다음 시간: 미분을 이용한 경사하강법!</strong></p>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]);</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">])</span>
-<span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'W = </span><span class="si">{</span><span class="n">W</span><span class="si">:</span><span class="s1">2d</span><span class="si">}</span><span class="s1">  →  E(W) = </span><span class="si">{</span><span class="n">loss_func</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">t2</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-
-<span class="n">Wg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Wg</span><span class="p">,</span> <span class="p">[</span><span class="n">loss_func</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">Wg</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'purple'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="n">loss_func</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'crimson'</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'W'</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'E(W)'</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'E(W) = (14/3)(1 − W)²'</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>W = -1  →  E(W) = 18.67
+W =  0  →  E(W) = 4.67
+W =  1  →  E(W) = 0.00
+W =  2  →  E(W) = 4.67
+W =  3  →  E(W) = 18.67
 </pre></div>
 </div>
+<img alt="_images/16656d0a53567667835724b1d0f12552a67efd9c6d1f92c78575c7b6bf204225.png" src="_images/16656d0a53567667835724b1d0f12552a67efd9c6d1f92c78575c7b6bf204225.png" />
 </div>
 </div>
 </section>
@@ -759,38 +640,9 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 <h2>애니메이션 2. W 와 b 를 함께 바꾸면? - 손실함수 ‘그릇’<a class="headerlink" href="#w-b" title="Link to this heading">#</a></h2>
 <p>W 와 b 가 둘 다 변하면 E(W, b) 는 <strong>길쭉한 그릇(골짜기) 모양의 곡면</strong>이 됩니다. 그릇의 <strong>가장 낮은 바닥(빨간 점)</strong> 이 우리가 찾는 W, b 입니다.
 (공부 시간 데이터 사용. 왼쪽 곡면이 천천히 돌아가고, 오른쪽은 위에서 내려다본 등고선입니다. 너무 높은 부분은 잘라서 보여 줍니다)</p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 2 실행 (3D 손실함수)</span>
-<span class="n">Wg</span><span class="p">,</span> <span class="n">bg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">70</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">70</span><span class="p">))</span>
-<span class="n">Eg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="p">(</span><span class="n">Wg</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">bg</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]))</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">Ec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">Eg</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>                                  <span class="c1"># 높은 부분 자르기</span>
-<span class="n">best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">Eg</span><span class="p">),</span> <span class="n">Eg</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">'3d'</span><span class="p">);</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-<span class="n">cs</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">Wg</span><span class="p">,</span> <span class="n">bg</span><span class="p">,</span> <span class="n">Ec</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Wg</span><span class="p">[</span><span class="n">best</span><span class="p">],</span> <span class="n">bg</span><span class="p">[</span><span class="n">best</span><span class="p">],</span> <span class="s1">'r*'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'W'</span><span class="p">);</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'b'</span><span class="p">);</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'위에서 본 모습 (등고선)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">Wg</span><span class="p">,</span> <span class="n">bg</span><span class="p">,</span> <span class="n">Ec</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">Wg</span><span class="p">[</span><span class="n">best</span><span class="p">]],</span> <span class="p">[</span><span class="n">bg</span><span class="p">[</span><span class="n">best</span><span class="p">]],</span> <span class="p">[</span><span class="n">Eg</span><span class="p">[</span><span class="n">best</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'W'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'b'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">'E(W, b)'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'가장 낮은 곳 : W 약 </span><span class="si">{</span><span class="n">Wg</span><span class="p">[</span><span class="n">best</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, b 약 </span><span class="si">{</span><span class="n">bg</span><span class="p">[</span><span class="n">best</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">azim</span><span class="o">=-</span><span class="mi">60</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span><span class="p">)</span>
-<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</details>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/05_linear_regression_loss_2.jpg"><source src="videos/05_linear_regression_loss_2.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 </section>
 <section id="id10">
@@ -801,18 +653,6 @@ E(0.5, 70) = (0.25 + 16 + 30.25 + 42.25 + 4 + 12.25) / 6 = ( 　　 )</p>
 </div>
 <div class="box box-practice docutils container">
 <p><strong>[문제 2]</strong> [문제 1] 의 직선과 y = 0.5x + 70 중 어느 쪽이 더 좋은 직선인가요? <strong>오차의 합</strong>으로 판단할 때와 <strong>손실함수</strong>로 판단할 때 결과가 같은지 비교하세요.</p>
-</div>
-<p>아래 셀의 <code class="docutils literal notranslate"><span class="pre">______</span></code> 를 채워 확인하세요.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">W</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">______</span><span class="p">,</span> <span class="n">______</span>
-<span class="n">err</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> <span class="p">(</span><span class="n">W</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'오차      ='</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'오차의 합 ='</span><span class="p">,</span> <span class="n">______</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'손실함수  ='</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="id11">
@@ -915,7 +755,7 @@ E(W) 를 줄이려면 W 를 ( 늘려야 / 줄여야 ) 한다. → 제 2편의 �
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">핵심 정리</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">개념 다지기 1. 데이터를 가장 잘 나타내는 직선 찾기</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error">개념 다지기 2. 오차(error) = 정답 − 예측값</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">개념 다지기 3. 왜 오차를 ‘제곱’ 할까?</a></li>

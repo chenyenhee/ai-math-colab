@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -333,17 +333,17 @@
                   
   <section id="id1">
 <h1>인공지능을 위한 수학<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p class="lede">미분에서 출발해 신경망, 오차역전파, CNN 과 RNN 까지. 수식이 어떻게 인공지능이 되는지 numpy 로 직접 만들며 배웁니다.</p>
+<p class="lede">미분에서 출발해 신경망, 오차역전파, CNN 과 RNN 까지. 편마다 핵심 수식을 정리하고, 그 수식이 실제로 어떻게 움직이는지 애니메이션으로 확인합니다.</p>
 <div class="contents">
 <section class="part"><h3><span class="roman">Ⅰ</span>수학 도구</h3><ol><li><a href="01_derivative.html"><span class="num">1</span><span class="t">머신러닝을 위한 미분 기초</span></a></li><li><a href="02_numerical_derivative.html"><span class="num">2</span><span class="t">수치미분 - 파이썬으로 미분하기</span></a></li><li><a href="03_vector_matrix.html"><span class="num">3</span><span class="t">벡터와 행렬 - numpy 로 데이터 다루기</span></a></li></ol></section><section class="part"><h3><span class="roman">Ⅱ</span>머신러닝 기초</h3><ol><li><a href="04_ml_overview.html"><span class="num">4</span><span class="t">머신러닝의 개념과 종류</span></a></li><li><a href="05_linear_regression_loss.html"><span class="num">5</span><span class="t">선형 회귀 (1) - 오차와 손실함수</span></a></li><li><a href="06_gradient_descent.html"><span class="num">6</span><span class="t">선형 회귀 (2) - 경사하강법</span></a></li><li><a href="07_linear_regression_python.html"><span class="num">7</span><span class="t">선형 회귀 (3) - 파이썬으로 직접 학습시키기</span></a></li></ol></section><section class="part"><h3><span class="roman">Ⅲ</span>분류와 신경망</h3><ol><li><a href="08_logistic_regression.html"><span class="num">8</span><span class="t">로지스틱 회귀 - 합격일까 불합격일까? (분류)</span></a></li><li><a href="09_xor.html"><span class="num">9</span><span class="t">XOR 문제 - 직선 하나로는 나눌 수 없다</span></a></li><li><a href="10_neural_network.html"><span class="num">10</span><span class="t">신경망과 딥러닝 - 피드포워드로 XOR 풀기</span></a></li><li><a href="11_mnist.html"><span class="num">11</span><span class="t">MNIST - 손글씨 숫자를 읽는 신경망</span></a></li></ol></section><section class="part"><h3><span class="roman">Ⅳ</span>오차역전파</h3><ol><li><a href="12_backprop_1.html"><span class="num">12</span><span class="t">오차역전파 (1) - 연쇄법칙으로 한꺼번에 미분하기</span></a></li><li><a href="13_backprop_2.html"><span class="num">13</span><span class="t">오차역전파 (2) - 은닉층 공식과 MNIST 고속 학습</span></a></li></ol></section><section class="part"><h3><span class="roman">Ⅴ</span>응용 : CNN 과 RNN</h3><ol><li><a href="14_cnn.html"><span class="num">14</span><span class="t">CNN - 합성곱으로 사진의 특징 찾기</span></a></li><li><a href="15_rnn.html"><span class="num">15</span><span class="t">RNN - 순서를 기억하는 신경망</span></a></li></ol></section>
 </div>
 <section id="id2">
 <h2>공부하는 방법<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>왼쪽 차례에서 편을 골라 개념을 읽습니다. 페이지 아래의 <strong>다음</strong> 으로 순서대로 넘어갈 수 있습니다.</p></li>
-<li><p>실습할 때는 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누릅니다. 코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p></li>
-<li><p>코랩에서는 맨 위 <strong>준비 셀</strong> 부터 한 셀씩 차례로 실행합니다. <strong>모두 실행</strong> 은 빈칸 <code class="docutils literal notranslate"><span class="pre">______</span></code> 에서 멈추므로 쓰지 않습니다.</p></li>
-<li><p>애니메이션과 정답은 코랩에서만 볼 수 있습니다.</p></li>
+<li><p>왼쪽 차례에서 편을 고릅니다. 페이지 아래의 <strong>다음</strong> 으로 순서대로 넘어갈 수 있습니다.</p></li>
+<li><p>편마다 맨 앞의 <strong>핵심 정리</strong> 로 수식을 먼저 익히고, 이어지는 설명과 <strong>애니메이션</strong> 으로 그 수식을 눈으로 확인합니다. 애니메이션은 ▶ 를 누르면 재생됩니다.</p></li>
+<li><p>코드로 직접 해 보려면 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누릅니다. 코랩이 열리면 <strong>파일 → Drive에 사본 저장</strong> 부터 하고, 맨 위 준비 셀부터 한 셀씩 실행합니다.</p></li>
+<li><p>연습 문제의 정답은 코랩 학습지에서 확인합니다.</p></li>
 </ol>
 <p class="credit">박성호(neowizard), 「파이썬으로 구현하는 머신러닝 / 딥러닝」 강의 내용을 바탕으로 수업용으로 새로 쓴 학습지입니다.</p>
 </section>

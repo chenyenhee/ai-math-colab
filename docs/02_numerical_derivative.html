@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=d3869467" />
+    <link rel="stylesheet" type="text/css" href="_static/textbook.css?v=4a03937e" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -351,7 +351,7 @@
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습 (제 1편)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">핵심 정리</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">개념 다지기 1. 수치미분(Numerical Derivative)이란?</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">미분계수의 정의와 중앙차분</a></li>
 </ul>
@@ -414,49 +414,31 @@
 <p><strong>오늘의 질문</strong> 🤔
 컴퓨터는 “x² 을 미분하면 2x” 라는 공식을 모릅니다. 그렇다면 컴퓨터는 어떻게 미분을 할까요?</p>
 </div>
-<div class="box box-note docutils container">
-<p><strong>실습은 코랩에서</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르면 이 학습지가 코랩으로 열립니다. 코드 실행, 애니메이션, 정답 확인은 코랩에서 합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 을 먼저 누르세요.</p>
-</div>
 </section>
 <section id="id4">
-<h2>0단계. 준비하기<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<p>아래 셀을 <strong>가장 먼저 한 번</strong> 실행하세요. (그래프 한글 글꼴과 애니메이션 설정)</p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title ▶ 준비 셀 (먼저 실행하세요)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.font_manager</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fm</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">animation</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
-
-<span class="c1"># 한글 글꼴 (나눔고딕) 설정</span>
-<span class="n">font_path</span> <span class="o">=</span> <span class="s1">'NanumGothic.ttf'</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">font_path</span><span class="p">):</span>
-        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/google/fonts/main/ofl/nanumgothic/NanumGothic-Regular.ttf'</span><span class="p">,</span> <span class="n">font_path</span><span class="p">)</span>
-    <span class="n">fm</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">font_path</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">'font'</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">font_path</span><span class="p">)</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'글꼴을 내려받지 못했습니다(그래프의 한글이 깨질 수 있음):'</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'axes.unicode_minus'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'animation.embed_limit'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">):</span>
-    <span class="c1"># 애니메이션을 코랩 화면에 재생 버튼과 함께 보여 주기</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">anim</span><span class="o">.</span><span class="n">to_jshtml</span><span class="p">()))</span>
-<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'✅ 준비 완료!'</span><span class="p">)</span>
-</pre></div>
+<h2>핵심 정리<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p><strong>① 컴퓨터의 미분 = 작은 h 로 계산한 기울기</strong></p>
+<div class="box box-formula docutils container">
+<p>전진차분 :  f′(x) ≒ {f(x + h) − f(x)} / h<br />
+중앙차분 :  f′(x) ≒ {f(x + h) − f(x − h)} / (2h)</p>
 </div>
-</div>
-</details>
-</div>
+<p><strong>② 왜 중앙차분이 더 정확한가 (테일러 전개)</strong></p>
+<p>f(x + h) = f(x) + f′(x)h + f″(x)h²/2 + f‴(x)h³/6 + …<br />
+f(x − h) = f(x) − f′(x)h + f″(x)h²/2 − f‴(x)h³/6 + …</p>
+<ul class="simple">
+<li><p>전진차분 :  {f(x + h) − f(x)} / h = f′(x) + <strong>f″(x)h/2</strong> + …  → 오차가 h 에 비례</p></li>
+<li><p>중앙차분 :  {f(x + h) − f(x − h)} / (2h) = f′(x) + <strong>f‴(x)h²/6</strong> + …  → h² 항이 서로 지워져 오차가 h² 에 비례</p></li>
+</ul>
+<p>예) f(x) = x³, x = 1, h = 0.1 :  전진차분 3.31 (오차 0.31),  중앙차분 3.01 (오차 0.01)<br />
+f(x) = x² 이면 f‴(x) = 0 이므로 중앙차분의 오차는 h 와 상관없이 0 이다. (아래 애니메이션 1)</p>
+<p><strong>③ h 는 무조건 작을수록 좋을까?</strong></p>
+<p>컴퓨터는 수를 약 16 자리까지만 저장한다. h 가 너무 작으면 f(x + h) 와 f(x − h) 가 거의 같아져 뺄셈에서 반올림 오차가 커진다. 그래서 보통 h = 10<sup>−4</sup> 을 쓴다.</p>
+<p><strong>④ 변수가 여러 개이면</strong></p>
+<p>변수마다 그 변수만 ±h 만큼 움직여 편미분을 하나씩 구한다.<br />
+f(x, y) = 2x + 3xy + y³ 의 점 (1, 2) 에서 (∂f/∂x, ∂f/∂y) = (2 + 3 × 2, 3 × 1 + 3 × 2²) = (8, 15)</p>
+<blockquote>
+<div><p><strong>코드로 직접 해 보려면</strong> : 페이지 위쪽 로켓 버튼 → <strong>Colab</strong> 을 누르세요. 값을 바꿔 가며 실행하고, 연습 문제의 정답도 코랩에서 확인합니다. 처음 열면 <strong>파일 → Drive에 사본 저장</strong> 부터 하세요.</p>
+</div></blockquote>
 </section>
 <section id="numerical-derivative">
 <h2>개념 다지기 1. 수치미분(Numerical Derivative)이란?<a class="headerlink" href="#numerical-derivative" title="Link to this heading">#</a></h2>
@@ -515,22 +497,8 @@ f’(x) ≒ {f(x + Δx) − f(x − Δx)} / ( 　　　 )</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">입력</span> <span class="pre">:</span> <span class="pre">식</span></code> 은 <strong>“f(x) 를 식으로 바꿔 계산하라”</strong> 는 뜻입니다.</p></li>
 <li><p>수치미분 함수에 <strong>미분할 함수 자체를 입력으로 넘겨줄 때</strong> 아주 편리합니다.</p></li>
 </ul>
-<div class="box box-practice docutils container">
-<p><strong>[연습 1]</strong> 아래 셀을 실행하고, 빈칸에 결과를 적어 보세요.
-f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="n">h</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">3</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">'f(3)    ='</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'g(2)    ='</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'h(1, 2) ='</span><span class="p">,</span> <span class="n">h</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
+<div class="box box-note docutils container">
+<p>f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </div>
 </section>
 <section id="id6">
@@ -558,23 +526,6 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </tbody>
 </table>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">numerical_derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="n">delta_x</span> <span class="o">=</span> <span class="mf">1e-4</span>                                            <span class="c1"># 극한(lim) 대신 쓰는 아주 작은 값</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">delta_x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">delta_x</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">delta_x</span><span class="p">)</span>  <span class="c1"># 중앙차분</span>
-
-<span class="c1"># [예제 1] f(x) = x² 에서 f'(3) 구하기</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">my_func1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="n">numerical_derivative</span><span class="p">(</span><span class="n">my_func1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"수치미분  f'(3) ="</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"공식      f'(3) = 2 × 3 ="</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="box box-check docutils container">
 <p><strong>[확인 1]</strong> 수치미분 결과는 6 과 <strong>정확히 같나요?</strong> 차이가 난다면 그 이유는 무엇일까요?
 (                                                                                   )</p>
@@ -585,17 +536,6 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 <li><p>수학 공식 (곱의 미분):  f’(x) = 3e<sup>x</sup> + 3x·e<sup>x</sup></p></li>
 <li><p>따라서  f’(2) = 3e² + 3 × 2 × e² = ( 　　 ) e²  ≒ ( 　　　　 )</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_func2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"수치미분  f'(2) ="</span><span class="p">,</span> <span class="n">numerical_derivative</span><span class="p">(</span><span class="n">my_func2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"공식      f'(2) = 3e² + 6e² ="</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 <section id="x">
@@ -605,45 +545,10 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 <li><p>🔴 <strong>전진차분</strong>: 두 점 1 과 1 + Δx 를 잇는 직선</p></li>
 <li><p>🟢 <strong>중앙차분</strong>: 두 점 1 − Δx 와 1 + Δx 를 잇는 직선</p></li>
 </ul>
-<p>Δx 가 1.5 에서 0 에 가까워질 때 두 직선의 기울기가 어떻게 변하는지 관찰하세요. (실행 후 ▶ 버튼)</p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 1 실행 (코드 보기: 왼쪽 화살표)</span>
-<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">x0</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">hs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)])</span>   <span class="c1"># Δx 값 변화</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
-<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="n">hs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">'royalblue'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'f(x) = x²'</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x0</span><span class="o">*</span><span class="p">(</span><span class="n">xs</span> <span class="o">-</span> <span class="n">x0</span><span class="p">),</span> <span class="s1">'k--'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"진짜 접선 (기울기 2)"</span><span class="p">)</span>
-    <span class="n">s_f</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>              <span class="c1"># 전진차분 기울기</span>
-    <span class="n">s_c</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>      <span class="c1"># 중앙차분 기울기</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="o">+</span> <span class="n">s_f</span><span class="o">*</span><span class="p">(</span><span class="n">xs</span> <span class="o">-</span> <span class="n">x0</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">'crimson'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">'전진차분 기울기 = </span><span class="si">{</span><span class="n">s_f</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="o">+</span> <span class="n">s_c</span><span class="o">*</span><span class="p">(</span><span class="n">xs</span> <span class="o">-</span> <span class="n">x0</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">'green'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">'중앙차분 기울기 = </span><span class="si">{</span><span class="n">s_c</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span><span class="p">],</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)],</span> <span class="s1">'ko'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span> <span class="o">+</span> <span class="n">h</span><span class="p">],</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span> <span class="o">+</span> <span class="n">h</span><span class="p">)],</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'crimson'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span> <span class="o">-</span> <span class="n">h</span><span class="p">],</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span> <span class="o">-</span> <span class="n">h</span><span class="p">)],</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'green'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Δx = </span><span class="si">{</span><span class="n">h</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">  일 때 x = 1 에서의 기울기'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-
-<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">hs</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</details>
+<p>Δx 가 1.5 에서 0 에 가까워질 때 두 직선의 기울기가 어떻게 변하는지 관찰하세요.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/02_numerical_derivative_1.jpg"><source src="videos/02_numerical_derivative_1.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 <div class="box box-check docutils container">
 <p><strong>[관찰 1]</strong>
@@ -656,28 +561,28 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 <section id="id7">
 <h2>탐구. Δx 는 무조건 작을수록 좋을까?<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>f(x) = x³ 에서 f’(1) = 3 입니다. Δx 를 10<sup>−1</sup>, 10<sup>−2</sup>, … , 10<sup>−15</sup> 으로 바꿔 가며 <strong>오차 = |수치미분 − 3|</strong> 을 비교해 봅시다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'Δx'</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">'전진차분 오차'</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">'중앙차분 오차'</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'-'</span><span class="o">*</span><span class="mi">44</span><span class="p">)</span>
-<span class="n">hs_list</span><span class="p">,</span> <span class="n">err_f</span><span class="p">,</span> <span class="n">err_c</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="mf">10.0</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="p">)</span>
-    <span class="n">ef</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">ec</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">hs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h</span><span class="p">);</span> <span class="n">err_f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ef</span><span class="p">);</span> <span class="n">err_c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ec</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">h</span><span class="si">:</span><span class="s1">8.0e</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">ef</span><span class="si">:</span><span class="s1">14.2e</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">ec</span><span class="si">:</span><span class="s1">14.2e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">hs_list</span><span class="p">,</span> <span class="n">err_f</span><span class="p">,</span> <span class="s1">'o-'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'crimson'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'전진차분'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">hs_list</span><span class="p">,</span> <span class="n">err_c</span><span class="p">,</span> <span class="s1">'s-'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'green'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'중앙차분'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Δx (오른쪽으로 갈수록 작아짐)'</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'오차 (로그 눈금)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"f(x) = x³,  f'(1) 의 오차"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">'both'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      Δx |        전진차분 오차 |        중앙차분 오차
+--------------------------------------------
+   1e-01 |       3.10e-01 |       1.00e-02
+   1e-02 |       3.01e-02 |       1.00e-04
+   1e-03 |       3.00e-03 |       1.00e-06
+   1e-04 |       3.00e-04 |       1.00e-08
+   1e-05 |       3.00e-05 |       9.74e-11
+   1e-06 |       3.00e-06 |       8.03e-11
+   1e-07 |       3.02e-07 |       8.63e-11
+   1e-08 |       3.97e-09 |       7.13e-09
+   1e-09 |       2.48e-07 |       8.17e-08
+   1e-10 |       2.48e-07 |       2.48e-07
+   1e-11 |       2.48e-07 |       2.48e-07
+   1e-12 |       2.67e-04 |       1.00e-04
+   1e-13 |       2.40e-03 |       7.32e-04
+   1e-14 |       2.40e-03 |       2.40e-03
+   1e-15 |       3.31e-01 |       1.64e-01
 </pre></div>
 </div>
+<img alt="_images/bb3de0b29174b85aebb3939fcbdd5cc4d70ab1cd7cfcc62dda2ed3a34f737243.png" src="_images/bb3de0b29174b85aebb3939fcbdd5cc4d70ab1cd7cfcc62dda2ed3a34f737243.png" />
 </div>
 </div>
 <div class="box box-check docutils container">
@@ -715,56 +620,9 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 <div class="box box-note docutils container">
 <p>1단계의 단면 f(x, 2) = 8x + 8 은 직선이라 접선과 완전히 겹칩니다. 2단계의 단면은 곡선이라 접선이 한 점에서만 닿습니다.</p>
 </div>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title 🎬 애니메이션 2 실행</span>
-<span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">3</span>
-<span class="n">px</span><span class="p">,</span> <span class="n">py</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mi">120</span><span class="p">))</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">axL</span><span class="p">,</span> <span class="n">axR</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">wiggle</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>      <span class="c1"># 점이 앞뒤로 움직이는 정도</span>
-<span class="n">frames</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'x'</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">wiggle</span><span class="p">]</span> <span class="o">+</span> <span class="p">[(</span><span class="s1">'y'</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">wiggle</span><span class="p">]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-    <span class="n">var</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">axL</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">axR</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    <span class="n">cs</span> <span class="o">=</span> <span class="n">axL</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">F</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
-    <span class="n">axL</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">px</span><span class="p">],</span> <span class="p">[</span><span class="n">py</span><span class="p">],</span> <span class="s1">'wo'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mec</span><span class="o">=</span><span class="s1">'k'</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="s1">'x'</span><span class="p">:</span>
-        <span class="n">axL</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">py</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'orange'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'y = 2 로 고정 (x 만 이동)'</span><span class="p">)</span>
-        <span class="n">axL</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">px</span> <span class="o">+</span> <span class="n">w</span><span class="p">],</span> <span class="p">[</span><span class="n">py</span><span class="p">],</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mec</span><span class="o">=</span><span class="s1">'k'</span><span class="p">)</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-        <span class="n">axR</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">py</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">'orange'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'단면 f(x, 2) = 8x + 8'</span><span class="p">)</span>
-        <span class="n">axR</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">F</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">)</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">px</span><span class="p">),</span> <span class="s1">'r--'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'접선 기울기 ∂f/∂x = 8'</span><span class="p">)</span>
-        <span class="n">axR</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">px</span> <span class="o">+</span> <span class="n">w</span><span class="p">],</span> <span class="p">[</span><span class="n">F</span><span class="p">(</span><span class="n">px</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">py</span><span class="p">)],</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mec</span><span class="o">=</span><span class="s1">'k'</span><span class="p">)</span>
-        <span class="n">axR</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'x'</span><span class="p">);</span> <span class="n">axR</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">);</span> <span class="n">axR</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-        <span class="n">axR</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'1단계 : x 에 대한 편미분'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">axL</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'magenta'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'x = 1 로 고정 (y 만 이동)'</span><span class="p">)</span>
-        <span class="n">axL</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">px</span><span class="p">],</span> <span class="p">[</span><span class="n">py</span> <span class="o">+</span> <span class="n">w</span><span class="p">],</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mec</span><span class="o">=</span><span class="s1">'k'</span><span class="p">)</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-        <span class="n">axR</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">F</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">'magenta'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'단면 f(1, y) = 2 + 3y + y³'</span><span class="p">)</span>
-        <span class="n">axR</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">F</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">)</span> <span class="o">+</span> <span class="mi">15</span><span class="o">*</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">py</span><span class="p">),</span> <span class="s1">'r--'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'접선 기울기 ∂f/∂y = 15'</span><span class="p">)</span>
-        <span class="n">axR</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">py</span> <span class="o">+</span> <span class="n">w</span><span class="p">],</span> <span class="p">[</span><span class="n">F</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span> <span class="o">+</span> <span class="n">w</span><span class="p">)],</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mec</span><span class="o">=</span><span class="s1">'k'</span><span class="p">)</span>
-        <span class="n">axR</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'y'</span><span class="p">);</span> <span class="n">axR</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">);</span> <span class="n">axR</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
-        <span class="n">axR</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'2단계 : y 에 대한 편미분'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-    <span class="n">axL</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'x'</span><span class="p">);</span> <span class="n">axL</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'y'</span><span class="p">);</span> <span class="n">axL</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'f(x, y) 등고선과 점 (1, 2)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-    <span class="n">axL</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'lower right'</span><span class="p">);</span> <span class="n">axR</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">);</span> <span class="n">axR</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-
-<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">draw</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-<span class="n">show_anim</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</details>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><figure class="anim"><video controls loop muted playsinline preload="none" poster="videos/02_numerical_derivative_2.jpg"><source src="videos/02_numerical_derivative_2.mp4" type="video/mp4"></video></figure></div></div>
 </div>
 </section>
 <section id="id10">
@@ -794,64 +652,13 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 </table>
 </div>
 <p>아래 코드는 계산 과정을 보여 주는 <code class="docutils literal notranslate"><span class="pre">debug</span></code> 출력이 들어간 버전입니다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">numerical_derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="n">delta_x</span> <span class="o">=</span> <span class="mf">1e-4</span>
-    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                                              <span class="c1"># ① 결과 저장</span>
-
-    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">'multi_index'</span><span class="p">],</span> <span class="n">op_flags</span><span class="o">=</span><span class="p">[</span><span class="s1">'readwrite'</span><span class="p">])</span>     <span class="c1"># ② 변수 하나씩</span>
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">it</span><span class="o">.</span><span class="n">finished</span><span class="p">:</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">multi_index</span>
-        <span class="n">tmp_val</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>                                                 <span class="c1">#    원래 값 보관</span>
-
-        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tmp_val</span><span class="p">)</span> <span class="o">+</span> <span class="n">delta_x</span>                                <span class="c1"># ③ 이 변수만 +Δx</span>
-        <span class="n">fx1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tmp_val</span><span class="p">)</span> <span class="o">-</span> <span class="n">delta_x</span>                                <span class="c1">#    이 변수만 −Δx</span>
-        <span class="n">fx2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">grad</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fx1</span> <span class="o">-</span> <span class="n">fx2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">delta_x</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'변수 위치 </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s1"> : 원래 값 = </span><span class="si">{</span><span class="n">tmp_val</span><span class="si">}</span><span class="s1">, 편미분 값 = </span><span class="si">{</span><span class="n">grad</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-
-        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span>                                                 <span class="c1"># ④ 원래 값으로 복원</span>
-        <span class="n">it</span><span class="o">.</span><span class="n">iternext</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">grad</span>
-</pre></div>
-</div>
-</div>
-</div>
 <section id="f-x-x2-f-3">
 <h3>[예제 3] 1변수 함수 f(x) = x², f’(3)<a class="headerlink" href="#f-x-x2-f-3" title="Link to this heading">#</a></h3>
 <p>입력이 하나여도 배열 <code class="docutils literal notranslate"><span class="pre">np.array([3.0])</span></code> 로 넘겨야 합니다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">func1</span><span class="p">(</span><span class="n">input_obj</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">input_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">numerical_derivative</span><span class="p">(</span><span class="n">func1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.0</span><span class="p">]),</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="f-x-y-2x-3xy-y3-1-0-2-0">
 <h3>[예제 4] 2변수 함수 f(x, y) = 2x + 3xy + y³, 점 (1.0, 2.0)<a class="headerlink" href="#f-x-y-2x-3xy-y3-1-0-2-0" title="Link to this heading">#</a></h3>
 <p>⚠️ 입력은 반드시 <strong>실수(1.0, 2.0)</strong> 로 넣으세요. 정수(1, 2)로 넣으면 0.0001 을 더해도 정수로 잘려 계산이 틀어집니다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">func2</span><span class="p">(</span><span class="n">input_obj</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">input_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">input_obj</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-
-<span class="n">grad</span> <span class="o">=</span> <span class="n">numerical_derivative</span><span class="p">(</span><span class="n">func2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]),</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'결과 (∂f/∂x, ∂f/∂y) ='</span><span class="p">,</span> <span class="n">grad</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="box box-check docutils container">
 <p><strong>[확인 2]</strong> 개념 다지기 3 에서 손으로 구한 값 ( 　 , 　 ) 과 일치하나요? ( 예 / 아니오 )</p>
 </div>
@@ -866,21 +673,6 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 <li><p>∂f/∂y = xz + 2zy = ( 　 )</p></li>
 <li><p>∂f/∂z = xy + y² = ( 　 )</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">func4</span><span class="p">(</span><span class="n">input_obj</span><span class="p">):</span>
-    <span class="n">w</span> <span class="o">=</span> <span class="n">input_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">input_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">input_obj</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">input_obj</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">w</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">w</span> <span class="o">+</span> <span class="n">z</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-
-<span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">numerical_derivative</span><span class="p">(</span><span class="n">func4</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="box box-think docutils container">
 <p><strong>[생각해 보기]</strong> 💡 결과도 입력과 똑같이 <strong>2 × 2 행렬</strong> 모양으로 나옵니다.
 나중에 딥러닝에서 수백 개의 가중치를 행렬 W 에 담아 한꺼번에 미분할 때 바로 이 코드를 사용합니다!</p>
@@ -896,24 +688,6 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
 <div class="box box-practice docutils container">
 <p><strong>[문제 2]</strong> f(x, y) = x²y + e<sup>y</sup> 일 때, 점 (1, 0) 에서 ∂f/∂x, ∂f/∂y 를 손으로 구하고 수치미분으로 확인하세요.
 손 계산: ∂f/∂x = ( 　　 ),　∂f/∂y = ( 　　 )</p>
-</div>
-<p>아래 셀의 <code class="docutils literal notranslate"><span class="pre">______</span></code> 부분을 채워 실행하세요.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># [문제 1]</span>
-<span class="n">p1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'문제 1 :'</span><span class="p">,</span> <span class="n">numerical_derivative</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">______</span><span class="p">])))</span>
-
-<span class="c1"># [문제 2]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">p2</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">______</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">'문제 2 :'</span><span class="p">,</span> <span class="n">numerical_derivative</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">______</span><span class="p">,</span> <span class="n">______</span><span class="p">])))</span>
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="id12">
@@ -1019,7 +793,7 @@ f(3) = ( 　　 ),  g(2) = ( 　　 ),  h(1, 2) = ( 　　 )</p>
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">학습 목표</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">지난 시간 복습 (제 1편)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">0단계. 준비하기</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">핵심 정리</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">개념 다지기 1. 수치미분(Numerical Derivative)이란?</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">미분계수의 정의와 중앙차분</a></li>
 </ul>
